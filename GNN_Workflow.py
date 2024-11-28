@@ -20,17 +20,9 @@ def connect_to_neo4j(uri, username, password):
     pass
 
 def extract_data(driver):
-    """
-    Extracts nodes and relationships data from the Neo4j database.
-
-    **Inputs:**
-    - driver (GraphDatabase.driver): The Neo4j driver instance.
-
-    **Outputs:**
-    - nodes_df (pd.DataFrame): DataFrame containing node information.
-    - relationships_df (pd.DataFrame): DataFrame containing relationship information.
-    """
-    pass
+    nodes = get_nodes(driver)
+    relationships = get_relationships(driver)
+    return nodes, relationships
 
 def identify_missing_attributes(nodes_df):
     """
@@ -180,3 +172,33 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+def get_nodes(tx):
+    query = """
+    MATCH (n)
+    RETURN id(n) AS id, labels(n) AS labels, properties(n) AS properties
+    """
+    result = tx.run(query)
+    nodes = []
+    for record in result:
+        node_data = record["properties"]
+        node_data["id"] = record["id"]
+        node_data["labels"] = record["labels"]
+        nodes.append(node_data)
+    return nodes
+
+def get_relationships(tx):
+    query = """
+    MATCH (n)-[r]->(m)
+    RETURN id(r) AS id, id(n) AS start_id, id(m) AS end_id, type(r) AS type, properties(r) AS properties
+    """
+    result = tx.run(query)
+    relationships = []
+    for record in result:
+        rel_data = record["properties"]
+        rel_data["id"] = record["id"]
+        rel_data["start_id"] = record["start_id"]
+        rel_data["end_id"] = record["end_id"]
+        rel_data["type"] = record["type"]
+        relationships.append(rel_data)
+    return relationships
