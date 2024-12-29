@@ -1,45 +1,95 @@
-# workflow.py
-
 import pandas as pd
 from neo4j import GraphDatabase
 import torch
 import joblib
 
-def connect_to_neo4j(uri, username, password):
-    """
-    Connects to the Neo4j Graph Database.
 
-    **Get from user:**
-    - uri (str): The connection URI for the Neo4j database.
-    - username (str): The username for authentication.
-    - password (str): The password for authentication.
+def get_nodes(driver):
+    with driver.session() as session:
+        return session.read_transaction(_get_nodes)
 
-    **Outputs:**
-    - driver (GraphDatabase.driver): An instance of the Neo4j driver for executing queries.
+def _get_nodes(tx):
+    query = """
+    MATCH (n)
+    RETURN id(n) AS id, labels(n) AS labels, properties(n) AS properties
     """
-    pass
+    result = tx.run(query)
+    nodes = []
+    for record in result:
+        node_data = record["properties"]
+        node_data["id"] = record["id"]
+        node_data["labels"] = record["labels"]
+        nodes.append(node_data)
+    return nodes
+
+def get_relationships(driver):
+    with driver.session() as session:
+        return session.read_transaction(_get_relationships)
+
+def _get_relationships(tx):
+    query = """
+    MATCH (n)-[r]->(m)
+    RETURN id(r) AS id, id(n) AS start_id, id(m) AS end_id, type(r) AS type, properties(r) AS properties
+    """
+    result = tx.run(query)
+    relationships = []
+    for record in result:
+        rel_data = record["properties"]
+        rel_data["id"] = record["id"]
+        rel_data["start_id"] = record["start_id"]
+        rel_data["end_id"] = record["end_id"]
+        rel_data["type"] = record["type"]
+        relationships.append(rel_data)
+    return relationships
+
+def connect_to_neo4j(uri=None, username=None, password=None):
+    # Hardcoded connection details
+    HARDCODED_URI = "neo4j+s://ae86bd83.databases.neo4j.io"
+    HARDCODED_USERNAME = "neo4j"
+    HARDCODED_PASSWORD = "h0ZknFPHLkSPXFU_O0eEI1_VG-AnHa-p1uN6NfrNdFY"
+    
+    driver = GraphDatabase.driver(
+        HARDCODED_URI, 
+        auth=(HARDCODED_USERNAME, HARDCODED_PASSWORD)
+    )
+    return driver
 
 def extract_data(driver):
     nodes = get_nodes(driver)
     relationships = get_relationships(driver)
-    return nodes, relationships
+    # Convert them to DataFrames
+    nodes_df = pd.DataFrame(nodes)
+    relationships_df = pd.DataFrame(relationships)
+    return nodes_df, relationships_df
 
 def identify_missing_attributes(nodes_df):
-    """
-    Identifies nodes that are missing specified attributes.
+    # List out the columns in the nodes_df (excluding id/labels if you like)
+    available_attributes = list(nodes_df.columns)
+    print("\nAvailable Attributes in nodes_df:")
+    for attr in available_attributes:
+        print(f"  - {attr}")
 
-    **Inputs:**
-    - nodes_df (pd.DataFrame): DataFrame containing node information.    
-    
-    **Get from user:**
-    - present them with the list of available attributes from the nodes we pulled from the db. 
-    make them select one (start with one) or more attributes for us to train models on. 
+    # For simplicity, let's just have the user pick one attribute
+    chosen_attribute = input(
+        "\nEnter the attribute you want to model/infer (e.g. 'age' or 'status'): "
+    )
 
-    **Outputs:**
-    - missing_attributes_df (pd.DataFrame): DataFrame containing nodes with missing attributes.
-    - key_attributes: a datatype that holds the list of attributes the user wants us inference
-    """
-    pass
+    # If the user picks an invalid attribute, handle it gracefully
+    if chosen_attribute not in available_attributes:
+        print(
+            f"[WARNING] '{chosen_attribute}' not found in the DataFrame. "
+            "Please ensure your input matches one of the listed attributes.\n"
+        )
+        return pd.DataFrame(), []  # Return empty DataFrame and empty attribute list
+
+    # Identify nodes that have that attribute missing (NaN or empty string)
+    missing_mask = (nodes_df[chosen_attribute].isna()) | (nodes_df[chosen_attribute] == "")
+    missing_attributes_df = nodes_df[missing_mask].copy()
+
+    # Pack chosen attributes in a list
+    key_attributes = [chosen_attribute]
+
+    return missing_attributes_df, key_attributes
 
 def preprocess_data(nodes_df, relationships_df):
     """
@@ -140,65 +190,48 @@ def main():
     8. Update Neo4j Database with Inferred Attributes
     9. Save Trained Models Locally
     """
-    # Step 1: Connect to Neo4j Graph Database
+    print("=== Step 1: Connect to Neo4j Graph Database ===")
     driver = connect_to_neo4j()
+    print("[INFO] Neo4j driver created.")
 
-    # Step 2: Extract Nodes and Relationships Data
+    print("\n=== Step 2: Extract Nodes and Relationships Data ===")
     nodes_df, relationships_df = extract_data(driver)
+    print(f"[INFO] Retrieved {len(nodes_df)} nodes and {len(relationships_df)} relationships.")
 
-    # Step 3. Identify The Attributes We Want to Inference and Find the Nodes with Missing Attributes
+    print("\n=== Step 3: Identify Missing Attributes ===")
     missing_attributes_df, key_attributes = identify_missing_attributes(nodes_df)
+    print(f"[INFO] Chosen attributes: {key_attributes}")
+    print(f"[INFO] Found {len(missing_attributes_df)} nodes missing values for those attributes.")
 
     # Step 4: Preprocess Data for AI Model
+    print("\n=== Step 4: Preprocess Data ===")
     preprocessed_features, labels = preprocess_data(nodes_df, relationships_df)
+    print("[INFO] Data preprocessed.")
 
     # Step 5: Train AI Models for Missing Attributes
+    print("\n=== Step 5: Train AI Models ===")
     trained_models = train_ai_models(preprocessed_features, labels, key_attributes)
+    print("[INFO] Models trained.")
 
     # Step 6: Infer Missing Attributes Using Trained Models
+    print("\n=== Step 6: Inference ===")
     inferred_attributes = infer_missing_attributes(trained_models, preprocessed_features, missing_attributes_df)
+    print("[INFO] Missing attributes inferred.")
 
     # Step 7: Generate and Present Inference Report to User
+    print("\n=== Step 7: Generate Report ===")
     generate_report(inferred_attributes)
+    print("[INFO] Inference report generated.")
 
-    # Step 8: Update Neo4j Database with Inferred Attributes if the User Wants to
+    # Step 8: Update Neo4j Database with Inferred Attributes (if user wants)
+    print("\n=== Step 8: Update Neo4j Database ===")
     update_neo4j(driver, inferred_attributes)
+    print("[INFO] Neo4j updated (if requested by user).")
 
-    # Step 9: Save Trained Models Locally
-    #save_trained_models(trained_models) hold off on this. need to see the usecase. are models disposable??
-
-    # Close the Neo4j driver connection
+    # Close the driver
+    print("\n=== Workflow Complete: Closing Neo4j Driver ===")
     driver.close()
 
 if __name__ == "__main__":
     main()
 
-def get_nodes(tx):
-    query = """
-    MATCH (n)
-    RETURN id(n) AS id, labels(n) AS labels, properties(n) AS properties
-    """
-    result = tx.run(query)
-    nodes = []
-    for record in result:
-        node_data = record["properties"]
-        node_data["id"] = record["id"]
-        node_data["labels"] = record["labels"]
-        nodes.append(node_data)
-    return nodes
-
-def get_relationships(tx):
-    query = """
-    MATCH (n)-[r]->(m)
-    RETURN id(r) AS id, id(n) AS start_id, id(m) AS end_id, type(r) AS type, properties(r) AS properties
-    """
-    result = tx.run(query)
-    relationships = []
-    for record in result:
-        rel_data = record["properties"]
-        rel_data["id"] = record["id"]
-        rel_data["start_id"] = record["start_id"]
-        rel_data["end_id"] = record["end_id"]
-        rel_data["type"] = record["type"]
-        relationships.append(rel_data)
-    return relationships
