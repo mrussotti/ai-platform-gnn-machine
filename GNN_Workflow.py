@@ -11,16 +11,15 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.metrics import mean_squared_error, accuracy_score
 from sklearn.base import TransformerMixin, BaseEstimator
 
-# ### NEW / FIX: Use XGBoost for better performance
-# pip install xgboost if not present
-from xgboost import XGBRegressor
-
 # For classification fallback
 from sklearn.linear_model import LogisticRegression
+
+# xgboost
+from xgboost import XGBRegressor
 
 ###############################################################################
 #                           Custom Transformer
@@ -40,6 +39,7 @@ class TopKCategories(TransformerMixin, BaseEstimator):
             # Convert everything to str, ensuring no list-like objects remain
             col = X[:, i].astype(str)
             unique, counts = np.unique(col, return_counts=True)
+            # Keep top_k categories
             top_k = unique[np.argsort(counts)[-self.top_k:]]
             self.top_categories_.append(set(top_k))
         return self
@@ -63,7 +63,10 @@ def connect_to_neo4j(uri=None, username=None, password=None):
     HARDCODED_URI = "neo4j+s://ae86bd83.databases.neo4j.io"
     HARDCODED_USERNAME = "neo4j"
     HARDCODED_PASSWORD = "h0ZknFPHLkSPXFU_O0eEI1_VG-AnHa-p1uN6NfrNdFY"
-    driver = GraphDatabase.driver(HARDCODED_URI, auth=(HARDCODED_USERNAME, HARDCODED_PASSWORD))
+    driver = GraphDatabase.driver(
+        HARDCODED_URI, 
+        auth=(HARDCODED_USERNAME, HARDCODED_PASSWORD)
+    )
     return driver
 
 def _get_nodes(tx):
@@ -132,7 +135,7 @@ def identify_missing_attributes(nodes_df):
 ###############################################################################
 #                 FIT the Preprocessing Pipeline (TRAINING)
 ###############################################################################
-def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True):
+def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True, max_pca_components=150):
     """
     1) Filter training rows (duplicates, missing target).
     2) Extract y_train before dropping the target column.
@@ -161,7 +164,10 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True):
     # Filter out-of-range 'year'
     if target_attribute == 'year' and is_numeric_target:
         before = len(training_df)
-        training_df = training_df[(training_df['year'] >= 1850) & (training_df['year'] <= 2025)]
+        training_df = training_df[
+            (training_df['year'] >= 1850) &
+            (training_df['year'] <= 2025)
+        ]
         after = len(training_df)
         if verbose:
             print(f"Filtered out-of-range '{target_attribute}'. Removed {before - after} rows. Remaining: {after}")
@@ -189,16 +195,20 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True):
         expected_len = 1536
         mask_correct = training_df[emb_col].apply(lambda x: isinstance(x, list) and len(x) == expected_len)
         if not mask_correct.all():
+            # Replace invalid embeddings with zero-vectors
             training_df.loc[~mask_correct, emb_col] = training_df.loc[~mask_correct, emb_col].apply(
                 lambda x: [0.0]*expected_len
             )
 
-        # Fit PCA
         embeddings = np.vstack(training_df[emb_col].values)
-        pca_object = PCA(n_components=300)
+        # Reduce from 1536 to max_pca_components
+        pca_object = PCA(n_components=max_pca_components)
         reduced = pca_object.fit_transform(embeddings)
         # Create new columns
-        reduced_df = pd.DataFrame(reduced, columns=[f"{emb_col}_pca_{i}" for i in range(300)])
+        reduced_df = pd.DataFrame(
+            reduced,
+            columns=[f"{emb_col}_pca_{i}" for i in range(max_pca_components)]
+        )
         # Ensure numeric
         for c in reduced_df.columns:
             reduced_df[c] = reduced_df[c].astype(float)
@@ -208,7 +218,7 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True):
             reduced_df.reset_index(drop=True)
         ], axis=1)
 
-    # Identify cat / num columns
+    # Identify cat / num / bool columns
     cat_cols = training_df.select_dtypes(include=['object', 'category']).columns.tolist()
     num_cols = training_df.select_dtypes(include=[np.number]).columns.tolist()
     bool_cols = training_df.select_dtypes(include=['bool']).columns.tolist()
@@ -216,13 +226,12 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True):
         cat_cols += bool_cols
         num_cols = [c for c in num_cols if c not in bool_cols]
 
-    # ### NEW / FIX:
-    # Convert any list-like or array-like in *any* row of cat_cols into a comma-joined string
+    # Flatten any list-likes in categorical columns
     for col in cat_cols:
         training_df[col] = training_df[col].apply(
             lambda x: ",".join(x) if isinstance(x, list) else x
         )
-        # Force string type
+        # Force string
         training_df[col] = training_df[col].astype(str)
 
     # Exclude ID columns from cat
@@ -236,7 +245,7 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True):
 
     # Re-check cat_cols if we dropped some
     cat_cols = [c for c in cat_cols if c in training_df.columns]
-    
+
     # Build pipeline
     cat_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='most_frequent')),
@@ -263,7 +272,7 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True):
 ###############################################################################
 #                 TRANSFORM New Data (INFERENCE)
 ###############################################################################
-def transform_data(df, preprocessor, pca_object, verbose=True):
+def transform_data(df, preprocessor, pca_object, verbose=True, max_pca_components=150):
     df_trans = df.copy()
 
     # Drop 'id','labels'
@@ -288,11 +297,14 @@ def transform_data(df, preprocessor, pca_object, verbose=True):
             df_trans.loc[~mask_correct, emb_col] = df_trans.loc[~mask_correct, emb_col].apply(
                 lambda x: [0.0]*expected_len
             )
-        embeddings = np.vstack(df_trans[emb_col].values)
 
-        # Transform with existing PCA
+        embeddings = np.vstack(df_trans[emb_col].values)
+        # Transform with existing PCA object
         reduced = pca_object.transform(embeddings)
-        reduced_df = pd.DataFrame(reduced, columns=[f"{emb_col}_pca_{i}" for i in range(300)])
+        reduced_df = pd.DataFrame(
+            reduced,
+            columns=[f"{emb_col}_pca_{i}" for i in range(max_pca_components)]
+        )
         # Force numeric
         for c in reduced_df.columns:
             reduced_df[c] = reduced_df[c].astype(float)
@@ -306,7 +318,6 @@ def transform_data(df, preprocessor, pca_object, verbose=True):
         for col in embedding_cols:
             df_trans.drop(columns=[col], inplace=True, errors='ignore')
 
-    # ### NEW / FIX:
     # Convert cat columns to string, flatten any list-likes
     cat_cols = df_trans.select_dtypes(include=['object', 'category']).columns.tolist()
     for col in cat_cols:
@@ -315,7 +326,6 @@ def transform_data(df, preprocessor, pca_object, verbose=True):
         )
         df_trans[col] = df_trans[col].astype(str)
 
-    # Now transform
     X_new = preprocessor.transform(df_trans)
     if hasattr(X_new, 'toarray'):
         X_new = X_new.toarray()
@@ -325,11 +335,11 @@ def transform_data(df, preprocessor, pca_object, verbose=True):
     return X_new
 
 ###############################################################################
-#                          Train AI Models
+#                          Train AI Models (with hyperparam tuning)
 ###############################################################################
 def train_ai_models(X, y, target_attribute, verbose=True):
     """
-    - If numeric, we scale the target and use XGBRegressor for better performance than RF.
+    - If numeric, we scale the target and use XGBRegressor with basic hyperparam tuning.
     - If categorical, we use LogisticRegression.
     """
     if np.issubdtype(y.dtype, np.floating):
@@ -337,14 +347,48 @@ def train_ai_models(X, y, target_attribute, verbose=True):
         y_scaler = StandardScaler()
         y_scaled = y_scaler.fit_transform(y.reshape(-1,1)).ravel()
 
-        # ### NEW / FIX: Use XGBRegressor instead of RF
-        # Some basic hyperparameters for improvement
-        model = XGBRegressor(n_estimators=200, max_depth=8, learning_rate=0.1, random_state=42)
-        
-        X_train, X_val, y_train, y_val = train_test_split(X, y_scaled, test_size=0.2, random_state=42)
-        model.fit(X_train, y_train)
+        # Prepare train/val split (20% val)
+        X_train, X_val, y_train, y_val = train_test_split(
+            X, y_scaled,
+            test_size=0.2,
+            random_state=42
+        )
 
-        y_pred_scaled = model.predict(X_val)
+        # Define parameter distributions for XGB
+        param_distributions = {
+            "n_estimators": [100, 200, 300],
+            "max_depth": [5, 8, 10],
+            "learning_rate": [0.01, 0.1, 0.2],
+            "subsample": [0.6, 0.8, 1.0],
+            "colsample_bytree": [0.6, 0.8, 1.0]
+        }
+
+        xgb_model = XGBRegressor(random_state=42)
+
+        # RandomizedSearchCV for efficiency (no early stopping in the search)
+        search = RandomizedSearchCV(
+            estimator=xgb_model,
+            param_distributions=param_distributions,
+            n_iter=10,                # number of parameter settings
+            scoring='neg_mean_squared_error',
+            cv=3,                     # 3-fold cross validation
+            random_state=42,
+            verbose=1
+        )
+
+        # Perform the search
+        search.fit(X_train, y_train)
+
+        # Retrieve the best estimator
+        best_model = search.best_estimator_
+        if verbose:
+            print(f"[INFO] Best XGB Params: {search.best_params_}")
+
+        # Final fit WITHOUT early_stopping_rounds (to avoid TypeError)
+        best_model.fit(X_train, y_train)
+
+        # Evaluate MSE on validation
+        y_pred_scaled = best_model.predict(X_val)
         y_pred = y_scaler.inverse_transform(y_pred_scaled.reshape(-1,1)).ravel()
         y_val_orig = y_scaler.inverse_transform(y_val.reshape(-1,1)).ravel()
 
@@ -353,18 +397,22 @@ def train_ai_models(X, y, target_attribute, verbose=True):
             print(f"Trained XGBRegressor for '{target_attribute}' with MSE: {mse:.4f}")
 
         model_info = {
-            'model': model,
+            'model': best_model,
             'y_scaler': y_scaler
         }
         return model_info
 
     else:
-        # Classification
+        # Classification fallback
         logreg = LogisticRegression(max_iter=1000)
-        X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
-        logreg.fit(X_train, y_train)
-        preds = logreg.predict(X_val)
-        acc = accuracy_score(y_val, preds)
+        X_train_, X_val_, y_train_, y_val_ = train_test_split(
+            X, y,
+            test_size=0.2,
+            random_state=42
+        )
+        logreg.fit(X_train_, y_train_)
+        preds = logreg.predict(X_val_)
+        acc = accuracy_score(y_val_, preds)
         if verbose:
             print(f"Trained Logistic Regression for '{target_attribute}' with Accuracy: {acc:.4f}")
         return logreg
@@ -377,7 +425,9 @@ def infer_missing_attributes(model_info, X_missing, is_numeric=True):
         model = model_info['model']
         y_scaler = model_info['y_scaler']
         y_pred_scaled = model.predict(X_missing)
-        predictions = y_scaler.inverse_transform(y_pred_scaled.reshape(-1,1)).ravel()
+        predictions = y_scaler.inverse_transform(
+            y_pred_scaled.reshape(-1,1)
+        ).ravel()
     else:
         # Classification
         model = model_info
@@ -399,7 +449,9 @@ def generate_report(inferred_values, target_attr):
 def update_neo4j(driver, missing_attributes_df, inferred_values, target_attribute, batch_size=1000):
     node_ids = missing_attributes_df['tmdbId'].tolist()
 
-    update_choice = input(f"\nDo you want to update the Neo4j database with the inferred '{target_attribute}' values? (yes/no): ").strip().lower()
+    update_choice = input(
+        f"\nDo you want to update the Neo4j database with the inferred '{target_attribute}' values? (yes/no): "
+    ).strip().lower()
     if update_choice not in ['yes', 'y']:
         print("[INFO] User opted not to update the Neo4j database.")
         return
@@ -408,23 +460,28 @@ def update_neo4j(driver, missing_attributes_df, inferred_values, target_attribut
         for i in range(0, len(node_ids), batch_size):
             batch_ids = node_ids[i:i+batch_size]
             batch_predictions = inferred_values[i:i+batch_size]
-            session.write_transaction(_update_batch, batch_ids, batch_predictions, target_attribute)
+            session.write_transaction(
+                _update_batch,
+                batch_ids,
+                batch_predictions,
+                target_attribute
+            )
     print(f"[INFO] Updated Neo4j database with inferred '{target_attribute}' in batches.")
 
 def _update_batch(tx, batch_ids, batch_predictions, target):
     for node_id, prediction in zip(batch_ids, batch_predictions):
         if isinstance(prediction, float):
-            query = """
+            query = f"""
             MATCH (n)
             WHERE n.tmdbId = $id
-            SET n.year = $value
+            SET n.{target} = $value
             """
             params = {'id': node_id, 'value': float(prediction)}
         else:
-            query = """
+            query = f"""
             MATCH (n)
             WHERE n.tmdbId = $id
-            SET n.year = $value
+            SET n.{target} = $value
             """
             params = {'id': node_id, 'value': int(prediction)}
         tx.run(query, params)
@@ -464,10 +521,13 @@ def main():
     print(f"[INFO] Chosen attribute: {target_attr}")
     print(f"[INFO] Found {len(missing_attributes_df)} nodes missing '{target_attr}'.")
 
-    # Fit pipeline
+    # Fit pipeline with reduced PCA components
     print("\n=== Step 4: Fit Preprocessing Pipeline ===")
     preprocessor, training_df, X_train, y_train, pca_object = fit_preprocessing_pipeline(
-        nodes_df, target_attr, verbose=True
+        nodes_df,
+        target_attr,
+        verbose=True,
+        max_pca_components=150
     )
     print(f"[INFO] Completed pipeline fitting. Training set shape: {X_train.shape}")
     print(f"[INFO] Training labels shape: {y_train.shape}")
@@ -480,8 +540,15 @@ def main():
     # Inference
     print("\n=== Step 6: Inference ===")
     placeholder_df = nodes_df.copy()
-    placeholder_df.loc[missing_attributes_df.index, target_attr] = 2000  # dummy year
-    X_missing_full = transform_data(placeholder_df, preprocessor, pca_object, verbose=True)
+    # For those missing, fill with a dummy year to keep shape consistent
+    placeholder_df.loc[missing_attributes_df.index, target_attr] = 2000
+    X_missing_full = transform_data(
+        placeholder_df,
+        preprocessor,
+        pca_object,
+        verbose=True,
+        max_pca_components=150
+    )
 
     missing_indices = missing_attributes_df.index
     X_missing_subset = X_missing_full[missing_indices, :]
