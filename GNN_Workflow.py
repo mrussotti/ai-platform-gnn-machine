@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pandas as pd
 from neo4j import GraphDatabase
 import torch
@@ -60,9 +62,10 @@ class TopKCategories(TransformerMixin, BaseEstimator):
 #                            Neo4j Queries
 ###############################################################################
 def connect_to_neo4j(uri=None, username=None, password=None):
-    HARDCODED_URI = "neo4j+s://ae86bd83.databases.neo4j.io"
+    # Update these credentials or read from environment
+    HARDCODED_URI = "neo4j+s://2022b6a4.databases.neo4j.io"
     HARDCODED_USERNAME = "neo4j"
-    HARDCODED_PASSWORD = "h0ZknFPHLkSPXFU_O0eEI1_VG-AnHa-p1uN6NfrNdFY"
+    HARDCODED_PASSWORD = "E_zTYSm4--WJKaaz4OTaaBiP_8Kng2ePCYWuMdRDJXU"
     driver = GraphDatabase.driver(
         HARDCODED_URI, 
         auth=(HARDCODED_USERNAME, HARDCODED_PASSWORD)
@@ -161,62 +164,81 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True, max_pca
     except ValueError:
         pass
 
-    # Filter out-of-range 'year'
-    if target_attribute == 'year' and is_numeric_target:
-        before = len(training_df)
-        training_df = training_df[
-            (training_df['year'] >= 1850) &
-            (training_df['year'] <= 2025)
-        ]
-        after = len(training_df)
-        if verbose:
-            print(f"Filtered out-of-range '{target_attribute}'. Removed {before - after} rows. Remaining: {after}")
+    # If the target is 'year' we could do out-of-range filtering (example code)
+    # if target_attribute == 'year' and is_numeric_target:
+    #     ...
 
-    # Extract labels
+    # Extract labels (y_train)
     if is_numeric_target:
         y_train = training_df[target_attribute].values.astype(float)
     else:
         y_train = training_df[target_attribute].values
 
-    # Drop the target col and non-informative
+    # Drop the target col + a few known non-informative
     drop_cols = ['id', 'labels', target_attribute]
     drop_cols = [c for c in drop_cols if c in training_df.columns]
     training_df = training_df.drop(columns=drop_cols, errors='ignore')
 
+    # -----------------------------
     # Handle embedding with PCA
+    # -----------------------------
     embedding_cols = [col for col in training_df.columns if col.lower() == 'embedding']
     pca_object = None
     if embedding_cols:
         emb_col = embedding_cols[0]
+        
+        # Convert string -> list if needed
         if training_df[emb_col].dtype == object:
             training_df[emb_col] = training_df[emb_col].apply(
                 lambda x: ast.literal_eval(x) if isinstance(x, str) else x
             )
+
         expected_len = 1536
-        mask_correct = training_df[emb_col].apply(lambda x: isinstance(x, list) and len(x) == expected_len)
-        if not mask_correct.all():
-            # Replace invalid embeddings with zero-vectors
-            training_df.loc[~mask_correct, emb_col] = training_df.loc[~mask_correct, emb_col].apply(
-                lambda x: [0.0]*expected_len
-            )
-
-        embeddings = np.vstack(training_df[emb_col].values)
-        # Reduce from 1536 to max_pca_components
-        pca_object = PCA(n_components=max_pca_components)
-        reduced = pca_object.fit_transform(embeddings)
-        # Create new columns
-        reduced_df = pd.DataFrame(
-            reduced,
-            columns=[f"{emb_col}_pca_{i}" for i in range(max_pca_components)]
+        # Check which rows have a valid embedding length
+        mask_correct = training_df[emb_col].apply(
+            lambda x: (isinstance(x, list) or isinstance(x, np.ndarray)) and len(x) == expected_len
         )
-        # Ensure numeric
-        for c in reduced_df.columns:
-            reduced_df[c] = reduced_df[c].astype(float)
 
-        training_df = pd.concat([
-            training_df.drop(columns=[emb_col]).reset_index(drop=True),
-            reduced_df.reset_index(drop=True)
-        ], axis=1)
+        # Replace invalid embeddings with zero vectors
+        training_df.loc[~mask_correct, emb_col] = training_df.loc[~mask_correct, emb_col].apply(
+            lambda x: np.zeros(expected_len, dtype=np.float32)
+        )
+
+        # Ensure entire column is float arrays
+        training_df[emb_col] = training_df[emb_col].apply(
+            lambda arr: np.array(arr, dtype=np.float32)
+        )
+
+        # Now stack
+        embeddings = np.vstack(training_df[emb_col].values)  # shape: (n_samples, 1536) float32
+
+        # Dynamically clamp PCA n_components
+        n_samples, n_features = embeddings.shape
+        max_valid_components = min(n_samples, n_features, max_pca_components)
+
+        if max_valid_components < 2:
+            # Not enough dimension or samples to do PCA
+            print("[WARNING] Not enough data to perform PCA. Skipping embedding PCA.")
+            # Optionally remove the embedding col altogether
+            training_df.drop(columns=[emb_col], inplace=True)
+        else:
+            # Perform PCA
+            pca_object = PCA(n_components=max_valid_components)
+            reduced = pca_object.fit_transform(embeddings)
+
+            # Create columns for the reduced embedding
+            pca_cols = [f"{emb_col}_pca_{i}" for i in range(max_valid_components)]
+            reduced_df = pd.DataFrame(reduced, columns=pca_cols)
+            # Force numeric
+            for c in reduced_df.columns:
+                reduced_df[c] = reduced_df[c].astype(float)
+
+            # Concat back to training_df
+            training_df = pd.concat(
+                [training_df.drop(columns=[emb_col]).reset_index(drop=True),
+                 reduced_df.reset_index(drop=True)],
+                axis=1
+            )
 
     # Identify cat / num / bool columns
     cat_cols = training_df.select_dtypes(include=['object', 'category']).columns.tolist()
@@ -234,11 +256,11 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True, max_pca
         # Force string
         training_df[col] = training_df[col].astype(str)
 
-    # Exclude ID columns from cat
+    # Exclude certain ID columns from cat
     exclude_id_cols = ['tmdbId', 'imdbId', 'name', 'userId']
     cat_cols = [c for c in cat_cols if c not in exclude_id_cols]
 
-    # Drop cat cols with all missing or "NaN" strings
+    # Drop cat cols that are entirely missing or "nan"
     for c in cat_cols:
         if training_df[c].replace("nan", np.nan).isna().all():
             training_df.drop(columns=[c], inplace=True)
@@ -246,7 +268,7 @@ def fit_preprocessing_pipeline(nodes_df, target_attribute, verbose=True, max_pca
     # Re-check cat_cols if we dropped some
     cat_cols = [c for c in cat_cols if c in training_df.columns]
 
-    # Build pipeline
+    # Build pipelines
     cat_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='most_frequent')),
         ('topk', TopKCategories(top_k=100)),
@@ -291,20 +313,29 @@ def transform_data(df, preprocessor, pca_object, verbose=True, max_pca_component
             df_trans[emb_col] = df_trans[emb_col].apply(
                 lambda x: ast.literal_eval(x) if isinstance(x, str) else x
             )
+
         expected_len = 1536
-        mask_correct = df_trans[emb_col].apply(lambda x: isinstance(x, list) and len(x) == expected_len)
-        if not mask_correct.all():
-            df_trans.loc[~mask_correct, emb_col] = df_trans.loc[~mask_correct, emb_col].apply(
-                lambda x: [0.0]*expected_len
-            )
+        # Fix invalid embeddings
+        mask_correct = df_trans[emb_col].apply(
+            lambda x: (isinstance(x, list) or isinstance(x, np.ndarray)) and len(x) == expected_len
+        )
+        df_trans.loc[~mask_correct, emb_col] = df_trans.loc[~mask_correct, emb_col].apply(
+            lambda x: np.zeros(expected_len, dtype=np.float32)
+        )
+
+        # Ensure arrays
+        df_trans[emb_col] = df_trans[emb_col].apply(
+            lambda arr: np.array(arr, dtype=np.float32)
+        )
 
         embeddings = np.vstack(df_trans[emb_col].values)
-        # Transform with existing PCA object
+
+        # Use the same n_components as pca_object
         reduced = pca_object.transform(embeddings)
-        reduced_df = pd.DataFrame(
-            reduced,
-            columns=[f"{emb_col}_pca_{i}" for i in range(max_pca_components)]
-        )
+        n_components = reduced.shape[1]
+        pca_cols = [f"{emb_col}_pca_{i}" for i in range(n_components)]
+        reduced_df = pd.DataFrame(reduced, columns=pca_cols)
+
         # Force numeric
         for c in reduced_df.columns:
             reduced_df[c] = reduced_df[c].astype(float)
@@ -347,14 +378,14 @@ def train_ai_models(X, y, target_attribute, verbose=True):
         y_scaler = StandardScaler()
         y_scaled = y_scaler.fit_transform(y.reshape(-1,1)).ravel()
 
-        # Prepare train/val split (20% val)
+        # Prepare train/val split
         X_train, X_val, y_train, y_val = train_test_split(
             X, y_scaled,
             test_size=0.2,
             random_state=42
         )
 
-        # Define parameter distributions for XGB
+        # Basic param distributions for XGBoost
         param_distributions = {
             "n_estimators": [100, 200, 300],
             "max_depth": [5, 8, 10],
@@ -365,26 +396,23 @@ def train_ai_models(X, y, target_attribute, verbose=True):
 
         xgb_model = XGBRegressor(random_state=42)
 
-        # RandomizedSearchCV for efficiency (no early stopping in the search)
+        # RandomizedSearchCV
         search = RandomizedSearchCV(
             estimator=xgb_model,
             param_distributions=param_distributions,
-            n_iter=10,                # number of parameter settings
+            n_iter=10,
             scoring='neg_mean_squared_error',
-            cv=3,                     # 3-fold cross validation
+            cv=3,
             random_state=42,
             verbose=1
         )
 
-        # Perform the search
         search.fit(X_train, y_train)
-
-        # Retrieve the best estimator
         best_model = search.best_estimator_
         if verbose:
             print(f"[INFO] Best XGB Params: {search.best_params_}")
 
-        # Final fit WITHOUT early_stopping_rounds (to avoid TypeError)
+        # Final fit
         best_model.fit(X_train, y_train)
 
         # Evaluate MSE on validation
@@ -425,9 +453,7 @@ def infer_missing_attributes(model_info, X_missing, is_numeric=True):
         model = model_info['model']
         y_scaler = model_info['y_scaler']
         y_pred_scaled = model.predict(X_missing)
-        predictions = y_scaler.inverse_transform(
-            y_pred_scaled.reshape(-1,1)
-        ).ravel()
+        predictions = y_scaler.inverse_transform(y_pred_scaled.reshape(-1,1)).ravel()
     else:
         # Classification
         model = model_info
@@ -483,7 +509,7 @@ def _update_batch(tx, batch_ids, batch_predictions, target):
             WHERE n.tmdbId = $id
             SET n.{target} = $value
             """
-            params = {'id': node_id, 'value': int(prediction)}
+            params = {'id': node_id, 'value': str(prediction)}
         tx.run(query, params)
 
 ###############################################################################
@@ -521,13 +547,12 @@ def main():
     print(f"[INFO] Chosen attribute: {target_attr}")
     print(f"[INFO] Found {len(missing_attributes_df)} nodes missing '{target_attr}'.")
 
-    # Fit pipeline with reduced PCA components
     print("\n=== Step 4: Fit Preprocessing Pipeline ===")
     preprocessor, training_df, X_train, y_train, pca_object = fit_preprocessing_pipeline(
         nodes_df,
         target_attr,
         verbose=True,
-        max_pca_components=150
+        max_pca_components=150  # You may adjust this down if your dataset is very small
     )
     print(f"[INFO] Completed pipeline fitting. Training set shape: {X_train.shape}")
     print(f"[INFO] Training labels shape: {y_train.shape}")
@@ -539,8 +564,8 @@ def main():
 
     # Inference
     print("\n=== Step 6: Inference ===")
+    # For those missing the target, fill with a placeholder so shape matches
     placeholder_df = nodes_df.copy()
-    # For those missing, fill with a dummy year to keep shape consistent
     placeholder_df.loc[missing_attributes_df.index, target_attr] = 2000
     X_missing_full = transform_data(
         placeholder_df,
@@ -570,6 +595,7 @@ def main():
 
     print("\n=== Workflow Complete ===")
     driver.close()
+
 
 if __name__ == "__main__":
     main()
