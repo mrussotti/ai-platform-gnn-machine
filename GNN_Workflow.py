@@ -6,25 +6,22 @@ import torch
 import joblib
 import ast
 import numpy as np
+import os
 
 # Scikit-learn imports
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, accuracy_score, f1_score
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.compose import ColumnTransformer
-from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.metrics import mean_squared_error, accuracy_score
 from sklearn.base import TransformerMixin, BaseEstimator
+from pandas.api.types import CategoricalDtype
 
-# For classification fallback
-from sklearn.linear_model import LogisticRegression
-
-# xgboost
-from xgboost import XGBRegressor
+# xgboost (unused here, but left for reference)
+# from xgboost import XGBRegressor
 
 # PyTorch Geometric
+import torch.nn.functional as F
 from torch_geometric.data import Data
+from torch_geometric.nn import GCNConv
 
 ###############################################################################
 #                           Custom Transformer
@@ -41,12 +38,12 @@ class TopKCategories(TransformerMixin, BaseEstimator):
     def fit(self, X, y=None):
         self.top_categories_ = []
         for i in range(X.shape[1]):
-            # Convert everything to str, ensuring no list-like objects remain
+            # Convert everything to str
             col = X[:, i].astype(str)
             unique, counts = np.unique(col, return_counts=True)
-            # Keep top_k categories
-            top_k = unique[np.argsort(counts)[-self.top_k:]]
-            self.top_categories_.append(set(top_k))
+            # Keep top_k categories by frequency
+            top_k_cats = unique[np.argsort(counts)[-self.top_k:]]
+            self.top_categories_.append(set(top_k_cats))
         return self
     
     def transform(self, X):
@@ -61,14 +58,15 @@ class TopKCategories(TransformerMixin, BaseEstimator):
             )
         return X_transformed
 
+
 ###############################################################################
-#                            Neo4j Queries
+#                           Neo4j Queries
 ###############################################################################
 def connect_to_neo4j(uri=None, username=None, password=None):
-    # Update these credentials or read from environment
-    HARDCODED_URI = "neo4j+s://8cd5bbe1.databases.neo4j.io"
+    # Update these credentials or read from environment or config
+    HARDCODED_URI = "neo4j+s://d3f09fae.databases.neo4j.io"
     HARDCODED_USERNAME = "neo4j"
-    HARDCODED_PASSWORD = "dobMHdjo7r0g70Oz_HKZy-qcyP2PY6UN8yxu_rb82fo"
+    HARDCODED_PASSWORD = "eYDPD1Qd_nn9HZYTKY7bKDHgRgbKF5YBgasio3TeaNs"
     driver = GraphDatabase.driver(
         HARDCODED_URI, 
         auth=(HARDCODED_USERNAME, HARDCODED_PASSWORD)
@@ -76,32 +74,34 @@ def connect_to_neo4j(uri=None, username=None, password=None):
     return driver
 
 def _get_nodes(tx):
+    # Use ID(n) as 'id' instead of n.tmdbId
     query = """
     MATCH (n)
-    RETURN n.tmdbId AS id, labels(n) AS labels, properties(n) AS properties
+    RETURN ID(n) AS id, labels(n) AS labels, properties(n) AS properties
     """
     result = tx.run(query)
     nodes = []
     for record in result:
-        node_data = record["properties"]
-        node_data["id"] = record["id"]  # Ensure the ID is stored as "id"
+        node_data = record["properties"]  # dictionary of n's properties
+        node_data["id"] = record["id"]
         node_data["labels"] = record["labels"]
         nodes.append(node_data)
     return nodes
 
 def get_nodes(driver):
     with driver.session() as session:
-        return session.execute_read(_get_nodes)
+        return session.read_transaction(_get_nodes)
 
 def _get_relationships(tx):
+    # Similarly, use ID(r) for the relationship ID, and ID(n), ID(m) for start/end
     query = """
     MATCH (n)-[r]->(m)
-    RETURN r.tmdbId AS id, n.tmdbId AS start_id, m.tmdbId AS end_id, type(r) AS type, properties(r) AS properties
+    RETURN ID(r) AS id, ID(n) AS start_id, ID(m) AS end_id, type(r) AS type, properties(r) AS properties
     """
     result = tx.run(query)
     relationships = []
     for record in result:
-        rel_data = record["properties"]
+        rel_data = record["properties"]  # dictionary of r's properties
         rel_data["id"] = record["id"]
         rel_data["start_id"] = record["start_id"]
         rel_data["end_id"] = record["end_id"]
@@ -111,37 +111,28 @@ def _get_relationships(tx):
 
 def get_relationships(driver):
     with driver.session() as session:
-        return session.execute_read(_get_relationships)
+        return session.read_transaction(_get_relationships)
 
 def extract_data(driver):
     nodes = get_nodes(driver)
     relationships = get_relationships(driver)
     nodes_df = pd.DataFrame(nodes)
     relationships_df = pd.DataFrame(relationships)
-    
-    # Debugging: Print the columns and first few rows of nodes_df
+
     print("Nodes DataFrame columns:", nodes_df.columns)
     print("First few rows of nodes_df:")
     print(nodes_df.head())
-    
-    # If 'id' column is missing, generate one
-    if 'id' not in nodes_df.columns:
-        nodes_df['id'] = nodes_df.index
-        print("[WARNING] 'id' column was missing. Generated using DataFrame index.")
 
-    # ---------------------------------------------------------------------
-    # DROP columns that are known to contain complex objects (e.g., lists/dicts)
-    # You can customize this if you want to transform them instead.
-    # ---------------------------------------------------------------------
-    for col in ["labels", "properties"]:
-        if col in nodes_df.columns:
-            nodes_df.drop(columns=col, inplace=True)
-
-    # For relationships, if 'properties' is a dict or list, remove if unneeded:
+    # Drop 'labels' and 'properties' if you don't need them as columns
+    if 'labels' in nodes_df.columns:
+        nodes_df.drop(columns='labels', inplace=True)
+    if 'properties' in nodes_df.columns:
+        nodes_df.drop(columns='properties', inplace=True)
     if 'properties' in relationships_df.columns:
         relationships_df.drop(columns='properties', inplace=True)
 
     return nodes_df, relationships_df
+
 
 ###############################################################################
 #                           Data Cleaning and Preprocessing
@@ -150,121 +141,116 @@ def detect_feature_type(series):
     """
     Detect the type of a feature (numerical, categorical, or other).
     """
-    # If all values can be numeric, treat as numeric
     if pd.api.types.is_numeric_dtype(series):
         return "numerical"
-    # If it's a string or categorical
-    elif pd.api.types.is_string_dtype(series) or pd.api.types.is_categorical_dtype(series):
+    elif isinstance(series.dtype, CategoricalDtype) or pd.api.types.is_string_dtype(series):
         return "categorical"
     else:
-        # Return 'other' for columns that have lists, dicts, or any non-scalar objects
         return "other"
 
 def preprocess_data(nodes_df, relationships_df):
     """
     Preprocess nodes and relationships data.
+    - Fill missing values
+    - Convert categorical features to one-hot
+    - Scale numerical columns
     """
-    # Step 1: Handle missing values
-    # For nodes DataFrame
+    # 1. Handle missing values in nodes
     for col in nodes_df.columns:
         if col == "id":
-            # Do NOT fill or alter the 'id' column
-            continue
-
-        feature_type = detect_feature_type(nodes_df[col])
-        if feature_type == "numerical":
-            nodes_df[col].fillna(nodes_df[col].mean(), inplace=True)
-        elif feature_type == "categorical":
-            # Fill missing with the mode or "unknown" if mode is empty
-            if nodes_df[col].mode().size > 0:
-                nodes_df[col].fillna(nodes_df[col].mode()[0], inplace=True)
+            continue  # don't alter the ID column
+        ftype = detect_feature_type(nodes_df[col])
+        if ftype == "numerical":
+            mean_val = nodes_df[col].mean()
+            nodes_df[col] = nodes_df[col].fillna(mean_val)
+        elif ftype == "categorical":
+            if not nodes_df[col].mode().empty:
+                mode_val = nodes_df[col].mode()[0]
+                nodes_df[col] = nodes_df[col].fillna(mode_val)
             else:
-                nodes_df[col].fillna("unknown", inplace=True)
+                nodes_df[col] = nodes_df[col].fillna("unknown")
         else:
-            # For 'other', convert everything to string (so it becomes categorical)
-            # Then fill NaN with 'unknown'
+            # Convert to string, fill with 'unknown'
             nodes_df[col] = nodes_df[col].astype(str)
-            nodes_df[col].fillna("unknown", inplace=True)
+            nodes_df[col] = nodes_df[col].fillna("unknown")
 
-    # For relationships DataFrame
+    # 2. Handle missing values in relationships
     for col in relationships_df.columns:
         if col in ["id", "start_id", "end_id"]:
-            # Do NOT fill or alter these ID columns
             continue
-
-        feature_type = detect_feature_type(relationships_df[col])
-        if feature_type == "numerical":
-            relationships_df[col].fillna(relationships_df[col].mean(), inplace=True)
-        elif feature_type == "categorical":
-            if relationships_df[col].mode().size > 0:
-                relationships_df[col].fillna(relationships_df[col].mode()[0], inplace=True)
+        ftype = detect_feature_type(relationships_df[col])
+        if ftype == "numerical":
+            mean_val = relationships_df[col].mean()
+            relationships_df[col] = relationships_df[col].fillna(mean_val)
+        elif ftype == "categorical":
+            if not relationships_df[col].mode().empty:
+                mode_val = relationships_df[col].mode()[0]
+                relationships_df[col] = relationships_df[col].fillna(mode_val)
             else:
-                relationships_df[col].fillna("unknown", inplace=True)
+                relationships_df[col] = relationships_df[col].fillna("unknown")
         else:
             relationships_df[col] = relationships_df[col].astype(str)
-            relationships_df[col].fillna("unknown", inplace=True)
+            relationships_df[col] = relationships_df[col].fillna("unknown")
 
-    # Step 2: Convert categorical data into numerical format
-    # For nodes DataFrame
-    # Exclude 'id' from transformations
+    # 3. Convert categorical data to numeric
+    # For nodes
     categorical_cols_nodes = [
-        col for col in nodes_df.columns
-        if detect_feature_type(nodes_df[col]) == "categorical" and col != "id"
+        c for c in nodes_df.columns
+        if c != "id" and detect_feature_type(nodes_df[c]) == "categorical"
     ]
     numerical_cols_nodes = [
-        col for col in nodes_df.columns
-        if detect_feature_type(nodes_df[col]) == "numerical" and col != "id"
+        c for c in nodes_df.columns
+        if c != "id" and detect_feature_type(nodes_df[c]) == "numerical"
     ]
 
     if categorical_cols_nodes:
-        onehot_encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
-        encoded_categorical = onehot_encoder.fit_transform(nodes_df[categorical_cols_nodes])
-        encoded_categorical_df = pd.DataFrame(
-            encoded_categorical,
-            columns=onehot_encoder.get_feature_names_out(categorical_cols_nodes)
+        ohe = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
+        encoded = ohe.fit_transform(nodes_df[categorical_cols_nodes])
+        encoded_df = pd.DataFrame(
+            encoded,
+            columns=ohe.get_feature_names_out(categorical_cols_nodes),
+            index=nodes_df.index
         )
-        nodes_df = pd.concat([nodes_df.drop(categorical_cols_nodes, axis=1), encoded_categorical_df], axis=1)
+        # Drop original cat columns and attach encoded
+        nodes_df = pd.concat([nodes_df.drop(categorical_cols_nodes, axis=1), encoded_df], axis=1)
 
-    # For relationships DataFrame
-    categorical_cols_relationships = [
-        col for col in relationships_df.columns
-        if detect_feature_type(relationships_df[col]) == "categorical"
-           and col not in ["id", "start_id", "end_id"]
-    ]
-    numerical_cols_relationships = [
-        col for col in relationships_df.columns
-        if detect_feature_type(relationships_df[col]) == "numerical"
-           and col not in ["id", "start_id", "end_id"]
-    ]
-
-    if categorical_cols_relationships:
-        onehot_encoder = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
-        encoded_categorical = onehot_encoder.fit_transform(relationships_df[categorical_cols_relationships])
-        encoded_categorical_df = pd.DataFrame(
-            encoded_categorical,
-            columns=onehot_encoder.get_feature_names_out(categorical_cols_relationships)
-        )
-        relationships_df = pd.concat([relationships_df.drop(categorical_cols_relationships, axis=1),
-                                      encoded_categorical_df], axis=1)
-
-    # Step 3: Normalize or standardize numerical features
     if numerical_cols_nodes:
         scaler = StandardScaler()
         nodes_df[numerical_cols_nodes] = scaler.fit_transform(nodes_df[numerical_cols_nodes])
 
-    if numerical_cols_relationships:
-        scaler = StandardScaler()
-        relationships_df[numerical_cols_relationships] = scaler.fit_transform(relationships_df[numerical_cols_relationships])
+    # For relationships
+    categorical_cols_rel = [
+        c for c in relationships_df.columns
+        if c not in ["id", "start_id", "end_id"] and detect_feature_type(relationships_df[c]) == "categorical"
+    ]
+    numerical_cols_rel = [
+        c for c in relationships_df.columns
+        if c not in ["id", "start_id", "end_id"] and detect_feature_type(relationships_df[c]) == "numerical"
+    ]
+
+    if categorical_cols_rel:
+        ohe_rel = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
+        encoded_rel = ohe_rel.fit_transform(relationships_df[categorical_cols_rel])
+        encoded_rel_df = pd.DataFrame(
+            encoded_rel,
+            columns=ohe_rel.get_feature_names_out(categorical_cols_rel),
+            index=relationships_df.index
+        )
+        relationships_df = pd.concat([relationships_df.drop(categorical_cols_rel, axis=1), encoded_rel_df], axis=1)
+
+    if numerical_cols_rel:
+        scaler_rel = StandardScaler()
+        relationships_df[numerical_cols_rel] = scaler_rel.fit_transform(relationships_df[numerical_cols_rel])
 
     return nodes_df, relationships_df
+
 
 ###############################################################################
 #                           Identify Features and Target
 ###############################################################################
 def identify_features_and_target(nodes_df):
     """
-    Prompt the user to specify the target attribute and features for training.
-    Group columns by type and allow the user to select a type of attribute to infer.
+    Interactive selection of target and features.
     """
     print("\n=== Step 4: Identify Features and Target ===")
 
@@ -273,258 +259,249 @@ def identify_features_and_target(nodes_df):
         for col in columns:
             if "_" in col:
                 prefix = col.split("_")[0]
-                if prefix not in grouped:
-                    grouped[prefix] = []
-                grouped[prefix].append(col)
+                grouped.setdefault(prefix, []).append(col)
             else:
                 grouped.setdefault(col, []).append(col)
         return grouped
 
-    grouped_columns = group_columns_by_type(nodes_df.columns)
+    grouped_cols = group_columns_by_type(nodes_df.columns)
 
     print("\nAvailable attribute types:")
-    for attr_type, columns in grouped_columns.items():
-        print(f"- {attr_type} ({len(columns)} columns)")
+    for attr_type, cols in grouped_cols.items():
+        print(f" - {attr_type} ({len(cols)} columns)")
 
+    # Prompt user for which attribute group to infer
     while True:
-        attr_type = input("\nEnter the type of attribute to infer (e.g., 'fax', 'phone', 'address'): ").strip()
-        if attr_type in grouped_columns:
+        attr_type = input("\nEnter the type of attribute to infer (e.g. 'occupation'): ").strip()
+        if attr_type in grouped_cols:
             break
         else:
-            print(f"Error: '{attr_type}' is not a valid attribute type. Please choose from the list above.")
+            print(f"Error: '{attr_type}' not in grouped columns.")
 
     print(f"\nColumns of type '{attr_type}':")
-    for col in grouped_columns[attr_type]:
-        print(f"- {col}")
+    for col in grouped_cols[attr_type]:
+        print(f" - {col}")
 
     while True:
-        target = input(f"\nEnter the specific {attr_type} attribute to infer (e.g., '{attr_type}_unknown'): ").strip()
-        if target in grouped_columns[attr_type]:
+        target = input(f"\nEnter the specific column from '{attr_type}' to predict (e.g. '{attr_type}_unknown'): ").strip()
+        if target in grouped_cols[attr_type]:
             break
         else:
-            print(f"Error: '{target}' is not a valid column of type '{attr_type}'.")
+            print(f"Error: '{target}' is not valid under '{attr_type}' group.")
 
+    # Prompt user to select features
     while True:
-        features = input("\nEnter the features to use for training (comma-separated, or type 'all' to use all columns): ").strip()
-        if features.lower() == "all":
-            features = nodes_df.columns.tolist()
+        features_input = input("\nEnter features to use (comma-separated) or 'all': ").strip()
+        if features_input.lower() == "all":
+            features = list(nodes_df.columns)
             break
         else:
-            features = [f.strip() for f in features.split(",")]
-            invalid_features = [f for f in features if f not in nodes_df.columns]
-            if not invalid_features:
-                break
+            features = [f.strip() for f in features_input.split(",")]
+            invalid = [f for f in features if f not in nodes_df.columns]
+            if invalid:
+                print(f"Invalid columns: {invalid}")
             else:
-                print(f"Error: The following columns are not valid: {invalid_features}")
+                break
 
     print(f"\n[INFO] Target attribute: {target}")
     print(f"[INFO] Features for training: {features}")
     return target, features
 
 
-
-
 ###############################################################################
 #                           Create Graph Representation
 ###############################################################################
 def create_graph_representation(nodes_df, relationships_df, target, features):
-    """
-    Convert nodes and relationships into a graph representation using PyTorch Geometric.
-    """
-    print("\n=== Step 2.2: Create Graph Representation ===")
+    print("\n=== Step 5: Create Graph Representation ===")
 
-    # Ensure 'id' is present
     if 'id' not in nodes_df.columns:
         raise ValueError("No 'id' column found in nodes_df after preprocessing. Cannot create graph.")
 
     # Map node IDs to indices
-    node_id_to_idx = {node_id: idx for idx, node_id in enumerate(nodes_df["id"])}
+    id_to_idx = {node_id: i for i, node_id in enumerate(nodes_df["id"])}
 
-    # Exclude 'id' from the feature vector if still present
+    # Remove 'id' from features if present
     if 'id' in features:
         features.remove('id')
 
-    # Build node features as float tensor
+    # Build node features
     node_features = nodes_df[features].values
-    # If any column is still object dtype, this line will fail.
-    # By here, all columns in `features` should be numeric (float/int).
     node_features = torch.tensor(node_features, dtype=torch.float)
 
-    # Build edge indices
-    edge_indices = []
+    # Build edge_index
+    edge_list = []
     for _, row in relationships_df.iterrows():
-        if "start_id" in row and "end_id" in row:
-            start_id = row["start_id"]
-            end_id = row["end_id"]
-            if start_id in node_id_to_idx and end_id in node_id_to_idx:
-                edge_indices.append([node_id_to_idx[start_id], node_id_to_idx[end_id]])
+        start = row["start_id"]
+        end = row["end_id"]
+        if start in id_to_idx and end in id_to_idx:
+            edge_list.append([id_to_idx[start], id_to_idx[end]])
+    edge_index = torch.tensor(edge_list, dtype=torch.long).t().contiguous()
 
-    edge_indices = torch.tensor(edge_indices, dtype=torch.long).t().contiguous()
+    # Build target
+    y_values = nodes_df[target].values
+    # Convert to float
+    y_values = torch.tensor(y_values, dtype=torch.float)
 
-    # Build target labels
-    target_labels = nodes_df[target].values
-    target_labels = torch.tensor(target_labels, dtype=torch.float)
-
-    # Create PyTorch Geometric Data object
-    graph_data = Data(
+    data = Data(
         x=node_features,
-        edge_index=edge_indices,
-        y=target_labels
+        edge_index=edge_index,
+        y=y_values
     )
-
     print("[INFO] Graph representation created.")
-    return graph_data
+    return data
 
-
-###############################################################################
-#                           Feature Selection
-###############################################################################
-def select_features(nodes_df, target):
-    """
-    Select relevant features from the nodes DataFrame to use as input features for the GNN.
-    Allows the user to choose features based on domain knowledge or feature importance.
-    """
-    print("\n=== Step 2.3: Feature Selection ===")
-
-    # Exclude the target column from feature selection
-    available_features = [col for col in nodes_df.columns if col != target]
-
-    print("\nAvailable features for selection:")
-    for i, feature in enumerate(available_features):
-        print(f"{i + 1}. {feature}")
-
-    while True:
-        try:
-            # Prompt the user to select features
-            selected_indices = input(
-                "\nEnter the indices of the features to use (comma-separated, e.g., '1,2,3'): "
-            ).strip()
-            selected_indices = [int(idx) - 1 for idx in selected_indices.split(",")]
-
-            # Validate selected indices
-            if all(0 <= idx < len(available_features) for idx in selected_indices):
-                selected_features = [available_features[idx] for idx in selected_indices]
-                break
-            else:
-                print("Error: One or more indices are invalid. Please try again.")
-        except ValueError:
-            print("Error: Invalid input. Please enter comma-separated indices.")
-
-    print(f"\n[INFO] Selected features: {selected_features}")
-    return selected_features
-
-import torch.nn.functional as F
-from torch_geometric.nn import GCNConv
-from torch_geometric.loader import DataLoader
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, accuracy_score
 
 ###############################################################################
 #                           GNN Architecture
 ###############################################################################
 class GCN(torch.nn.Module):
-    """
-    Graph Convolutional Network (GCN) model.
-    """
     def __init__(self, input_dim, hidden_dim, output_dim):
-        super(GCN, self).__init__()
+        super().__init__()
         self.conv1 = GCNConv(input_dim, hidden_dim)
-        self.conv2 = GCNConv(hidden_dim, output_dim)
+        self.conv2 = GCNConv(hidden_dim, hidden_dim)
+        self.conv3 = GCNConv(hidden_dim, output_dim)
 
     def forward(self, x, edge_index):
-        # First GCN layer
         x = self.conv1(x, edge_index)
         x = F.relu(x)
-        # Second GCN layer
         x = self.conv2(x, edge_index)
+        x = F.relu(x)
+        x = self.conv3(x, edge_index)
+        # For binary classification with BCEWithLogitsLoss, we return raw logits (no sigmoid here)
         return x
 
-###############################################################################
-#                           Train-Test Split
-###############################################################################
-def split_data(graph_data, test_size=0.2, random_state=42):
-    """
-    Split the graph data into training and testing sets.
-    """
-    # Node-wise split
-    num_nodes = graph_data.num_nodes
-    indices = torch.arange(num_nodes)
-    train_indices, test_indices = train_test_split(
-        indices, test_size=test_size, random_state=random_state
-    )
 
-    # Create masks for training and testing
+###############################################################################
+#                           Split Data
+###############################################################################
+def split_data(data, test_size=0.2, random_state=42):
+    num_nodes = data.num_nodes
+    idx_all = torch.arange(num_nodes)
+    train_idx, test_idx = train_test_split(idx_all, test_size=test_size, random_state=random_state)
+
     train_mask = torch.zeros(num_nodes, dtype=torch.bool)
     test_mask = torch.zeros(num_nodes, dtype=torch.bool)
-    train_mask[train_indices] = True
-    test_mask[test_indices] = True
+    train_mask[train_idx] = True
+    test_mask[test_idx] = True
 
-    graph_data.train_mask = train_mask
-    graph_data.test_mask = test_mask
+    data.train_mask = train_mask
+    data.test_mask = test_mask
+    return data
 
-    return graph_data
 
 ###############################################################################
-#                           Model Training
+#                           Training Loop
 ###############################################################################
 def train_model(model, graph_data, optimizer, criterion, epochs=100):
-    """
-    Train the GNN model.
-    """
     model.train()
     for epoch in range(epochs):
         optimizer.zero_grad()
-        # Forward pass
         out = model(graph_data.x, graph_data.edge_index)
-        # Compute loss only on training nodes
-        loss = criterion(out[graph_data.train_mask], graph_data.y[graph_data.train_mask])
-        # Backward pass
+
+        # shape handling for single-output
+        # if output_dim == 1, out is [N,1], we can squeeze to [N]
+        if out.shape[1] == 1:
+            out = out.view(-1)
+
+        # same for y
+        y = graph_data.y
+        if y.dim() > 1 and y.shape[1] == 1:
+            y = y.view(-1)
+
+        loss = criterion(out[graph_data.train_mask], y[graph_data.train_mask])
         loss.backward()
         optimizer.step()
 
-        if (epoch + 1) % 10 == 0:
-            print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss.item()}")
+        if (epoch+1) % 10 == 0:
+            print(f"Epoch {epoch+1}/{epochs}, Loss: {loss.item():.6f}")
+
 
 ###############################################################################
-#                           Model Evaluation
+#                           Evaluation
 ###############################################################################
-def evaluate_model(model, graph_data, criterion, output_file="inferences.txt"):
-    """
-    Evaluate the GNN model on the test set and log inferences to a text file.
-    """
+def evaluate_model(model, graph_data, criterion, output_file="inferences.txt", driver=None, target=None):
     model.eval()
     with torch.no_grad():
-        # Forward pass
         out = model(graph_data.x, graph_data.edge_index)
-        # Compute loss on test nodes
-        loss = criterion(out[graph_data.test_mask], graph_data.y[graph_data.test_mask])
-        # Compute predictions
-        preds = out[graph_data.test_mask].argmax(dim=1) if criterion == F.cross_entropy else out[graph_data.test_mask]
-        
-        # Compute metrics
-        if criterion == F.cross_entropy:
-            accuracy = accuracy_score(graph_data.y[graph_data.test_mask].cpu(), preds.cpu())
-            print(f"Test Loss: {loss.item()}, Test Accuracy: {accuracy}")
-        else:
-            rmse = mean_squared_error(graph_data.y[graph_data.test_mask].cpu(), preds.cpu(), squared=False)
-            print(f"Test Loss: {loss.item()}, Test RMSE: {rmse}")
+        if out.shape[1] == 1:
+            out = out.view(-1)
+        y_true = graph_data.y
+        if y_true.dim() > 1 and y_true.shape[1] == 1:
+            y_true = y_true.view(-1)
 
-        # Log inferences to a text file
-        with open(output_file, "w") as f:
-            f.write("=== Model Evaluation ===\n")
-            f.write(f"Test Loss: {loss.item()}\n")
-            if criterion == F.cross_entropy:
-                f.write(f"Test Accuracy: {accuracy}\n")
-            else:
-                f.write(f"Test RMSE: {rmse}\n")
-            
-            f.write("\n=== Predictions ===\n")
-            for i in range(len(preds)):
-                f.write(f"Node {graph_data.test_mask.nonzero()[i].item()}: ")
-                f.write(f"True Label = {graph_data.y[graph_data.test_mask][i].item()}, ")
-                f.write(f"Predicted Label = {preds[i].item()}\n")
+        test_out = out[graph_data.test_mask]
+        test_y = y_true[graph_data.test_mask]
+
+        loss = criterion(test_out, test_y)
         
-        print(f"[INFO] Inferences logged to {output_file}.")
+        if isinstance(criterion, torch.nn.BCEWithLogitsLoss):
+            # Probability via sigmoid
+            probs = torch.sigmoid(test_out)
+            preds = (probs >= 0.5).float()
+            acc = accuracy_score(test_y.cpu(), preds.cpu())
+            f1 = f1_score(test_y.cpu(), preds.cpu())
+            print(f"Test Loss: {loss.item():.6f}, Test Accuracy: {acc:.4f}, Test F1: {f1:.4f}")
+            
+            # Ensure the output directory exists (only if output_file contains a directory path)
+            output_dir = os.path.dirname(output_file)
+            if output_dir:  # Only create the directory if output_dir is not empty
+                os.makedirs(output_dir, exist_ok=True)
+            
+            # Log to file
+            try:
+                with open(output_file, "w") as f:
+                    f.write("=== Model Evaluation (Binary Classification) ===\n")
+                    f.write(f"Test Loss: {loss.item():.6f}\n")
+                    f.write(f"Test Accuracy: {acc:.4f}\n")
+                    f.write(f"Test F1: {f1:.4f}\n\n")
+                    f.write("=== Predictions ===\n")
+                    idx_test_nodes = graph_data.test_mask.nonzero().view(-1)
+                    for i, node_idx in enumerate(idx_test_nodes):
+                        f.write(f"Node {node_idx.item()}: ")
+                        f.write(f"True Label = {test_y[i].item():.0f}, ")
+                        f.write(f"Predicted Prob = {probs[i].item():.4f}, Predicted Class = {preds[i].item():.0f}\n")
+                print(f"[INFO] Inferences logged to {output_file}.")
+            except Exception as e:
+                print(f"[ERROR] Failed to write to {output_file}: {e}")
+
+            # Print updates to Neo4j (without actually applying them)
+            if driver is not None and target is not None:
+                node_ids = graph_data.test_mask.nonzero().view(-1).tolist()
+                inferred_labels = preds.tolist()
+                update_neo4j_with_inferred_labels(driver, node_ids, inferred_labels, target)
+
+        elif isinstance(criterion, torch.nn.CrossEntropyLoss):
+            preds = test_out.argmax(dim=1)
+            acc = accuracy_score(test_y.cpu(), preds.cpu())
+            print(f"Test Loss: {loss.item():.6f}, Test Accuracy: {acc:.4f}")
+            
+            # Print updates to Neo4j (without actually applying them)
+            if driver is not None and target is not None:
+                node_ids = graph_data.test_mask.nonzero().view(-1).tolist()
+                inferred_labels = preds.tolist()
+                update_neo4j_with_inferred_labels(driver, node_ids, inferred_labels, target)
+
+        else:
+            rmse = mean_squared_error(test_y.cpu(), test_out.cpu(), squared=False)
+            print(f"Test Loss: {loss.item():.6f}, Test RMSE: {rmse:.4f}")
+
+###############################################################################
+#                           Update inferences
+###############################################################################
+def update_neo4j_with_inferred_labels(driver, node_ids, inferred_labels, target):
+    """
+    Print the updates that would be made to the Neo4j database with inferred labels.
+    
+    :param driver: Neo4j driver instance
+    :param node_ids: List of node IDs
+    :param inferred_labels: List of inferred labels
+    :param target: Target attribute to update
+    """
+    print("\n=== Updates to Neo4j Database (Preview) ===")
+    for node_id, label in zip(node_ids, inferred_labels):
+        print(f"MATCH (n) WHERE ID(n) = {node_id} SET n.{target} = {label};")
+    print(f"[INFO] {len(node_ids)} nodes would be updated with inferred labels for attribute '{target}'.")
+
 
 ###############################################################################
 #                           Main Workflow
@@ -545,41 +522,46 @@ def main():
     print("\n=== Step 4: Identify Features and Target ===")
     target, features = identify_features_and_target(nodes_df)
 
-    print("\n=== Step 2.3: Feature Selection ===")
-    selected_features = select_features(nodes_df, target)
+    print("\n=== Step 5: Create Graph Representation ===")
+    graph_data = create_graph_representation(nodes_df, relationships_df, target, features)
 
-    print("\n=== Step 2.2: Create Graph Representation ===")
-    graph_data = create_graph_representation(nodes_df, relationships_df, target, selected_features)
+    print("\n=== Step 6: Choose a GNN Architecture ===")
+    input_dim = graph_data.num_node_features
+    hidden_dim = 16
+    if graph_data.y.dim() == 1:
+        output_dim = 1
+    else:
+        output_dim = graph_data.y.size(1)
 
-    print("\n=== Step 3.1: Choose a GNN Architecture ===")
-    input_dim = graph_data.x.size(1)  # Number of features per node
-    hidden_dim = 16  # Hidden layer dimension
-    output_dim = 1 if graph_data.y.dim() == 1 else graph_data.y.size(1)  # Output dimension
     model = GCN(input_dim, hidden_dim, output_dim)
     print("[INFO] GCN model created.")
 
-    print("\n=== Step 3.2: Train-Test Split ===")
-    graph_data = split_data(graph_data, test_size=0.2)
+    print("\n=== Step 7: Train-Test Split ===")
+    graph_data = split_data(graph_data, test_size=0.2, random_state=42)
     print("[INFO] Data split into training and testing sets.")
 
-    print("\n=== Step 3.3: Model Training ===")
+    print("\n=== Step 8: Model Training ===")
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-    criterion = torch.nn.MSELoss() if output_dim == 1 else F.cross_entropy  # Choose loss function
+
+    if output_dim == 1:
+        criterion = torch.nn.BCEWithLogitsLoss()
+    else:
+        criterion = torch.nn.CrossEntropyLoss()
+
     train_model(model, graph_data, optimizer, criterion, epochs=100)
     print("[INFO] Model training complete.")
 
-    print("\n=== Step 3.4: Model Evaluation ===")
-    evaluate_model(model, graph_data, criterion)
+    print("\n=== Step 9: Model Evaluation ===")
+    evaluate_model(model, graph_data, criterion, driver=driver, target=target)
     print("[INFO] Model evaluation complete.")
 
-    # Export to Excel for debugging/further analysis
     nodes_df.to_excel("nodes_preprocessed.xlsx", index=False)
     relationships_df.to_excel("relationships_preprocessed.xlsx", index=False)
-    print("[INFO] Preprocessed nodes and relationships exported to Excel files.")
+    print("[INFO] Preprocessed data exported.")
 
     print("\n=== Workflow Complete ===")
     driver.close()
 
+
 if __name__ == "__main__":
     main()
-
