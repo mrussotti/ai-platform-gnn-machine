@@ -2,61 +2,7 @@
 
 import pandas as pd
 from neo4j import GraphDatabase
-import torch
-import joblib
-import ast
-import numpy as np
 
-# Scikit-learn imports
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.compose import ColumnTransformer
-from sklearn.decomposition import PCA
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.metrics import mean_squared_error, accuracy_score
-from sklearn.base import TransformerMixin, BaseEstimator
-
-# For classification fallback
-from sklearn.linear_model import LogisticRegression
-
-# xgboost
-from xgboost import XGBRegressor
-
-###############################################################################
-#                           Custom Transformer
-###############################################################################
-class TopKCategories(TransformerMixin, BaseEstimator):
-    """
-    Custom transformer to keep only the top K categories for each categorical feature.
-    Categories outside the top K are replaced with 'Other'.
-    """
-    def __init__(self, top_k=100):
-        self.top_k = top_k
-        self.top_categories_ = []
-    
-    def fit(self, X, y=None):
-        self.top_categories_ = []
-        for i in range(X.shape[1]):
-            # Convert everything to str, ensuring no list-like objects remain
-            col = X[:, i].astype(str)
-            unique, counts = np.unique(col, return_counts=True)
-            # Keep top_k categories
-            top_k = unique[np.argsort(counts)[-self.top_k:]]
-            self.top_categories_.append(set(top_k))
-        return self
-    
-    def transform(self, X):
-        X_transformed = X.copy()
-        for i in range(X.shape[1]):
-            col_as_str = X_transformed[:, i].astype(str)
-            # Replace anything not in top_k with 'Other'
-            X_transformed[:, i] = np.where(
-                np.isin(col_as_str, list(self.top_categories_[i])),
-                col_as_str,
-                'Other'
-            )
-        return X_transformed
 
 ###############################################################################
 #                            Neo4j Queries
