@@ -27,7 +27,7 @@ def _get_nodes(tx):
     nodes = []
     for record in result:
         node_data = record["properties"]
-        node_data["id"] = record["id"]
+        node_data["id"] = record["id"]  # Ensure the ID is stored as "id"
         node_data["labels"] = record["labels"]
         nodes.append(node_data)
     return nodes
@@ -61,11 +61,32 @@ def extract_data(driver):
     relationships = get_relationships(driver)
     nodes_df = pd.DataFrame(nodes)
     relationships_df = pd.DataFrame(relationships)
+    
+    # Debugging: Print the columns and first few rows of nodes_df
+    print("Nodes DataFrame columns:", nodes_df.columns)
+    print("First few rows of nodes_df:")
+    print(nodes_df.head())
+    
+    # If 'id' column is missing, generate one
+    if 'id' not in nodes_df.columns:
+        nodes_df['id'] = nodes_df.index
+        print("[WARNING] 'id' column was missing. Generated using DataFrame index.")
+
+    # ---------------------------------------------------------------------
+    # DROP columns that are known to contain complex objects (e.g., lists/dicts)
+    # You can customize this if you want to transform them instead.
+    # ---------------------------------------------------------------------
+    for col in ["labels", "properties"]:
+        if col in nodes_df.columns:
+            nodes_df.drop(columns=col, inplace=True)
+
+    # For relationships, if 'properties' is a dict or list, remove if unneeded:
+    if 'properties' in relationships_df.columns:
+        relationships_df.drop(columns='properties', inplace=True)
+
     return nodes_df, relationships_df
 
-###############################################################################
-#                           Prep Data
-###############################################################################
+
 
 ###############################################################################
 #                           Main Workflow
@@ -79,14 +100,9 @@ def main():
     nodes_df, relationships_df = extract_data(driver)
     print(f"[INFO] Retrieved {len(nodes_df)} nodes and {len(relationships_df)} relationships.")
 
-    print(f"how to prepare these dataframes for NN training")
-
-
-
-   
     print("\n=== Workflow Complete ===")
     driver.close()
 
-
 if __name__ == "__main__":
     main()
+
