@@ -26,6 +26,7 @@ def connect_to_neo4j(uri=None, username=None, password=None):
 def _get_incident_transcripts(tx):
     """
     Retrieve pairs of incident nature and transcript text.
+    
     This query matches Incident nodes with a CONTAINS relationship to
     Transcript nodes and returns the 'nature' property along with the transcript text.
     """
@@ -39,6 +40,7 @@ def _get_incident_transcripts(tx):
 def extract_training_data(driver):
     """
     Extract training data from the graph.
+    
     Returns a DataFrame with columns: 'nature' and 'transcript'.
     """
     with driver.session() as session:
@@ -53,19 +55,20 @@ def extract_training_data(driver):
 def preprocess_training_data(df):
     """
     Preprocess the training DataFrame for model training.
-    This function cleans the transcript text by removing timestamps and speaker markers,
+    
+    Cleans the transcript text by removing timestamps and speaker markers,
     collapsing extra whitespace, and converting text to lowercase.
     It also cleans the 'nature' column and creates numeric labels.
     
-    Parameters:
-        df (pandas.DataFrame): DataFrame with 'nature' and 'transcript' columns.
-        
     Returns:
-        df (pandas.DataFrame): Updated DataFrame with 'clean_transcript', 'clean_nature', and 'nature_label'.
-        le (LabelEncoder): Fitted LabelEncoder for converting labels back later.
+        df (pandas.DataFrame): DataFrame with additional columns:
+            - 'clean_transcript'
+            - 'clean_nature'
+            - 'nature_label'
+        le (LabelEncoder): The fitted LabelEncoder.
     """
     def clean_transcript(text):
-        # Remove timestamp and speaker markers, e.g., "0002.0s 0002.5s SPEAKER_01:".
+        # Remove timestamp and speaker markers (e.g., "0002.0s 0002.5s SPEAKER_01:")
         cleaned = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", text)
         # Replace multiple whitespace (including newlines) with a single space
         cleaned = re.sub(r"\s+", " ", cleaned)
@@ -79,13 +82,14 @@ def preprocess_training_data(df):
     
     return df, le
 
-def train_and_evaluate_model(training_df):
+def train_and_evaluate_model(training_df, le):
     """
-    Converts the text into TF-IDF features, splits the data, trains a logistic regression classifier,
-    and prints evaluation metrics.
+    Vectorizes the text, splits the data, trains a logistic regression classifier,
+    evaluates its performance, and writes the detailed results to an Excel file.
     
-    Parameters:
-        training_df (pandas.DataFrame): Preprocessed training DataFrame with 'clean_transcript' and 'nature_label'.
+    Returns:
+        clf: The trained classifier.
+        vectorizer: The fitted TF-IDF vectorizer.
     """
     # Extract features and labels
     X = training_df["clean_transcript"]
@@ -96,8 +100,8 @@ def train_and_evaluate_model(training_df):
         X, y, test_size=0.2, random_state=42
     )
     
-    # Convert text to TF-IDF features
-    vectorizer = TfidfVectorizer(max_features=5000)
+    # Convert text to TF-IDF features with bigrams and stop word removal
+    vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1,2), stop_words='english')
     X_train_vec = vectorizer.fit_transform(X_train)
     X_test_vec = vectorizer.transform(X_test)
     
@@ -110,9 +114,28 @@ def train_and_evaluate_model(training_df):
     
     # Evaluate the classifier
     accuracy = accuracy_score(y_test, y_pred)
+    report = classification_report(y_test, y_pred)
+    
     print("Accuracy:", accuracy)
     print("Classification Report:")
-    print(classification_report(y_test, y_pred))
+    print(report)
+    
+    # Create a detailed results DataFrame for test samples
+    test_results_df = pd.DataFrame({
+        "transcript": X_test,
+        "actual_nature": le.inverse_transform(y_test),
+        "predicted_nature": le.inverse_transform(y_pred)
+    })
+    
+    # Write the detailed test results to an Excel file
+    test_results_df.to_excel("detailed_test_results.xlsx", index=False)
+    print("[INFO] Detailed test results written to 'detailed_test_results.xlsx'.")
+    
+    # Optionally, also write the summary test results to a text file
+    with open("test_results.txt", "w", encoding="utf-8") as f:
+        f.write("Accuracy: {:.4f}\n\n".format(accuracy))
+        f.write("Classification Report:\n")
+        f.write(report)
     
     return clf, vectorizer
 
@@ -136,10 +159,9 @@ def main():
     print("[INFO] Preprocessed training data written to 'preprocessed_training_data.xlsx'.")
     
     print("\n=== Step 4: Train and Evaluate the Model ===")
-    clf, vectorizer = train_and_evaluate_model(training_df)
+    clf, vectorizer = train_and_evaluate_model(training_df, le)
     
-    # Optionally, you can save the trained model and vectorizer for later use
-    # For example, using joblib:
+    # Optionally, save the trained model and vectorizer for later use (e.g., using joblib)
     # import joblib
     # joblib.dump(clf, 'classifier.joblib')
     # joblib.dump(vectorizer, 'vectorizer.joblib')
