@@ -2,91 +2,142 @@
 
 import pandas as pd
 from neo4j import GraphDatabase
-
+import re
+from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
 
 ###############################################################################
 #                            Neo4j Queries
 ###############################################################################
 def connect_to_neo4j(uri=None, username=None, password=None):
     # Update these credentials or read from environment
-    HARDCODED_URI = "neo4j+s://8cd5bbe1.databases.neo4j.io"
+    HARDCODED_URI = "neo4j+s://09ed30ec.databases.neo4j.io"
     HARDCODED_USERNAME = "neo4j"
-    HARDCODED_PASSWORD = "dobMHdjo7r0g70Oz_HKZy-qcyP2PY6UN8yxu_rb82fo"
+    HARDCODED_PASSWORD = "N7azcFeea5x3mkCafrBbdjAbptvfVW4RVyKUdtsie70"
     driver = GraphDatabase.driver(
         HARDCODED_URI, 
         auth=(HARDCODED_USERNAME, HARDCODED_PASSWORD)
     )
     return driver
 
-def _get_nodes(tx):
+def _get_incident_transcripts(tx):
+    """
+    Retrieve pairs of incident nature and transcript text.
+    
+    This query matches Incident nodes with a CONTAINS relationship to
+    Transcript nodes and returns the 'nature' property along with the transcript text.
+    """
     query = """
-    MATCH (n)
-    RETURN n.tmdbId AS id, labels(n) AS labels, properties(n) AS properties
+    MATCH (i:Incident)-[:CONTAINS]->(t:Transcript)
+    RETURN i.nature AS nature, t.TEXT AS transcript
     """
     result = tx.run(query)
-    nodes = []
-    for record in result:
-        node_data = record["properties"]
-        node_data["id"] = record["id"]  # Ensure the ID is stored as "id"
-        node_data["labels"] = record["labels"]
-        nodes.append(node_data)
-    return nodes
+    return [record.data() for record in result]
 
-def get_nodes(driver):
-    with driver.session() as session:
-        return session.execute_read(_get_nodes)
-
-def _get_relationships(tx):
-    query = """
-    MATCH (n)-[r]->(m)
-    RETURN r.tmdbId AS id, n.tmdbId AS start_id, m.tmdbId AS end_id, type(r) AS type, properties(r) AS properties
+def extract_training_data(driver):
     """
-    result = tx.run(query)
-    relationships = []
-    for record in result:
-        rel_data = record["properties"]
-        rel_data["id"] = record["id"]
-        rel_data["start_id"] = record["start_id"]
-        rel_data["end_id"] = record["end_id"]
-        rel_data["type"] = record["type"]
-        relationships.append(rel_data)
-    return relationships
-
-def get_relationships(driver):
+    Extract training data from the graph.
+    
+    Returns a DataFrame with columns: 'nature' and 'transcript'.
+    """
     with driver.session() as session:
-        return session.execute_read(_get_relationships)
+        data = session.execute_read(_get_incident_transcripts)
+        training_df = pd.DataFrame(data)
+        print("Training DataFrame columns:", training_df.columns)
+        print("First few rows of training data:")
+        print(training_df.head())
+        training_df.dropna(subset=['nature', 'transcript'], inplace=True)
+        return training_df
 
-def extract_data(driver):
-    nodes = get_nodes(driver)
-    relationships = get_relationships(driver)
-    nodes_df = pd.DataFrame(nodes)
-    relationships_df = pd.DataFrame(relationships)
+def preprocess_training_data(df):
+    """
+    Preprocess the training DataFrame for model training.
     
-    # Debugging: Print the columns and first few rows of nodes_df
-    print("Nodes DataFrame columns:", nodes_df.columns)
-    print("First few rows of nodes_df:")
-    print(nodes_df.head())
+    Cleans the transcript text by removing timestamps and speaker markers,
+    collapsing extra whitespace, and converting text to lowercase.
+    It also cleans the 'nature' column and creates numeric labels.
     
-    # If 'id' column is missing, generate one
-    if 'id' not in nodes_df.columns:
-        nodes_df['id'] = nodes_df.index
-        print("[WARNING] 'id' column was missing. Generated using DataFrame index.")
+    Returns:
+        df (pandas.DataFrame): DataFrame with additional columns:
+            - 'clean_transcript'
+            - 'clean_nature'
+            - 'nature_label'
+        le (LabelEncoder): The fitted LabelEncoder.
+    """
+    def clean_transcript(text):
+        # Remove timestamp and speaker markers (e.g., "0002.0s 0002.5s SPEAKER_01:")
+        cleaned = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", text)
+        # Replace multiple whitespace (including newlines) with a single space
+        cleaned = re.sub(r"\s+", " ", cleaned)
+        return cleaned.strip().lower()
+    
+    df["clean_transcript"] = df["transcript"].apply(clean_transcript)
+    df["clean_nature"] = df["nature"].str.strip().str.lower()
+    
+    le = LabelEncoder()
+    df["nature_label"] = le.fit_transform(df["clean_nature"])
+    
+    return df, le
 
-    # ---------------------------------------------------------------------
-    # DROP columns that are known to contain complex objects (e.g., lists/dicts)
-    # You can customize this if you want to transform them instead.
-    # ---------------------------------------------------------------------
-    for col in ["labels", "properties"]:
-        if col in nodes_df.columns:
-            nodes_df.drop(columns=col, inplace=True)
-
-    # For relationships, if 'properties' is a dict or list, remove if unneeded:
-    if 'properties' in relationships_df.columns:
-        relationships_df.drop(columns='properties', inplace=True)
-
-    return nodes_df, relationships_df
-
-
+def train_and_evaluate_model(training_df, le):
+    """
+    Vectorizes the text, splits the data, trains a logistic regression classifier,
+    evaluates its performance, and writes the detailed results to an Excel file.
+    
+    Returns:
+        clf: The trained classifier.
+        vectorizer: The fitted TF-IDF vectorizer.
+    """
+    # Extract features and labels
+    X = training_df["clean_transcript"]
+    y = training_df["nature_label"]
+    
+    # Split data into training and test sets
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
+    
+    # Convert text to TF-IDF features with bigrams and stop word removal
+    vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1,2), stop_words='english')
+    X_train_vec = vectorizer.fit_transform(X_train)
+    X_test_vec = vectorizer.transform(X_test)
+    
+    # Train a logistic regression classifier
+    clf = LogisticRegression(max_iter=1000)
+    clf.fit(X_train_vec, y_train)
+    
+    # Predict on the test set
+    y_pred = clf.predict(X_test_vec)
+    
+    # Evaluate the classifier
+    accuracy = accuracy_score(y_test, y_pred)
+    report = classification_report(y_test, y_pred)
+    
+    print("Accuracy:", accuracy)
+    print("Classification Report:")
+    print(report)
+    
+    # Create a detailed results DataFrame for test samples
+    test_results_df = pd.DataFrame({
+        "transcript": X_test,
+        "actual_nature": le.inverse_transform(y_test),
+        "predicted_nature": le.inverse_transform(y_pred)
+    })
+    
+    # Write the detailed test results to an Excel file
+    test_results_df.to_excel("detailed_test_results.xlsx", index=False)
+    print("[INFO] Detailed test results written to 'detailed_test_results.xlsx'.")
+    
+    # Optionally, also write the summary test results to a text file
+    with open("test_results.txt", "w", encoding="utf-8") as f:
+        f.write("Accuracy: {:.4f}\n\n".format(accuracy))
+        f.write("Classification Report:\n")
+        f.write(report)
+    
+    return clf, vectorizer
 
 ###############################################################################
 #                           Main Workflow
@@ -96,13 +147,27 @@ def main():
     driver = connect_to_neo4j()
     print("[INFO] Neo4j driver created.")
 
-    print("\n=== Step 2: Extract Nodes and Relationships Data ===")
-    nodes_df, relationships_df = extract_data(driver)
-    print(f"[INFO] Retrieved {len(nodes_df)} nodes and {len(relationships_df)} relationships.")
-
+    print("\n=== Step 2: Extract Incident and Transcript Data for Training ===")
+    training_df = extract_training_data(driver)
+    print(f"[INFO] Retrieved {len(training_df)} training records.")
+    
+    print("\n=== Step 3: Preprocess the Training Data ===")
+    training_df, le = preprocess_training_data(training_df)
+    print("Preprocessed training data sample:")
+    print(training_df[['clean_nature', 'clean_transcript', 'nature_label']].head())
+    training_df.to_excel("preprocessed_training_data.xlsx", index=False)
+    print("[INFO] Preprocessed training data written to 'preprocessed_training_data.xlsx'.")
+    
+    print("\n=== Step 4: Train and Evaluate the Model ===")
+    clf, vectorizer = train_and_evaluate_model(training_df, le)
+    
+    # Optionally, save the trained model and vectorizer for later use (e.g., using joblib)
+    # import joblib
+    # joblib.dump(clf, 'classifier.joblib')
+    # joblib.dump(vectorizer, 'vectorizer.joblib')
+    
     print("\n=== Workflow Complete ===")
     driver.close()
 
 if __name__ == "__main__":
     main()
-
