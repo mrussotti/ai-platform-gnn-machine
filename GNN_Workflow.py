@@ -150,6 +150,8 @@ def main():
     print("\n=== Step 2: Extract Incident and Transcript Data for Training ===")
     training_df = extract_training_data(driver)
     print(f"[INFO] Retrieved {len(training_df)} training records.")
+
+    #chatgptAPIcallmethod()
     
     print("\n=== Step 3: Preprocess the Training Data ===")
     training_df, le = preprocess_training_data(training_df)
