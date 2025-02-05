@@ -23,6 +23,10 @@ def connect_to_neo4j(uri=None, username=None, password=None):
     return driver
 
 def _get_incident_transcripts(tx):
+    query = """
+    MATCH (i:Incident)-[:CONTAINS]->(t:Transcript)
+    RETURN i.nature AS nature, t.TEXT AS transcript
+    """
     result = tx.run(query)
     return [record.data() for record in result]
 
@@ -39,7 +43,7 @@ def extract_training_data(driver):
 def preprocess_training_data(df):
 
     def clean_transcript(text):
-        cleaned = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", text)# we timestamp and speaker markers
+        cleaned = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", text)# we remove timestamp and speaker markers
         cleaned = re.sub(r"\s+", " ", cleaned)
         return cleaned.strip().lower()
     
@@ -55,7 +59,7 @@ def train_and_evaluate_model(training_df, le):
     X = training_df["clean_transcript"]
     y = training_df["nature_label"]
     
-    X_train, X_test, y_train, y_test = train_test_split(
+    X_train, X_test, y_train, y_test = train_test_split( #80% train 20% test
         X, y, test_size=0.2, random_state=42
     )
     
