@@ -14,7 +14,6 @@ from sklearn.metrics import accuracy_score, classification_report
 app = Flask(__name__)
 CORS(app)
 
-# Paths for saving model artifacts
 MODEL_PATH = "model.pkl"
 VECTORIZER_PATH = "vectorizer.pkl"
 LABEL_ENCODER_PATH = "label_encoder.pkl"
@@ -30,7 +29,6 @@ def connect_to_neo4j():
     return driver
 
 def _get_incident_transcripts(tx):
-    # Replace this query with your actual Cypher query.
     query = "MATCH (i:Incident)-[:CONTAINS]->(t:Transcript) RETURN i.nature AS nature, t.TEXT AS transcript"
     result = tx.run(query)
     return [record.data() for record in result]
@@ -45,27 +43,31 @@ def extract_training_data(driver):
         training_df.dropna(subset=['nature', 'transcript'], inplace=True)
         return training_df
 
+
+
 def preprocess_training_data(df):
     def clean_transcript(text):
-        # Remove timestamps and speaker markers; clean whitespace; and convert to lowercase.
+        #remove timestamps and speaker markers, then clean extra whitespace and lowercase the text
         cleaned = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", text)
         cleaned = re.sub(r"\s+", " ", cleaned)
         return cleaned.strip().lower()
+
     df["clean_transcript"] = df["transcript"].apply(clean_transcript)
+    df["clean_nature"] = df["nature"].str.strip().str.lower()
+
     le = LabelEncoder()
-    df["nature_label"] = le.fit_transform(df["nature"])
+    df["nature_label"] = le.fit_transform(df["clean_nature"])
+
     return df, le
 
 ###############################################################################
 #         Legacy Training and Evaluation (Old Way)
 ###############################################################################
 def train_and_evaluate_encodings(training_df, le):
-    # Split data into training and testing sets.
     X = training_df["clean_transcript"]
     y = training_df["nature_label"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # Define a set of vectorizers.
     vectorizers = {
         "TfidfVectorizer": TfidfVectorizer(max_features=5000, ngram_range=(1, 2), stop_words='english'),
         "CountVectorizer": CountVectorizer(max_features=5000, ngram_range=(1, 2), stop_words='english'),
@@ -76,7 +78,6 @@ def train_and_evaluate_encodings(training_df, le):
     for vec_name, vectorizer in vectorizers.items():
         print(f"\n=== Training with {vec_name} ===")
         if vec_name == "HashingVectorizer":
-            # HashingVectorizer is stateless.
             X_train_vec = vectorizer.transform(X_train)
             X_test_vec = vectorizer.transform(X_test)
         else:
@@ -108,33 +109,49 @@ def train_and_save_model(training_df, le):
     y = training_df["nature_label"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # Using only TfidfVectorizer here.
-    vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2), stop_words='english')
-    X_train_vec = vectorizer.fit_transform(X_train)
-    X_test_vec = vectorizer.transform(X_test)
+    vectorizers = {
+        "TfidfVectorizer": TfidfVectorizer(max_features=5000, ngram_range=(1, 2), stop_words='english'),
+        "CountVectorizer": CountVectorizer(max_features=5000, ngram_range=(1, 2), stop_words='english'),
+        "HashingVectorizer": HashingVectorizer(n_features=5000, ngram_range=(1, 2), stop_words='english', alternate_sign=False)
+    }
 
-    clf = LogisticRegression(max_iter=1000)
-    clf.fit(X_train_vec, y_train)
-    y_pred = clf.predict(X_test_vec)
+    messages = []
+    for vec_name, vectorizer in vectorizers.items():
+        X_train_vec = vectorizer.fit_transform(X_train)
+        X_test_vec = vectorizer.transform(X_test)
 
-    print("Accuracy:", accuracy_score(y_test, y_pred))
-    print("Classification Report:")
-    print(classification_report(y_test, y_pred))
+        clf = LogisticRegression(max_iter=1000)
+        clf.fit(X_train_vec, y_train)
+        y_pred = clf.predict(X_test_vec)
 
-    # Save model components to disk.
-    with open(MODEL_PATH, "wb") as f:
-        pickle.dump(clf, f)
-    with open(VECTORIZER_PATH, "wb") as f:
-        pickle.dump(vectorizer, f)
+        accuracy = accuracy_score(y_test, y_pred)
+        report = classification_report(y_test, y_pred)
+
+        print(f"\n=== Results for {vec_name} ===")
+        print("Accuracy:", accuracy)
+        print("Classification Report:")
+        print(report)
+
+        model_filename = f"model_{vec_name}.pkl"
+        vectorizer_filename = f"vectorizer_{vec_name}.pkl"
+
+        with open(model_filename, "wb") as f:
+            pickle.dump(clf, f)
+        with open(vectorizer_filename, "wb") as f:
+            pickle.dump(vectorizer, f)
+
+        messages.append(f"{vec_name} trained and saved successfully as {model_filename} and {vectorizer_filename}.")
+
     with open(LABEL_ENCODER_PATH, "wb") as f:
         pickle.dump(le, f)
 
-    return "Model trained and saved successfully."
+    return "\n".join(messages)
 
-def load_model():
-    with open(MODEL_PATH, "rb") as f:
+
+def load_count_model():
+    with open("model_CountVectorizer.pkl", "rb") as f:
         clf = pickle.load(f)
-    with open(VECTORIZER_PATH, "rb") as f:
+    with open("vectorizer_CountVectorizer.pkl", "rb") as f:
         vectorizer = pickle.load(f)
     with open(LABEL_ENCODER_PATH, "rb") as f:
         le = pickle.load(f)
@@ -144,7 +161,7 @@ def load_model():
 #                         Flask Endpoints
 ###############################################################################
 
-# Legacy endpoint: uses the old training method (multiple vectorizers).
+#uses the old training method (multiple vectorizers).
 @app.route('/train_model', methods=['POST'])
 def train_model():
     try:
@@ -157,9 +174,9 @@ def train_model():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-# New endpoint: trains using TfidfVectorizer and saves the model.
+#trains using TfidfVectorizer and saves the model.
 @app.route('/train_and_save', methods=['POST'])
-def train_and_save():
+def train_and_save_endpoint():
     try:
         driver = connect_to_neo4j()
         training_df = extract_training_data(driver)
@@ -170,7 +187,8 @@ def train_and_save():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-# New endpoint: load saved model and make predictions.
+
+#load saved model and make predictions.
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -180,9 +198,8 @@ def predict():
         if not transcript:
             return jsonify({"status": "error", "message": "No transcript provided."}), 400
 
-        clf, vectorizer, le = load_model()
+        clf, vectorizer, le = load_count_model()
 
-        # Clean the input transcript similarly to training.
         cleaned_transcript = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", transcript)
         cleaned_transcript = re.sub(r"\s+", " ", cleaned_transcript).strip().lower()
 
@@ -197,6 +214,7 @@ def predict():
         })
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
