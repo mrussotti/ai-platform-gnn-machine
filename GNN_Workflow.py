@@ -1,6 +1,6 @@
-import os
 import pickle
 import re
+import json
 import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -10,13 +10,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer, Ha
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+from transformers import pipeline
+
 
 app = Flask(__name__)
 CORS(app)
 
-MODEL_PATH = "model.pkl"
-VECTORIZER_PATH = "vectorizer.pkl"
-LABEL_ENCODER_PATH = "label_encoder.pkl"
 
 ###############################################################################
 #                            Neo4j Functions
@@ -43,11 +42,9 @@ def extract_training_data(driver):
         training_df.dropna(subset=['nature', 'transcript'], inplace=True)
         return training_df
 
-
-
 def preprocess_training_data(df):
     def clean_transcript(text):
-        #remove timestamps and speaker markers, then clean extra whitespace and lowercase the text
+        # Remove timestamps and speaker markers, then clean extra whitespace and lowercase the text.
         cleaned = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", text)
         cleaned = re.sub(r"\s+", " ", cleaned)
         return cleaned.strip().lower()
@@ -104,6 +101,9 @@ def train_and_evaluate_encodings(training_df, le):
 ###############################################################################
 #         New Training and Saving (Additional Features)
 ###############################################################################
+# Define paths for models
+LABEL_ENCODER_PATH = "label_encoder.pkl"
+
 def train_and_save_model(training_df, le):
     X = training_df["clean_transcript"]
     y = training_df["nature_label"]
@@ -147,7 +147,6 @@ def train_and_save_model(training_df, le):
 
     return "\n".join(messages)
 
-
 def load_count_model():
     with open("model_CountVectorizer.pkl", "rb") as f:
         clf = pickle.load(f)
@@ -156,6 +155,182 @@ def load_count_model():
     with open(LABEL_ENCODER_PATH, "rb") as f:
         le = pickle.load(f)
     return clf, vectorizer, le
+
+###############################################################################
+#           New Feature: Extract Incident Information using LLM
+###############################################################################
+
+def extract_incident_information_pipeline(transcript):
+    """
+    Extracts information from 911 transcripts using ML-based approaches with confidence checks.
+    Includes enhanced debugging for severity extraction.
+    """
+    # Clean the transcript
+    cleaned_transcript = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", transcript)
+    cleaned_transcript = re.sub(r"\s+", " ", cleaned_transcript).strip()
+    transcript_lower = cleaned_transcript.lower()
+    
+    try:
+        # Initialize QA pipeline
+        qa_pipeline = pipeline("question-answering")
+        
+        # ======== NATURE OF INCIDENT EXTRACTION ========
+        # Use trained classifier for nature prediction with confidence check
+        try:
+            # Load and use the existing classification model
+            clf, vectorizer, le = load_count_model()
+            transcript_vectorized = vectorizer.transform([transcript_lower])
+            
+            # Get prediction and prediction probability
+            prediction_label = clf.predict(transcript_vectorized)[0]
+            prediction_proba = clf.predict_proba(transcript_vectorized)[0]
+            max_proba = max(prediction_proba)
+            
+            # Only use prediction if confidence is high enough
+            NATURE_CONFIDENCE_THRESHOLD = 0.7  # Adjust as needed based on your model
+            
+            if max_proba >= NATURE_CONFIDENCE_THRESHOLD:
+                nature_of_incident = le.inverse_transform([prediction_label])[0]
+                print(f"Using classifier prediction for nature: {nature_of_incident} (confidence: {max_proba:.2f})")
+            else:
+                nature_of_incident = ""
+                print(f"Classifier confidence too low: {max_proba:.2f} < {NATURE_CONFIDENCE_THRESHOLD}")
+        except Exception as e:
+            print(f"Error using classifier: {str(e)}")
+            nature_of_incident = ""
+            
+            # Fall back to QA extraction if classifier fails
+            nature_questions = [
+                "What type of emergency is this?",
+                "What is the nature of this incident?",
+                "What happened?",
+                "What is the problem?"
+            ]
+            
+            best_score = 0
+            QA_CONFIDENCE_THRESHOLD = 0.5  # Adjust based on testing
+            
+            for question in nature_questions:
+                try:
+                    result = qa_pipeline(question=question, context=cleaned_transcript[:800])
+                    if result["score"] > best_score and len(result["answer"]) > 2:
+                        best_score = result["score"]
+                        if best_score >= QA_CONFIDENCE_THRESHOLD:
+                            nature_of_incident = result["answer"]
+                except Exception as err:
+                    print(f"Error in nature extraction question: {str(err)}")
+        
+        # ======== SEVERITY OF INCIDENT EXTRACTION (Scale 1-5) ========
+        # Use a simpler, more robust approach for severity
+        SEVERITY_CONFIDENCE_THRESHOLD = 0.1  # Very low threshold for testing
+        
+        # First approach: Direct question about numerical severity
+        print("Attempting severity extraction...")
+        severity_of_incident = "3/5"  # Default middle severity as fallback
+        
+        try:
+            # Try a simple direct question first
+            simple_severity = qa_pipeline(
+                question="On a scale of 1 to 5, how severe is this emergency?",
+                context=cleaned_transcript[:800]
+            )
+            
+            print(f"Severity extraction answer: '{simple_severity['answer']}' (confidence: {simple_severity['score']:.2f})")
+            
+            # Look for any digit in the answer
+            severity_match = re.search(r'[1-5]', simple_severity['answer'])
+            if severity_match:
+                severity_digit = severity_match.group(0)
+                severity_of_incident = f"{severity_digit}/5"
+                print(f"Found severity digit: {severity_digit}, setting to {severity_of_incident}")
+        except Exception as e:
+            print(f"Error in simple severity extraction: {str(e)}")
+        
+        # Second approach: Focused extraction with multiple questions
+        if severity_of_incident == "3/5":  # If we're still using the default
+            print("Trying alternative severity extraction approaches...")
+            severity_indicators = {
+                "life threatening": 5,
+                "severe": 5,
+                "critical": 5,
+                "serious": 4,
+                "moderate": 3,
+                "mild": 2,
+                "minor": 1
+            }
+            
+            try:
+                # Alternative question about severity without requiring numerical answer
+                alt_severity = qa_pipeline(
+                    question="How would you describe the severity of this emergency: minor, moderate, or severe?",
+                    context=cleaned_transcript[:800]
+                )
+                
+                print(f"Alternative severity result: '{alt_severity['answer']}' (confidence: {alt_severity['score']:.2f})")
+                
+                # Check for severity indicators in the answer
+                answer_lower = alt_severity['answer'].lower()
+                for indicator, level in severity_indicators.items():
+                    if indicator in answer_lower:
+                        severity_of_incident = f"{level}/5"
+                        print(f"Found severity indicator '{indicator}', setting to {severity_of_incident}")
+                        break
+            except Exception as e:
+                print(f"Error in alternative severity extraction: {str(e)}")
+            
+        # ======== HAZARDS ON SCENE EXTRACTION ========
+        hazard_questions = [
+            "Are there any hazards for emergency responders at the scene?",
+            "Is the scene safe for emergency personnel?",
+            "What safety concerns exist for responders?"
+        ]
+        
+        hazards_on_scene = "None"  # Default to None for safety
+        best_score = 0
+        HAZARD_CONFIDENCE_THRESHOLD = 0.6  # Higher threshold for hazards - safety critical
+        
+        negative_responses = ["no", "none", "no hazards", "safe", "not unsafe"]
+        
+        for question in hazard_questions:
+            try:
+                result = qa_pipeline(question=question, context=cleaned_transcript[:800])
+                answer_lower = result["answer"].lower().strip()
+                
+                # Check if the answer indicates no hazards with high confidence
+                if result["score"] >= HAZARD_CONFIDENCE_THRESHOLD:
+                    if any(neg in answer_lower for neg in negative_responses) and len(answer_lower) < 15:
+                        hazards_on_scene = "None"
+                        print(f"No hazards detected (confidence: {result['score']:.2f})")
+                        break
+                    # If answer is substantial and confident, use it
+                    elif len(answer_lower) > 2 and not any(neg in answer_lower for neg in negative_responses):
+                        hazards_on_scene = result["answer"]
+                        print(f"Hazards detected: {hazards_on_scene} (confidence: {result['score']:.2f})")
+                        break
+            except Exception as e:
+                print(f"Error in hazards extraction: {str(e)}")
+            
+        # Return the incident node structure
+        incident_node = {
+            "transcript": transcript,  # Original transcript
+            "nature_of_incident": nature_of_incident,
+            "severity_of_incident": severity_of_incident,
+            "hazards_on_scene": hazards_on_scene
+        }
+        
+        return incident_node
+        
+    except Exception as e:
+        print(f"Error in incident extraction: {str(e)}")
+        # Fallback with minimal structure - empty strings instead of guesses
+        return {
+            "transcript": transcript,
+            "nature_of_incident": "",
+            "severity_of_incident": "",  # Default middle severity
+            "hazards_on_scene": "None"
+        }
+    
+
 
 ###############################################################################
 #                         Flask Endpoints
@@ -187,7 +362,6 @@ def train_and_save_endpoint():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-
 #load saved model and make predictions.
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -214,6 +388,41 @@ def predict():
         })
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@app.route('/extract_incident', methods=['POST'])
+def extract_incident_endpoint():
+    try:
+        data = request.json
+        transcript = data.get("transcript", "")
+        if not isinstance(transcript, str):
+            transcript = json.dumps(transcript)
+        transcript = transcript.strip()
+        if not transcript:
+            return jsonify({"status": "error", "message": "No transcript provided."}), 400
+        
+        print("About to call extract_incident_information_pipeline function")
+        incident_info = extract_incident_information_pipeline(transcript)
+        print("Function completed successfully")
+        
+        if 'summary' in incident_info and incident_info['summary']:
+            summary = incident_info['summary']
+            summary = re.sub(r'^\{\"value\":\s*\"', '', summary) 
+            summary = re.sub(r'\"\}$', '', summary) 
+            summary = re.sub(r'\\[rn"]', ' ', summary)  
+            incident_info['summary'] = summary
+        
+        return jsonify({
+            "status": "success", 
+            "incident_info": incident_info,
+            "message": "Successfully extracted incident information"
+        })
+    except Exception as e:
+        print(f"Error in extract_incident_endpoint: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"status": "error", "message": str(e)}), 500
+    
 
 
 if __name__ == "__main__":
