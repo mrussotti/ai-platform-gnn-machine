@@ -162,157 +162,144 @@ def load_count_model():
 
 def extract_incident_information_pipeline(transcript):
     """
-    Extracts information from 911 transcripts using ML-based approaches with confidence checks.
-    Includes enhanced debugging for severity extraction.
+    Extracts information from 911 transcripts using a simpler approach without keywords.
     """
+    from transformers import pipeline
+    import torch
+    import re
+    
     # Clean the transcript
     cleaned_transcript = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", transcript)
     cleaned_transcript = re.sub(r"\s+", " ", cleaned_transcript).strip()
     transcript_lower = cleaned_transcript.lower()
     
     try:
-        # Initialize QA pipeline
-        qa_pipeline = pipeline("question-answering")
-        
         # ======== NATURE OF INCIDENT EXTRACTION ========
-        # Use trained classifier for nature prediction with confidence check
+        # Keep your existing classifier-based approach for nature of incident
+        nature_of_incident = ""
         try:
-            # Load and use the existing classification model
             clf, vectorizer, le = load_count_model()
             transcript_vectorized = vectorizer.transform([transcript_lower])
             
-            # Get prediction and prediction probability
             prediction_label = clf.predict(transcript_vectorized)[0]
             prediction_proba = clf.predict_proba(transcript_vectorized)[0]
             max_proba = max(prediction_proba)
             
-            # Only use prediction if confidence is high enough
-            NATURE_CONFIDENCE_THRESHOLD = 0.7  # Adjust as needed based on your model
+            NATURE_CONFIDENCE_THRESHOLD = 0.7
             
             if max_proba >= NATURE_CONFIDENCE_THRESHOLD:
                 nature_of_incident = le.inverse_transform([prediction_label])[0]
                 print(f"Using classifier prediction for nature: {nature_of_incident} (confidence: {max_proba:.2f})")
             else:
-                nature_of_incident = ""
                 print(f"Classifier confidence too low: {max_proba:.2f} < {NATURE_CONFIDENCE_THRESHOLD}")
         except Exception as e:
             print(f"Error using classifier: {str(e)}")
-            nature_of_incident = ""
-            
-            # Fall back to QA extraction if classifier fails
-            nature_questions = [
-                "What type of emergency is this?",
-                "What is the nature of this incident?",
-                "What happened?",
-                "What is the problem?"
-            ]
-            
-            best_score = 0
-            QA_CONFIDENCE_THRESHOLD = 0.5  # Adjust based on testing
-            
-            for question in nature_questions:
-                try:
-                    result = qa_pipeline(question=question, context=cleaned_transcript[:800])
-                    if result["score"] > best_score and len(result["answer"]) > 2:
-                        best_score = result["score"]
-                        if best_score >= QA_CONFIDENCE_THRESHOLD:
-                            nature_of_incident = result["answer"]
-                except Exception as err:
-                    print(f"Error in nature extraction question: {str(err)}")
         
-        # ======== SEVERITY OF INCIDENT EXTRACTION (Scale 1-5) ========
-        # Use a simpler, more robust approach for severity
-        SEVERITY_CONFIDENCE_THRESHOLD = 0.1  # Very low threshold for testing
-        
-        # First approach: Direct question about numerical severity
-        print("Attempting severity extraction...")
-        severity_of_incident = "3/5"  # Default middle severity as fallback
-        
+        # ======== CREATE ZERO-SHOT CLASSIFIER (USED FOR BOTH SEVERITY AND HAZARDS) ========
+        print("Loading zero-shot classification model...")
         try:
-            # Try a simple direct question first
-            simple_severity = qa_pipeline(
-                question="On a scale of 1 to 5, how severe is this emergency?",
-                context=cleaned_transcript[:800]
-            )
+            classifier = pipeline("zero-shot-classification", 
+                                 model="facebook/bart-large-mnli",
+                                 device=-1)  # Always use CPU for compatibility
             
-            print(f"Severity extraction answer: '{simple_severity['answer']}' (confidence: {simple_severity['score']:.2f})")
-            
-            # Look for any digit in the answer
-            severity_match = re.search(r'[1-5]', simple_severity['answer'])
-            if severity_match:
-                severity_digit = severity_match.group(0)
-                severity_of_incident = f"{severity_digit}/5"
-                print(f"Found severity digit: {severity_digit}, setting to {severity_of_incident}")
+            print("Zero-shot classifier loaded successfully")
         except Exception as e:
-            print(f"Error in simple severity extraction: {str(e)}")
-        
-        # Second approach: Focused extraction with multiple questions
-        if severity_of_incident == "3/5":  # If we're still using the default
-            print("Trying alternative severity extraction approaches...")
-            severity_indicators = {
-                "life threatening": 5,
-                "severe": 5,
-                "critical": 5,
-                "serious": 4,
-                "moderate": 3,
-                "mild": 2,
-                "minor": 1
+            print(f"Error loading zero-shot classifier: {str(e)}")
+            # If we can't load the classifier, we'll return empty values
+            return {
+                "transcript": transcript,
+                "nature_of_incident": nature_of_incident,
+                "severity_of_incident": "",
+                "hazards_on_scene": ""
             }
             
-            try:
-                # Alternative question about severity without requiring numerical answer
-                alt_severity = qa_pipeline(
-                    question="How would you describe the severity of this emergency: minor, moderate, or severe?",
-                    context=cleaned_transcript[:800]
-                )
-                
-                print(f"Alternative severity result: '{alt_severity['answer']}' (confidence: {alt_severity['score']:.2f})")
-                
-                # Check for severity indicators in the answer
-                answer_lower = alt_severity['answer'].lower()
-                for indicator, level in severity_indicators.items():
-                    if indicator in answer_lower:
-                        severity_of_incident = f"{level}/5"
-                        print(f"Found severity indicator '{indicator}', setting to {severity_of_incident}")
-                        break
-            except Exception as e:
-                print(f"Error in alternative severity extraction: {str(e)}")
+        # ======== SEVERITY OF INCIDENT EXTRACTION ========
+        print("Attempting severity extraction...")
+        severity_of_incident = ""
+        
+        try:
+            # Candidate labels for severity
+            candidate_labels = [
+                "life-threatening emergency",
+                "serious medical emergency", 
+                "moderate medical issue",
+                "minor medical concern",
+                "non-urgent situation"
+            ]
             
+            # Classify the transcript
+            result = classifier(cleaned_transcript, candidate_labels)
+            print(f"Severity classification: {result['labels'][0]} (score: {result['scores'][0]:.2f})")
+            
+            # Map the classification to a numeric severity
+            severity_mapping = {
+                "life-threatening emergency": "5/5",
+                "serious medical emergency": "4/5",
+                "moderate medical issue": "3/5", 
+                "minor medical concern": "2/5",
+                "non-urgent situation": "1/5"
+            }
+            
+            # Only use the result if the confidence is high enough
+            SEVERITY_CONFIDENCE_THRESHOLD = 0.4
+            if result['scores'][0] >= SEVERITY_CONFIDENCE_THRESHOLD:
+                severity_of_incident = severity_mapping[result['labels'][0]]
+                print(f"Determined severity: {severity_of_incident}")
+            else:
+                print(f"Severity classification confidence too low: {result['scores'][0]:.2f}")
+        except Exception as e:
+            print(f"Error in severity classification: {str(e)}")
+        
         # ======== HAZARDS ON SCENE EXTRACTION ========
-        hazard_questions = [
-            "Are there any hazards for emergency responders at the scene?",
-            "Is the scene safe for emergency personnel?",
-            "What safety concerns exist for responders?"
-        ]
+        print("Attempting hazards extraction...")
+        hazards_on_scene = ""
         
-        hazards_on_scene = "None"  # Default to None for safety
-        best_score = 0
-        HAZARD_CONFIDENCE_THRESHOLD = 0.6  # Higher threshold for hazards - safety critical
-        
-        negative_responses = ["no", "none", "no hazards", "safe", "not unsafe"]
-        
-        for question in hazard_questions:
-            try:
-                result = qa_pipeline(question=question, context=cleaned_transcript[:800])
-                answer_lower = result["answer"].lower().strip()
-                
-                # Check if the answer indicates no hazards with high confidence
-                if result["score"] >= HAZARD_CONFIDENCE_THRESHOLD:
-                    if any(neg in answer_lower for neg in negative_responses) and len(answer_lower) < 15:
-                        hazards_on_scene = "None"
-                        print(f"No hazards detected (confidence: {result['score']:.2f})")
-                        break
-                    # If answer is substantial and confident, use it
-                    elif len(answer_lower) > 2 and not any(neg in answer_lower for neg in negative_responses):
-                        hazards_on_scene = result["answer"]
-                        print(f"Hazards detected: {hazards_on_scene} (confidence: {result['score']:.2f})")
-                        break
-            except Exception as e:
-                print(f"Error in hazards extraction: {str(e)}")
+        try:
+            # Simpler approach for hazards - just use zero-shot classification
+            hazard_class_labels = [
+                "scene contains safety hazards", 
+                "scene is safe with no hazards",
+                "scene safety is unclear"
+            ]
             
-        # Return the incident node structure
+            hazard_classification = classifier(cleaned_transcript, hazard_class_labels)
+            print(f"Hazard classification: {hazard_classification['labels'][0]} (score: {hazard_classification['scores'][0]:.2f})")
+            
+            # Only set hazards_on_scene if we have high confidence
+            HAZARD_CONFIDENCE_THRESHOLD = 0.6
+            if hazard_classification['scores'][0] >= HAZARD_CONFIDENCE_THRESHOLD:
+                if hazard_classification['labels'][0] == "scene contains safety hazards":
+                    # Additional classification to determine type of hazard
+                    hazard_type_labels = [
+                        "medical risk",
+                        "environmental hazard",
+                        "vehicle-related danger",
+                        "violent situation",
+                        "fire hazard"
+                    ]
+                    
+                    type_result = classifier(cleaned_transcript, hazard_type_labels)
+                    top_type = type_result['labels'][0]
+                    top_score = type_result['scores'][0]
+                    
+                    if top_score >= 0.5:
+                        hazards_on_scene = f"{top_type.capitalize()}"
+                        print(f"Hazard type identified: {hazards_on_scene} (score: {top_score:.2f})")
+                    else:
+                        hazards_on_scene = "Potential hazards detected"
+                        print(f"Generic hazard detected, type unclear (score: {top_score:.2f})")
+                
+                elif hazard_classification['labels'][0] == "scene is safe with no hazards":
+                    hazards_on_scene = "None"
+                    print("Scene classified as safe with no hazards")
+            else:
+                print(f"Hazard classification confidence too low: {hazard_classification['scores'][0]:.2f}")
+                
+        except Exception as e:
+            print(f"Error in hazards extraction: {str(e)}")
+        
         incident_node = {
-            "transcript": transcript,  # Original transcript
+            "transcript": transcript,
             "nature_of_incident": nature_of_incident,
             "severity_of_incident": severity_of_incident,
             "hazards_on_scene": hazards_on_scene
@@ -322,15 +309,14 @@ def extract_incident_information_pipeline(transcript):
         
     except Exception as e:
         print(f"Error in incident extraction: {str(e)}")
-        # Fallback with minimal structure - empty strings instead of guesses
+        import traceback
+        traceback.print_exc()
         return {
             "transcript": transcript,
             "nature_of_incident": "",
-            "severity_of_incident": "",  # Default middle severity
-            "hazards_on_scene": "None"
+            "severity_of_incident": "",
+            "hazards_on_scene": ""
         }
-    
-
 
 ###############################################################################
 #                         Flask Endpoints
