@@ -161,177 +161,238 @@ def load_count_model():
 ###############################################################################
 
 def extract_incident_information_pipeline(transcript):
-    """
-    Extracts information from 911 transcripts using ML-based approaches with confidence checks.
-    Includes enhanced debugging for severity extraction.
-    """
-    # Clean the transcript
-    cleaned_transcript = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", transcript)
-    cleaned_transcript = re.sub(r"\s+", " ", cleaned_transcript).strip()
-    transcript_lower = cleaned_transcript.lower()
+    incident_info = {
+        "nature": None,
+        "hazards": None,
+        "summary": None
+    }
     
     try:
-        # Initialize QA pipeline
-        qa_pipeline = pipeline("question-answering")
+        # Use a valid NER model from Hugging Face
+        hazards_extractor = pipeline(
+            "ner",
+            model="dslim/bert-base-NER",  # Changed to a valid model
+            aggregation_strategy="simple"
+        )
         
-        # ======== NATURE OF INCIDENT EXTRACTION ========
-        # Use trained classifier for nature prediction with confidence check
-        try:
-            # Load and use the existing classification model
-            clf, vectorizer, le = load_count_model()
-            transcript_vectorized = vectorizer.transform([transcript_lower])
-            
-            # Get prediction and prediction probability
-            prediction_label = clf.predict(transcript_vectorized)[0]
-            prediction_proba = clf.predict_proba(transcript_vectorized)[0]
-            max_proba = max(prediction_proba)
-            
-            # Only use prediction if confidence is high enough
-            NATURE_CONFIDENCE_THRESHOLD = 0.7  # Adjust as needed based on your model
-            
-            if max_proba >= NATURE_CONFIDENCE_THRESHOLD:
-                nature_of_incident = le.inverse_transform([prediction_label])[0]
-                print(f"Using classifier prediction for nature: {nature_of_incident} (confidence: {max_proba:.2f})")
-            else:
-                nature_of_incident = ""
-                print(f"Classifier confidence too low: {max_proba:.2f} < {NATURE_CONFIDENCE_THRESHOLD}")
-        except Exception as e:
-            print(f"Error using classifier: {str(e)}")
-            nature_of_incident = ""
-            
-            # Fall back to QA extraction if classifier fails
-            nature_questions = [
-                "What type of emergency is this?",
-                "What is the nature of this incident?",
-                "What happened?",
-                "What is the problem?"
-            ]
-            
-            best_score = 0
-            QA_CONFIDENCE_THRESHOLD = 0.5  # Adjust based on testing
-            
-            for question in nature_questions:
-                try:
-                    result = qa_pipeline(question=question, context=cleaned_transcript[:800])
-                    if result["score"] > best_score and len(result["answer"]) > 2:
-                        best_score = result["score"]
-                        if best_score >= QA_CONFIDENCE_THRESHOLD:
-                            nature_of_incident = result["answer"]
-                except Exception as err:
-                    print(f"Error in nature extraction question: {str(err)}")
+        ner_results = hazards_extractor(transcript)
         
-        # ======== SEVERITY OF INCIDENT EXTRACTION (Scale 1-5) ========
-        # Use a simpler, more robust approach for severity
-        SEVERITY_CONFIDENCE_THRESHOLD = 0.1  # Very low threshold for testing
+        # Zero-shot classification for entities
+        entity_classifier = pipeline(
+            "zero-shot-classification",
+            model="facebook/bart-large-mnli"
+        )
         
-        # First approach: Direct question about numerical severity
-        print("Attempting severity extraction...")
-        severity_of_incident = "3/5"  # Default middle severity as fallback
+        unique_entities = set()
+        for entity in ner_results:
+            entity_text = entity["word"].strip()
+            if len(entity_text) > 2:
+                unique_entities.add(entity_text)
         
-        try:
-            # Try a simple direct question first
-            simple_severity = qa_pipeline(
-                question="On a scale of 1 to 5, how severe is this emergency?",
-                context=cleaned_transcript[:800]
+        potential_hazards = []
+        for entity in unique_entities:
+            entity_context = f"In an emergency situation, {entity} was mentioned."
+            classification = entity_classifier(
+                entity_context,
+                candidate_labels=["represents a hazard", "not a hazard"],
+                multi_label=False
             )
             
-            print(f"Severity extraction answer: '{simple_severity['answer']}' (confidence: {simple_severity['score']:.2f})")
-            
-            # Look for any digit in the answer
-            severity_match = re.search(r'[1-5]', simple_severity['answer'])
-            if severity_match:
-                severity_digit = severity_match.group(0)
-                severity_of_incident = f"{severity_digit}/5"
-                print(f"Found severity digit: {severity_digit}, setting to {severity_of_incident}")
-        except Exception as e:
-            print(f"Error in simple severity extraction: {str(e)}")
+            if classification['labels'][0] == "represents a hazard" and classification['scores'][0] > 0.7:
+                potential_hazards.append(entity)
         
-        # Second approach: Focused extraction with multiple questions
-        if severity_of_incident == "3/5":  # If we're still using the default
-            print("Trying alternative severity extraction approaches...")
-            severity_indicators = {
-                "life threatening": 5,
-                "severe": 5,
-                "critical": 5,
-                "serious": 4,
-                "moderate": 3,
-                "mild": 2,
-                "minor": 1
-            }
-            
-            try:
-                # Alternative question about severity without requiring numerical answer
-                alt_severity = qa_pipeline(
-                    question="How would you describe the severity of this emergency: minor, moderate, or severe?",
-                    context=cleaned_transcript[:800]
-                )
-                
-                print(f"Alternative severity result: '{alt_severity['answer']}' (confidence: {alt_severity['score']:.2f})")
-                
-                # Check for severity indicators in the answer
-                answer_lower = alt_severity['answer'].lower()
-                for indicator, level in severity_indicators.items():
-                    if indicator in answer_lower:
-                        severity_of_incident = f"{level}/5"
-                        print(f"Found severity indicator '{indicator}', setting to {severity_of_incident}")
-                        break
-            except Exception as e:
-                print(f"Error in alternative severity extraction: {str(e)}")
-            
-        # ======== HAZARDS ON SCENE EXTRACTION ========
+        # Extract specific hazards using a question-answering approach
+        qa_hazard_model = pipeline(
+            "question-answering",
+            model="deepset/roberta-base-squad2"
+        )
+        
         hazard_questions = [
-            "Are there any hazards for emergency responders at the scene?",
-            "Is the scene safe for emergency personnel?",
-            "What safety concerns exist for responders?"
+            "What specific hazards are present in this incident?",
+            "What dangerous items or conditions are mentioned?",
+            "What safety concerns exist in this situation?",
+            "What threats are described in this incident?"
         ]
         
-        hazards_on_scene = "None"  # Default to None for safety
-        best_score = 0
-        HAZARD_CONFIDENCE_THRESHOLD = 0.6  # Higher threshold for hazards - safety critical
+        specific_hazards = set()
         
-        negative_responses = ["no", "none", "no hazards", "safe", "not unsafe"]
+        # Process in chunks
+        chunk_size = 512
+        transcript_chunks = [transcript[i:i+chunk_size] for i in range(0, len(transcript), chunk_size)]
         
         for question in hazard_questions:
-            try:
-                result = qa_pipeline(question=question, context=cleaned_transcript[:800])
-                answer_lower = result["answer"].lower().strip()
+            for chunk in transcript_chunks:
+                if len(chunk.strip()) > 50:
+                    try:
+                        answer = qa_hazard_model(
+                            question=question,
+                            context=chunk
+                        )
+                        if answer['score'] > 0.3 and len(answer['answer'].strip()) > 3:
+                            specific_hazards.add(answer['answer'].strip())
+                    except Exception as e:
+                        print(f"QA hazard error: {str(e)}")
+                        continue
+        
+        # Use zero-shot classification to determine if specific entities are hazards
+        potential_specific_hazards = []
+        specific_entities = [entity for entity in unique_entities if len(entity) > 3]
+        
+        if specific_entities:
+            for entity in specific_entities[:10]:  # Limit to prevent too many API calls
+                classification = entity_classifier(
+                    f"In an emergency situation: {entity}",
+                    candidate_labels=["dangerous item", "safety threat", "health hazard", "not a hazard"],
+                    multi_label=False
+                )
                 
-                # Check if the answer indicates no hazards with high confidence
-                if result["score"] >= HAZARD_CONFIDENCE_THRESHOLD:
-                    if any(neg in answer_lower for neg in negative_responses) and len(answer_lower) < 15:
-                        hazards_on_scene = "None"
-                        print(f"No hazards detected (confidence: {result['score']:.2f})")
-                        break
-                    # If answer is substantial and confident, use it
-                    elif len(answer_lower) > 2 and not any(neg in answer_lower for neg in negative_responses):
-                        hazards_on_scene = result["answer"]
-                        print(f"Hazards detected: {hazards_on_scene} (confidence: {result['score']:.2f})")
-                        break
-            except Exception as e:
-                print(f"Error in hazards extraction: {str(e)}")
+                if classification['labels'][0] != "not a hazard" and classification['scores'][0] > 0.6:
+                    potential_specific_hazards.append(f"{entity} ({classification['labels'][0]})")
+                    
+        # Combine results
+        combined_hazards = set(potential_specific_hazards) | specific_hazards
+        
+        # For summarization, use a valid model
+        summarizer = pipeline(
+            "summarization",
+            model="facebook/bart-large-cnn"
+        )
+        
+        summary_chunks = []
+        for i in range(0, len(transcript), 1000):
+            chunk = transcript[i:i+1000]
+            if len(chunk.strip()) > 100:
+                summary = summarizer(
+                    chunk,
+                    max_length=100,
+                    min_length=30,
+                    do_sample=False
+                )
+                summary_chunks.append(summary[0]['summary_text'])
+        
+        full_summary = " ".join(summary_chunks)
+        
+        qa_model = pipeline(
+            "question-answering",
+            model="deepset/roberta-base-squad2"
+        )
+        
+        summary_questions = [
+            "What happened in this incident?",
+            "What is the main emergency situation described?",
+            "What are the key details of this incident?"
+        ]
+        
+        qa_answers = []
+        for question in summary_questions:
+            for i in range(0, len(transcript), 1000):
+                chunk = transcript[i:i+1000]
+                if len(chunk.strip()) > 50:
+                    try:
+                        answer = qa_model(
+                            question=question,
+                            context=chunk
+                        )
+                        if answer['score'] > 0.3:
+                            qa_answers.append(answer['answer'])
+                    except Exception as e:
+                        print(f"QA model error: {str(e)}")
+                        continue
+        
+        # Enhanced hazard extraction using context analysis
+        # Use QA model to directly extract hazards from the transcript
+        direct_hazard_questions = [
+            "What specific item is dangerous in this situation?",
+            "What exact hazard is present?", 
+            "What specific threat is mentioned?",
+            "What weapon is described?",
+            "What health risk is present?"
+        ]
+        
+        direct_hazards = []
+        for question in direct_hazard_questions:
+            best_answer = {"score": 0, "answer": ""}
+            for chunk in transcript_chunks:
+                if len(chunk.strip()) > 50:
+                    try:
+                        answer = qa_model(question=question, context=chunk)
+                        if answer['score'] > best_answer['score'] and len(answer['answer']) > 2:
+                            best_answer = answer
+                    except Exception as e:
+                        continue
             
-        # Return the incident node structure
-        incident_node = {
-            "transcript": transcript,  # Original transcript
-            "nature_of_incident": nature_of_incident,
-            "severity_of_incident": severity_of_incident,
-            "hazards_on_scene": hazards_on_scene
-        }
+            if best_answer['score'] > 0.2 and best_answer['answer'] not in direct_hazards:
+                direct_hazards.append(best_answer['answer'])
         
-        return incident_node
+        # Analyze the transcript for medical conditions
+        medical_conditions = []
+        medical_question = "What medical condition or health problem is mentioned?"
+        for chunk in transcript_chunks:
+            if len(chunk.strip()) > 50:
+                try:
+                    answer = qa_model(question=medical_question, context=chunk)
+                    if answer['score'] > 0.3 and len(answer['answer']) > 2:
+                        medical_conditions.append(answer['answer'])
+                except Exception as e:
+                    continue
         
+        # Build the final hazards list with specific details
+        final_hazards = []
+        
+        # Add direct QA-extracted hazards
+        final_hazards.extend(direct_hazards)
+        
+        # Add medical conditions as health hazards
+        for condition in medical_conditions:
+            final_hazards.append(f"Health hazard: {condition}")
+        
+        # Add hazards from entity classification
+        if potential_specific_hazards:
+            final_hazards.extend(potential_specific_hazards)
+            
+        # Add hazards from QA extraction
+        if specific_hazards:
+            final_hazards.extend(specific_hazards)
+            
+        # Deduplicate and clean
+        clean_hazards = []
+        for hazard in final_hazards:
+            hazard = hazard.strip()
+            if hazard and hazard not in clean_hazards and len(hazard) > 2:
+                clean_hazards.append(hazard)
+        
+        # Final fallback
+        if clean_hazards:
+            incident_info["hazards"] = clean_hazards
+        elif combined_hazards:
+            incident_info["hazards"] = list(combined_hazards)
+        elif potential_hazards:
+            incident_info["hazards"] = potential_hazards
+        else:
+            incident_info["hazards"] = ["No specific hazards identified in the transcript"]
+            
+        if qa_answers:
+            qa_summary = " ".join(set(qa_answers))
+            if full_summary:
+                incident_info["summary"] = f"{full_summary} {qa_summary}"
+            else:
+                incident_info["summary"] = qa_summary
+        else:
+            incident_info["summary"] = full_summary
+        
+        if not incident_info["summary"]:
+            incident_info["summary"] = transcript[:150] + "..."
+            
     except Exception as e:
-        print(f"Error in incident extraction: {str(e)}")
-        # Fallback with minimal structure - empty strings instead of guesses
-        return {
-            "transcript": transcript,
-            "nature_of_incident": "",
-            "severity_of_incident": "",  # Default middle severity
-            "hazards_on_scene": "None"
-        }
+        print(f"Error in extract_incident_information_pipeline: {str(e)}")
+        if not incident_info["hazards"]:
+            incident_info["hazards"] = ["Unable to identify hazards"]
+        if not incident_info["summary"]:
+            incident_info["summary"] = "Unable to generate summary"
     
+    return incident_info
 
-
+    
 ###############################################################################
 #                         Flask Endpoints
 ###############################################################################
