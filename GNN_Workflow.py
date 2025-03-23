@@ -161,6 +161,7 @@ def load_count_model():
 ###############################################################################
 
 def extract_incident_information_pipeline(transcript):
+<<<<<<< HEAD
     incident_info = {
         "nature": None,
         "hazards": None,
@@ -323,6 +324,151 @@ def extract_incident_information_pipeline(transcript):
             
             if best_answer['score'] > 0.2 and best_answer['answer'] not in direct_hazards:
                 direct_hazards.append(best_answer['answer'])
+=======
+    """
+    Extracts information from 911 transcripts using a simpler approach without keywords.
+    """
+    from transformers import pipeline
+    import torch
+    import re
+    
+    # Clean the transcript
+    cleaned_transcript = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", transcript)
+    cleaned_transcript = re.sub(r"\s+", " ", cleaned_transcript).strip()
+    transcript_lower = cleaned_transcript.lower()
+    
+    try:
+        # ======== NATURE OF INCIDENT EXTRACTION ========
+        # Keep your existing classifier-based approach for nature of incident
+        nature_of_incident = ""
+        try:
+            clf, vectorizer, le = load_count_model()
+            transcript_vectorized = vectorizer.transform([transcript_lower])
+            
+            prediction_label = clf.predict(transcript_vectorized)[0]
+            prediction_proba = clf.predict_proba(transcript_vectorized)[0]
+            max_proba = max(prediction_proba)
+            
+            NATURE_CONFIDENCE_THRESHOLD = 0.7
+            
+            if max_proba >= NATURE_CONFIDENCE_THRESHOLD:
+                nature_of_incident = le.inverse_transform([prediction_label])[0]
+                print(f"Using classifier prediction for nature: {nature_of_incident} (confidence: {max_proba:.2f})")
+            else:
+                print(f"Classifier confidence too low: {max_proba:.2f} < {NATURE_CONFIDENCE_THRESHOLD}")
+        except Exception as e:
+            print(f"Error using classifier: {str(e)}")
+        
+        # ======== CREATE ZERO-SHOT CLASSIFIER (USED FOR BOTH SEVERITY AND HAZARDS) ========
+        print("Loading zero-shot classification model...")
+        try:
+            classifier = pipeline("zero-shot-classification", 
+                                 model="facebook/bart-large-mnli",
+                                 device=-1)  # Always use CPU for compatibility
+            
+            print("Zero-shot classifier loaded successfully")
+        except Exception as e:
+            print(f"Error loading zero-shot classifier: {str(e)}")
+            # If we can't load the classifier, we'll return empty values
+            return {
+                "transcript": transcript,
+                "nature_of_incident": nature_of_incident,
+                "severity_of_incident": "",
+                "hazards_on_scene": ""
+            }
+            
+        # ======== SEVERITY OF INCIDENT EXTRACTION ========
+        print("Attempting severity extraction...")
+        severity_of_incident = ""
+        
+        try:
+            # Candidate labels for severity
+            candidate_labels = [
+                "life-threatening emergency",
+                "serious medical emergency", 
+                "moderate medical issue",
+                "minor medical concern",
+                "non-urgent situation"
+            ]
+            
+            # Classify the transcript
+            result = classifier(cleaned_transcript, candidate_labels)
+            print(f"Severity classification: {result['labels'][0]} (score: {result['scores'][0]:.2f})")
+            
+            # Map the classification to a numeric severity
+            severity_mapping = {
+                "life-threatening emergency": "5/5",
+                "serious medical emergency": "4/5",
+                "moderate medical issue": "3/5", 
+                "minor medical concern": "2/5",
+                "non-urgent situation": "1/5"
+            }
+            
+            # Only use the result if the confidence is high enough
+            SEVERITY_CONFIDENCE_THRESHOLD = 0.4
+            if result['scores'][0] >= SEVERITY_CONFIDENCE_THRESHOLD:
+                severity_of_incident = severity_mapping[result['labels'][0]]
+                print(f"Determined severity: {severity_of_incident}")
+            else:
+                print(f"Severity classification confidence too low: {result['scores'][0]:.2f}")
+        except Exception as e:
+            print(f"Error in severity classification: {str(e)}")
+        
+        # ======== HAZARDS ON SCENE EXTRACTION ========
+        print("Attempting hazards extraction...")
+        hazards_on_scene = ""
+        
+        try:
+            # Simpler approach for hazards - just use zero-shot classification
+            hazard_class_labels = [
+                "scene contains safety hazards", 
+                "scene is safe with no hazards",
+                "scene safety is unclear"
+            ]
+            
+            hazard_classification = classifier(cleaned_transcript, hazard_class_labels)
+            print(f"Hazard classification: {hazard_classification['labels'][0]} (score: {hazard_classification['scores'][0]:.2f})")
+            
+            # Only set hazards_on_scene if we have high confidence
+            HAZARD_CONFIDENCE_THRESHOLD = 0.6
+            if hazard_classification['scores'][0] >= HAZARD_CONFIDENCE_THRESHOLD:
+                if hazard_classification['labels'][0] == "scene contains safety hazards":
+                    # Additional classification to determine type of hazard
+                    hazard_type_labels = [
+                        "medical risk",
+                        "environmental hazard",
+                        "vehicle-related danger",
+                        "violent situation",
+                        "fire hazard"
+                    ]
+                    
+                    type_result = classifier(cleaned_transcript, hazard_type_labels)
+                    top_type = type_result['labels'][0]
+                    top_score = type_result['scores'][0]
+                    
+                    if top_score >= 0.5:
+                        hazards_on_scene = f"{top_type.capitalize()}"
+                        print(f"Hazard type identified: {hazards_on_scene} (score: {top_score:.2f})")
+                    else:
+                        hazards_on_scene = "Potential hazards detected"
+                        print(f"Generic hazard detected, type unclear (score: {top_score:.2f})")
+                
+                elif hazard_classification['labels'][0] == "scene is safe with no hazards":
+                    hazards_on_scene = "None"
+                    print("Scene classified as safe with no hazards")
+            else:
+                print(f"Hazard classification confidence too low: {hazard_classification['scores'][0]:.2f}")
+                
+        except Exception as e:
+            print(f"Error in hazards extraction: {str(e)}")
+        
+        incident_node = {
+            "transcript": transcript,
+            "nature_of_incident": nature_of_incident,
+            "severity_of_incident": severity_of_incident,
+            "hazards_on_scene": hazards_on_scene
+        }
+>>>>>>> c3e8a8264dc81ca3279b887b1f3e53d3003032d1
         
         # Analyze the transcript for medical conditions
         medical_conditions = []
@@ -384,6 +530,7 @@ def extract_incident_information_pipeline(transcript):
             incident_info["summary"] = transcript[:150] + "..."
             
     except Exception as e:
+<<<<<<< HEAD
         print(f"Error in extract_incident_information_pipeline: {str(e)}")
         if not incident_info["hazards"]:
             incident_info["hazards"] = ["Unable to identify hazards"]
@@ -393,6 +540,18 @@ def extract_incident_information_pipeline(transcript):
     return incident_info
 
     
+=======
+        print(f"Error in incident extraction: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return {
+            "transcript": transcript,
+            "nature_of_incident": "",
+            "severity_of_incident": "",
+            "hazards_on_scene": ""
+        }
+
+>>>>>>> c3e8a8264dc81ca3279b887b1f3e53d3003032d1
 ###############################################################################
 #                         Flask Endpoints
 ###############################################################################
