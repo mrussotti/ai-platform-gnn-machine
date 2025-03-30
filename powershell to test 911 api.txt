@@ -1,0 +1,10 @@
+$transcript = Get-Content -Raw -Path ".\transcript.txt"
+
+$jsonBody = @{ 
+    transcript = $transcript
+    save_to_neo4j = $true  # Set to true to save to Neo4j, false to just test extraction
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_911_call" -Method POST -Body $jsonBody -ContentType "application/json"
+
+$response | ConvertTo-Json -Depth 10
