@@ -2,6 +2,7 @@ import pickle
 import re
 import json
 import pandas as pd
+import openai
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from neo4j import GraphDatabase
@@ -12,10 +13,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from transformers import pipeline
 
-
 app = Flask(__name__)
 CORS(app)
-
 
 ###############################################################################
 #                            Neo4j Functions
@@ -157,186 +156,364 @@ def load_count_model():
     return clf, vectorizer, le
 
 ###############################################################################
-#           New Feature: Extract Incident Information using LLM
+#           New Feature: Extract Incident Information using ChatGPT API
 ###############################################################################
-
 def extract_incident_information_pipeline(transcript):
     """
-    Extracts information from 911 transcripts using ML-based approaches with confidence checks.
-    Includes enhanced debugging for severity extraction.
+    Use the OpenAI API (GPT-4) to extract incident information from a transcript.
+    The API is prompted to extract:
+      - nature: the nature of the incident,
+      - hazards: hazards present on the scene,
+      - summary: a concise summary of the incident.
+      
+    Only include values if you are confident they are accurate and relevant.
+    Returns a dictionary with the keys 'nature', 'hazards', and 'summary'.
     """
-    # Clean the transcript
-    cleaned_transcript = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", transcript)
-    cleaned_transcript = re.sub(r"\s+", " ", cleaned_transcript).strip()
-    transcript_lower = cleaned_transcript.lower()
+    # Import OpenAI client at the beginning of your file
+    from openai import OpenAI
+    
+    # Initialize the client with your API key
+    client = OpenAI(api_key="")
+    
+    system_prompt = (
+        "You are an expert incident analyzer. Extract the following information from the transcript: "
+        "1. The nature of the incident. "
+        "2. Hazards present on the scene. "
+        "3. A concise summary of the incident. "
+        "Only include values if you are confident they are accurate and relevant. "
+        "Return your answer as valid JSON with the keys 'nature', 'hazards', and 'summary'."
+    )
+    
+    user_prompt = f"Extract the incident information from the following transcript:\n\n{transcript}\n"
     
     try:
-        # Initialize QA pipeline
-        qa_pipeline = pipeline("question-answering")
+        # Using the new API format
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0
+        )
         
-        # ======== NATURE OF INCIDENT EXTRACTION ========
-        # Use trained classifier for nature prediction with confidence check
-        try:
-            # Load and use the existing classification model
-            clf, vectorizer, le = load_count_model()
-            transcript_vectorized = vectorizer.transform([transcript_lower])
-            
-            # Get prediction and prediction probability
-            prediction_label = clf.predict(transcript_vectorized)[0]
-            prediction_proba = clf.predict_proba(transcript_vectorized)[0]
-            max_proba = max(prediction_proba)
-            
-            # Only use prediction if confidence is high enough
-            NATURE_CONFIDENCE_THRESHOLD = 0.7  # Adjust as needed based on your model
-            
-            if max_proba >= NATURE_CONFIDENCE_THRESHOLD:
-                nature_of_incident = le.inverse_transform([prediction_label])[0]
-                print(f"Using classifier prediction for nature: {nature_of_incident} (confidence: {max_proba:.2f})")
-            else:
-                nature_of_incident = ""
-                print(f"Classifier confidence too low: {max_proba:.2f} < {NATURE_CONFIDENCE_THRESHOLD}")
-        except Exception as e:
-            print(f"Error using classifier: {str(e)}")
-            nature_of_incident = ""
-            
-            # Fall back to QA extraction if classifier fails
-            nature_questions = [
-                "What type of emergency is this?",
-                "What is the nature of this incident?",
-                "What happened?",
-                "What is the problem?"
-            ]
-            
-            best_score = 0
-            QA_CONFIDENCE_THRESHOLD = 0.5  # Adjust based on testing
-            
-            for question in nature_questions:
-                try:
-                    result = qa_pipeline(question=question, context=cleaned_transcript[:800])
-                    if result["score"] > best_score and len(result["answer"]) > 2:
-                        best_score = result["score"]
-                        if best_score >= QA_CONFIDENCE_THRESHOLD:
-                            nature_of_incident = result["answer"]
-                except Exception as err:
-                    print(f"Error in nature extraction question: {str(err)}")
+        # Access the content from the new response structure
+        content = response.choices[0].message.content
+        info = json.loads(content)
+        return info
+    except Exception as e:
+        print(f"Error in ChatGPT API call: {e}")
+        # In case of an error, return empty values.
+        return {"nature": "", "hazards": "", "summary": ""}
+
+###############################################################################
+#           New Feature: Extract Complete 911 Call Data using ChatGPT API
+###############################################################################
+def extract_all_911_call_data(transcript):
+    """
+    Use the OpenAI API (GPT-4) to extract complete 911 call information from a transcript,
+    including all nodes in the Neo4j structure:
+    - Incident details (nature, severity, hazards)
+    - Person information (name, phone, role, etc.)
+    - Location/time data (address, type, features, time)
+    - Call metadata (summary)
+    
+    Returns a dictionary with structured data for all Neo4j nodes.
+    """
+    from openai import OpenAI
+    
+    # Initialize the client with your API key
+    client = OpenAI(api_key="Insert_key_here")
+    
+    system_prompt = """
+    You are an expert emergency call analyzer. Extract the following information from the 911 call transcript.
+    Return ONLY a valid JSON object with these keys and nested objects:
+    
+    {
+        "call": {
+            "summary": "Brief summary of the call"
+        },
+        "incident": {
+            "nature": "Nature of the incident (e.g., heart attack, car accident)",
+            "severity": "Severity level (e.g., life-threatening, minor)",
+            "hazards": "Any hazards on scene (e.g., active shooter, fire)",
+            "transcript": "The call transcript (pass through as is)"
+        },
+        "persons": [
+            {
+                "name": "Person's name if mentioned",
+                "phone": "Phone number if mentioned",
+                "role": "Role in the incident (e.g., caller, victim, witness)",
+                "relationship": "Relationship with other persons mentioned",
+                "conditions": "Any preexisting conditions/medications mentioned",
+                "age": "Age if mentioned",
+                "sex": "Sex/gender if mentioned"
+            }
+        ],
+        "location": {
+            "address": "Address of the incident if mentioned",
+            "type": "Type of location (e.g., residence, business, public space)",
+            "features": "Identifying features (e.g., color of house, car description)",
+            "time": "Time when the incident occurred or when call was made"
+        }
+    }
+    
+    Only include values that are explicitly mentioned in the transcript. Use empty strings for unknown values.
+    Include all persons mentioned in the transcript as separate objects in the 'persons' array.
+    """
+    
+    user_prompt = f"Extract all information from the following 911 call transcript:\n\n{transcript}\n"
+    
+    try:
+        # Using the OpenAI API
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0
+        )
         
-        # ======== SEVERITY OF INCIDENT EXTRACTION (Scale 1-5) ========
-        # Use a simpler, more robust approach for severity
-        SEVERITY_CONFIDENCE_THRESHOLD = 0.1  # Very low threshold for testing
+        # Access the content from the response
+        content = response.choices[0].message.content
         
-        # First approach: Direct question about numerical severity
-        print("Attempting severity extraction...")
-        severity_of_incident = "3/5"  # Default middle severity as fallback
+        # Parse the JSON response
+        call_data = json.loads(content)
         
-        try:
-            # Try a simple direct question first
-            simple_severity = qa_pipeline(
-                question="On a scale of 1 to 5, how severe is this emergency?",
-                context=cleaned_transcript[:800]
-            )
+        # Add the original transcript to the incident data
+        if "incident" in call_data:
+            call_data["incident"]["transcript"] = transcript
             
-            print(f"Severity extraction answer: '{simple_severity['answer']}' (confidence: {simple_severity['score']:.2f})")
+        return call_data
+    except Exception as e:
+        print(f"Error in ChatGPT API call: {e}")
+        # In case of an error, return a minimal structure with empty values
+        return {
+            "call": {"summary": ""},
+            "incident": {"nature": "", "severity": "", "hazards": "", "transcript": transcript},
+            "persons": [{"name": "", "phone": "", "role": "", "relationship": "", "conditions": "", "age": "", "sex": ""}],
+            "location": {"address": "", "type": "", "features": "", "time": ""}
+        }
+
+def preprocess_transcript(transcript):
+    """
+    Clean and preprocess the transcript to make it more suitable for analysis.
+    
+    Parameters:
+    - transcript: Raw transcript text
+    
+    Returns:
+    - Cleaned transcript text
+    """
+    # Remove timestamp and speaker patterns
+    cleaned = re.sub(r"\d+\.\d+s\s+\d+\.\d+s\s+SPEAKER_\d{2}:", "", transcript)
+    
+    # Remove extra whitespace
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    
+    # Check if the transcript is too short
+    if len(cleaned.split()) < 10:
+        print(f"Warning: Transcript might be too short for accurate analysis: {len(cleaned.split())} words")
+    
+    return cleaned
+
+def analyze_transcript_quality(transcript):
+    """
+    Analyze the quality of the transcript to determine if it's suitable for extraction.
+    
+    Parameters:
+    - transcript: Raw or cleaned transcript text
+    
+    Returns:
+    - Dictionary with quality metrics and warnings
+    """
+    words = transcript.split()
+    word_count = len(words)
+    
+    # Calculate some basic metrics
+    metrics = {
+        "word_count": word_count,
+        "warnings": [],
+        "is_suitable": True
+    }
+    
+    # Check for minimum word count
+    if word_count < 20:
+        metrics["warnings"].append("Transcript is very short and may not contain enough information")
+        metrics["is_suitable"] = False
+    
+    
+    # Check for potential formatting issues
+    if transcript.count("\n") > word_count / 10:
+        metrics["warnings"].append("Transcript has unusual formatting with many line breaks")
+    
+    # Check for potential relevant keywords
+    emergency_keywords = ["emergency", "help", "911", "accident", "injured", "hurt", 
+                         "medical", "fire", "police", "ambulance", "bleeding", "pain",
+                         "unconscious", "breath", "weapon", "gun", "knife"]
+    
+    found_keywords = [word for word in emergency_keywords if word in transcript.lower()]
+    metrics["emergency_keywords_found"] = found_keywords
+    
+    if not found_keywords:
+        metrics["warnings"].append("No emergency keywords detected - might not be a 911 call")
+    
+    return metrics
+
+def save_911_call_to_neo4j(call_data, driver):
+    """
+    Save the extracted 911 call data to Neo4j.
+    Creates all nodes and relationships according to the database schema.
+    
+    Parameters:
+    - call_data: Dictionary containing structured data from extract_all_911_call_data
+    - driver: Neo4j driver connection
+    
+    Returns:
+    - Dictionary with status information
+    """
+    try:
+        with driver.session() as session:
+            # Create the transaction function
+            def create_call_graph(tx, data):
+                # Create Call node
+                call_query = """
+                CREATE (c:Call {summary: $summary})
+                RETURN id(c) AS call_id
+                """
+                call_result = tx.run(call_query, summary=data["call"]["summary"]).single()
+                call_id = call_result["call_id"]
+                
+                # Create Incident node
+                incident_query = """
+                CREATE (i:Incident {
+                    nature: $nature,
+                    severity: $severity,
+                    hazards: $hazards,
+                    transcript: $transcript
+                })
+                RETURN id(i) AS incident_id
+                """
+                incident_result = tx.run(
+                    incident_query,
+                    nature=data["incident"]["nature"],
+                    severity=data["incident"]["severity"],
+                    hazards=data["incident"]["hazards"],
+                    transcript=data["incident"]["transcript"]
+                ).single()
+                incident_id = incident_result["incident_id"]
+                
+                # Create relationship between Call and Incident
+                tx.run("""
+                MATCH (c:Call), (i:Incident)
+                WHERE id(c) = $call_id AND id(i) = $incident_id
+                CREATE (c)-[:ABOUT]->(i)
+                """, call_id=call_id, incident_id=incident_id)
+                
+                # Create Location node
+                location_query = """
+                CREATE (l:Location {
+                    address: $address,
+                    type: $type,
+                    features: $features,
+                    time: $time
+                })
+                RETURN id(l) AS location_id
+                """
+                location_result = tx.run(
+                    location_query,
+                    address=data["location"]["address"],
+                    type=data["location"]["type"],
+                    features=data["location"]["features"],
+                    time=data["location"]["time"]
+                ).single()
+                location_id = location_result["location_id"]
+                
+                # Create relationship between Incident and Location
+                tx.run("""
+                MATCH (i:Incident), (l:Location)
+                WHERE id(i) = $incident_id AND id(l) = $location_id
+                CREATE (i)-[:AT]->(l)
+                """, incident_id=incident_id, location_id=location_id)
+                
+                # Create Person nodes and relationships
+                person_ids = []
+                for person in data["persons"]:
+                    if not any(person.values()):  # Skip if all values are empty
+                        continue
+                        
+                    person_query = """
+                    CREATE (p:Person {
+                        name: $name,
+                        phone: $phone,
+                        role: $role,
+                        relationship: $relationship,
+                        conditions: $conditions,
+                        age: $age,
+                        sex: $sex
+                    })
+                    RETURN id(p) AS person_id
+                    """
+                    person_result = tx.run(
+                        person_query,
+                        name=person["name"],
+                        phone=person["phone"],
+                        role=person["role"],
+                        relationship=person["relationship"],
+                        conditions=person["conditions"],
+                        age=person["age"],
+                        sex=person["sex"]
+                    ).single()
+                    person_id = person_result["person_id"]
+                    person_ids.append(person_id)
+                    
+                    # Create relationship between Person and Incident
+                    tx.run("""
+                    MATCH (p:Person), (i:Incident)
+                    WHERE id(p) = $person_id AND id(i) = $incident_id
+                    CREATE (p)-[:INVOLVED_IN]->(i)
+                    """, person_id=person_id, incident_id=incident_id)
+                    
+                    # If person is a caller, create relationship with Call
+                    if person["role"].lower() == "caller":
+                        tx.run("""
+                        MATCH (p:Person), (c:Call)
+                        WHERE id(p) = $person_id AND id(c) = $call_id
+                        CREATE (p)-[:MADE]->(c)
+                        """, person_id=person_id, call_id=call_id)
+                
+                return {
+                    "call_id": call_id,
+                    "incident_id": incident_id,
+                    "location_id": location_id,
+                    "person_ids": person_ids
+                }
             
-            # Look for any digit in the answer
-            severity_match = re.search(r'[1-5]', simple_severity['answer'])
-            if severity_match:
-                severity_digit = severity_match.group(0)
-                severity_of_incident = f"{severity_digit}/5"
-                print(f"Found severity digit: {severity_digit}, setting to {severity_of_incident}")
-        except Exception as e:
-            print(f"Error in simple severity extraction: {str(e)}")
-        
-        # Second approach: Focused extraction with multiple questions
-        if severity_of_incident == "3/5":  # If we're still using the default
-            print("Trying alternative severity extraction approaches...")
-            severity_indicators = {
-                "life threatening": 5,
-                "severe": 5,
-                "critical": 5,
-                "serious": 4,
-                "moderate": 3,
-                "mild": 2,
-                "minor": 1
+            # Execute the transaction function
+            result = session.execute_write(create_call_graph, call_data)
+            
+            return {
+                "status": "success",
+                "message": "911 call data successfully saved to Neo4j",
+                "node_ids": result
             }
             
-            try:
-                # Alternative question about severity without requiring numerical answer
-                alt_severity = qa_pipeline(
-                    question="How would you describe the severity of this emergency: minor, moderate, or severe?",
-                    context=cleaned_transcript[:800]
-                )
-                
-                print(f"Alternative severity result: '{alt_severity['answer']}' (confidence: {alt_severity['score']:.2f})")
-                
-                # Check for severity indicators in the answer
-                answer_lower = alt_severity['answer'].lower()
-                for indicator, level in severity_indicators.items():
-                    if indicator in answer_lower:
-                        severity_of_incident = f"{level}/5"
-                        print(f"Found severity indicator '{indicator}', setting to {severity_of_incident}")
-                        break
-            except Exception as e:
-                print(f"Error in alternative severity extraction: {str(e)}")
-            
-        # ======== HAZARDS ON SCENE EXTRACTION ========
-        hazard_questions = [
-            "Are there any hazards for emergency responders at the scene?",
-            "Is the scene safe for emergency personnel?",
-            "What safety concerns exist for responders?"
-        ]
-        
-        hazards_on_scene = "None"  # Default to None for safety
-        best_score = 0
-        HAZARD_CONFIDENCE_THRESHOLD = 0.6  # Higher threshold for hazards - safety critical
-        
-        negative_responses = ["no", "none", "no hazards", "safe", "not unsafe"]
-        
-        for question in hazard_questions:
-            try:
-                result = qa_pipeline(question=question, context=cleaned_transcript[:800])
-                answer_lower = result["answer"].lower().strip()
-                
-                # Check if the answer indicates no hazards with high confidence
-                if result["score"] >= HAZARD_CONFIDENCE_THRESHOLD:
-                    if any(neg in answer_lower for neg in negative_responses) and len(answer_lower) < 15:
-                        hazards_on_scene = "None"
-                        print(f"No hazards detected (confidence: {result['score']:.2f})")
-                        break
-                    # If answer is substantial and confident, use it
-                    elif len(answer_lower) > 2 and not any(neg in answer_lower for neg in negative_responses):
-                        hazards_on_scene = result["answer"]
-                        print(f"Hazards detected: {hazards_on_scene} (confidence: {result['score']:.2f})")
-                        break
-            except Exception as e:
-                print(f"Error in hazards extraction: {str(e)}")
-            
-        # Return the incident node structure
-        incident_node = {
-            "transcript": transcript,  # Original transcript
-            "nature_of_incident": nature_of_incident,
-            "severity_of_incident": severity_of_incident,
-            "hazards_on_scene": hazards_on_scene
-        }
-        
-        return incident_node
-        
     except Exception as e:
-        print(f"Error in incident extraction: {str(e)}")
-        # Fallback with minimal structure - empty strings instead of guesses
+        print(f"Error saving to Neo4j: {e}")
+        import traceback
+        traceback.print_exc()
         return {
-            "transcript": transcript,
-            "nature_of_incident": "",
-            "severity_of_incident": "",  # Default middle severity
-            "hazards_on_scene": "None"
+            "status": "error",
+            "message": f"Failed to save 911 call data: {str(e)}"
         }
-    
 
 
 ###############################################################################
 #                         Flask Endpoints
 ###############################################################################
 
-#uses the old training method (multiple vectorizers).
+# uses the old training method (multiple vectorizers).
 @app.route('/train_model', methods=['POST'])
 def train_model():
     try:
@@ -349,7 +526,7 @@ def train_model():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-#trains using TfidfVectorizer and saves the model.
+# trains using TfidfVectorizer and saves the model.
 @app.route('/train_and_save', methods=['POST'])
 def train_and_save_endpoint():
     try:
@@ -362,7 +539,7 @@ def train_and_save_endpoint():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-#load saved model and make predictions.
+# load saved model and make predictions.
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -388,7 +565,6 @@ def predict():
         })
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
-
 
 @app.route('/extract_incident', methods=['POST'])
 def extract_incident_endpoint():
@@ -422,8 +598,58 @@ def extract_incident_endpoint():
         import traceback
         traceback.print_exc()
         return jsonify({"status": "error", "message": str(e)}), 500
-    
 
+# New endpoint to process complete 911 call data
+@app.route('/process_911_call', methods=['POST'])
+def process_911_call_endpoint():
+    try:
+        data = request.json
+        transcript = data.get("transcript", "")
+        if not isinstance(transcript, str):
+            transcript = json.dumps(transcript)
+        transcript = transcript.strip()
+        
+        if not transcript:
+            return jsonify({
+                "status": "error", 
+                "message": "No transcript provided."
+            }), 400
+        
+        # First, preprocess and analyze transcript quality
+        cleaned_transcript = preprocess_transcript(transcript)
+        quality_metrics = analyze_transcript_quality(cleaned_transcript)
+        
+        # If transcript quality is poor, warn the user but continue processing
+        warnings = quality_metrics.get("warnings", [])
+        
+        # Extract all data from the transcript
+        call_data = extract_all_911_call_data(transcript)
+        
+        # Optionally save to Neo4j
+       # neo4j_result = None
+       # if data.get("save_to_neo4j", True):
+        #    driver = connect_to_neo4j()
+         #   neo4j_result = save_911_call_to_neo4j(call_data, driver)
+         #   driver.close()
+        
+        # Return the extracted data and Neo4j save status
+        return jsonify({
+            "status": "success",
+            "call_data": call_data,
+            "quality_metrics": quality_metrics,
+            "neo4j_result": neo4j_result,
+            "warnings": warnings,
+            "message": "Successfully processed 911 call data"
+        })
+        
+    except Exception as e:
+        print(f"Error in process_911_call_endpoint: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "status": "error", 
+            "message": str(e)
+        }), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
