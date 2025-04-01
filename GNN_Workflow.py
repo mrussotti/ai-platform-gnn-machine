@@ -12,6 +12,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from transformers import pipeline
+# New import for incident matching
+from incident_matcher import are_same_incident
 
 app = Flask(__name__)
 CORS(app)
@@ -508,6 +510,169 @@ def save_911_call_to_neo4j(call_data, driver):
             "message": f"Failed to save 911 call data: {str(e)}"
         }
 
+###############################################################################
+#           NEW FEATURE: Incident Matching for Multiple Calls
+###############################################################################
+def find_matching_incidents(driver, call_data, time_window_minutes=30):
+    """
+    Search for existing incidents that might match the new call data
+    
+    Parameters:
+    - driver: Neo4j driver
+    - call_data: Dictionary with call information
+    - time_window_minutes: Time window to search for matches
+    
+    Returns:
+    - List of potential matching incidents
+    """
+    matches = []
+    
+    try:
+        with driver.session() as session:
+            # Find recent incidents in Neo4j
+            result = session.run("""
+                MATCH (i:Incident)
+                RETURN i
+                LIMIT 15
+            """)
+            
+            for record in result:
+                incident = dict(record["i"])
+                
+                # Get location for this incident
+                loc_result = session.run("""
+                    MATCH (i:Incident)-[:AT]->(l:Location)
+                    WHERE id(i) = $incident_id
+                    RETURN l
+                """, incident_id=incident["id"])
+                
+                loc_record = loc_result.single()
+                location = dict(loc_record["l"]) if loc_record else {}
+                
+                # Get a call for this incident
+                call_result = session.run("""
+                    MATCH (i:Incident)<-[:ABOUT]-(c:Call)
+                    WHERE id(i) = $incident_id
+                    RETURN c
+                    LIMIT 1
+                """, incident_id=incident["id"])
+                
+                call_record = call_result.single()
+                call = dict(call_record["c"]) if call_record else {}
+                
+                # Format for comparison
+                existing_data = {
+                    "incident": incident,
+                    "location": location,
+                    "call": call
+                }
+                
+                # Check if it's a match
+                comparison = are_same_incident(existing_data, call_data)
+                
+                matches.append({
+                    "incident_id": incident["id"],
+                    "comparison": comparison
+                })
+                
+        return matches
+        
+    except Exception as e:
+        print(f"Error finding matching incidents: {e}")
+        return []
+
+def link_call_to_existing_incident(driver, call_data, incident_id):
+    """
+    Link a new call to an existing incident instead of creating a new one
+    
+    Parameters:
+    - driver: Neo4j driver
+    - call_data: Dictionary with call information
+    - incident_id: ID of the existing incident to link to
+    
+    Returns:
+    - Dictionary with status information
+    """
+    try:
+        with driver.session() as session:
+            # Create Call node
+            call_result = session.run("""
+                CREATE (c:Call {summary: $summary})
+                RETURN id(c) AS call_id
+            """, summary=call_data["call"]["summary"]).single()
+            
+            call_id = call_result["call_id"]
+            
+            # Link call to existing incident
+            session.run("""
+                MATCH (c:Call), (i:Incident)
+                WHERE id(c) = $call_id AND id(i) = $incident_id
+                CREATE (c)-[:ABOUT]->(i)
+            """, call_id=call_id, incident_id=incident_id)
+            
+            # Create Person nodes and relationships
+            person_ids = []
+            for person in call_data["persons"]:
+                if not any(person.values()):  # Skip if all values are empty
+                    continue
+                    
+                person_params = {
+                    "name": person.get("name", ""),
+                    "phone": person.get("phone", ""),
+                    "role": person.get("role", ""),
+                    "relationship": person.get("relationship", ""),
+                    "conditions": person.get("conditions", ""),
+                    "age": person.get("age", ""),
+                    "sex": person.get("sex", "")
+                }
+                
+                person_result = session.run("""
+                    CREATE (p:Person {
+                        name: $name,
+                        phone: $phone,
+                        role: $role,
+                        relationship: $relationship,
+                        conditions: $conditions,
+                        age: $age,
+                        sex: $sex
+                    })
+                    RETURN id(p) AS person_id
+                """, **person_params).single()
+                
+                person_id = person_result["person_id"]
+                person_ids.append(person_id)
+                
+                # Create relationship between Person and Incident
+                session.run("""
+                    MATCH (p:Person), (i:Incident)
+                    WHERE id(p) = $person_id AND id(i) = $incident_id
+                    CREATE (p)-[:INVOLVED_IN]->(i)
+                """, person_id=person_id, incident_id=incident_id)
+                
+                # If person is a caller, create relationship with Call
+                if person.get("role", "").lower() == "caller":
+                    session.run("""
+                        MATCH (p:Person), (c:Call)
+                        WHERE id(p) = $person_id AND id(c) = $call_id
+                        CREATE (p)-[:MADE]->(c)
+                    """, person_id=person_id, call_id=call_id)
+            
+            return {
+                "status": "success",
+                "message": "Call linked to existing incident",
+                "call_id": call_id,
+                "incident_id": incident_id,
+                "person_ids": person_ids
+            }
+            
+    except Exception as e:
+        print(f"Error linking call to incident: {e}")
+        import traceback
+        traceback.print_exc()
+        return {
+            "status": "error",
+            "message": f"Failed to link call to incident: {str(e)}"
+        }
 
 ###############################################################################
 #                         Flask Endpoints
@@ -599,7 +764,7 @@ def extract_incident_endpoint():
         traceback.print_exc()
         return jsonify({"status": "error", "message": str(e)}), 500
 
-# New endpoint to process complete 911 call data
+# Modified endpoint to process complete 911 call data with incident matching
 @app.route('/process_911_call', methods=['POST'])
 def process_911_call_endpoint():
     try:
@@ -619,26 +784,70 @@ def process_911_call_endpoint():
         cleaned_transcript = preprocess_transcript(transcript)
         quality_metrics = analyze_transcript_quality(cleaned_transcript)
         
-        # If transcript quality is poor, warn the user but continue processing
-        warnings = quality_metrics.get("warnings", [])
-        
         # Extract all data from the transcript
         call_data = extract_all_911_call_data(transcript)
         
-        # Optionally save to Neo4j
-       # neo4j_result = None
-       # if data.get("save_to_neo4j", True):
-        #    driver = connect_to_neo4j()
-         #   neo4j_result = save_911_call_to_neo4j(call_data, driver)
-         #   driver.close()
+        # Connect to Neo4j
+        driver = connect_to_neo4j()
         
-        # Return the extracted data and Neo4j save status
+        # NEW: Check for matching incidents before creating a new one
+        match_results = None
+        neo4j_result = None
+        
+        if data.get("check_for_duplicates", True):
+            # Find potential matching incidents
+            matches = find_matching_incidents(driver, call_data)
+            
+            # Find the best match if any
+            best_match = None
+            best_score = 0
+            
+            for match in matches:
+                comparison = match["comparison"]
+                if comparison["is_duplicate"] and comparison["confidence_score"] > best_score:
+                    best_match = match
+                    best_score = comparison["confidence_score"]
+            
+            # If we found a good match, link to existing incident
+            if best_match:
+                print(f"Found matching incident with confidence {best_score}")
+                match_results = {
+                    "found_match": True,
+                    "incident_id": best_match["incident_id"],
+                    "confidence": best_score,
+                    "match_details": best_match["comparison"]["match_details"]
+                }
+                
+                # Link the new call to the existing incident
+                neo4j_result = link_call_to_existing_incident(
+                    driver, 
+                    call_data, 
+                    best_match["incident_id"]
+                )
+            else:
+                match_results = {
+                    "found_match": False,
+                    "message": "No matching incidents found",
+                    "checked_count": len(matches)
+                }
+                
+                # No match found, create new incident as usual
+                neo4j_result = save_911_call_to_neo4j(call_data, driver)
+        else:
+            # Not checking for duplicates, just save normally
+            neo4j_result = save_911_call_to_neo4j(call_data, driver)
+            
+        # Close the Neo4j connection
+        driver.close()
+        
+        # Return the results
         return jsonify({
             "status": "success",
             "call_data": call_data,
             "quality_metrics": quality_metrics,
             "neo4j_result": neo4j_result,
-            "warnings": warnings,
+            "incident_matching": match_results,
+            "warnings": quality_metrics.get("warnings", []),
             "message": "Successfully processed 911 call data"
         })
         
@@ -648,6 +857,107 @@ def process_911_call_endpoint():
         traceback.print_exc()
         return jsonify({
             "status": "error", 
+            "message": str(e)
+        }), 500
+
+# New endpoint for checking if two incidents match
+@app.route('/check_incidents', methods=['POST'])
+def check_incidents_endpoint():
+    try:
+        data = request.json
+        incident1 = data.get("incident1")
+        incident2 = data.get("incident2")
+        
+        if not incident1 or not incident2:
+            return jsonify({
+                "status": "error",
+                "message": "Both incident1 and incident2 are required"
+            }), 400
+        
+        # Use the incident matching function
+        result = are_same_incident(incident1, incident2)
+        
+        return jsonify({
+            "status": "success",
+            "result": result
+        })
+        
+    except Exception as e:
+        print(f"Error in check_incidents_endpoint: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
+
+# New endpoint for manually merging two incidents
+@app.route('/merge_incidents', methods=['POST'])
+def merge_incidents_endpoint():
+    try:
+        data = request.json
+        primary_id = data.get("primary_incident_id")
+        secondary_id = data.get("secondary_incident_id")
+        
+        if not primary_id or not secondary_id:
+            return jsonify({
+                "status": "error",
+                "message": "Both primary_incident_id and secondary_incident_id are required"
+            }), 400
+        
+        driver = connect_to_neo4j()
+        
+        with driver.session() as session:
+            # Reassign all ABOUT relationships to the primary incident
+            session.run("""
+                MATCH (c:Call)-[r:ABOUT]->(i:Incident)
+                WHERE id(i) = $secondary_id
+                MATCH (primary:Incident)
+                WHERE id(primary) = $primary_id
+                MERGE (c)-[:ABOUT]->(primary)
+                DELETE r
+            """, primary_id=primary_id, secondary_id=secondary_id)
+            
+            # Reassign all AT relationships to the primary incident
+            session.run("""
+                MATCH (i:Incident)-[r:AT]->(l:Location)
+                WHERE id(i) = $secondary_id
+                MATCH (primary:Incident)
+                WHERE id(primary) = $primary_id
+                MERGE (primary)-[:AT]->(l)
+                DELETE r
+            """, primary_id=primary_id, secondary_id=secondary_id)
+            
+            # Reassign all INVOLVED_IN relationships to the primary incident
+            session.run("""
+                MATCH (p:Person)-[r:INVOLVED_IN]->(i:Incident)
+                WHERE id(i) = $secondary_id
+                MATCH (primary:Incident)
+                WHERE id(primary) = $primary_id
+                MERGE (p)-[:INVOLVED_IN]->(primary)
+                DELETE r
+            """, primary_id=primary_id, secondary_id=secondary_id)
+            
+            # Delete the secondary incident
+            session.run("""
+                MATCH (i:Incident)
+                WHERE id(i) = $secondary_id
+                DETACH DELETE i
+            """, secondary_id=secondary_id)
+        
+        driver.close()
+        
+        return jsonify({
+            "status": "success",
+            "message": f"Successfully merged incident {secondary_id} into {primary_id}"
+        })
+        
+    except Exception as e:
+        print(f"Error in merge_incidents_endpoint: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "status": "error",
             "message": str(e)
         }), 500
 
