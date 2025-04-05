@@ -2,7 +2,7 @@ import pickle
 import re
 import json
 import pandas as pd
-import openai
+import requests
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from neo4j import GraphDatabase
@@ -12,6 +12,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from transformers import pipeline
+from openai import OpenAI
 
 app = Flask(__name__)
 CORS(app)
@@ -155,63 +156,13 @@ def load_count_model():
         le = pickle.load(f)
     return clf, vectorizer, le
 
-###############################################################################
-#           New Feature: Extract Incident Information using ChatGPT API
-###############################################################################
-def extract_incident_information_pipeline(transcript):
-    """
-    Use the OpenAI API (GPT-4) to extract incident information from a transcript.
-    The API is prompted to extract:
-      - nature: the nature of the incident,
-      - hazards: hazards present on the scene,
-      - summary: a concise summary of the incident.
-      
-    Only include values if you are confident they are accurate and relevant.
-    Returns a dictionary with the keys 'nature', 'hazards', and 'summary'.
-    """
-    # Import OpenAI client at the beginning of your file
-    from openai import OpenAI
-    
-    # Initialize the client with your API key
-    client = OpenAI(api_key="")
-    
-    system_prompt = (
-        "You are an expert incident analyzer. Extract the following information from the transcript: "
-        "1. The nature of the incident. "
-        "2. Hazards present on the scene. "
-        "3. A concise summary of the incident. "
-        "Only include values if you are confident they are accurate and relevant. "
-        "Return your answer as valid JSON with the keys 'nature', 'hazards', and 'summary'."
-    )
-    
-    user_prompt = f"Extract the incident information from the following transcript:\n\n{transcript}\n"
-    
-    try:
-        # Using the new API format
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0
-        )
-        
-        # Access the content from the new response structure
-        content = response.choices[0].message.content
-        info = json.loads(content)
-        return info
-    except Exception as e:
-        print(f"Error in ChatGPT API call: {e}")
-        # In case of an error, return empty values.
-        return {"nature": "", "hazards": "", "summary": ""}
 
 ###############################################################################
-#           New Feature: Extract Complete 911 Call Data using ChatGPT API
+#           New Feature: Extract Complete 911 Call Data using DeepSeek API
 ###############################################################################
 def extract_all_911_call_data(transcript):
     """
-    Use the OpenAI API (GPT-4) to extract complete 911 call information from a transcript,
+    Use the DeepSeek API via OpenAI client to extract complete 911 call information from a transcript,
     including all nodes in the Neo4j structure:
     - Incident details (nature, severity, hazards)
     - Person information (name, phone, role, etc.)
@@ -220,14 +171,16 @@ def extract_all_911_call_data(transcript):
     
     Returns a dictionary with structured data for all Neo4j nodes.
     """
-    from openai import OpenAI
     
-    # Initialize the client with your API key
-    client = OpenAI(api_key="Insert_key_here")
+    # Initialize the client with DeepSeek base URL and your API key
+    client = OpenAI(
+        api_key="sk-d0a34cbfde64466eb6e7c7b07f12e2c9",  # Replace with your actual DeepSeek API key
+        base_url="https://api.deepseek.com"
+    )
     
     system_prompt = """
     You are an expert emergency call analyzer. Extract the following information from the 911 call transcript.
-    Return ONLY a valid JSON object with these keys and nested objects:
+    Return ONLY a valid JSON object with these keys and nested objects WITHOUT ANY MARKDOWN FORMATTING:
     
     {
         "call": {
@@ -258,6 +211,7 @@ def extract_all_911_call_data(transcript):
         }
     }
     
+    IMPORTANT: Do not wrap your JSON in markdown code blocks (```). Return just the JSON.
     Only include values that are explicitly mentioned in the transcript. Use empty strings for unknown values.
     Include all persons mentioned in the transcript as separate objects in the 'persons' array.
     """
@@ -265,36 +219,68 @@ def extract_all_911_call_data(transcript):
     user_prompt = f"Extract all information from the following 911 call transcript:\n\n{transcript}\n"
     
     try:
-        # Using the OpenAI API
+        # Using the OpenAI client with DeepSeek API
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="deepseek-chat",  # Use the appropriate DeepSeek model
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ],
-            temperature=0
+            temperature=0,
+            stream=False
         )
         
-        # Access the content from the response
+        # Add detailed logging to debug API response
+        print(f"API Response status: {response.status_code if hasattr(response, 'status_code') else 'No status code'}")
+        print(f"API Response type: {type(response)}")
+        print(f"API Response: {response}")
+        
+        # Extract content from the response
         content = response.choices[0].message.content
+        print(f"Content to parse: {content[:100]}...")  # Log first 100 chars
+        
+        # Strip any Markdown code block formatting
+        # This will remove ```json and ``` from the content
+        cleaned_content = content
+        if content.startswith("```"):
+            # Find where the opening code block ends and where the closing code block starts
+            content_start = content.find("\n") + 1
+            content_end = content.rfind("```")
+            if content_end > content_start:
+                cleaned_content = content[content_start:content_end].strip()
+            else:
+                # If we can't find the proper end, just remove the first line
+                cleaned_content = content[content_start:].strip()
         
         # Parse the JSON response
-        call_data = json.loads(content)
-        
-        # Add the original transcript to the incident data
-        if "incident" in call_data:
-            call_data["incident"]["transcript"] = transcript
+        try:
+            call_data = json.loads(cleaned_content)
             
-        return call_data
+            # Add the original transcript to the incident data
+            if "incident" in call_data:
+                call_data["incident"]["transcript"] = transcript
+                
+            return call_data
+        except json.JSONDecodeError as json_err:
+            print(f"JSON Decode Error: {json_err}")
+            print(f"Failed JSON content: {cleaned_content}")
+            return fallback_response(transcript)
+            
     except Exception as e:
-        print(f"Error in ChatGPT API call: {e}")
+        print(f"Error in DeepSeek API call: {e}")
+        import traceback
+        traceback.print_exc()
         # In case of an error, return a minimal structure with empty values
-        return {
-            "call": {"summary": ""},
-            "incident": {"nature": "", "severity": "", "hazards": "", "transcript": transcript},
-            "persons": [{"name": "", "phone": "", "role": "", "relationship": "", "conditions": "", "age": "", "sex": ""}],
-            "location": {"address": "", "type": "", "features": "", "time": ""}
-        }
+        return fallback_response(transcript)
+
+def fallback_response(transcript):
+    """Return a fallback response structure when API call fails"""
+    return {
+        "call": {"summary": "Failed to extract information from transcript"},
+        "incident": {"nature": "", "severity": "", "hazards": "", "transcript": transcript},
+        "persons": [{"name": "", "phone": "", "role": "", "relationship": "", "conditions": "", "age": "", "sex": ""}],
+        "location": {"address": "", "type": "", "features": "", "time": ""}
+    }
 
 def preprocess_transcript(transcript):
     """
@@ -566,39 +552,6 @@ def predict():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-@app.route('/extract_incident', methods=['POST'])
-def extract_incident_endpoint():
-    try:
-        data = request.json
-        transcript = data.get("transcript", "")
-        if not isinstance(transcript, str):
-            transcript = json.dumps(transcript)
-        transcript = transcript.strip()
-        if not transcript:
-            return jsonify({"status": "error", "message": "No transcript provided."}), 400
-        
-        print("About to call extract_incident_information_pipeline function")
-        incident_info = extract_incident_information_pipeline(transcript)
-        print("Function completed successfully")
-        
-        if 'summary' in incident_info and incident_info['summary']:
-            summary = incident_info['summary']
-            summary = re.sub(r'^\{\"value\":\s*\"', '', summary) 
-            summary = re.sub(r'\"\}$', '', summary) 
-            summary = re.sub(r'\\[rn"]', ' ', summary)  
-            incident_info['summary'] = summary
-        
-        return jsonify({
-            "status": "success", 
-            "incident_info": incident_info,
-            "message": "Successfully extracted incident information"
-        })
-    except Exception as e:
-        print(f"Error in extract_incident_endpoint: {str(e)}")
-        import traceback
-        traceback.print_exc()
-        return jsonify({"status": "error", "message": str(e)}), 500
-
 # New endpoint to process complete 911 call data
 @app.route('/process_911_call', methods=['POST'])
 def process_911_call_endpoint():
@@ -626,11 +579,11 @@ def process_911_call_endpoint():
         call_data = extract_all_911_call_data(transcript)
         
         # Optionally save to Neo4j
-       # neo4j_result = None
-       # if data.get("save_to_neo4j", True):
-        #    driver = connect_to_neo4j()
-         #   neo4j_result = save_911_call_to_neo4j(call_data, driver)
-         #   driver.close()
+        neo4j_result = None
+        # if data.get("save_to_neo4j", True):
+        #     driver = connect_to_neo4j()
+        #     neo4j_result = save_911_call_to_neo4j(call_data, driver)
+        #     driver.close()
         
         # Return the extracted data and Neo4j save status
         return jsonify({

@@ -1,0 +1,16 @@
+"0003.5s 0005.1s SPEAKER_00:  BEEP BEEP BEEP BEEP BEEP
+ 0013.6s 0015.8s SPEAKER_01:  911, what's the address of your emergency?
+ 0016.3s 0019.9s SPEAKER_00:  3971 Bradford Court
+ 0020.4s 0021.9s SPEAKER_01:  Okay, is this Abington and Powell?
+ 0022.3s 0022.8s SPEAKER_00:  Yeah.
+ 0023.4s 0024.3s SPEAKER_01:  Alright, and what's your name?
+ 0025.1s 0025.5s SPEAKER_00:  Katie.
+ 0026.3s 0027.7s SPEAKER_01:  Hey, K, what's the phone number there?
+ 0028.4s 0032.7s SPEAKER_00:  614-789-9868
+ 0033.3s 0034.4s SPEAKER_01:  Okay, what's going on, Katie?
+ 0034.9s 0049.8s SPEAKER_00:  I have a male resident that we actually called you guys earlier about. He wasn't quite acting right. A squad came out, but he refused at the time and now he's not responding. He's having stroke-like symptoms.
+ 0054.6s 0056.6s SPEAKER_01:  You know how old he is, Katie? 89?
+ 0057.8s 0059.9s SPEAKER_01:  Is there room number words out there?
+ 0060.5s 0061.6s SPEAKER_00:  139.
+ 0065.1s 0066.7s SPEAKER_01:  What kind of symptoms is he having?
+ 0067.2s 0076.4s SPEAKER_00:  He's not responding, his eyes are kind of dazed off to the side. He's drooling out the left side of his mouth, and he's not responding when we talk to him."

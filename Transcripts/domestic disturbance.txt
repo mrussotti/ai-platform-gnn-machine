@@ -1,0 +1,81 @@
+"0010.0s 0012.7s SPEAKER_00:  911, what is the address of your emergency?
+ 0012.7s 0015.4s SPEAKER_01:  79 Rock Creek Drive.
+ 0016.2s 0017.6s SPEAKER_00:  79 Rock Creek.
+ 0018.3s 0018.8s SPEAKER_01:  Yes.
+ 0019.2s 0020.2s SPEAKER_00:  What's going on there?
+ 0020.6s 0037.0s SPEAKER_01:  My husband, I don't know what's going on, he was just attacking me because I have a cell phone and he thinks that all electronics is on.
+ 0021.1s 0021.5s SPEAKER_00:  Bye!
+ 0037.6s 0045.7s SPEAKER_01:  Oh my goodness. Can you separate yourself from him? I can.
+ 0041.2s 0041.5s SPEAKER_00:  Thank you.
+ 0045.7s 0048.2s SPEAKER_00:  Can you put yourself in another room and lock the door?
+ 0048.7s 0055.7s SPEAKER_01:  But I mean, now that we're in the room.
+ 0057.0s 0058.0s SPEAKER_00:  What is your name?
+ 0057.0s 0058.0s SPEAKER_00:  What is your name?
+ 0058.4s 0062.2s SPEAKER_01:  It's okay, I can't.
+ 0061.8s 0063.4s SPEAKER_00:  Okay, is there any weapons involved?
+ 0064.0s 0066.0s SPEAKER_01:  No, mom.
+ 0068.7s 0071.0s SPEAKER_00:  Anybody been using any drugs or alcohol tonight?
+ 0071.8s 0075.8s SPEAKER_01:  Yes, because I have a couple of feet here.
+ 0078.7s 0083.2s SPEAKER_01:  But she has a problem. She has a mental problem.
+ 0083.5s 0085.4s SPEAKER_00:  Okay, do you need a medic?
+ 0085.4s 0085.4s SPEAKER_01:  you
+ 0086.3s 0086.5s SPEAKER_01:  Oh, my God.
+ 0086.5s 0087.2s SPEAKER_00:  Yeah
+ 0087.2s 0087.3s SPEAKER_01:  you
+ 0087.8s 0088.4s SPEAKER_00:  Okay.
+ 0088.4s 0089.5s SPEAKER_01:  Thanks everybody.
+ 0090.1s 0091.5s SPEAKER_00:  Are you bleeding from anywhere?
+ 0090.6s 0091.1s SPEAKER_01:  and
+ 0092.5s 0101.3s SPEAKER_01:  No. No, not leaving from anywhere? OK. What's a good phone number for you? Pardon me? A good phone number for you?
+ 0093.8s 0097.2s SPEAKER_00:  What's a good phone number for you?
+ 0099.4s 0101.2s SPEAKER_00:  I got a phone number for you.
+ 0102.1s 0103.5s SPEAKER_01:  Bring it in on to!
+ 0106.1s 0106.9s SPEAKER_01:  Please.
+ 0107.7s 0109.7s SPEAKER_01:  Let me see. Stop the piss.
+ 0111.0s 0111.1s SPEAKER_01:  you
+ 0111.1s 0112.9s SPEAKER_00:  Miss, what's a good phone number for us?
+ 0112.2s 0113.8s SPEAKER_01:  All right, no, it's still horrible.
+ 0114.5s 0124.2s SPEAKER_01:  mentorship.
+ 0124.9s 0126.9s SPEAKER_00:  Miss, what's a good phone number for you?
+ 0126.0s 0128.0s SPEAKER_01:  for you.
+ 0128.3s 0130.0s SPEAKER_00:  A good phone number for you.
+ 0130.9s 0136.8s SPEAKER_01:  What is your
+ 0136.0s 0138.0s SPEAKER_00:  What is your phone number?
+ 0138.3s 0140.3s SPEAKER_01:  That's what I hate to talk about.
+ 0141.0s 0143.1s SPEAKER_00:  Can you get away from him and go to a different room?
+ 0144.3s 0148.6s SPEAKER_01:  Well, we have only kitchen and room not for people.
+ 0144.3s 0144.4s SPEAKER_00:  We'll see you next time.
+ 0149.4s 0150.5s SPEAKER_01:  It is.
+ 0151.4s 0152.5s SPEAKER_01:  Thank you.
+ 0154.9s 0155.5s SPEAKER_01:  Okay.
+ 0156.9s 0158.1s SPEAKER_00:  What's your phone number?
+ 0158.1s 0158.1s SPEAKER_01:  you
+ 0159.1s 0163.3s SPEAKER_01:  937-407-9095.
+ 0163.3s 0164.7s SPEAKER_00:  Okay, and what was your name?
+ 0165.5s 0166.7s SPEAKER_01:  She said I can't.
+ 0167.5s 0168.1s SPEAKER_00:  OK.
+ 0167.5s 0168.1s SPEAKER_00:  OK.
+ 0169.6s 0171.1s SPEAKER_00:  And you said you do need a medic?
+ 0172.2s 0182.6s SPEAKER_01:  Yes, we need the magnet, they can have the safety to the hospital. He was in the hospital and they said that he has a brain that we could be healed.
+ 0177.8s 0178.7s SPEAKER_00:  OK.
+ 0183.4s 0186.5s SPEAKER_01:  You know, I'm talking to you, man.
+ 0184.3s 0184.9s SPEAKER_00:  Okay, bye!
+ 0186.5s 0188.0s SPEAKER_00:  Are you injured at all?
+ 0188.7s 0191.7s SPEAKER_01:  I don't know because he was...
+ 0193.2s 0200.0s SPEAKER_01:  He was, you know, missing my arm and, you know, missing me.
+ 0201.0s 0206.3s SPEAKER_01:  Just because I have a cell phone, that's so... Oh, what is he doing?
+ 0201.0s 0206.3s SPEAKER_01:  Just because I have a cell phone, that's so... Oh, what is he doing?
+ 0210.3s 0212.1s SPEAKER_00:  Are there any weapons in the house at all?
+ 0212.8s 0213.5s SPEAKER_01:  No.
+ 0213.5s 0213.9s SPEAKER_00:  Okay.
+ 0221.4s 0223.6s SPEAKER_00:  And that was 79 Rock Creek, correct?
+ 0223.6s 0225.0s SPEAKER_01:  Yes, yes.
+ 0224.4s 0225.1s SPEAKER_00:  Yeah.
+ 0226.1s 0231.0s SPEAKER_00:  We got lots of help coming your way. Are you, do you have yourself locked in another room away from him?
+ 0232.1s 0240.0s SPEAKER_01:  Well, we don't have a lock for now because this is a senior apartment, you know, in Kingston.
+ 0248.7s 0252.7s SPEAKER_00:  I have an officer marking an area, so I'm going to stay on the phone until he comes in, okay?
+ 0253.3s 0254.0s SPEAKER_01:  Okay.
+ 0258.6s 0260.9s SPEAKER_00:  You should be with you here in just a couple minutes.
+ 0261.8s 0262.2s SPEAKER_01:  Okay.
+ 0261.8s 0262.1s SPEAKER_00:  Okay.
+ 0261.8s 0262.1s SPEAKER_00:  Okay."

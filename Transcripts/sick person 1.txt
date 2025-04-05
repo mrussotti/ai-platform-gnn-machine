@@ -1,0 +1,39 @@
+"0011.3s 0013.5s SPEAKER_00:  911, what's the address of your emergency?
+ 0014.2s 0016.1s SPEAKER_01:  317 Chelsea.
+ 0016.9s 0021.5s SPEAKER_01:  Street, apartment A, London town apartment.
+ 0022.2s 0023.4s SPEAKER_00:  Okay, and what's your name?
+ 0022.2s 0023.4s SPEAKER_00:  Okay, and what's your name?
+ 0024.0s 0027.0s SPEAKER_00:  James Clegg. James, what's the phone number you called from?
+ 0027.7s 0053.8s SPEAKER_01:  at 740-693-395-10. Okay, what's going on there James? Yeah, I was trying to get a, it's an emergency, but I need a, well, her dad had heart issues and everything, and he started puking blood up. So he's puking blood, he was puking blood up real bad, and he's really weak. So I didn't know maybe if they could send a squad out and check him and then you go from there if they need to take him or not.
+ 0031.1s 0032.2s SPEAKER_00:  What's going on there James?
+ 0054.1s 0056.3s SPEAKER_00:  Yeah, James, I see right there with you guys.
+ 0056.7s 0059.5s SPEAKER_01:  He's upstairs laying, he went but he's laying in the bed.
+ 0059.7s 0062.5s SPEAKER_00:  Okay, but he was awake and alert for you before he called.
+ 0062.5s 0062.6s SPEAKER_01:  Thank you.
+ 0063.3s 0063.3s SPEAKER_00:  you
+ 0063.3s 0072.9s SPEAKER_01:  Yeah, he's still awake and alert. He's just feeling... He's picking up blood real bad. Okay. How old is he, James? He's... How old is he, Dan?
+ 0063.3s 0072.9s SPEAKER_01:  Yeah, he's still awake and alert. He's just feeling... He's picking up blood real bad. Okay. How old is he, James? He's... How old is he, Dan?
+ 0074.1s 0075.0s SPEAKER_01:  61
+ 0075.3s 0076.0s SPEAKER_00:  61.
+ 0078.9s 0079.4s SPEAKER_01:  Hold on.
+ 0080.4s 0082.0s SPEAKER_01:  62.
+ 0082.0s 0091.4s SPEAKER_00:  Yes, correct. Okay, James. My partner is going to go ahead and start the medics there for you guys. Any COVID symptoms in the household there at all, James?
+ 0091.4s 0100.5s SPEAKER_01:  No, no, nobody's had no COVID, nobody's coughing fever. No, I know him now. He's got, by the main concerns, he's got like...
+ 0101.2s 0109.0s SPEAKER_01:  Two stents in his heart and he's had like heart problems and stuff. So I said I don't know what's causing it, but I think it needs to be two stents.
+ 0109.0s 0114.3s SPEAKER_00:  Yeah, I mean he wasn't having any trouble breathing temperature nothing like that for you guys
+ 0113.6s 0125.7s SPEAKER_01:  He ain't got no temperature, no temperature. He had no problems breathing. He's not having no headaches. He's just, he's peaking blood and... Right.
+ 0125.7s 0126.0s SPEAKER_00:  But.
+ 0126.7s 0128.8s SPEAKER_01:  He feels really drained.
+ 0128.8s 0129.3s SPEAKER_00:  Okay.
+ 0131.3s 0136.2s SPEAKER_01:  And he's the bathroom one. It's bad. I don't know if I'll tell you that now.
+ 0137.1s 0137.5s SPEAKER_01:  Okay.
+ 0137.5s 0140.4s SPEAKER_00:  Well James, the medic's just marking route there to you guys.
+ 0141.5s 0142.0s SPEAKER_00:  Um...
+ 0143.1s 0144.8s SPEAKER_00:  Is your friend Dornlok Form James?
+ 0145.2s 0149.5s SPEAKER_01:  Yes, we're here, but yes, it's unlocked.
+ 0149.5s 0155.4s SPEAKER_00:  Okay, like I said, they did just mark him out there to you. Just have him rest in a comfortable position for him, okay?
+ 0155.9s 0156.3s SPEAKER_01:  Yeah.
+ 0156.3s 0159.5s SPEAKER_00:  I wouldn't give you anything to eat or drink right now until the medics get there.
+ 0160.0s 0160.6s SPEAKER_01:  Okay.
+ 0160.6s 0164.6s SPEAKER_00:  And if he would get worse or something changes before they get there, just call me back, okay?
+ 0164.9s 0168.0s SPEAKER_01:  Yes, thank you very much. You're welcome James. No, bye."

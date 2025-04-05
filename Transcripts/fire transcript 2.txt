@@ -1,0 +1,16 @@
+"0009.8s 0012.7s SPEAKER_00:  911, where is your emergency?
+0013.2s 0017.4s SPEAKER_01:  11050 Fancure Road, near lot 257 by the community pool.
+0018.0s 0020.5s SPEAKER_00:  What's happening there exactly?
+0020.9s 0025.1s SPEAKER_01:  There's a shed fire behind lot 257, lots of smoke coming from it.
+0026.3s 0028.9s SPEAKER_00:  Anyone inside or near the shed?
+0029.4s 0032.0s SPEAKER_01:  No, but some nearby pool furniture started melting.
+0032.8s 0035.7s SPEAKER_00:  Do you see actual flames?
+0036.4s 0040.0s SPEAKER_01:  Not anymore, someone used a garden hose to put out the flames, just smoke now.
+0041.2s 0043.5s SPEAKER_00:  What's your name, please?
+0044.0s 0045.4s SPEAKER_01:  Mark.
+0046.1s 0049.3s SPEAKER_00:  Mark, your phone number?
+0050.0s 0054.4s SPEAKER_01:  614-589-1123.
+0055.2s 0058.7s SPEAKER_00:  Are there hazardous materials involved?
+0059.3s 0063.5s SPEAKER_01:  Hold on, my neighbor Sarah is here. She says it's just lawn equipment in the shed.
+0064.2s 0067.8s SPEAKER_00:  Okay, fire department is dispatched. Stay clear.
+0068.4s 0069.2s SPEAKER_01:  Thanks."
