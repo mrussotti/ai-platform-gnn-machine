@@ -1,0 +1,34 @@
+"0012.5s 0014.7s SPEAKER_01:  911, what's the address of your emergency?
+ 0015.6s 0019.3s SPEAKER_00:  Hi, we're located, I forgot the address here, what's that?
+ 0020.6s 0023.9s SPEAKER_00:  3971 Bradford Court.
+ 0024.5s 0026.3s SPEAKER_01:  Okay, and this is the Abington about.
+ 0026.6s 0031.4s SPEAKER_00:  It is, and we are smelling something burning and we're seeing smoke.
+ 0033.1s 0034.3s SPEAKER_01:  Okay, is he smoked?
+ 0034.6s 0035.0s SPEAKER_00:  Yes.
+ 0035.3s 0047.0s SPEAKER_01:  Okay, well I'll just advise you, we can start the Fire Department that way. If you guys have any evacuation procedures, just use the Metro on policy or discretion. In the meantime, can I get your name?
+ 0047.4s 0048.3s SPEAKER_00:  My name is Julie.
+ 0049.1s 0051.8s SPEAKER_01:  And Julie, what was your phone number in case we get disconnected?
+ 0053.2s 0053.7s SPEAKER_00:  Um...
+ 0054.5s 0057.1s SPEAKER_00:  I don't have the number right off.
+ 0057.3s 0059.0s SPEAKER_01:  yourself on the road work as well.
+ 0059.0s 0063.2s SPEAKER_00:  Okay, 614-999-0140.
+ 0066.4s 0072.9s SPEAKER_01:  And while we're getting the fire department started that way, if you could just answer some questions for me. Where do you see the smoke coming from?
+ 0073.6s 0078.3s SPEAKER_00:  So it's in between the dining room and the activity room, the hallway.
+ 0079.4s 0080.7s SPEAKER_01:  in the dining room.
+ 0081.6s 0082.5s SPEAKER_01:  and activity room.
+ 0083.0s 0083.4s SPEAKER_00:  Yeah.
+ 0085.7s 0092.7s SPEAKER_00:  And it smells like burning plastic is what it smells like, but we don't see it anywhere else other than the hallway.
+ 0093.1s 0094.2s SPEAKER_01:  Have you seen any plane?
+ 0094.9s 0097.1s SPEAKER_00:  No, no flames yet, as of yet.
+ 0097.4s 0098.5s SPEAKER_01:  What color is the smoke?
+ 0099.0s 0102.1s SPEAKER_00:  The smoke would be white, white smoke.
+ 0102.9s 0103.4s SPEAKER_00:  And how many?
+ 0103.4s 0104.5s SPEAKER_01:  How many floors are there?
+ 0105.1s 0105.9s SPEAKER_00:  We're only one.
+ 0106.1s 0106.7s SPEAKER_01:  One floor.
+ 0107.0s 0107.2s SPEAKER_00:  Yes.
+ 0107.7s 0108.2s SPEAKER_01:  Okay.
+ 0109.7s 0112.5s SPEAKER_01:  and there are people in the building, so I'm assuming.
+ 0111.9s 0113.7s SPEAKER_00:  There are people in the building, yes.
+ 0115.6s 0116.4s SPEAKER_00:  We had dinner.
+ 0115.6s 0118.4s SPEAKER_01:  We have to do now."
