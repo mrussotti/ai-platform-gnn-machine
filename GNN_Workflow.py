@@ -604,5 +604,121 @@ def process_911_call_endpoint():
             "message": str(e)
         }), 500
 
+@app.route('/process_all_transcripts', methods=['POST'])
+def process_all_transcripts():
+    try:
+        # Get parameters from request
+        data = request.json
+        file_name = data.get("file_name", "911_dataset3.csv")
+        batch_size = data.get("batch_size", 100)  # Process in batches to avoid memory issues
+        save_to_neo4j = data.get("save_to_neo4j", False)
+        
+        # Check if file exists
+        import os
+        if not os.path.exists(file_name):
+            return jsonify({
+                "status": "error",
+                "message": f"File {file_name} not found in the current directory."
+            }), 404
+        
+        # Read the CSV file
+        try:
+            df = pd.read_csv(file_name)
+            print(f"CSV loaded successfully. Shape: {df.shape}")
+            print(f"Columns: {df.columns.tolist()}")
+            
+            # Check if the TEXT column exists
+            if "TEXT" not in df.columns:
+                return jsonify({
+                    "status": "error",
+                    "message": f"Column 'TEXT' not found in the file. Available columns: {df.columns.tolist()}"
+                }), 400
+            
+            # Filter out empty transcripts
+            df = df[df["TEXT"].notna() & (df["TEXT"].str.strip() != "")]
+            total_transcripts = len(df)
+            print(f"Found {total_transcripts} non-empty transcripts")
+            
+            # Process all transcripts in batches
+            results = []
+            errors = []
+            total_batches = (total_transcripts + batch_size - 1) // batch_size
+            
+            for batch_num in range(total_batches):
+                start_idx = batch_num * batch_size
+                end_idx = min(start_idx + batch_size, total_transcripts)
+                print(f"Processing batch {batch_num + 1}/{total_batches} (records {start_idx} to {end_idx})")
+                
+                batch_df = df.iloc[start_idx:end_idx]
+                
+                for idx, row in batch_df.iterrows():
+                    transcript = row["TEXT"]
+                    try:
+                        # Get additional metadata if available
+                        metadata = {col: row[col] for col in df.columns if col != "TEXT"}
+                        
+                        # Process transcript
+                        call_data = extract_all_911_call_data(transcript)
+                        
+                        # Add row index and metadata
+                        call_data["row_index"] = idx
+                        call_data["metadata"] = metadata
+                        
+                        # Save to Neo4j if requested
+                        if save_to_neo4j:
+                            driver = connect_to_neo4j()
+                            neo4j_result = save_911_call_to_neo4j(call_data, driver)
+                            call_data["neo4j_result"] = neo4j_result
+                            driver.close()
+                            
+                        results.append(call_data)
+                        
+                    except Exception as e:
+                        print(f"Error processing transcript at index {idx}: {str(e)}")
+                        errors.append({
+                            "index": idx,
+                            "error": str(e),
+                            "transcript_preview": transcript[:100] + "..." if len(transcript) > 100 else transcript
+                        })
+                
+                print(f"Completed batch {batch_num + 1}/{total_batches}")
+                
+            # Save results to JSON file for future reference
+            output_file = f"processed_911_calls_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}.json"
+            with open(output_file, "w") as f:
+                json.dump({
+                    "total_transcripts": total_transcripts,
+                    "processed_successfully": len(results),
+                    "errors": len(errors),
+                    "results": results,
+                    "error_details": errors
+                }, f, indent=2)
+                
+            return jsonify({
+                "status": "success",
+                "message": f"Successfully processed {len(results)} out of {total_transcripts} transcripts.",
+                "output_file": output_file,
+                "error_count": len(errors),
+                "sample_results": results[:5] if results else []  # Return first 5 results as a sample
+            })
+            
+        except Exception as e:
+            print(f"Error reading or processing CSV: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return jsonify({
+                "status": "error", 
+                "message": f"Error reading or processing CSV: {str(e)}"
+            }), 500
+            
+    except Exception as e:
+        print(f"Unexpected error in process_all_transcripts: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "status": "error", 
+            "message": f"Unexpected error: {str(e)}"
+        }), 500
+
 if __name__ == "__main__":
     app.run(debug=True)
