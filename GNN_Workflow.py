@@ -610,8 +610,11 @@ def process_all_transcripts():
         # Get parameters from request
         data = request.json
         file_name = data.get("file_name", "911_dataset3.csv")
-        batch_size = data.get("batch_size", 100)  # Process in batches to avoid memory issues
         save_to_neo4j = data.get("save_to_neo4j", False)
+        
+        # TEMPORARY TEST MODE - Only process first 3 records
+        test_mode = True
+        num_test_records = 3
         
         # Check if file exists
         import os
@@ -621,11 +624,27 @@ def process_all_transcripts():
                 "message": f"File {file_name} not found in the current directory."
             }), 404
         
-        # Read the CSV file
+                    # Read the CSV file
         try:
-            df = pd.read_csv(file_name)
-            print(f"CSV loaded successfully. Shape: {df.shape}")
-            print(f"Columns: {df.columns.tolist()}")
+            # Try different encodings since UTF-8 failed
+            encodings_to_try = ['latin1', 'cp1252', 'iso-8859-1']
+            df = None
+            
+            for encoding in encodings_to_try:
+                try:
+                    print(f"Attempting to read CSV with {encoding} encoding...")
+                    df = pd.read_csv(file_name, encoding=encoding)
+                    print(f"CSV loaded successfully with {encoding} encoding. Shape: {df.shape}")
+                    print(f"Columns: {df.columns.tolist()}")
+                    break
+                except Exception as enc_error:
+                    print(f"Failed with {encoding} encoding: {str(enc_error)}")
+            
+            if df is None:
+                return jsonify({
+                    "status": "error",
+                    "message": f"Failed to read CSV file with any of the attempted encodings: {encodings_to_try}"
+                }), 500
             
             # Check if the TEXT column exists
             if "TEXT" not in df.columns:
@@ -639,17 +658,20 @@ def process_all_transcripts():
             total_transcripts = len(df)
             print(f"Found {total_transcripts} non-empty transcripts")
             
-            # Process all transcripts in batches
+            # TEMPORARY: Limit to first 3 records for testing
+            if test_mode:
+                print(f"TEST MODE: Processing only first {num_test_records} records.")
+                df = df.head(num_test_records)
+                total_transcripts = len(df)
+            
+            # For test mode, process all records at once
+            # Otherwise process in batches
             results = []
             errors = []
-            total_batches = (total_transcripts + batch_size - 1) // batch_size
             
-            for batch_num in range(total_batches):
-                start_idx = batch_num * batch_size
-                end_idx = min(start_idx + batch_size, total_transcripts)
-                print(f"Processing batch {batch_num + 1}/{total_batches} (records {start_idx} to {end_idx})")
-                
-                batch_df = df.iloc[start_idx:end_idx]
+            if test_mode:
+                print(f"Processing {num_test_records} test records...")
+                batch_df = df
                 
                 for idx, row in batch_df.iterrows():
                     transcript = row["TEXT"]
@@ -681,7 +703,7 @@ def process_all_transcripts():
                             "transcript_preview": transcript[:100] + "..." if len(transcript) > 100 else transcript
                         })
                 
-                print(f"Completed batch {batch_num + 1}/{total_batches}")
+                print("Completed processing test records")
                 
             # Save results to JSON file for future reference
             output_file = f"processed_911_calls_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}.json"
@@ -693,14 +715,30 @@ def process_all_transcripts():
                     "results": results,
                     "error_details": errors
                 }, f, indent=2)
-                
-            return jsonify({
-                "status": "success",
-                "message": f"Successfully processed {len(results)} out of {total_transcripts} transcripts.",
-                "output_file": output_file,
-                "error_count": len(errors),
-                "sample_results": results[:5] if results else []  # Return first 5 results as a sample
-            })
+            
+            # For test mode, return all results
+            if test_mode:
+                return jsonify({
+                    "status": "success",
+                    "message": f"TEST MODE: Successfully processed {len(results)} out of {total_transcripts} test records.",
+                    "output_file": output_file,
+                    "error_count": len(errors),
+                    "test_results": results,  # Return all test results
+                    "debug_info": {
+                        "columns": df.columns.tolist(),
+                        "first_few_transcript_previews": [
+                            str(df.iloc[i]["TEXT"])[:200] + "..." for i in range(min(3, len(df)))
+                        ]
+                    }
+                })
+            else:
+                return jsonify({
+                    "status": "success",
+                    "message": f"Successfully processed {len(results)} out of {total_transcripts} transcripts.",
+                    "output_file": output_file,
+                    "error_count": len(errors),
+                    "sample_results": results[:5] if results else []  # Return first 5 results as a sample
+                })
             
         except Exception as e:
             print(f"Error reading or processing CSV: {str(e)}")

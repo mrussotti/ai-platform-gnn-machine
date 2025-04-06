@@ -1,0 +1,7 @@
+$jsonBody = @{ 
+    file_name = "911_dataset3.csv"
+    save_to_neo4j = $false
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_all_transcripts" -Method POST -Body $jsonBody -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
