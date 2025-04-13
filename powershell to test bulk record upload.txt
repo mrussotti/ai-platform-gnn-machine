@@ -1,0 +1,30 @@
+$jsonBody = @{ 
+    file_name = "Cleaned_911_Transcripts.csv"
+    batch_size = 20
+    save_to_neo4j = $false
+    limit_records = $false  # Set to $true if you want to limit records
+    max_records = 50        # Only used if limit_records is $true
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_all_transcripts" -Method POST -Body $jsonBody -ContentType "application/json"
+$response | ConvertTo-Json -Depth 5
+
+
+
+
+
+
+
+
+
+
+$jsonBody = @{ 
+    file_name = "Cleaned_911_Transcripts.csv"
+    batch_size = 10
+    save_to_neo4j = $false
+    limit_records = $true
+    max_records = 2
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/process_all_transcripts" -Method POST -Body $jsonBody -ContentType "application/json"
+$response | ConvertTo-Json -Depth 5
