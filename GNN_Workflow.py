@@ -24,8 +24,15 @@ def connect_to_neo4j():
     uri = "neo4j+s://4a946ffe.databases.neo4j.io"
     username = "neo4j"
     password = "k-njZdN37CLEDE3p-g7YolnA78v2OiTGt6H2iILUH9o"
+    
+    # Create driver without the encrypted parameter for secure protocols
     driver = GraphDatabase.driver(uri, auth=(username, password))
+
+    with GraphDatabase.driver(uri, auth=(username, password)) as driver:
+        driver.verify_connectivity()
+
     return driver
+
 
 def _get_incident_transcripts(tx):
     query = "MATCH (i:Incident)-[:CONTAINS]->(t:Transcript) RETURN i.nature AS nature, t.TEXT AS transcript"
@@ -817,88 +824,52 @@ def process_all_transcripts():
             "message": f"Unexpected error: {str(e)}"
         }), 500
 
-@app.route('/test_all_neo4j_connections', methods=['GET'])
-def test_all_neo4j_connections():
+@app.route('/test_neo4j_connection', methods=['GET'])
+def test_neo4j_connection():
     """
-    Test multiple Neo4j connection methods to determine which works.
+    Test the Neo4j connection using the connect_to_neo4j function.
     """
-    results = {}
-    
-    # Try connection methods with different protocols
-    connection_methods = [
-        {
-            "name": "bolt",
-            "uri": "bolt://4a946ffe.databases.neo4j.io:7687",
-            "encrypted": True
-        },
-        {
-            "name": "bolt+s",
-            "uri": "bolt+s://4a946ffe.databases.neo4j.io:7687",
-            "encrypted": True
-        },
-        {
-            "name": "neo4j",
-            "uri": "neo4j://4a946ffe.databases.neo4j.io:7687",
-            "encrypted": True
-        },
-        {
-            "name": "neo4j+s",
-            "uri": "neo4j+s://4a946ffe.databases.neo4j.io",
-            "encrypted": True
-        }
-    ]
-    
-    username = "neo4j"
-    password = "k-njZdN37CLEDE3p-g7YolnA78v2OiTGt6H2iILUH9o"
-    
-    from neo4j import GraphDatabase
-    
-    for method in connection_methods:
-        try:
-            print(f"Trying connection with {method['name']} protocol: {method['uri']}")
-            
-            # Connection configuration
-            config = {
-                "max_connection_lifetime": 3600,
-                "max_connection_pool_size": 50,
-                "connection_acquisition_timeout": 60,
-                "max_transaction_retry_time": 30,
-                "encrypted": method["encrypted"]
+    try:
+        print("Attempting to connect to Neo4j...")
+        
+        # Try to establish a connection using the existing function
+        driver = connect_to_neo4j()
+        
+        # Test a simple query to validate the connection
+        with driver.session() as session:
+            result = session.run("RETURN 'Connection successful' AS message").single()
+            message = result["message"] if result else "Query executed but no result returned"
+        
+        # Close the driver
+        driver.close()
+        
+        print(f"SUCCESS: {message}")
+        
+        return jsonify({
+            "status": "success",
+            "message": message,
+            "connection_details": {
+                "uri": "neo4j+s://4a946ffe.databases.neo4j.io",
+                "username": "neo4j",
+                # Password is masked for security
+                "password": "********"
             }
-            
-            # Create driver with configuration
-            driver = GraphDatabase.driver(method["uri"], auth=(username, password), **config)
-            
-            # Test simple query
-            with driver.session() as session:
-                result = session.run("RETURN 'Connection successful' AS message").single()
-                message = result["message"] if result else "Query executed but no result returned"
-            
-            driver.close()
-            
-            results[method["name"]] = {
-                "status": "success",
-                "message": message
+        })
+        
+    except Exception as e:
+        print(f"ERROR: {str(e)}")
+        
+        return jsonify({
+            "status": "error",
+            "message": str(e),
+            "recommendation": "Please ensure the Neo4j credentials are correct and that the database is accessible from your environment",
+            "connection_details": {
+                "uri": "neo4j+s://4a946ffe.databases.neo4j.io",
+                "username": "neo4j",
+                # Password is masked for security
+                "password": "********"
             }
-            
-            print(f"SUCCESS with {method['name']} protocol!")
-            
-        except Exception as e:
-            print(f"ERROR with {method['name']} protocol: {str(e)}")
-            results[method["name"]] = {
-                "status": "error",
-                "message": str(e)
-            }
-    
-    # Determine if any connection was successful
-    success = any(r["status"] == "success" for r in results.values())
-    
-    return jsonify({
-        "status": "success" if success else "error",
-        "message": "At least one connection method was successful" if success else "All connection methods failed",
-        "results": results,
-        "recommendation": "Use the first successful connection method in your code"
-    })
-
+        }), 500
+        
 if __name__ == "__main__":
     app.run(debug=True)
