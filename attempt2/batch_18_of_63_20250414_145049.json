@@ -1,0 +1,1292 @@
+{
+  "batch": 18,
+  "total_batches": 63,
+  "batch_size": 20,
+  "processed_successfully": 20,
+  "batch_errors": 0,
+  "results": [
+    {
+      "incident": {
+        "summary": "An employee at Holland Supply Company is experiencing chest tightness and pain, possibly a heart-related issue.",
+        "timestamp": "",
+        "transcript": "0008.7s 0009.3s SPEAKER_00:  and\n 0008.7s 0009.3s SPEAKER_00:  and\n 0012.1s 0014.9s SPEAKER_01:  911, what is the address of your emergency?\n 0015.5s 0020.8s SPEAKER_00:  8225 Green Meadows Drive, north, Lewis Center, 43035.\n 0023.2s 0023.4s SPEAKER_00:  Yes.\n 0026.2s 0030.2s SPEAKER_00:  One of our employees has some chest tightness and some pain in his chest.\n 0030.6s 0032.4s SPEAKER_01:  No, no, no, no, what's the name of the business?\n 0032.6s 0034.2s SPEAKER_00:  Oh, Holland Supply Company.\n 0034.2s 0035.3s SPEAKER_01:  Thank you.\n 0036.2s 0039.1s SPEAKER_01:  Okay, what's the phone number that you're calling from?\n 0039.8s 0043.8s SPEAKER_00:  This is my cell number. It's 706-761-5644.\n 0044.5s 0045.3s SPEAKER_01:  OK, in your name.\n 0046.5s 0047.2s SPEAKER_00:  Danny Fields.\n 0051.2s 0055.5s SPEAKER_01:  Okay, and I just want to verify the address with you. Did you say that it was 8211?\n 0056.2s 0058.9s SPEAKER_00:  A225, Green Meadows Drive North.\n 0061.6s 0064.6s SPEAKER_01:  Okay. And where should they go exactly in the building?\n 0065.6s 0069.3s SPEAKER_00:  uh... to the front door uh... will meet them at the front door\n 0071.6s 0073.5s SPEAKER_01:  Is the patient conscious in breathing?\n 0074.1s 0074.4s SPEAKER_00:  Yeah.\n 0075.3s 0076.4s SPEAKER_01:  And do you have an age?\n 0077.8s 0078.1s SPEAKER_01:  Uh...\n 0077.9s 0078.5s SPEAKER_00:  Umm...\n 0079.8s 0081.6s SPEAKER_00:  our young low 60s.\n 0085.0s 0086.1s SPEAKER_01:  as in a male or a female.\n 0086.7s 0087.0s SPEAKER_00:  Nail.\n 0087.7s 0089.7s SPEAKER_01:  Okay, do you know if he's had any COVID symptoms?\n 0090.6s 0090.8s SPEAKER_00:  No.\n 0092.2s 0094.7s SPEAKER_01:  They started having some chest pain today.\n 0095.4s 0095.6s SPEAKER_00:  Yep.\n 0096.9s 0100.1s SPEAKER_01:  All right. Is he right there where you can speak to him?\n 0100.6s 0100.9s SPEAKER_00:  Yeah.\n 0101.3s 0104.0s SPEAKER_01:  Okay, can you ask him if he has a history of heart problems?\n 0105.0s 0105.7s SPEAKER_00:  Yeah, one second.\n 0105.0s 0105.7s SPEAKER_00:  Yeah, one second.\n 0107.9s 0111.0s SPEAKER_00:  Have you ever had any heart issues?\n 0111.8s 0114.9s SPEAKER_00:  I have a real slow heartbeat. He has a slow heartbeat.\n 0116.1s 0117.0s SPEAKER_01:  Oh, OK.\n 0119.3s 0127.6s SPEAKER_01:  All right, I actually do have some other questions, if you don't mind, but the medics have already been dispatched. Okay. Where is chest, it is pain located?\n 0129.7s 0131.6s SPEAKER_00:  in the middle of his chest.\n 0132.6s 0133.5s SPEAKER_00:  and his jaw.\n 0135.5s 0138.3s SPEAKER_01:  Did it come on sudden or gradual?\n 0139.9s 0140.8s SPEAKER_01:  Okay.\n 0141.0s 0142.1s SPEAKER_00:  Pretty sudden.\n 0142.8s 0144.6s SPEAKER_01:  Alright, and how long ago did it start?\n 0147.0s 0147.9s SPEAKER_00:  How long did it start?\n 0149.6s 0152.2s SPEAKER_00:  Bye. About five to seven minutes ago.\n 0154.8s 0156.0s SPEAKER_01:  Is he unpaid anywhere else?\n 0156.4s 0158.9s SPEAKER_00:  Do you have any painting around?\n 0160.5s 0160.7s SPEAKER_00:  No.\n 0161.4s 0162.0s SPEAKER_00:  on your own.\n 0162.9s 0164.1s SPEAKER_00:  Thank you because we have as soon\n 0165.6s 0167.5s SPEAKER_00:  His hands are tingling, but there's no pain.\n 0167.8s 0170.2s SPEAKER_01:  Okay, is this pain change if you breathe or move?\n 0171.1s 0173.5s SPEAKER_00:  of it should the paint change it be great about.\n 0174.2s 0174.2s SPEAKER_00:  you\n 0174.9s 0175.1s SPEAKER_00:  No.\n 0175.7s 0176.6s SPEAKER_01:  Is he short of breath?\n 0178.5s 0178.9s SPEAKER_00:  a little.\n 0179.6s 0181.7s SPEAKER_01:  Is he nauseated or vomiting?\n 0183.3s 0185.3s SPEAKER_00:  He's a little nauseous, but not vomiting.\n 0185.6s 0187.2s SPEAKER_01:  Okay, is he sweating profusely?\n 0187.9s 0189.5s SPEAKER_00:  No, it feels cold.\n 0189.8s 0196.4s SPEAKER_01:  Okay, I know you said that he told you he had a slow heartbeat. Is he experiencing a rapid heart rate right now?\n 0197.9s 0199.6s SPEAKER_00:  He's right behind you\n 0200.5s 0203.7s SPEAKER_00:  I don't think so. I've got somebody checking their polls right now.\n 0204.1s 0206.3s SPEAKER_01:  Is he prescribed aspirin or nitroglycerin?\n 0207.0s 0207.3s SPEAKER_01:  Yeah.\n 0207.4s 0207.7s SPEAKER_00:  No.\n 0208.3s 0209.4s SPEAKER_01:  Okay.\n 0209.6s 0210.8s SPEAKER_00:  He's on no medications.\n 0211.1s 0214.4s SPEAKER_01:  Okay. Has he recently came into contact with any illicit drugs?\n 0215.4s 0215.7s SPEAKER_01:  out.\n 0215.7s 0216.1s SPEAKER_00:  No.\n 0217.0s 0219.0s SPEAKER_01:  Okay, is he having back pain right now?\n 0219.7s 0220.4s SPEAKER_00:  be back.\n 0224.7s 0225.2s SPEAKER_00:  No.\n 0227.7s 0228.1s SPEAKER_01:  Um.\n 0229.7s 0233.6s SPEAKER_01:  What about any prescription medications like Biagra or C.\n 0234.2s 0234.4s SPEAKER_01:  now.\n 0234.8s 0235.2s SPEAKER_00:  No.\n 0235.9s 0236.5s SPEAKER_01:  medication.\n 0236.5s 0237.6s SPEAKER_00:  No medications at all.\n 0237.9s 0239.3s SPEAKER_01:  I understand, I just have to ask.\n 0240.1s 0242.0s SPEAKER_01:  You guys already have him laying down.\n 0242.6s 0242.9s SPEAKER_00:  Yeah.\n 0243.3s 0247.3s SPEAKER_01:  Okay, if he has on any tight clothing, go ahead and have him loose in that.\n 0247.8s 0248.7s SPEAKER_00:  Yep, we've done that.\n 0249.0s 0250.3s SPEAKER_01:  OK.\n 0251.3s 0259.0s SPEAKER_01:  If anything changes or worse, let's have a look at the static skid barrel and please give us a call back. Okay. Does anyone there have any aspirin available?\n 0260.5s 0263.1s SPEAKER_00:  I may have some\n 0263.8s 0266.3s SPEAKER_00:  to call on all of the other things and see the medical.\n 0267.5s 0268.7s SPEAKER_01:  But no, after no.\n 0269.9s 0272.8s SPEAKER_00:  I don't think we've got any after.\n 0273.0s 0281.0s SPEAKER_01:  That's fine. I'll just make a note of that for the medics. In the meantime, if he's not diabetic, just don't give them anything to eat or drink, and they are en route to you guys, okay?\n 0281.6s 0282.7s SPEAKER_00:  You have an ETA?\n 0283.2s 0290.4s SPEAKER_01:  They're just coming from Orange Township, Station 361, if you know where that's at. So just drive time and they've already been around too while we've been on the phone.\n 0290.8s 0293.6s SPEAKER_00:  Okay, should this be a couple minutes? No, you can drink anything.\n 0296.0s 0299.3s SPEAKER_00:  Okay, this is my number, my cell number. You need to get ahold of me.\n 0299.4s 0300.5s SPEAKER_01:  Okay, perfect. Thank you.\n 0301.1s 0301.6s SPEAKER_00:  All right, thanks.\n 0302.0s 0302.5s SPEAKER_01:  Bye.\n 0303.2s 0303.5s SPEAKER_01:  Bye.\n 0303.4s 0303.4s SPEAKER_00:  you",
+        "nature": "Chest pain and tightness, possible heart issue",
+        "severity": "Potentially life-threatening",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports an employee at Holland Supply Company is experiencing chest pain and tightness, possibly a heart issue.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Danny Fields",
+          "phone": "706-761-5644",
+          "role": "Caller",
+          "relationship": "Employee at Holland Supply Company",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "Employee at Holland Supply Company",
+          "conditions": "Slow heartbeat",
+          "age": "Low 60s",
+          "sex": "Male"
+        }
+      ],
+      "location": {
+        "address": "8225 Green Meadows Drive, north, Lewis Center, 43035",
+        "type": "Business (Holland Supply Company)",
+        "features": "Front door of the building",
+        "time": "About five to seven minutes before the call"
+      },
+      "row_index": 340,
+      "metadata": {
+        "Unnamed: 0.1": "416",
+        "id": "6903070000000000.0",
+        "nature": "Chest Pain",
+        "incidentno": "4898",
+        "start": "1/15/2021 8:57",
+        "address": "8225 GREEN MEADOWS DR ORANGE TWP",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "8225 Green Meadows Dr Lewis Center OH 43035 USA",
+        "latitude_EMS": "40.1701684",
+        "longitude_EMS": "-83.0095636",
+        "address_reverse_EMS": "8174 Appleridge Dr, Lewis Center, OH 43035, USA",
+        "Date_EMS": "1/15/2021 0:00",
+        "Unnamed: 0": "1143",
+        "fileName": "2021-01-15/3/CH3_02004264_51.txt",
+        "AddressFinal": "8225 Green Meadows",
+        "AddressExtracted": "8225 Green Meadows Drive north Lewis Center 43035 Oh Holland Supply Company Fields ? A225 Green Meadows Drive North. Orange Townsp Station 361",
+        "clean_address_extracted": "8225 Green Meadows Dr Lewis Center OH 43035 USA",
+        "Date_target": "1/15/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A man with COVID-19 is experiencing severe breathing difficulties and suspected pneumonia, requiring emergency medical assistance.",
+        "timestamp": "",
+        "transcript": "0011.3s 0013.5s SPEAKER_01:  911. What's the address of your emergency?\n 0014.5s 0018.3s SPEAKER_01:  The address is 295 Flint Rock Drive.\n 0016.8s 0017.0s SPEAKER_00:  MnM\n 0019.0s 0020.6s SPEAKER_01:  onset second line crunch later\n 0021.5s 0023.2s SPEAKER_01:  Drive, correct, Delaware.\n 0023.8s 0025.2s SPEAKER_01:  and the phone number you've called from.\n 0026.3s 0026.4s SPEAKER_01:  you\n 0026.4s 0029.9s SPEAKER_00:  My phone number is 740-816-67\n 0029.9s 0031.5s SPEAKER_01:  Your name is?\n 0032.2s 0035.4s SPEAKER_01:  Jennifer, tell me exactly what's happened.\n 0036.5s 0036.5s SPEAKER_01:  you\n 0036.5s 0054.0s SPEAKER_00:  I'm calling for my father, Kenneth Bowser. He has COVID and he was at the hospital and he is home. I do believe he probably has pneumonia at this point. He's not able to breathe very well. His oxygen is low and he needs to go back in pretty please.\n 0054.6s 0061.6s SPEAKER_01:  Okay, I will have my medics just found your way to 95 point rock drive. You said he has tested positive for COVID.\n 0062.1s 0062.5s SPEAKER_01:  Yes.\n 0062.5s 0072.9s SPEAKER_00:  He is positive, his wife is there. Also, her name is Patty and she is COVID positive also. I am not at the residence. Okay.\n 0072.4s 0074.8s SPEAKER_01:  Is she having any difficulty breathing?\n 0075.5s 0075.9s SPEAKER_01:  No.\n 0079.4s 0080.6s SPEAKER_01:  And they know that you're calling?\n 0081.3s 0082.4s SPEAKER_01:  Yes.\n 0083.6s 0084.4s SPEAKER_01:  could you bother?\n 0083.6s 0084.4s SPEAKER_01:  could you bother?\n 0085.3s 0086.3s SPEAKER_00:  It is my father, yeah.\n 0088.6s 0089.3s SPEAKER_01:  He is conscious.\n 0090.9s 0092.6s SPEAKER_01:  Yes. And how old are they?\n 0090.9s 0092.6s SPEAKER_01:  Yes. And how old are they?\n 0094.1s 0100.4s SPEAKER_00:  He was born in 1935, like, 85, I think.\n 0094.1s 0100.4s SPEAKER_00:  He was born in 1935, like, 85, I think.\n 0102.3s 0104.4s SPEAKER_01:  And I'm sorry, did you say that they know that you're calling?\n 0105.2s 0105.5s SPEAKER_01:  Yes.\n 0106.0s 0109.4s SPEAKER_00:  I tried to get her to call but she got all confused and so here I am.\n 0109.4s 0111.0s SPEAKER_01:  Will they have the door unlocked?\n 0112.6s 0117.1s SPEAKER_01:  I certainly hope so. All right. Do you know if the short of breath of a hurt, time to breathe.\n 0118.4s 0136.6s SPEAKER_00:  He's short of breath when he speaks. He's short of breath. Yeah, it is. It's hard for him to breathe. So yesterday his oxygen was like in the 86 sevens. He doesn't have oxygen on. Yeah. Does he have it at home?\n 0137.3s 0149.4s SPEAKER_00:  No, because when he was discharged, I guess his oxygen was at 89. It didn't need to be 88 for him to get oxygen. But there's oxygen in the home, she got it, but he did not.\n 0150.0s 0151.3s SPEAKER_01:  When was he discharged?\n 0152.1s 0153.6s SPEAKER_01:  Is that yesterday? Tuesday?\n 0152.1s 0153.6s SPEAKER_01:  Is that yesterday? Tuesday?\n 0160.3s 0161.9s SPEAKER_01:  Do you know if he has an inhaler?\n 0161.9s 0162.0s SPEAKER_00:  Together and together.\n 0163.3s 0164.7s SPEAKER_00:  He does not have an inhaler.\n 0166.4s 0166.5s SPEAKER_00:  you\n 0166.5s 0167.9s SPEAKER_01:  if they were speaking full sentences.\n 0169.2s 0169.6s SPEAKER_01:  Yeah.\n 0170.6s 0171.9s SPEAKER_01:  Any other problems with them right now?\n 0173.3s 0173.8s SPEAKER_01:  Ehh\n 0174.3s 0176.0s SPEAKER_00:  And the stomach hurts.\n 0177.6s 0183.1s SPEAKER_00:  He's feeling dizzy when he walks around in them shirts because his oxygen is low.\n 0183.2s 0185.1s SPEAKER_01:  Yeah. Does he have to sit up to breathe?\n 0186.6s 0195.7s SPEAKER_00:  Well, I encourage him to sit up to breathe, but then he says his stomach hurts and he wants to lay down and that's when it gets worse. So, come on listening to me.\n 0197.1s 0198.7s SPEAKER_00:  And has he ever had this problem before?\n 0197.4s 0198.0s SPEAKER_01:  if you ever had the.\n 0200.0s 0202.5s SPEAKER_00:  Um, only when he went in for COVID.\n 0203.9s 0205.6s SPEAKER_00:  Did it just get worse today?\n 0206.7s 0209.3s SPEAKER_00:  Yeah, it's progressively gotten worse.\n 0210.1s 0224.2s SPEAKER_00:  I did attempt to get him feeling better, adding vitamins. I gave him some breathing treatments and he is not improving. At this point, his lungs sound pretty diminished to me the last time I...\n 0224.9s 0233.3s SPEAKER_00:  I listen to him and I have a very sneaky suspicion that he probably has pneumonia.\n 0224.9s 0233.3s SPEAKER_00:  I listen to him and I have a very sneaky suspicion that he probably has pneumonia.\n 0234.1s 0234.5s SPEAKER_00:  Yeah.\n 0234.5s 0238.4s SPEAKER_01:  Have you been remembered for an extended period or any recent travel?\n 0239.7s 0240.1s SPEAKER_01:  No.\n 0241.3s 0242.6s SPEAKER_01:  Does he have a history of heart problems?\n 0244.6s 0254.3s SPEAKER_00:  Um, that's a good question. Not that I'm aware of, but I suspect he might have congestive heart failure because he has had a little bit of shortness of breath prior to the COVID.\n 0254.3s 0257.5s SPEAKER_01:  OK. Is he drilling or having a difficult time swallowing?\n 0259.1s 0259.1s SPEAKER_01:  you\n 0259.1s 0259.6s SPEAKER_00:  UMMM\n 0261.5s 0263.9s SPEAKER_00:  Not drooling, but, yeah, for the swallowing.\n 0265.0s 0272.4s SPEAKER_00:  As in thin liquids in particular, he will cough. Okay. I think he is aspirating.\n 0272.4s 0275.1s SPEAKER_01:  Is he on any actual medication?\n 0275.7s 0276.0s SPEAKER_01:  Yeah.\n 0277.2s 0279.8s SPEAKER_01:  any other medical or surgical history they need to know about.\n 0281.2s 0287.3s SPEAKER_00:  He did have prostate cancer and was treated for it. I believe it's an remission.\n 0288.3s 0291.0s SPEAKER_00:  Mmm, I'm trying to think if he's had.\n 0291.8s 0297.3s SPEAKER_00:  Honestly, I don't know. They had these ladder stones that they took care of at one point.\n 0297.9s 0305.6s SPEAKER_00:  He has had pneumonia like in the past, like, you know, when he was younger. So that concerns me because I'm sure there's some tissue damage in there.\n 0305.9s 0307.9s SPEAKER_01:  Yeah, and you said he's not on oxygen, right?\n 0307.7s 0307.9s SPEAKER_00:  All right.\n 0308.7s 0318.7s SPEAKER_00:  No, he's not actually on oxygen. I did put him on some last night when she did not need it. And his oxygen level, I could only get it up to 90.\n 0319.3s 0320.4s SPEAKER_00:  OK.\n 0320.4s 0323.0s SPEAKER_01:  Jennifer, can I get a phone number for the premise there?\n 0324.4s 0330.0s SPEAKER_00:  Um... Let me see here, sorry.\n 0331.3s 0332.5s SPEAKER_00:  I think fine, it'll be.\n 0333.6s 0342.2s SPEAKER_00:  It's a cell phone, it's my dad's cell phone, it's 740-513-1884.\n 0342.9s 0343.3s SPEAKER_00:  And what's his...\n 0343.3s 0343.6s SPEAKER_01:  name.\n 0344.8s 0347.3s SPEAKER_00:  But Patty probably will answer.\n 0347.8s 0348.2s SPEAKER_01:  OK.\n 0350.6s 0360.3s SPEAKER_01:  All right, I will go ahead and attempt to call them. If you hear of any changes or anything worsening before they get there, give us a call back, but they are on the way over there, okay?\n 0359.7s 0363.2s SPEAKER_00:  Thank you so much for your help. You're welcome. Bye.",
+        "nature": "COVID-19 with severe breathing difficulties and suspected pneumonia",
+        "severity": "life-threatening",
+        "hazards": "COVID-19 exposure"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports her father, Kenneth Bowser, is experiencing severe breathing difficulties due to COVID-19 and suspected pneumonia, requiring emergency medical assistance.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Jennifer",
+          "phone": "740-816-67",
+          "role": "caller",
+          "relationship": "daughter of Kenneth Bowser",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Kenneth Bowser",
+          "phone": "740-513-1884",
+          "role": "victim",
+          "relationship": "father of Jennifer, husband of Patty",
+          "conditions": "COVID-19, suspected pneumonia, possible congestive heart failure, history of prostate cancer, past pneumonia",
+          "age": "85",
+          "sex": "male"
+        },
+        {
+          "name": "Patty",
+          "phone": "",
+          "role": "witness",
+          "relationship": "wife of Kenneth Bowser",
+          "conditions": "COVID-19",
+          "age": "",
+          "sex": "female"
+        }
+      ],
+      "location": {
+        "address": "295 Flint Rock Drive, Delaware",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 341,
+      "metadata": {
+        "Unnamed: 0.1": "417",
+        "id": "6903070000000000.0",
+        "nature": "Difficulty Breathing",
+        "incidentno": "4558",
+        "start": "1/14/2021 11:45",
+        "address": "295 FLINT ROCK DR DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "295 Flint Rock Dr Delaware OH 43015 USA",
+        "latitude_EMS": "40.3013331",
+        "longitude_EMS": "-83.1044089",
+        "address_reverse_EMS": "295 Flint Rock Dr, Delaware, OH 43015, USA",
+        "Date_EMS": "1/14/2021 0:00",
+        "Unnamed: 0": "1015",
+        "fileName": "2021-01-14/1/CH1_000039B3_51.txt",
+        "AddressFinal": "295 Flint Rock",
+        "AddressExtracted": "295 Flint Rock Drive MnM Bowser",
+        "clean_address_extracted": "295 Flint Rock Dr Delaware OH 43015 USA",
+        "Date_target": "1/14/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Accidental 911 call with no emergency",
+        "timestamp": "",
+        "transcript": "0012.8s 0014.9s SPEAKER_01:  911, what's the address of the emergency?\n 0015.7s 0016.2s SPEAKER_01:  Hello.\n 0017.1s 0027.4s SPEAKER_01:  This is 911. Where's your emergency? Oh, I apologize. Did not mean to call. Okay. Can you just stand the line with me and verify some information, like name, get a number, and address?\n 0027.4s 0027.8s SPEAKER_00:  Mm-hmm.\n 0028.8s 0030.6s SPEAKER_00:  I could have tried. I could have not tried that.\n 0031.4s 0033.9s SPEAKER_00:  I definitely clicked the whole entire phone number.\n 0035.4s 0040.4s SPEAKER_01:  Okay, can I get your name and the address and phone number that you're calling from? Yes, Shelley.\n 0040.4s 0042.9s SPEAKER_00:  address 1100 Sunbury Road.\n 0043.5s 0049.5s SPEAKER_00:  And then phone number is 740-362-5800, option 2. Okay, as long as we have a good time.\n 0049.5s 0053.2s SPEAKER_01:  Is everything okay? Yeah, everything's fine. Okay, thank you. Okay, thank you.",
+        "nature": "Accidental call",
+        "severity": "Non-emergency",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Accidental 911 call with verification of caller information",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Shelley",
+          "phone": "740-362-5800",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "1100 Sunbury Road",
+        "type": "",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 342,
+      "metadata": {
+        "Unnamed: 0.1": "418",
+        "id": "6903070000000000.0",
+        "nature": "911 HANG-UP/OPEN/MISDIAL",
+        "incidentno": "64666",
+        "start": "6/14/2021 12:08",
+        "address": "1100 SUNBURY DELAWARE",
+        "created_at": "2/25/2022 15:16",
+        "updated_at": "2/25/2022 15:16",
+        "month": "6",
+        "clean_address_EMS": "1100 Sunbury Rd Delaware OH 43015 USA",
+        "latitude_EMS": "40.2929774",
+        "longitude_EMS": "-83.0339978",
+        "address_reverse_EMS": "1100 Sunbury Rd, Delaware, OH 43015, USA",
+        "Date_EMS": "6/14/2021 0:00",
+        "Unnamed: 0": "14192",
+        "fileName": "2021-06-14/3/CH3_02004D9B_51.txt",
+        "AddressFinal": "1100 Sunbury Road",
+        "AddressExtracted": "1100 Sunbury Road",
+        "clean_address_extracted": "1100 Sunbury Rd Delaware OH 43015 USA",
+        "Date_target": "6/14/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Emergency call made to 911",
+        "timestamp": "",
+        "transcript": "0010.1s 0010.9s SPEAKER_00:  911.\n 0010.9s 0012.0s SPEAKER_02:  address of your emergency.\n 0012.7s 0016.7s SPEAKER_02:  It's 1725 West Central Avenue, Delaware, Ohio.\n 0017.8s 0017.8s SPEAKER_02:  you\n 0017.8s 0020.5s SPEAKER_01:  Okay, see ya. Yes. What's the phone read?\n 0017.8s 0020.5s SPEAKER_01:  Okay, see ya. Yes. What's the phone read?\n 0021.4s 0026.5s SPEAKER_02:  It's 740-363-8171, extension 8221.",
+        "nature": "",
+        "severity": "",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller provides address and phone number",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "",
+          "phone": "740-363-8171, extension 8221",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "1725 West Central Avenue, Delaware, Ohio",
+        "type": "",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 343,
+      "metadata": {
+        "Unnamed: 0.1": "420",
+        "id": "6903070000000000.0",
+        "nature": "CHEST PAIN",
+        "incidentno": "38878",
+        "start": "4/11/2021 14:08",
+        "address": "1725 W CENTRAL AVE DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "1725 W Central Ave Delaware OH 43015 USA",
+        "latitude_EMS": "40.3083725",
+        "longitude_EMS": "-83.1086815",
+        "address_reverse_EMS": "1725 W Central Ave, Delaware, OH 43015, USA",
+        "Date_EMS": "4/11/2021 0:00",
+        "Unnamed: 0": "8276",
+        "fileName": "2021-04-11/3/CH3_02004841_51.txt",
+        "AddressFinal": "1725 West Central",
+        "AddressExtracted": "1725 West Central Avenue Delaware Oo",
+        "clean_address_extracted": "1725 W Central Ave Delaware OH 43015 USA",
+        "Date_target": "4/11/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Caller inquires about a potential warrant and expresses concern about law enforcement response.",
+        "timestamp": "",
+        "transcript": "0001.9s 0006.7s SPEAKER_01:  You are home now at 7176 Lavender Lane, right? Yes, yes, yes.\n 0006.7s 0020.2s SPEAKER_00:  Now, I will say this. I'm told by my sister that I have a warrant out in Columbus. So this won't influence Columbus to come. I'm just not trying to get in trouble. I'm just trying to get things straight.\n 0014.1s 0014.5s SPEAKER_01:  Okay.\n 0020.7s 0027.0s SPEAKER_01:  Sure, I'm not sure if you ever worn out for Columbus. You can call them to check with them, but we'll send it up to you. I'll check the vehicle for you if you'd like.\n 0020.7s 0027.0s SPEAKER_01:  Sure, I'm not sure if you ever worn out for Columbus. You can call them to check with them, but we'll send it up to you. I'll check the vehicle for you if you'd like.\n 0028.0s 0032.5s SPEAKER_00:  But if the deputy comes out, does that give Columbus the right to come with him?\n 0033.2s 0043.3s SPEAKER_01:  I call the probably won't come to your house, but that's what you mean. Okay. Okay. Yeah. Okay. That's fine. Okay They'll be there soon to talk to you. Okay, Chauncey. Sure. Sure. Sure. All right. Bye",
+        "nature": "Inquiry about a warrant",
+        "severity": "Non-life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller discusses a potential warrant in Columbus and expresses concern about law enforcement response.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Chauncey",
+          "phone": "",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "sister",
+          "phone": "",
+          "role": "witness",
+          "relationship": "sister of caller",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "7176 Lavender Lane",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 344,
+      "metadata": {
+        "Unnamed: 0.1": "421",
+        "id": "6903070000000000.0",
+        "nature": "Civil Complaint",
+        "incidentno": "5835",
+        "start": "1/18/2021 2:00",
+        "address": "7176 LAVENDER LN ORANGE TWP",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "7176 Lavender Ln Lewis Center OH 43035 USA",
+        "latitude_EMS": "40.1796072",
+        "longitude_EMS": "-82.9983874",
+        "address_reverse_EMS": "7176 Lavender Ln, Lewis Center, OH 43035, USA",
+        "Date_EMS": "1/18/2021 0:00",
+        "Unnamed: 0": "1373",
+        "fileName": "2021-01-18/4/CH4_03004567_51.txt",
+        "AddressFinal": "7176 Lavender Lane",
+        "AddressExtracted": "7176 Lavender Lane",
+        "clean_address_extracted": "7176 Lavender Ln Lewis Center OH 43035 USA",
+        "Date_target": "1/18/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Emergency services are being dispatched to a residence where someone may need medical attention, with mentions of past COVID symptoms and quarantine.",
+        "timestamp": "",
+        "transcript": "0002.5s 0009.2s SPEAKER_01:  Well, when you just keep them comfortable, continue to monitor them until they get there. Has anybody there been having any type of COVID symptoms?\n 0009.9s 0016.6s SPEAKER_00:  I'm like, how, three weeks, two weeks? You're about two weeks. Two weeks out. Yes, I'm fine.\n 0018.6s 0019.0s SPEAKER_01:  Okay.\n 0020.4s 0022.9s SPEAKER_01:  No orders to quarantine with anybody there.\n 0023.5s 0027.0s SPEAKER_00:  No, we're not quarantined anymore. No, two weeks ago.\n 0027.5s 0037.8s SPEAKER_01:  Okay. Alright, well, like I said, the medics are on the way if you could. Just, if you're on any kind of medication, get those up from the medics to look at, turn on your porch light, and any pets in the home.\n 0038.9s 0040.8s SPEAKER_00:  There's a cat, but he'll run.\n 0040.5s 0047.4s SPEAKER_01:  Okay, all right. Well, they should be there shortly when they say anything should change. I'll just give a call back, but they're on the way to 370 Western Dreamers.\n 0047.4s 0049.1s SPEAKER_00:  Yep. All right, thank you.\n 0049.7s 0050.8s SPEAKER_00:  Thank you. Bye.",
+        "nature": "Medical emergency with past COVID symptoms",
+        "severity": "Unknown",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller confirms past COVID symptoms and quarantine status, medics are dispatched to the location.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "",
+          "phone": "",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "Past COVID symptoms, not currently quarantined",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "370 Western Dreamers",
+        "type": "Residence",
+        "features": "Porch light mentioned, cat in the home",
+        "time": ""
+      },
+      "row_index": 345,
+      "metadata": {
+        "Unnamed: 0.1": "423",
+        "id": "6903070000000000.0",
+        "nature": "Injury (Basic)",
+        "incidentno": "5488",
+        "start": "1/16/2021 22:10",
+        "address": "370 WESTERN DREAMER DR DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "370 Western Dreamer Dr Delaware OH 43015 USA",
+        "latitude_EMS": "40.3147314",
+        "longitude_EMS": "-83.1058106",
+        "address_reverse_EMS": "370 Western Dreamer Dr, Delaware, OH 43015, USA",
+        "Date_EMS": "1/16/2021 0:00",
+        "Unnamed: 0": "1193",
+        "fileName": "2021-01-16/3/CH3_02004278_51.txt",
+        "AddressFinal": "370 Western Dreamers",
+        "AddressExtracted": "370 Western Dreamers Yep",
+        "clean_address_extracted": "370 Western Dreamer Dr Delaware OH 43015 USA",
+        "Date_target": "1/16/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 61-year-old man named Robert injured his hamstring while lifting something, resulting in severe pain and swelling near his knee, and is unable to move his leg.",
+        "timestamp": "",
+        "transcript": "0010.4s 0011.4s SPEAKER_00:  Well, yeah, it's fun.\n 0011.4s 0014.1s SPEAKER_01:  911, what is the address to your emergency?\n 0015.0s 0017.8s SPEAKER_00:  370 Western Dreamer Drive.\n 0018.2s 0018.8s SPEAKER_01:  And what's your name?\n 0020.1s 0022.2s SPEAKER_00:  My name is Wendy, the patient is Robert.\n 0022.8s 0024.6s SPEAKER_01:  Okay, Wendy, you said it was your first name?\n 0025.0s 0026.5s SPEAKER_00:  Yes, my first name is...\n 0027.1s 0029.3s SPEAKER_01:  Okay, can you just confirm your phone number for me?\n 0029.9s 0034.3s SPEAKER_00:  Sure, 740-815-7433.\n 0034.5s 0036.1s SPEAKER_01:  and tell me what's going on tonight with them.\n 0036.7s 0040.8s SPEAKER_00:  Ron just pulled something about half an hour ago.\n 0041.6s 0049.7s SPEAKER_00:  And between the hamstring and he can't move his leg. He can move his foot and his toes.\n 0050.6s 0055.6s SPEAKER_00:  But he can't move at all. We don't know if we should go to the ER.\n 0056.2s 0059.0s SPEAKER_01:  Okay, did he fall and do this or...?\n 0059.4s 0062.0s SPEAKER_00:  Oh, he was licking something and he heard a pop.\n 0063.0s 0066.5s SPEAKER_00:  and extreme pain and there's swelling down by his knee.\n 0068.7s 0071.5s SPEAKER_01:  Okay, so it's hamstring knee area, that's where the pain's at.\n 0071.8s 0072.4s SPEAKER_00:  Yeah.\n 0074.2s 0076.9s SPEAKER_00:  He's been icing it for 15 minutes.\n 0077.7s 0081.6s SPEAKER_01:  Okay, I'm just gonna ask you a few questions while the medics are being dispensed, okay?\n 0082.0s 0082.6s SPEAKER_00:  Okay.\n 0082.6s 0083.4s SPEAKER_01:  How old is he?\n 0084.9s 0085.3s SPEAKER_00:  61.\n 0086.3s 0087.4s SPEAKER_01:  60, 60.\n 0088.1s 0088.9s SPEAKER_00:  Yep, correct.\n 0089.3s 0091.4s SPEAKER_01:  Okay, I need to wake and breathing, okay right?\n 0091.9s 0095.3s SPEAKER_00:  Yeah, he's awake and breathing. His collar is cracking his face.\n 0096.3s 0097.0s SPEAKER_00:  I will be.\n 0096.9s 0097.5s SPEAKER_01:  Okay.\n 0098.4s 0101.0s SPEAKER_01:  And he's not in any danger. He's safe and out of danger right now.\n 0101.7s 0104.3s SPEAKER_00:  Not right now, no, he's in a chair with his leg up.\n 0105.4s 0111.0s SPEAKER_00:  I just can't move him. He can't move and we think it should be maybe x-rayed or something.\n 0112.1s 0114.4s SPEAKER_01:  Gotcha. Okay, any issues breathing?\n 0115.1s 0115.9s SPEAKER_00:  No, not at all.",
+        "nature": "Hamstring injury with severe pain and swelling near the knee",
+        "severity": "Non-life-threatening but requires medical attention",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Wendy calls 911 to report that Robert, a 61-year-old man, has injured his hamstring while lifting something, resulting in severe pain and swelling near his knee, and is unable to move his leg.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Wendy",
+          "phone": "740-815-7433",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Robert",
+          "phone": "",
+          "role": "patient",
+          "relationship": "",
+          "conditions": "",
+          "age": "61",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "370 Western Dreamer Drive",
+        "type": "",
+        "features": "",
+        "time": "half an hour ago"
+      },
+      "row_index": 346,
+      "metadata": {
+        "Unnamed: 0.1": "424",
+        "id": "6903070000000000.0",
+        "nature": "Injury (Basic)",
+        "incidentno": "5488",
+        "start": "1/16/2021 22:10",
+        "address": "370 WESTERN DREAMER DR DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "370 Western Dreamer Dr Delaware OH 43015 USA",
+        "latitude_EMS": "40.3147314",
+        "longitude_EMS": "-83.1058106",
+        "address_reverse_EMS": "370 Western Dreamer Dr, Delaware, OH 43015, USA",
+        "Date_EMS": "1/16/2021 0:00",
+        "Unnamed: 0": "1196",
+        "fileName": "2021-01-16/3/CH3_02004277_51.txt",
+        "AddressFinal": "370 Western Dreamer",
+        "AddressExtracted": "370 Western Dreamer Drive",
+        "clean_address_extracted": "370 Western Dreamer Dr Delaware OH 43015 USA",
+        "Date_target": "1/16/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A suspicious trash bag was left in front of the caller's apartment door, prompting a 911 call.",
+        "timestamp": "",
+        "transcript": "0009.7s 0011.9s SPEAKER_00:  911, what's the address of your emergency?\n 0012.8s 0017.3s SPEAKER_00:  8141 Apple Ridge Drive, Lewis Center, Ohio 43035.\n 0018.7s 0022.2s SPEAKER_00:  8141 Apple Ridge Drive and your name.\n 0021.3s 0021.7s SPEAKER_01:  and your\n 0023.0s 0028.9s SPEAKER_00:  when it's spelled A-M-I-T-A-B-H is the first name. My name is S-R-I-V-A-S-T-A-B-H.\n 0031.8s 0033.3s SPEAKER_00:  Amatab, is that how you pronounce it?\n 0034.1s 0034.5s SPEAKER_01:  Yeah.\n 0034.8s 0036.8s SPEAKER_00:  Okay, and your phone number in case we're disconnected.\n 0037.5s 0041.8s SPEAKER_00:  513-9190993 Tell me exactly what's happening.\n 0042.7s 0049.5s SPEAKER_00:  Okay, we just came back to our townhouse, our apartment here, and in front of our door is a trash bag.\n 0050.5s 0056.7s SPEAKER_00:  big trash bag. I have no idea what's in it or what it is, but somebody left a trash bag right in front of our door.\n 0058.9s 0059.8s SPEAKER_00:  So I have no idea what.\n 0060.4s 0064.6s SPEAKER_00:  what somebody's trying to, what's in it or I have no idea what it is.\n 0065.5s 0071.2s SPEAKER_00:  Alright go ahead and stay on the line with me. I'm going to transfer you over to the Delaware County Sheriff's Office. They'll be able to speak to you about it. Okay. Alright.\n 0079.1s 0081.0s SPEAKER_01:  still recounting sheriff's office. This is Elisa.\n 0081.2s 0085.0s SPEAKER_00:  It's Delcambre Transfer. This is going to be your 8141 Apple Ridge Drive Collar.\n 0085.4s 0085.8s SPEAKER_01:  Thank you.\n 0086.9s 0087.0s SPEAKER_01:  you\n 0088.6s 0096.2s SPEAKER_00:  Yeah, we just came to our townhouse apartment here, and in front of our front door is a black garbage bag.\n 0098.4s 0100.5s SPEAKER_01:  Okay, have you gone inside or are you still outside?\n 0101.2s 0105.7s SPEAKER_00:  No, we're in the car. We're not going to do inside because we have no idea what's in the bag and we don't want to touch the bag.\n 0106.3s 0110.2s SPEAKER_01:  Okay, when did you leave? Or like, what's the time frame we're looking at? This has been dropped off.\n 0111.9s 0114.1s SPEAKER_00:  Probably in the last, what, two hours maybe?\n 0115.1s 0120.9s SPEAKER_00:  Probably the last two hours, we just got here and we just know it's a bag right here from the last two hours.\n 0123.5s 0124.2s SPEAKER_01:  Okay, what's your name?\n 0125.4s 0132.2s SPEAKER_00:  Next, spelled A-M-I-T-A-B-H is the first name. Last name is S-R-I-V-A-F-T-A-B-A.\n 0135.7s 0138.1s SPEAKER_01:  And the first letter was an ethic frank or ethic family.\n 0139.4s 0141.7s SPEAKER_00:  That's like Stanislas, or the last name.\n 0143.1s 0149.9s SPEAKER_01:  and your phone number popped up 513-919-0993 is that you? Yes. Yes. Are you, what kind of vehicle are you in?\n 0151.4s 0153.1s SPEAKER_00:  I'm in the theater camera.\n 0154.0s 0154.5s SPEAKER_01:  color.\n 0155.8s 0160.5s SPEAKER_00:  It's a great color. We're actually about to write in the end of the apartment right now.\n 0160.9s 0163.3s SPEAKER_01:  right in front of the, like right in front of your apartment.\n 0164.1s 0173.3s SPEAKER_00:  Yes, we're waiting here because we don't want to, we have no idea why somebody would leave it right in front of our door and what's actually what's, and we're not going to tell any police comes in here.\n 0166.4s 0166.8s SPEAKER_01:  We have no idea.\n 0170.9s 0171.2s SPEAKER_01:  be what\n 0173.6s 0179.6s SPEAKER_01:  Sure, I've got a deputy in route. I will let her know that you're waiting in the car. Just hang tight there until she tells you to get out, okay?\n 0180.3s 0182.4s SPEAKER_01:  Okay, great. Okay, thank you.\n 0181.5s 0181.8s SPEAKER_00:  Okay.\n 0182.7s 0183.0s SPEAKER_00:  Thank you.",
+        "nature": "Suspicious package",
+        "severity": "Unknown",
+        "hazards": "Unknown contents of trash bag"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a suspicious trash bag left in front of their apartment door and requests police assistance.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Amitabh Srivastabh",
+          "phone": "513-919-0993",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Elisa",
+          "phone": "",
+          "role": "Dispatcher",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "8141 Apple Ridge Drive, Lewis Center, Ohio 43035",
+        "type": "Apartment",
+        "features": "Townhouse apartment, black garbage bag in front of door",
+        "time": "Within the last two hours"
+      },
+      "row_index": 347,
+      "metadata": {
+        "Unnamed: 0.1": "425",
+        "id": "6903070000000000.0",
+        "nature": "Trash Dumping",
+        "incidentno": "5692",
+        "start": "1/17/2021 17:00",
+        "address": "8141 APPLERIDGE DR ORANGE TWP",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "8141 Appleridge Dr Lewis Center OH 43035 USA",
+        "latitude_EMS": "40.1705377",
+        "longitude_EMS": "-83.0088773",
+        "address_reverse_EMS": "8141 Appleridge Dr, Lewis Center, OH 43035, USA",
+        "Date_EMS": "1/17/2021 0:00",
+        "Unnamed: 0": "1253",
+        "fileName": "2021-01-17/3/CH3_02004281_51.txt",
+        "AddressFinal": "8141 Apple Ridge",
+        "AddressExtracted": "8141 Apple Ridge Drive Lewis Center Oo 43035 8141 Apple Ridge Drive Delaware County Sheriff 's 8141 Apple Ridge Drive Collar",
+        "clean_address_extracted": "8141 Appleridge Dr Lewis Center OH 43035 USA",
+        "Date_target": "1/17/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A person at the Kroger warehouse is reportedly having a heart attack.",
+        "timestamp": "",
+        "transcript": "0012.9s 0015.6s SPEAKER_01:  911, what is the address of your emergency?\n 0016.2s 0019.3s SPEAKER_00:  2000 Nutter Farm Lane, it's the Kroger warehouse.\n 0019.9s 0021.2s SPEAKER_01:  Okay, and your name?\n 0022.1s 0025.3s SPEAKER_00:  Lance L-A-N-C-E, Hainer, H-A-N-E-R.\n 0026.3s 0027.3s SPEAKER_00:  and the phone number there.\n 0028.1s 0030.2s SPEAKER_00:  uh... six by seven\n 0030.9s 0031.6s SPEAKER_00:  Two, one.\n 0032.5s 0033.2s SPEAKER_00:  2-4.\n 0034.5s 0036.3s SPEAKER_01:  Okay, and how can we help you?\n 0038.2s 0047.5s SPEAKER_00:  We need an ambulance for our squad for our cardiac substance. Apparently, he's having a heart attack.\n 0038.2s 0047.5s SPEAKER_00:  We need an ambulance for our squad for our cardiac substance. Apparently, he's having a heart attack.\n 0048.7s 0049.9s SPEAKER_01:  Okay, chest pain.\n 0050.7s 0058.7s SPEAKER_00:  Yes, he's on the other side of the compound. I'm just calling for him. So where does the medic need to go to?\n 0059.3s 0069.2s SPEAKER_00:  We will have a security guard out there leading them in. Just have them come into the four-way stop, and we'll take them from there. So meet at the guard shack? Yeah.\n 0070.0s 0073.5s SPEAKER_00:  Right there before we stop. Okay. Yeah.\n 0072.5s 0073.3s SPEAKER_01:  Thanks.\n 0074.0s 0079.9s SPEAKER_01:  And do you have any information how old the patient might be or? No, sir, I don't. Okay.",
+        "nature": "heart attack",
+        "severity": "life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a heart attack at the Kroger warehouse and provides instructions for emergency responders.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Lance Hainer",
+          "phone": "672124",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "",
+          "conditions": "cardiac substance",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "2000 Nutter Farm Lane",
+        "type": "Kroger warehouse",
+        "features": "guard shack, four-way stop",
+        "time": ""
+      },
+      "row_index": 348,
+      "metadata": {
+        "Unnamed: 0.1": "426",
+        "id": "6903070000000000.0",
+        "nature": "Chest Pain",
+        "incidentno": "5855",
+        "start": "1/18/2021 5:12",
+        "address": "2000 NUTTER FARMS LN DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "2000 Nutter Farm Ln Delaware OH 43015 USA",
+        "latitude_EMS": "40.2824683",
+        "longitude_EMS": "-83.0223746",
+        "address_reverse_EMS": "2000 Nutter Farm Ln, Delaware, OH 43015, USA",
+        "Date_EMS": "1/18/2021 0:00",
+        "Unnamed: 0": "1360",
+        "fileName": "2021-01-18/3/CH3_02004286_51.txt",
+        "AddressFinal": "2000 Nutter Farm",
+        "AddressExtracted": "2000 Nutter Farm Lane Lance L-A-N-C-E Hainer H-A-N-E-R.",
+        "clean_address_extracted": "2000 Nutter Farm Ln Delaware OH 43015 USA",
+        "Date_target": "1/18/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Report of gunshots heard near House Road in Carson Meadows at Carson Farms.",
+        "timestamp": "",
+        "transcript": "0012.1s 0014.4s SPEAKER_01:  911, what's the address of your emergency?\n 0015.0s 0027.8s SPEAKER_00:  Hi, I am at 700 Swanson Street, but that's not where the emergency is. I just heard what sounds like gunshots towards House Road. I'm in Carson Meadows at Carson Farms.\n 0028.5s 0030.6s SPEAKER_01:  Okay, do you know how many you thought you heard?\n 0031.0s 0034.2s SPEAKER_00:  There's probably about like nine around what it sounded like\n 0037.1s 0038.0s SPEAKER_00:  Thank you.\n 0037.4s 0040.0s SPEAKER_01:  and it's coming from or like towards Halcrode.\n 0040.1s 0044.6s SPEAKER_00:  Yeah, my husband, C.P. Bien, he just told me to call. He's on duty right now.\n 0047.1s 0048.4s SPEAKER_01:  And what was your name again, ma'am?\n 0048.9s 0050.5s SPEAKER_00:  K-1-K-A-L-I-N.\n 0052.2s 0054.0s SPEAKER_01:  And Ken, what's the phone number you called from?\n 0054.3s 0061.8s SPEAKER_00:  614-02-9814. A couple of my neighbors heard it as well.\n 0055.9s 0056.3s SPEAKER_01:  Mm-hmm.\n 0065.6s 0066.1s SPEAKER_01:  Okay.\n 0066.9s 0069.9s SPEAKER_01:  And did you want to meet with Officer Scanlon or just have them check the area?\n 0070.5s 0073.2s SPEAKER_00:  Just have them check the area.\n 0073.9s 0074.7s SPEAKER_00:  as possible.\n 0076.9s 0081.8s SPEAKER_01:  Okay. We've got a couple officers dispatched to that area, okay?\n 0082.3s 0084.5s SPEAKER_00:  Okay, all right, tell them to be safe.\n 0085.0s 0085.9s SPEAKER_01:  Well, I will. Thank you.\n 0086.2s 0087.3s SPEAKER_00:  Thank you.",
+        "nature": "Possible gunshots",
+        "severity": "Potentially life-threatening",
+        "hazards": "Possible active shooter"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports hearing gunshots near House Road in Carson Meadows at Carson Farms.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "K-1-K-A-L-I-N",
+          "phone": "614-02-9814",
+          "role": "caller",
+          "relationship": "wife of C.P. Bien",
+          "conditions": "",
+          "age": "",
+          "sex": "female"
+        },
+        {
+          "name": "C.P. Bien",
+          "phone": "",
+          "role": "husband of caller",
+          "relationship": "husband of K-1-K-A-L-I-N",
+          "conditions": "",
+          "age": "",
+          "sex": "male"
+        },
+        {
+          "name": "Officer Scanlon",
+          "phone": "",
+          "role": "police officer",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "700 Swanson Street (caller's location), House Road (incident location)",
+        "type": "public space",
+        "features": "Carson Meadows at Carson Farms",
+        "time": ""
+      },
+      "row_index": 349,
+      "metadata": {
+        "Unnamed: 0.1": "427",
+        "id": "6903070000000000.0",
+        "nature": "Loud Disturbance",
+        "incidentno": "5482",
+        "start": "1/16/2021 21:53",
+        "address": "700 SWANSON ST DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "700 Swanson St Delaware OH 43015 USA",
+        "latitude_EMS": "40.3019593",
+        "longitude_EMS": "-83.1026672",
+        "address_reverse_EMS": "700 Swanson St, Delaware, OH 43015, USA",
+        "Date_EMS": "1/16/2021 0:00",
+        "Unnamed: 0": "1212",
+        "fileName": "2021-01-16/6/CH6_05004320_51.txt",
+        "AddressFinal": "700 Swanson Street",
+        "AddressExtracted": "700 Swanson Street Carson Meadows at Carson Farms",
+        "clean_address_extracted": "700 Swanson St Delaware OH 43015 USA",
+        "Date_target": "1/16/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A man is experiencing severe side pain and cannot move, prompting his wife to call 911.",
+        "timestamp": "",
+        "transcript": "0012.1s 0014.6s SPEAKER_01:  911, what's the address of your emergency?\n 0014.9s 0018.2s SPEAKER_00:  It's 9285 Waterford Drive.\n 0019.1s 0025.2s SPEAKER_00:  Is it 9285? Uh-huh. Water flow, W-A-T-E-R. F-O-R-D. Drive.\n 0019.1s 0025.2s SPEAKER_00:  Is it 9285? Uh-huh. Water flow, W-A-T-E-R. F-O-R-D. Drive.\n 0026.0s 0026.5s SPEAKER_00:  Okay, how?\n 0026.2s 0029.2s SPEAKER_01:  What's your phone number in case you get disconnected?\n 0029.5s 0035.2s SPEAKER_00:  614-584-9444. Your name? Molly.\n 0034.1s 0034.1s SPEAKER_01:  you\n 0036.0s 0036.3s SPEAKER_00:  coming.\n 0036.3s 0037.3s SPEAKER_01:  exactly what's going on there.\n 0037.7s 0042.5s SPEAKER_00:  My husband's having really, really, really bad side pain. Oh, he can't move.\n 0042.9s 0046.7s SPEAKER_01:  Alright, my partner's gonna start a mess too. I'm gonna ask you a few questions, okay?\n 0047.0s 0047.4s SPEAKER_00:  Okay.\n 0047.8s 0049.7s SPEAKER_01:  And how old is your husband?\n 0049.7s 0053.5s SPEAKER_00:  He is $40, or $46.\n 0054.6s 0055.0s SPEAKER_00:  7.\n 0054.6s 0055.0s SPEAKER_00:  7.\n 0055.9s 0063.2s SPEAKER_01:  Alright, and he has conscience and if I'll talk to you... He is. Okay. Like I said, my partner is going to start a med-\n 0063.9s 0072.4s SPEAKER_01:  Is this the first time he's had this? Something is... Yes. Okay. Due to an injury or... No, we just started.\n 0072.0s 0075.8s SPEAKER_00:  Okay. When did it start? It woke them up.\n 0076.8s 0078.2s SPEAKER_00:  About an hour now.\n 0078.9s 0081.9s SPEAKER_01:  Like an hour ago you said? Mm-hmm.\n 0082.6s 0084.3s SPEAKER_01:  And has it been vomiting?\n 0084.6s 0084.9s SPEAKER_00:  Now.\n 0085.4s 0087.4s SPEAKER_01:  are allowing me\n 0089.1s 0091.4s SPEAKER_01:  Are bowel movements different than normal?\n 0091.5s 0094.1s SPEAKER_00:  We can't do anything, but... Okay.\n 0094.6s 0098.4s SPEAKER_01:  And now his pain is above or below his belly button.\n 0098.4s 0099.9s SPEAKER_00:  above all the way they winded.\n 0098.4s 0099.9s SPEAKER_00:  above all the way they winded.\n 0102.3s 0103.0s SPEAKER_00:  Thank you.",
+        "nature": "Severe side pain",
+        "severity": "life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports her husband is experiencing severe side pain and cannot move.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Molly",
+          "phone": "614-584-9444",
+          "role": "caller",
+          "relationship": "wife of the victim",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "husband of the caller",
+          "conditions": "",
+          "age": "40 or 46 or 47",
+          "sex": "male"
+        }
+      ],
+      "location": {
+        "address": "9285 Waterford Drive",
+        "type": "",
+        "features": "",
+        "time": "About an hour before the call"
+      },
+      "row_index": 350,
+      "metadata": {
+        "Unnamed: 0.1": "428",
+        "id": "6903070000000000.0",
+        "nature": "Abdominal Pain",
+        "incidentno": "5251",
+        "start": "1/16/2021 7:37",
+        "address": "9285 WATERFORD DR POWELL",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "9285 Waterford Dr Powell OH 43065 USA",
+        "latitude_EMS": "40.1672602",
+        "longitude_EMS": "-83.1034635",
+        "address_reverse_EMS": "9285 Waterford Dr, Powell, OH 43065, USA",
+        "Date_EMS": "1/16/2021 0:00",
+        "Unnamed: 0": "1191",
+        "fileName": "2021-01-16/3/CH3_02004270_51.txt",
+        "AddressFinal": "9285 Waterford Drive",
+        "AddressExtracted": "9285 Waterford Drive 9285 ? Uh-huh W-A-T-E-R. F-O-R-D. Drive 9285 ? Uh-huh W-A-T-E-R. F-O-R-D. Drive",
+        "clean_address_extracted": "9285 Waterford Dr Powell OH 43065 USA",
+        "Date_target": "1/16/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Medical emergency involving a person with unspecified symptoms, possibly related to a side pain, with no known medical or surgical history or use of blood thinners or aspirin.",
+        "timestamp": "",
+        "transcript": "0001.9s 0005.0s SPEAKER_00:  Is it both or just all around?\n 0005.9s 0006.1s SPEAKER_00:  It's.\n 0008.8s 0011.2s SPEAKER_00:  It's just like all on the side, you said. OK.\n 0012.5s 0016.5s SPEAKER_00:  Does he have any medical or surgical history? Mm-mm.\n 0017.2s 0017.6s SPEAKER_00:  Okay.\n 0018.7s 0022.8s SPEAKER_00:  Alright, is he on any blood then or is aspirin both neither?\n 0023.6s 0024.2s SPEAKER_00:  What'd you say?\n 0024.9s 0028.5s SPEAKER_00:  Is he on any blood thinners or aspirin? No.\n 0029.4s 0046.7s SPEAKER_00:  All right. Well, the medics have been dispatched to you. They are in routes. Just don't have, let them have anything to eat or drink. Just have them rest in the most comfortable position. Has anybody there been sick? Any COVID symptoms or under doctor's orders to quarantine? No, no, no, no.\n 0047.3s 0057.3s SPEAKER_00:  Alright, well if anything changes or worse, then go ahead and give us a call back immediately, but they're allowed to hit 9285 Waterford Drive, okay? Okay, thank you. Alright, thank you.",
+        "nature": "Unspecified medical emergency with side pain",
+        "severity": "Unspecified",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a medical emergency, possibly involving side pain, with no known medical history or use of blood thinners or aspirin. Medics are dispatched to the location.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "",
+          "conditions": "No medical or surgical history, not on blood thinners or aspirin",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "9285 Waterford Drive",
+        "type": "",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 351,
+      "metadata": {
+        "Unnamed: 0.1": "429",
+        "id": "6903070000000000.0",
+        "nature": "Abdominal Pain",
+        "incidentno": "5251",
+        "start": "1/16/2021 7:37",
+        "address": "9285 WATERFORD DR POWELL",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "9285 Waterford Dr Powell OH 43065 USA",
+        "latitude_EMS": "40.1672602",
+        "longitude_EMS": "-83.1034635",
+        "address_reverse_EMS": "9285 Waterford Dr, Powell, OH 43065, USA",
+        "Date_EMS": "1/16/2021 0:00",
+        "Unnamed: 0": "1195",
+        "fileName": "2021-01-16/3/CH3_02004271_51.txt",
+        "AddressFinal": "9285 Waterford Drive",
+        "AddressExtracted": "t 9285 Waterford Drive okay",
+        "clean_address_extracted": "9285 Waterford Dr Powell OH 43065 USA",
+        "Date_target": "1/16/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A six-year-old boy had a seizure while sleeping, and his parents called 911 for assistance.",
+        "timestamp": "",
+        "transcript": "0010.1s 0012.8s SPEAKER_01:  911, what is the address to your emergency?\n 0013.4s 0020.1s SPEAKER_00:  Address is 1689 Hardin Lane, Powell, Ohio, 43065. And your name, sir?\n 0020.9s 0029.4s SPEAKER_00:  Ryan Fisher. And what's the phone number you call from Ryan? My cell phone is 614-570-3552. And tell me exactly what happened.\n 0029.4s 0029.5s SPEAKER_01:  you\n 0030.2s 0037.2s SPEAKER_00:  uh... have a son six-year-old son that uh... was going to sleep and we he woke up with the having a seizure\n 0038.4s 0038.6s SPEAKER_01:  Okay.\n 0038.4s 0038.6s SPEAKER_01:  Okay.\n 0040.6s 0047.5s SPEAKER_01:  My partner's going to start medics. I'm just going to ask you a couple questions and give them a better idea of what's going on. Okay, it's not delaying them at all. Okay, you said he's sick.\n 0048.5s 0049.8s SPEAKER_01:  He's six, yes.\n 0050.4s 0051.7s SPEAKER_01:  OK, are you with him right now?\n 0052.3s 0057.0s SPEAKER_00:  Yeah, my wife's with him in bed. I'm with him right now. OK, are his eyes open?\n 0057.8s 0060.6s SPEAKER_00:  His eyes are open, people look dilated.\n 0061.3s 0064.3s SPEAKER_00:  They're coming at you back in. They're constricting now.\n 0065.1s 0066.5s SPEAKER_00:  He's breathing\n 0067.4s 0070.4s SPEAKER_01:  Okay, what's he doing right now? Is he still seizing or...\n 0070.4s 0072.0s SPEAKER_00:  No, no, he's not seizing anything.\n 0072.0s 0072.3s SPEAKER_01:  more.\n 0073.0s 0076.4s SPEAKER_01:  Okay, is this breathing normal? What'd you say?\n 0076.4s 0078.2s SPEAKER_00:  is his breathing back to normal.\n 0079.1s 0081.5s SPEAKER_00:  A little labor in the middle coughing.\n 0082.2s 0082.2s SPEAKER_00:  you\n 0082.2s 0084.5s SPEAKER_01:  Okay. See you at a fever.\n 0084.5s 0085.1s SPEAKER_00:  and spider parent.\n 0085.8s 0089.1s SPEAKER_00:  He has not had a fever now. OK. All right.\n 0088.5s 0091.4s SPEAKER_01:  Does he have any history of asthma?\n 0090.8s 0097.0s SPEAKER_00:  No, asthma or epilepsy, no.\n 0098.8s 0104.6s SPEAKER_00:  And so he's never had one before? He has never had one now. OK. How long do you think he'll last before?\n 0105.8s 0106.5s SPEAKER_00:  Um...\n 0107.3s 0110.3s SPEAKER_00:  So do you think how long it lasts before we even know?\n 0111.2s 0112.5s SPEAKER_00:  Maybe a minute or two.\n 0112.1s 0113.3s SPEAKER_01:  Thank you.\n 0113.3s 0114.2s SPEAKER_00:  See you in three minutes.\n 0114.2s 0114.4s SPEAKER_01:  Yeah.\n 0116.9s 0119.3s SPEAKER_01:  Okay, and not diabetic as far as you know.\n 0119.9s 0124.6s SPEAKER_00:  I'm your diabetic now. OK. No recent head injuries?\n 0125.7s 0127.5s SPEAKER_00:  No, you can't have an injury now.\n 0128.3s 0128.7s SPEAKER_00:  Okay.\n 0133.6s 0160.9s SPEAKER_01:  Okay, well just keep an eye on him, monitor his breathing, clear the area around him in case he does go into a seizure again. If he does, do not restrain him and do not place anything in his mouth, okay? Okay. After the seizure has stopped, just continue to monitor his breathing. Has anybody in the house had any type of COVID symptoms or been ordered to quarantine? No, not at all. Okay. All right, well I got him on the way to 1689 Hardin Lane. Is there, it looks like you guys have shared driveway.\n 0161.6s 0175.8s SPEAKER_00:  We have a shared driveway. We come down the shared driveway where the fourth house on the right. Fourth house on the right. The fourth driveway. Fourth driveway. Yeah, fourth driveway on the right.\n 0172.9s 0173.2s SPEAKER_01:  Uh...\n 0175.8s 0187.5s SPEAKER_01:  Okay. All right, if you could just turn your port slide on for them, Ryan, so they can see the numbers better. But they'll be there shortly. If anything, you should change or get worse. Give me a call back, okay? Okay. Yeah, I appreciate it. Hey, no problem, sir. Bye.",
+        "nature": "Seizure",
+        "severity": "Potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Ryan Fisher called 911 to report his six-year-old son having a seizure. He provided the address, his phone number, and details about the child's condition.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Ryan Fisher",
+          "phone": "614-570-3552",
+          "role": "Caller",
+          "relationship": "Father of the child",
+          "conditions": "",
+          "age": "",
+          "sex": "Male"
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Wife",
+          "relationship": "Mother of the child",
+          "conditions": "",
+          "age": "",
+          "sex": "Female"
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Son",
+          "relationship": "Child of Ryan Fisher and his wife",
+          "conditions": "No history of asthma or epilepsy",
+          "age": "6",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "1689 Hardin Lane, Powell, Ohio, 43065",
+        "type": "Residence",
+        "features": "Fourth house on the right in a shared driveway",
+        "time": ""
+      },
+      "row_index": 352,
+      "metadata": {
+        "Unnamed: 0.1": "432",
+        "id": "6903070000000000.0",
+        "nature": "Convulsion/Seizures",
+        "incidentno": "5176",
+        "start": "1/15/2021 22:19",
+        "address": "1689 HARDIN LN LIBERTY TWP",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "1689 Hardin Ln Powell OH 43065 USA",
+        "latitude_EMS": "40.2236269",
+        "longitude_EMS": "-83.0699874",
+        "address_reverse_EMS": "1689 Hardin Ln, Powell, OH 43065, USA",
+        "Date_EMS": "1/15/2021 0:00",
+        "Unnamed: 0": "1169",
+        "fileName": "2021-01-15/6/CH6_05004317_51.txt",
+        "AddressFinal": "1689 Hardin Lane",
+        "AddressExtracted": "1689 Hardin Lane Powell Oo 43065 ? Ryan Fisher 1689 Hardin Lane",
+        "clean_address_extracted": "1689 Hardin Ln Powell OH 43065 USA",
+        "Date_target": "1/15/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A caregiver is concerned about a client who is not answering the door after previously experiencing dizziness and tremors.",
+        "timestamp": "",
+        "transcript": "0003.5s 0004.0s SPEAKER_00:  Beep beep beep beep.\n 0012.6s 0015.1s SPEAKER_01:  911. What's the address of your emergency?\n 0015.6s 0019.6s SPEAKER_00:  Hello, 162 North Sandusky Street.\n 0020.3s 0021.0s SPEAKER_00:  Ahem.\n 0020.5s 0029.8s SPEAKER_01:  Okay, and apartment B? Apartment B? Yes ma'am. Okay, what's your phone number in case you're disconnected? Two six seven seven.\n 0029.8s 0032.5s SPEAKER_00:  774-6415.\n 0032.5s 0034.0s SPEAKER_01:  Your name? Whitney?\n 0033.4s 0033.5s SPEAKER_00:  you\n 0035.3s 0038.4s SPEAKER_01:  And I'm telling you something exactly what's going on. Um, I'm a hoe-\n 0038.4s 0046.3s SPEAKER_00:  home and my client, they came out here the other day because he was really dizzy and fallen around. I'm here. I've been to our home.\n 0048.5s 0063.8s SPEAKER_00:  I'm sorry my phone is crazy. I've been here for an hour knocking and calling his cell phone. I know his cell phone has turned up. He has a real loud rock and roll noise. Cell phone ringtone. Okay. I've been here knocking and calling and he's not answering the door. I hope he's not in his life.\n 0064.5s 0065.7s SPEAKER_00:  buzzy\n 0064.5s 0065.7s SPEAKER_00:  buzzy\n 0064.5s 0065.7s SPEAKER_00:  buzzy\n 0069.1s 0070.9s SPEAKER_00:  and the door is locked, I can't get in.\n 0071.5s 0072.6s SPEAKER_00:  I've been banging on it.\n 0074.3s 0079.3s SPEAKER_00:  And I called the office to see where we were going to take and he just told me to buy something to call EMS.\n 0081.3s 0081.4s SPEAKER_00:  I will see you guys next time.\n 0081.4s 0082.7s SPEAKER_01:  Okay, everybody.\n 0082.7s 0083.3s SPEAKER_00:  or whatever.\n 0083.5s 0092.9s SPEAKER_01:  Okay, and you did call Medics the other day, correct? Yes, ma'am. And did they take him to the hospital? No, they did.\n 0092.9s 0111.3s SPEAKER_00:  and it was just a fall? Yeah, they said he was shaky, he was trembling, but they couldn't really take him. He didn't fall, fall all the way down, he called himself, but they can't really take him like that. They did test his walking and his hearing and talking and everything, so they said just after that they can't really take him.\n 0094.8s 0094.8s SPEAKER_01:  you\n 0111.9s 0115.8s SPEAKER_00:  Is he COVID positive? No ma'am. He is not.\n 0117.1s 0120.7s SPEAKER_00:  I'm sorry, I'm sorry, yes he's fine. He is. He's negative.\n 0120.7s 0121.2s SPEAKER_01:  Bye.\n 0121.8s 0124.9s SPEAKER_01:  Okay, wait, he is or is not? He is not.\n 0125.7s 0125.9s SPEAKER_01:  here.\n 0125.9s 0128.7s SPEAKER_00:  It is not positive. Sorry.\n 0130.7s 0136.2s SPEAKER_00:  Was he? I don't think, not that I know of. Not that you know of?",
+        "nature": "Medical concern (dizziness, tremors, unresponsiveness)",
+        "severity": "Potentially life-threatening (due to unresponsiveness)",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a client is unresponsive after previous episodes of dizziness and tremors.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Whitney",
+          "phone": "267-774-6415",
+          "role": "Caller, caregiver",
+          "relationship": "Caregiver to the client",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Client",
+          "relationship": "Client of Whitney",
+          "conditions": "Previously experienced dizziness and tremors",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "162 North Sandusky Street, Apartment B",
+        "type": "Residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 353,
+      "metadata": {
+        "Unnamed: 0.1": "433",
+        "id": "6903070000000000.0",
+        "nature": "Well Being Check",
+        "incidentno": "6345",
+        "start": "1/19/2021 12:13",
+        "address": "162 N SANDUSKY ST DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "162 N Sandusky St Delaware OH 43015 USA",
+        "latitude_EMS": "40.3038377",
+        "longitude_EMS": "-83.06714",
+        "address_reverse_EMS": "162 N Sandusky St, Delaware, OH 43015, USA",
+        "Date_EMS": "1/19/2021 0:00",
+        "Unnamed: 0": "1425",
+        "fileName": "2021-01-19/2/CH2_01004401_51.txt",
+        "AddressFinal": "162 North Sandusky",
+        "AddressExtracted": "Hello 162 North Sandusky Street Ahem",
+        "clean_address_extracted": "162 N Sandusky St Delaware OH 43015 USA",
+        "Date_target": "1/19/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Dispatch sending officers to an apartment complex to investigate an unspecified situation.",
+        "timestamp": "",
+        "transcript": "0007.3s 0011.1s SPEAKER_01:  Okay. Alright, what'd you say your name was, sir? It is Bryce Smith.\n 0013.1s 0016.8s SPEAKER_01:  All right, thank you, Bryce. I appreciate it. We're gonna send an officer out there to...\n 0018.1s 0035.4s SPEAKER_01:  see what's going on. We were able to get it, looks like we were able to get everything ironed out with the address so it should be actually 10 Village Lane apartment 16. Okay 10 Village Lane apartment 16. Yeah is she gonna be in the big strip of apartments there? Yes. Okay all right yeah.\n 0018.2s 0019.1s SPEAKER_00:  Anyway.\n 0035.1s 0043.6s SPEAKER_00:  And though, I don't know if you let them know, the front doors are locked, but the left door does not lock, so if they can go in the left door.\n 0046.7s 0052.7s SPEAKER_00:  like the apartments are locked in the front, but the left door is unlocked. Okay, so is this going to be?\n 0052.7s 0058.4s SPEAKER_01:  like the south side of the strip of apartments and you're looking at the front door to the left.\n 0059.0s 0059.5s SPEAKER_01:  Yeah.\n 0062.9s 0066.0s SPEAKER_01:  Alright, Bryce, we're going to have some officers stop out there, okay?\n 0066.6s 0068.3s SPEAKER_01:  Okay, thank you. No problem, goodbye.\n 0068.9s 0069.4s SPEAKER_01:  Bye.",
+        "nature": "Unspecified situation requiring police presence",
+        "severity": "Unknown",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller Bryce Smith provides address details and information about the apartment's unlocked left door for officers.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Bryce Smith",
+          "phone": "",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": "male"
+        }
+      ],
+      "location": {
+        "address": "10 Village Lane apartment 16",
+        "type": "apartment complex",
+        "features": "big strip of apartments, front doors locked but left door unlocked, south side of the strip",
+        "time": ""
+      },
+      "row_index": 354,
+      "metadata": {
+        "Unnamed: 0.1": "435",
+        "id": "6903070000000000.0",
+        "nature": "Well Being Check",
+        "incidentno": "5677",
+        "start": "1/17/2021 16:30",
+        "address": "10 VILLAGE LN DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "10 Village Ln Delaware OH 43015 USA",
+        "latitude_EMS": "40.2714099",
+        "longitude_EMS": "-83.0742646",
+        "address_reverse_EMS": "10 Village Ln, Delaware, OH 43015, USA",
+        "Date_EMS": "1/17/2021 0:00",
+        "Unnamed: 0": "1313",
+        "fileName": "2021-01-17/6/CH6_05004339_51.txt",
+        "AddressFinal": "10 Village Lane",
+        "AddressExtracted": "Smith 10 Village Lane apartment 10 Village Lane apartment",
+        "clean_address_extracted": "10 Village Ln Delaware OH 43015 USA",
+        "Date_target": "1/17/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A mail carrier reported a woman on the floor in her apartment, unable to get up, but it's unclear if she's injured or delirious.",
+        "timestamp": "",
+        "transcript": "0012.4s 0014.8s SPEAKER_00:  911. What's the address of your emergency?\n 0012.4s 0014.8s SPEAKER_00:  911. What's the address of your emergency?\n 0015.6s 0016.8s SPEAKER_01:  10 Village Lane.\n 0017.7s 0019.0s SPEAKER_01:  Apartment 16.\n 0020.6s 0022.7s SPEAKER_00:  and verify that address for me one more time.\n 0020.6s 0022.7s SPEAKER_00:  and verify that address for me one more time.\n 0023.5s 0025.4s SPEAKER_01:  10 Village Lane.\n 0026.2s 0028.5s SPEAKER_01:  Delaware, apartment 16.\n 0028.5s 0028.9s SPEAKER_00:  your name.\n 0029.7s 0029.8s SPEAKER_01:  you\n 0029.8s 0033.3s SPEAKER_00:  Jamie, Jordan. Jamie, your phone number, 14-4-disconnected.\n 0033.9s 0038.6s SPEAKER_00:  740-368-4506. I'm going to exactly what's happened.\n 0033.9s 0038.6s SPEAKER_00:  740-368-4506. I'm going to exactly what's happened.\n 0039.4s 0050.8s SPEAKER_01:  We have the mail carrier called up front to state that they were trying to deliver around her that she was on the floor. She didn't use her emergency button or anything, her apartment.\n 0051.4s 0055.4s SPEAKER_01:  And he's not able to get up. He's on the floor.\n 0055.2s 0057.8s SPEAKER_00:  You know, she's being delivetous or she's actually injured?\n 0057.4s 0063.0s SPEAKER_01:  We don't know. We can't go out there. We currently have season independent living.\n 0063.2s 0063.8s SPEAKER_00:  Okay.\n 0063.8s 0065.7s SPEAKER_01:  Okay.\n 0064.9s 0070.9s SPEAKER_00:  We're going to do injuries just in case because we don't know. Yeah, right. I'll send maintenance out that way. Mail carrier.\n 0068.5s 0071.0s SPEAKER_01:  I'll send me a note that way and then later on. Make note for you.\n 0071.9s 0073.5s SPEAKER_01:  Yeah, reported it.\n 0075.0s 0076.9s SPEAKER_01:  He didn't push our emergency button to us.\n 0097.2s 0097.7s SPEAKER_01:  Thank you.\n 0097.5s 0097.7s SPEAKER_00:  you\n 0101.1s 0104.8s SPEAKER_00:  And do you have any idea if she has any COVID symptoms or doctor's orders to quarantine?\n 0105.2s 0108.8s SPEAKER_01:  I don't know, but I don't have any idea. Sorry.\n 0106.6s 0106.9s SPEAKER_00:  Thank you.\n 0108.8s 0109.6s SPEAKER_00:  No, you're fine.\n 0111.0s 0115.2s SPEAKER_01:  I'm not going to answer the heads that way, but they didn't wait for you to get back. Okay, good.\n 0116.3s 0118.3s SPEAKER_00:  Alright, do you have any, how old is she?\n 0119.4s 0119.4s SPEAKER_00:  you\n 0119.4s 0124.5s SPEAKER_01:  We don't. We don't have much separation.\n 0124.9s 0130.5s SPEAKER_00:  Okay. And you said that the mailman just heard her saying that she needed like help or... Yeah.\n 0130.0s 0131.6s SPEAKER_01:  And that's what's on the floor.\n 0138.4s 0138.5s SPEAKER_00:  Thank you.\n 0139.3s 0150.9s SPEAKER_00:  Okay. All right. Well, we do have a medic in around out there. If you get any other information or anything like that, let us know. Send the maintenance that way. That's perfect. That'll help us out. And we'll let them know, okay?\n 0149.1s 0149.7s SPEAKER_01:  And now\n 0150.9s 0152.9s SPEAKER_01:  All right, we'll do. Thank you. You're welcome.\n 0152.3s 0153.5s SPEAKER_00:  You're welcome.\n 0153.5s 0154.0s SPEAKER_01:  Bye.",
+        "nature": "Person on the floor, unable to get up",
+        "severity": "Unknown, potentially serious",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a woman on the floor in her apartment, unable to get up, as reported by a mail carrier. The caller is unsure if the woman is injured or delirious.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Jamie, Jordan",
+          "phone": "740-368-4506",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": "female"
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "witness",
+          "relationship": "mail carrier",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "10 Village Lane, Delaware, apartment 16",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 355,
+      "metadata": {
+        "Unnamed: 0.1": "436",
+        "id": "6903070000000000.0",
+        "nature": "Injured From A Fall",
+        "incidentno": "8582",
+        "start": "1/25/2021 12:17",
+        "address": "10 VILLAGE LN DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "10 Village Ln Delaware OH 43015 USA",
+        "latitude_EMS": "40.2714099",
+        "longitude_EMS": "-83.0742646",
+        "address_reverse_EMS": "10 Village Ln, Delaware, OH 43015, USA",
+        "Date_EMS": "1/25/2021 0:00",
+        "Unnamed: 0": "2046",
+        "fileName": "2021-01-25/5/CH5_040042B8_51.txt",
+        "AddressFinal": "10 Village Lane",
+        "AddressExtracted": "10 Village Lane Apartment 16. 10 Village Lane Delaware apartment Jordan",
+        "clean_address_extracted": "10 Village Ln Delaware OH 43015 USA",
+        "Date_target": "1/25/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Person stuck in an elevator after taking insulin without eating",
+        "timestamp": "",
+        "transcript": "0012.7s 0015.3s SPEAKER_00:  911. Where is your emergency?\n 0016.5s 0022.4s SPEAKER_01:  I'm second in the elevator at Riverside Landing, 351 South Sandusky Street.\n 0024.1s 0028.5s SPEAKER_00:  Okay, so Riverside Landing 351,000 deaths in our apartment number there.\n 0029.9s 0034.6s SPEAKER_01:  uh... i mean the elevator and dot i live in the department for a bit\n 0036.2s 0036.2s SPEAKER_01:  you\n 0036.2s 0036.7s SPEAKER_00:  between.\n 0037.4s 0039.9s SPEAKER_00:  said that one more time. I was having a little trouble hearing it.\n 0040.8s 0040.9s SPEAKER_00:  you\n 0040.9s 0052.9s SPEAKER_01:  I live in apartment 406. I'm stuck inside the elevator. I just done insulin to run down to the mail real fast.\n 0054.0s 0056.3s SPEAKER_01:  And I need out of this elevator, please.\n 0056.9s 0060.4s SPEAKER_00:  Okay, we're going to get the fire department started for you to give you a hand there.\n 0061.3s 0062.7s SPEAKER_01:  All right, thank you.\n 0062.7s 0064.4s SPEAKER_00:  Real quick, what's your name?\n 0065.2s 0067.2s SPEAKER_01:  Richard Dickerson.\n 0066.5s 0066.8s SPEAKER_00:  miracle until next month. For now, chuck Pinky Black\n 0067.7s 0069.9s SPEAKER_00:  Okay, Richard, does it show?\n 0070.7s 0071.9s SPEAKER_00:  like what floor is your between\n 0070.7s 0071.9s SPEAKER_00:  like what floor is your between\n 0073.2s 0077.7s SPEAKER_01:  I'm, well, the last number was number two.\n 0081.7s 0084.4s SPEAKER_00:  Okay, and are you otherwise okay? I mean...\n 0085.2s 0094.6s SPEAKER_01:  Other than my shirt is going to be bottoming out because I did the insulin without eating. I just wanted to drop some mail in the mailbox and go right back to my apartment.\n 0095.6s 0098.2s SPEAKER_00:  Okay, well we're gonna get the fire department over there to help you out.\n 0099.1s 0100.5s SPEAKER_01:  All right, thank you.",
+        "nature": "Person stuck in elevator",
+        "severity": "potentially life-threatening due to insulin use without eating",
+        "hazards": "elevator malfunction"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports being stuck in an elevator after taking insulin without eating",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Richard Dickerson",
+          "phone": "",
+          "role": "caller, victim",
+          "relationship": "",
+          "conditions": "uses insulin",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "Riverside Landing, 351 South Sandusky Street, apartment 406",
+        "type": "residence",
+        "features": "elevator",
+        "time": ""
+      },
+      "row_index": 356,
+      "metadata": {
+        "Unnamed: 0.1": "437",
+        "id": "6903070000000000.0",
+        "nature": "ELEVATOR RESCUE",
+        "incidentno": "41137",
+        "start": "4/17/2021 11:14",
+        "address": "351 S SANDUSKY ST DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "351 S Sandusky St Delaware OH 43015 USA",
+        "latitude_EMS": "40.2875791",
+        "longitude_EMS": "-83.0684756",
+        "address_reverse_EMS": "351 S Sandusky St, Delaware, OH 43015, USA",
+        "Date_EMS": "4/17/2021 0:00",
+        "Unnamed: 0": "8732",
+        "fileName": "2021-04-17/2/CH2_01004B0A_51.txt",
+        "AddressFinal": "351 South Sandusky",
+        "AddressExtracted": "Riverside Landing 351 South Sandusky Street Dickerson Pinky Black Richard",
+        "clean_address_extracted": "351 S Sandusky St Delaware OH 43015 USA",
+        "Date_target": "4/17/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Caller reports possible COVID-19 symptoms and other health issues after receiving the second dose of the vaccine.",
+        "timestamp": "",
+        "transcript": "0007.9s 0010.3s SPEAKER_01:  I'm gonna say it didn't even start ringing.\n 0011.1s 0013.1s SPEAKER_00:  911 what's the address in the emergency.\n 0013.9s 0017.7s SPEAKER_01:  351 South Sandusky Street, Department 311.\n 0020.0s 0021.2s SPEAKER_00:  Okay, and what's your name?\n 0021.9s 0023.0s SPEAKER_01:  Patricia Swift?\n 0023.7s 0025.4s SPEAKER_00:  and tell me exactly what's happened.\n 0026.1s 0030.9s SPEAKER_01:  I just called my doctor and they recommended I go to the marketing room.\n 0031.8s 0035.9s SPEAKER_01:  possibly COVID even after having my second dose.\n 0036.7s 0042.6s SPEAKER_01:  of vaccine or it could be related to something else.\n 0046.1s 0048.8s SPEAKER_00:  What is the phone number you're calling from?\n 0049.6s 0054.5s SPEAKER_01:  740-417-1915.\n 0058.3s 0061.7s SPEAKER_01:  Yeah, I didn't want to ride the data bus just in case.\n 0061.8s 0064.0s SPEAKER_00:  Yeah. And, um...\n 0065.1s 0066.5s SPEAKER_00:  And how old are you, I'm sorry.\n 0071.3s 0072.6s SPEAKER_00:  And you have a fever?\n 0073.4s 0085.7s SPEAKER_01:  No, they called ahead for Tegrady to tell them all my symptoms and I'm nauseous, I'm extremely fatigued and tired.\n 0086.8s 0089.6s SPEAKER_01:  Um, stomach issues.\n 0091.7s 0099.5s SPEAKER_01:  rectal problems which they think I don't know they may test for anemia because I've been having blood and stuff coming out.\n 0091.7s 0099.5s SPEAKER_01:  rectal problems which they think I don't know they may test for anemia because I've been having blood and stuff coming out.\n 0104.5s 0108.1s SPEAKER_01:  But they told me I could get COVID even after I got the shot.\n 0108.9s 0112.8s SPEAKER_01:  Yeah, just a lot of muscle and body aches. I just don't feel.\n 0113.9s 0114.3s SPEAKER_01:  Right.\n 0120.1s 0123.9s SPEAKER_01:  and some chest pain, not a whole lot.\n 0120.1s 0123.9s SPEAKER_01:  and some chest pain, not a whole lot.\n 0125.3s 0133.9s SPEAKER_01:  but I haven't been short of breath or anything like that. And I just checked my oxygen level and my pulse, and they seem OK.\n 0135.4s 0135.6s SPEAKER_00:  Thank you.\n 0138.0s 0141.9s SPEAKER_00:  And do you feel like you're completely alert?\n 0142.6s 0143.3s SPEAKER_00:  and\n 0145.3s 0145.4s SPEAKER_00:  Thank you.\n 0145.4s 0149.6s SPEAKER_01:  Yeah, I'm kind of alert. Yeah.\n 0150.6s 0154.0s SPEAKER_01:  It's like I get really tired even, you know, doing.\n 0154.8s 0155.4s SPEAKER_01:  anything.\n 0157.3s 0159.0s SPEAKER_01:  And I'm usually not that way.\n 0160.5s 0169.0s SPEAKER_00:  Okay. Like I said, we do have the medics on their way. If anything changes before they get there, just give us a call back.\n 0162.9s 0163.0s SPEAKER_01:  Bye.\n 0165.5s 0166.1s SPEAKER_01:  OK.\n 0169.8s 0171.2s SPEAKER_01:  Okay, thank you.",
+        "nature": "Possible COVID-19 infection and other health issues",
+        "severity": "Moderate",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports symptoms including nausea, fatigue, stomach issues, rectal problems, muscle and body aches, and some chest pain. Possible COVID-19 infection after receiving the second dose of the vaccine.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Patricia Swift",
+          "phone": "740-417-1915",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "Possible COVID-19 infection, nausea, fatigue, stomach issues, rectal problems, muscle and body aches, some chest pain",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "351 South Sandusky Street, Department 311",
+        "type": "",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 357,
+      "metadata": {
+        "Unnamed: 0.1": "438",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "69144",
+        "start": "6/24/2021 13:50",
+        "address": "351 S SANDUSKY DELAWARE",
+        "created_at": "2/25/2022 15:16",
+        "updated_at": "2/25/2022 15:16",
+        "month": "6",
+        "clean_address_EMS": "351 S Sandusky St Delaware OH 43015 USA",
+        "latitude_EMS": "40.2875791",
+        "longitude_EMS": "-83.0684756",
+        "address_reverse_EMS": "351 S Sandusky St, Delaware, OH 43015, USA",
+        "Date_EMS": "6/24/2021 0:00",
+        "Unnamed: 0": "15182",
+        "fileName": "2021-06-24/4/CH4_03005208_146.txt",
+        "AddressFinal": "351 South Sandusky",
+        "AddressExtracted": "351 South Sandusky Street Department 311.",
+        "clean_address_extracted": "351 S Sandusky St Delaware OH 43015 USA",
+        "Date_target": "6/24/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A home health care nurse called 911 for a patient with dangerously high blood sugar levels that required emergency room attention.",
+        "timestamp": "",
+        "transcript": "0012.0s 0013.0s SPEAKER_01:  911\n 0013.0s 0018.3s SPEAKER_00:  What is the address of the emergency? I'm at 168 North Franklin Street in Delaware.\n 0018.7s 0020.3s SPEAKER_01:  Okay, what's the phone number you're calling from?\n 0021.0s 0026.2s SPEAKER_00:  614-704-8765. What's your name?\n 0026.8s 0028.0s SPEAKER_00:  My name is Deborah Gall.\n 0029.2s 0030.4s SPEAKER_01:  And what's going on there, Deborah?\n 0031.0s 0036.4s SPEAKER_00:  I'm with one of my patients. I'm a home health care nurse. I got here about an hour ago.\n 0037.4s 0046.3s SPEAKER_00:  Her blood sugar is very high today. It wasn't registering on the machine. Given her some insulin, it's still registering in the 500.\n 0047.1s 0053.4s SPEAKER_00:  Talk to her doctor. Doctor wants her to be seen in the emergency room. Family is unable to take her.\n 0053.6s 0054.3s SPEAKER_01:  How old is she?\n 0055.4s 0056.3s SPEAKER_00:  67.\n 0057.6s 0059.0s SPEAKER_01:  And has she had a fever at all?\n 0060.0s 0060.3s SPEAKER_00:  No.\n 0064.3s 0068.5s SPEAKER_01:  And anybody had the right to have any coffee or shortness breath or difficulty breathing due to COVID.\n 0069.5s 0070.0s SPEAKER_00:  No.\n 0074.0s 0079.4s SPEAKER_01:  Alright, well I'm going to go ahead and let you go. We do have the medics started that way for her, okay?\n 0079.7s 0081.2s SPEAKER_00:  Thank you.\n 0081.2s 0081.3s SPEAKER_01:  Bye-bye.",
+        "nature": "High blood sugar requiring emergency medical attention",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Deborah Gall, a home health care nurse, called 911 for her 67-year-old patient with dangerously high blood sugar levels that were not responding to insulin and required emergency room attention.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Deborah Gall",
+          "phone": "614-704-8765",
+          "role": "Caller, home health care nurse",
+          "relationship": "Nurse to patient",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "Patient of Deborah Gall",
+          "conditions": "High blood sugar, possibly diabetic",
+          "age": "67",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "168 North Franklin Street in Delaware",
+        "type": "Residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 358,
+      "metadata": {
+        "Unnamed: 0.1": "439",
+        "id": "6903070000000000.0",
+        "nature": "Diabetic Problem",
+        "incidentno": "6049",
+        "start": "1/18/2021 15:30",
+        "address": "168 N FRANKLIN ST DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "168 N Franklin St Delaware OH 43015 USA",
+        "latitude_EMS": "40.3039056",
+        "longitude_EMS": "-83.0688342",
+        "address_reverse_EMS": "168 N Franklin St, Delaware, OH 43015, USA",
+        "Date_EMS": "1/18/2021 0:00",
+        "Unnamed: 0": "1332",
+        "fileName": "2021-01-18/1/CH1_000039F3_51.txt",
+        "AddressFinal": "168 North Franklin",
+        "AddressExtracted": "168 North Franklin Street in",
+        "clean_address_extracted": "168 N Franklin St Delaware OH 43015 USA",
+        "Date_target": "1/18/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 50-year-old patient is experiencing nausea, vomiting, shortness of breath, and possible GI bleed after receiving medication.",
+        "timestamp": "",
+        "transcript": "0009.1s 0012.5s SPEAKER_00:  Can you try to work on some vitals? I haven't got any vitals or any of this.\n 0012.5s 0015.7s SPEAKER_01:  911, what's the address of the emergency? 36 Troy Road.\n 0016.6s 0018.2s SPEAKER_01:  Okay, is this for Phineas?\n 0018.9s 0021.5s SPEAKER_01:  Sure is. And what's your name? I'm Marie.\n 0021.0s 0044.6s SPEAKER_00:  Marie, N-A-R-I-E. Tell me exactly what's happened. Yep, I have a 50-year-old patient that came in this morning with nausea and vomiting. We gave him a dose of phenogram and it didn't seem to help. He started having shortness of breath and nausea and vomiting again. The second time he had vomiting, it almost looks like he's throwing up blood like a GI bleed, so we need to ship him next door to the hospital to rule out a GI bleed.\n 0045.4s 0049.2s SPEAKER_00:  And is there a nurse with him? Yep, I'm with him right now.\n 0050.5s 0057.5s SPEAKER_00:  Is he awake? Yes, he is. Just shortness of breath and vomiting. This is only two complaints. Okay, and what's the phone number?\n 0056.0s 0056.5s SPEAKER_01:  Umm\n 0057.5s 0058.4s SPEAKER_01:  that you're calling from.\n 0058.4s 0066.0s SPEAKER_00:  They just need to go to the front door. Yep, just come to the side door and I'll let you in.\n 0066.8s 0071.4s SPEAKER_00:  You said side door? Yeah, they know where it is, but they pull up right to the side door and I'll let them in.\n 0071.6s 0074.5s SPEAKER_01:  Okay, we got them on their way. Alright, thank you. Thank you.",
+        "nature": "Possible GI bleed with nausea, vomiting, and shortness of breath",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a 50-year-old patient with nausea, vomiting, shortness of breath, and possible GI bleed after receiving medication.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Marie",
+          "phone": "",
+          "role": "Caller, nurse",
+          "relationship": "Nurse attending to the patient",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Phineas",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "",
+          "conditions": "Nausea, vomiting, shortness of breath, possible GI bleed",
+          "age": "50",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "36 Troy Road",
+        "type": "",
+        "features": "Side door for entry",
+        "time": "This morning"
+      },
+      "row_index": 359,
+      "metadata": {
+        "Unnamed: 0.1": "440",
+        "id": "6903070000000000.0",
+        "nature": "LACERATION - BLEEDING",
+        "incidentno": "48822",
+        "start": "5/7/2021 7:19",
+        "address": "36 TROY RD DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "36 Troy Rd Delaware OH 43015 USA",
+        "latitude_EMS": "40.307561",
+        "longitude_EMS": "-83.0891067",
+        "address_reverse_EMS": "30 Troy Rd, Delaware, OH 43015, USA",
+        "Date_EMS": "5/7/2021 0:00",
+        "Unnamed: 0": "10477",
+        "fileName": "2021-05-07/3/CH3_02004A13_51.txt",
+        "AddressFinal": "36 Troy Road",
+        "AddressExtracted": "36 Troy Road Marie N-A-R-I-E.",
+        "clean_address_extracted": "36 Troy Rd Delaware OH 43015 USA",
+        "Date_target": "5/7/2021 0:00"
+      }
+    }
+  ],
+  "error_details": []
+}
