@@ -3,7 +3,10 @@ import re
 import json
 import pandas as pd
 import requests
-from flask import Flask, jsonify, request
+import os
+import base64
+from io import BytesIO
+from flask import Flask, jsonify, request, send_file, Response
 from flask_cors import CORS
 from neo4j import GraphDatabase
 from sklearn.preprocessing import LabelEncoder
@@ -13,6 +16,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from transformers import pipeline
 from openai import OpenAI
+import matplotlib.pyplot as plt
+import networkx as nx
+import plotly.graph_objects as go
+import plotly
 
 app = Flask(__name__)
 CORS(app)
@@ -21,9 +28,10 @@ CORS(app)
 #                            Neo4j Functions
 ###############################################################################
 def connect_to_neo4j():
-    uri = "neo4j+s://4a946ffe.databases.neo4j.io"
+    # Using the same connection details as in sample.py for compatibility
+    uri = "neo4j+ssc://2b9a3029.databases.neo4j.io"
     username = "neo4j"
-    password = "k-njZdN37CLEDE3p-g7YolnA78v2OiTGt6H2iILUH9o"
+    password = "4GGm6B1aeQdjWyFxs7MpVCtqc8xZU0aueO_kqeAwXto"
     
     # Create driver without the encrypted parameter for secure protocols
     driver = GraphDatabase.driver(uri, auth=(username, password))
@@ -247,9 +255,9 @@ def extract_all_911_call_data(transcript):
         )
         
         # Add detailed logging to debug API response
-        print(f"API Response status: {response.status_code if hasattr(response, 'status_code') else 'No status code'}")
-        print(f"API Response type: {type(response)}")
-        print(f"API Response: {response}")
+        # print(f"API Response status: {response.status_code if hasattr(response, 'status_code') else 'No status code'}")
+        # print(f"API Response type: {type(response)}")
+        # print(f"API Response: {response}")
         
         # Extract content from the response
         content = response.choices[0].message.content
@@ -849,10 +857,10 @@ def test_neo4j_connection():
             "status": "success",
             "message": message,
             "connection_details": {
-                "uri": "neo4j+s://4a946ffe.databases.neo4j.io",
+                "uri": "neo4j+ssc://2b9a3029.databases.neo4j.io",
                 "username": "neo4j",
                 # Password is masked for security
-                "password": "********"
+                "password": "****"
             }
         })
         
@@ -864,11 +872,687 @@ def test_neo4j_connection():
             "message": str(e),
             "recommendation": "Please ensure the Neo4j credentials are correct and that the database is accessible from your environment",
             "connection_details": {
-                "uri": "neo4j+s://4a946ffe.databases.neo4j.io",
+                "uri": "neo4j+ssc://2b9a3029.databases.neo4j.io",
                 "username": "neo4j",
                 # Password is masked for security
-                "password": "********"
+                "password": "****"
             }
+        }), 500
+
+###############################################################################
+#                   Compatibility Functions for Demo
+###############################################################################
+
+def save_compatible_to_neo4j(call_data, driver):
+    """
+    Save 911 call data to Neo4j in a format compatible with the structure used in sample.py.
+    This creates a flatter structure with metadata as a serialized string rather than the
+    full graph structure.
+    
+    Parameters:
+    - call_data: Dictionary containing structured data from extract_all_911_call_data
+    - driver: Neo4j driver connection
+    
+    Returns:
+    - Dictionary with status information
+    """
+    try:
+        with driver.session() as session:
+            # Combine the data into a single Incident node with metadata as a string
+            def create_compatible_node(tx, data):
+                # Create metadata object that matches the expected format in sample.py and similarity_v2.py
+                metadata = {
+                    "clean_address_EMS": data["location"]["address"],
+                    "clean_address_extracted": data["location"]["address"],
+                    "Date_target": data["location"]["time"] or data["incident"]["timestamp"],
+                    "start": data["incident"]["timestamp"],
+                    "nature": data["incident"]["nature"],
+                    "severity": data["incident"]["severity"],
+                    "hazards": data["incident"]["hazards"],
+                    "persons": [
+                        {
+                            "name": p["name"],
+                            "role": p["role"],
+                            "age": p["age"],
+                            "sex": p["sex"],
+                            "conditions": p["conditions"],
+                            "relationship": p["relationship"],
+                            "phone": p["phone"]
+                        } for p in data["persons"] if any(p.values())
+                    ],
+                    "location_type": data["location"]["type"],
+                    "location_features": data["location"]["features"],
+                    "source_file": data.get("source_file", "")
+                }
+                
+                # Add calls data to metadata
+                metadata["calls"] = [
+                    {
+                        "summary": call["summary"],
+                        "timestamp": call["timestamp"]
+                    } for call in data["calls"]
+                ]
+                
+                # Create a single Incident node with all data
+                incident_query = """
+                CREATE (i:Incident {
+                    summary: $summary,
+                    transcript: $transcript,
+                    metadata: $metadata
+                })
+                RETURN id(i) AS incident_id
+                """
+                
+                # Convert metadata to a string
+                metadata_str = str(metadata)
+                
+                # Extract the main summary from the incident data
+                summary = data["incident"]["summary"]
+                transcript = data["incident"]["transcript"]
+                
+                # Run the query
+                incident_result = tx.run(
+                    incident_query,
+                    summary=summary,
+                    transcript=transcript,
+                    metadata=metadata_str
+                ).single()
+                
+                incident_id = incident_result["incident_id"]
+                
+                # Also create a transcript node and relationship (to be compatible with some queries)
+                transcript_query = """
+                CREATE (t:Transcript {
+                    TEXT: $transcript
+                })
+                RETURN id(t) AS transcript_id
+                """
+                
+                transcript_result = tx.run(
+                    transcript_query,
+                    transcript=transcript
+                ).single()
+                
+                transcript_id = transcript_result["transcript_id"]
+                
+                # Create relationship between Incident and Transcript
+                tx.run("""
+                MATCH (i:Incident), (t:Transcript)
+                WHERE id(i) = $incident_id AND id(t) = $transcript_id
+                CREATE (i)-[:CONTAINS]->(t)
+                """, incident_id=incident_id, transcript_id=transcript_id)
+                
+                return {
+                    "incident_id": incident_id,
+                    "transcript_id": transcript_id
+                }
+            
+            # Execute the transaction function
+            result = session.execute_write(create_compatible_node, call_data)
+            
+            return {
+                "status": "success",
+                "message": "911 call data successfully saved to Neo4j in a compatible format",
+                "node_ids": result
+            }
+            
+    except Exception as e:
+        print(f"Error saving to Neo4j: {e}")
+        import traceback
+        traceback.print_exc()
+        return {
+            "status": "error",
+            "message": f"Failed to save 911 call data: {str(e)}"
+        }
+
+###############################################################################
+#                       Demo Visualization Functions
+###############################################################################
+
+def generate_network_graph(call_data):
+    """
+    Generate a network visualization of the 911 call graph data.
+    
+    Args:
+        call_data: Dictionary containing incident, calls, persons, and location data
+    
+    Returns:
+        Base64 encoded PNG image of the network graph
+    """
+    # Create a directed graph
+    G = nx.DiGraph()
+    
+    # Add nodes with different colors based on type
+    incident_id = "incident_1"
+    G.add_node(incident_id, label=call_data["incident"]["nature"] or "Incident", 
+               node_type="incident", data=call_data["incident"])
+    
+    # Add location node
+    location_id = "location_1"
+    G.add_node(location_id, label=call_data["location"]["address"] or "Location", 
+               node_type="location", data=call_data["location"])
+    
+    # Connect incident to location
+    G.add_edge(incident_id, location_id, relationship="AT")
+    
+    # Add call nodes
+    for i, call in enumerate(call_data["calls"]):
+        call_id = f"call_{i+1}"
+        G.add_node(call_id, label=f"Call {i+1}", node_type="call", data=call)
+        G.add_edge(call_id, incident_id, relationship="ABOUT")
+    
+    # Add person nodes
+    for i, person in enumerate(call_data["persons"]):
+        if not any(person.values()):  # Skip if all values are empty
+            continue
+        person_id = f"person_{i+1}"
+        G.add_node(person_id, label=person["name"] or f"Person {i+1}", 
+                   node_type="person", data=person)
+        G.add_edge(person_id, incident_id, relationship="INVOLVED_IN")
+        
+        # If person is a caller, connect to first call
+        if person["role"].lower() == "caller" and call_data["calls"]:
+            G.add_edge(person_id, "call_1", relationship="MADE")
+    
+    # Set up the figure and draw the graph
+    plt.figure(figsize=(12, 10))
+    
+    # Define positions
+    pos = nx.spring_layout(G, seed=42)
+    
+    # Define node colors based on type
+    node_colors = {
+        "incident": "#FF6B6B",  # Red
+        "location": "#4ECDC4",  # Teal
+        "call": "#FFD166",      # Yellow
+        "person": "#6B5B95"     # Purple
+    }
+    
+    # Draw nodes with different colors
+    for node_type in node_colors:
+        node_list = [node for node, data in G.nodes(data=True) if data.get("node_type") == node_type]
+        nx.draw_networkx_nodes(G, pos, 
+                              nodelist=node_list,
+                              node_color=node_colors[node_type],
+                              node_size=1500,
+                              alpha=0.8)
+    
+    # Draw edges
+    edge_labels = {(u, v): d["relationship"] for u, v, d in G.edges(data=True)}
+    nx.draw_networkx_edges(G, pos, width=2, alpha=0.7, edge_color="gray", arrows=True, arrowsize=20)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=10)
+    
+    # Draw labels
+    labels = {node: data["label"] for node, data in G.nodes(data=True)}
+    nx.draw_networkx_labels(G, pos, labels=labels, font_size=10, font_weight="bold")
+    
+    # Add title and adjust layout
+    plt.title("911 Call Graph Visualization", size=16)
+    plt.axis("off")
+    plt.tight_layout()
+    
+    # Convert plot to base64 encoded string
+    buf = BytesIO()
+    plt.savefig(buf, format="png", dpi=150)
+    plt.close()
+    buf.seek(0)
+    img_str = base64.b64encode(buf.read()).decode('utf-8')
+    
+    return img_str
+
+def generate_plotly_graph(call_data):
+    """
+    Generate an interactive plotly visualization of the 911 call graph data.
+    
+    Args:
+        call_data: Dictionary containing incident, calls, persons, and location data
+    
+    Returns:
+        HTML representation of the interactive plot
+    """
+    # Create a directed graph
+    G = nx.DiGraph()
+    
+    # Add nodes with different types
+    incident_id = "incident_1"
+    G.add_node(incident_id, label=call_data["incident"]["nature"] or "Incident", 
+               type="incident", data=call_data["incident"])
+    
+    # Add location node
+    location_id = "location_1"
+    G.add_node(location_id, label=call_data["location"]["address"] or "Location", 
+               type="location", data=call_data["location"])
+    
+    # Connect incident to location
+    G.add_edge(incident_id, location_id, relationship="AT")
+    
+    # Add call nodes
+    for i, call in enumerate(call_data["calls"]):
+        call_id = f"call_{i+1}"
+        G.add_node(call_id, label=f"Call {i+1}", type="call", data=call)
+        G.add_edge(call_id, incident_id, relationship="ABOUT")
+    
+    # Add person nodes
+    for i, person in enumerate(call_data["persons"]):
+        if not any(person.values()):  # Skip if all values are empty
+            continue
+        person_id = f"person_{i+1}"
+        G.add_node(person_id, label=person["name"] or f"Person {i+1}", 
+                   type="person", data=person)
+        G.add_edge(person_id, incident_id, relationship="INVOLVED_IN")
+        
+        # If person is a caller, connect to first call
+        if person["role"].lower() == "caller" and call_data["calls"]:
+            G.add_edge(person_id, "call_1", relationship="MADE")
+    
+    # Create layout
+    pos = nx.spring_layout(G, seed=42)
+    
+    # Node color map
+    node_colors = {
+        "incident": "#FF6B6B",  # Red
+        "location": "#4ECDC4",  # Teal
+        "call": "#FFD166",      # Yellow
+        "person": "#6B5B95"     # Purple
+    }
+    
+    # Create node traces
+    node_traces = {}
+    for node_type, color in node_colors.items():
+        node_traces[node_type] = go.Scatter(
+            x=[],
+            y=[],
+            text=[],
+            mode='markers',
+            name=node_type.capitalize(),
+            marker=dict(
+                color=color,
+                size=30,
+                line=dict(width=2, color='white')
+            ),
+            hoverinfo='text'
+        )
+    
+    # Add node information
+    for node in G.nodes():
+        x, y = pos[node]
+        node_type = G.nodes[node]['type']
+        node_label = G.nodes[node]['label']
+        data = G.nodes[node]['data']
+        
+        # Prepare hover text based on node type
+        if node_type == 'incident':
+            hover_text = (f"<b>Incident</b><br>"
+                         f"Nature: {data['nature']}<br>"
+                         f"Severity: {data['severity']}<br>"
+                         f"Hazards: {data['hazards']}<br>"
+                         f"Summary: {data['summary']}")
+        elif node_type == 'location':
+            hover_text = (f"<b>Location</b><br>"
+                         f"Address: {data['address']}<br>"
+                         f"Type: {data['type']}<br>"
+                         f"Features: {data['features']}")
+        elif node_type == 'call':
+            hover_text = (f"<b>Call</b><br>"
+                         f"Summary: {data['summary']}<br>"
+                         f"Timestamp: {data['timestamp']}")
+        elif node_type == 'person':
+            hover_text = (f"<b>Person</b><br>"
+                         f"Name: {data['name']}<br>"
+                         f"Role: {data['role']}<br>"
+                         f"Age: {data['age']}<br>"
+                         f"Sex: {data['sex']}")
+        
+        # Add to appropriate trace
+        node_traces[node_type].x = list(node_traces[node_type].x) + [x]
+        node_traces[node_type].y = list(node_traces[node_type].y) + [y]
+        node_traces[node_type].text = list(node_traces[node_type].text) + [hover_text]
+    
+    # Create edge trace
+    edge_trace = go.Scatter(
+        x=[],
+        y=[],
+        line=dict(width=1, color='gray'),
+        hoverinfo='none',
+        mode='lines'
+    )
+    
+    # Add edge information
+    for edge in G.edges():
+        x0, y0 = pos[edge[0]]
+        x1, y1 = pos[edge[1]]
+        edge_trace.x = list(edge_trace.x) + [x0, x1, None]
+        edge_trace.y = list(edge_trace.y) + [y0, y1, None]
+    
+    # Create figure
+    fig = go.Figure(
+        data=[edge_trace] + list(node_traces.values()),
+        layout=go.Layout(
+            title='Interactive 911 Call Network',
+            showlegend=True,
+            hovermode='closest',
+            margin=dict(b=20, l=5, r=5, t=40),
+            annotations=[
+                dict(
+                    text=f"911 Call: {call_data['incident']['nature']}",
+                    showarrow=False,
+                    xref="paper", yref="paper",
+                    x=0.005, y=-0.002
+                )
+            ],
+            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            template="plotly_white"
+        )
+    )
+    
+    # Convert to HTML
+    html = plotly.io.to_html(fig, full_html=False, include_plotlyjs='cdn')
+    return html
+
+def generate_incident_summary_plot(call_data):
+    """
+    Generate a visualization showing key elements of the incident.
+    
+    Args:
+        call_data: Dictionary containing incident, calls, persons, and location data
+    
+    Returns:
+        Base64 encoded PNG image of the summary visualization
+    """
+    # Create figure with 2x2 subplots
+    fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+    fig.suptitle(f"911 Call Analysis: {call_data['incident']['nature']}", fontsize=16)
+    
+    # Extract key information
+    incident = call_data["incident"]
+    location = call_data["location"]
+    persons = call_data["persons"]
+    
+    # Subplot 1: Incident Summary
+    axs[0, 0].text(0.5, 0.95, "Incident Summary", ha="center", fontsize=14, fontweight="bold")
+    summary_text = (
+        f"Nature: {incident['nature']}\n"
+        f"Severity: {incident['severity']}\n"
+        f"Hazards: {incident['hazards']}\n"
+        f"Location: {location['address']}\n"
+        f"Location Type: {location['type']}\n"
+        f"Time: {location['time']}\n"
+        f"\nSummary: {incident['summary']}"
+    )
+    axs[0, 0].text(0.1, 0.8, summary_text, va="top", ha="left", wrap=True)
+    axs[0, 0].axis("off")
+    
+    # Subplot 2: Persons Involved
+    axs[0, 1].text(0.5, 0.95, "Persons Involved", ha="center", fontsize=14, fontweight="bold")
+    
+    if persons:
+        person_data = []
+        for i, person in enumerate(persons):
+            if any(person.values()):
+                person_text = (
+                    f"Person {i+1}:\n"
+                    f"  Name: {person['name']}\n"
+                    f"  Role: {person['role']}\n"
+                    f"  Age: {person['age']}\n"
+                    f"  Sex: {person['sex']}\n"
+                    f"  Conditions: {person['conditions']}\n"
+                )
+                person_data.append(person_text)
+        
+        person_summary = "\n".join(person_data)
+        axs[0, 1].text(0.1, 0.8, person_summary, va="top", ha="left")
+    else:
+        axs[0, 1].text(0.5, 0.5, "No person information available", ha="center")
+    
+    axs[0, 1].axis("off")
+    
+    # Subplot 3: Extracted Entities
+    axs[1, 0].text(0.5, 0.95, "Extracted Information", ha="center", fontsize=14, fontweight="bold")
+    
+    # Count entities by type
+    entity_counts = {
+        "Location Details": len([v for v in location.values() if v]),
+        "Person Information": sum(sum(1 for v in p.values() if v) for p in persons),
+        "Incident Details": len([v for v in incident.values() if v and v != incident['transcript']])
+    }
+    
+    if sum(entity_counts.values()) > 0:
+        # Create horizontal bar chart
+        bars = axs[1, 0].barh(list(entity_counts.keys()), list(entity_counts.values()), color=["#4ECDC4", "#6B5B95", "#FF6B6B"])
+        axs[1, 0].set_xlabel("Number of Extracted Fields")
+        
+        # Add labels to bars
+        for bar in bars:
+            width = bar.get_width()
+            label_x_pos = width if width > 0 else 0
+            axs[1, 0].text(label_x_pos + 0.5, bar.get_y() + bar.get_height()/2, f"{width}", 
+                           va='center', fontweight='bold')
+    else:
+        axs[1, 0].text(0.5, 0.5, "No entities extracted", ha="center")
+        axs[1, 0].axis("off")
+    
+    # Subplot, 4: Incident Type Visualization
+    axs[1, 1].text(0.5, 0.95, "Incident Classification", ha="center", fontsize=14, fontweight="bold")
+    
+    # Simplified incident type classifier
+    incident_type = incident['nature'].lower() if incident['nature'] else "unknown"
+    incident_categories = {
+        'medical': ['medical', 'heart', 'attack', 'breathing', 'chest', 'pain', 'unconscious', 'injury', 'sick', 'stroke'],
+        'fire': ['fire', 'burning', 'smoke', 'flames', 'burn', 'explosion'],
+        'crime': ['crime', 'assault', 'violence', 'weapon', 'disturbance', 'domestic', 'theft', 'robbery'],
+        'traffic': ['traffic', 'accident', 'crash', 'collision', 'car', 'vehicle'],
+        'other': ['other', 'assistance', 'unknown']
+    }
+    
+    # Determine incident category
+    incident_category = 'other'
+    max_matches = 0
+    
+    for category, keywords in incident_categories.items():
+        matches = sum(1 for keyword in keywords if keyword in incident_type)
+        if matches > max_matches:
+            max_matches = matches
+            incident_category = category
+    
+    # Create a pie chart with just the determined category highlighted
+    categories = list(incident_categories.keys())
+    sizes = [1 if cat == incident_category else 0.05 for cat in categories]
+    colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#6B5B95', '#F9F9F9']
+    explode = [0.1 if cat == incident_category else 0 for cat in categories]
+    
+    axs[1, 1].pie(sizes, explode=explode, labels=categories, colors=colors, autopct=lambda p: f'{p:.0f}%' if p > 1 else '',
+                 shadow=False, startangle=90)
+    axs[1, 1].axis('equal')
+    axs[1, 1].text(0, -1.2, f"Classified as: {incident_category.upper()}", ha="center", fontweight="bold")
+    
+    # Adjust layout and convert to image
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    
+    # Convert plot to base64 encoded string
+    buf = BytesIO()
+    plt.savefig(buf, format="png", dpi=150)
+    plt.close()
+    buf.seek(0)
+    img_str = base64.b64encode(buf.read()).decode('utf-8')
+    
+    return img_str
+
+###############################################################################
+#                         Demo Endpoint
+###############################################################################
+@app.route('/demo', methods=['GET'])
+def demo_endpoint():
+    """
+    Demo endpoint that processes sample 911 call transcripts,
+    extracts information using DeepSeek API, creates graph data structure,
+    uploads to Neo4j, and provides visualizations.
+    """
+    try:
+        # Set up logging
+        import logging
+        logging.basicConfig(filename='demo_processing.log', level=logging.INFO)
+        logger = logging.getLogger('demo')
+        logger.info("Starting demo processing...")
+        
+        # Transcript file paths
+        transcript_files = [
+            "Transcripts/fire transcript.txt",
+            "Transcripts/fire transcript 2.txt",
+            "Transcripts/heart attack transcript.txt"
+        ]
+        
+        # Process each transcript
+        processed_data = []
+        network_graphs = []
+        interactive_graphs = []
+        summary_graphs = []
+        
+        # Connect to Neo4j
+        driver = connect_to_neo4j()
+        
+        for file_path in transcript_files:
+            try:
+                # Read transcript file
+                with open(file_path, 'r') as f:
+                    transcript = f.read()
+                
+                logger.info(f"Processing transcript from {file_path}")
+                
+                # Clean and preprocess transcript
+                cleaned_transcript = preprocess_transcript(transcript)
+                
+                # Extract data using DeepSeek API
+                call_data = extract_all_911_call_data(cleaned_transcript)
+                
+                # Add source file information
+                call_data["source_file"] = file_path
+                
+                # Save to Neo4j in a format compatible with sample.py structure
+                neo4j_result = save_compatible_to_neo4j(call_data, driver)
+                call_data["neo4j_status"] = neo4j_result["status"]
+                call_data["neo4j_node_ids"] = neo4j_result.get("node_ids", {})
+                
+                # Generate visualizations
+                try:
+                    network_graph = generate_network_graph(call_data)
+                    interactive_graph = generate_plotly_graph(call_data)
+                    summary_graph = generate_incident_summary_plot(call_data)
+                    
+                    network_graphs.append({
+                        "source_file": file_path, 
+                        "image": network_graph
+                    })
+                    
+                    interactive_graphs.append({
+                        "source_file": file_path, 
+                        "html": interactive_graph
+                    })
+                    
+                    summary_graphs.append({
+                        "source_file": file_path, 
+                        "image": summary_graph
+                    })
+                except Exception as vis_error:
+                    logger.error(f"Error generating visualizations for {file_path}: {str(vis_error)}")
+                
+                # Add to processed data
+                processed_data.append(call_data)
+                logger.info(f"Successfully processed {file_path}")
+                
+            except Exception as e:
+                logger.error(f"Error processing {file_path}: {str(e)}")
+                import traceback
+                traceback.print_exc()
+        
+        # Close Neo4j connection
+        driver.close()
+        
+        # Prepare response
+        response = {
+            "status": "success",
+            "message": f"Successfully processed {len(processed_data)} transcripts",
+            "compatibility_note": "Data was saved to Neo4j using a structure compatible with sample.py and similarity_v2.py",
+            "processed_data": processed_data,
+            "visualizations": {
+                "network_graphs": network_graphs,
+                "interactive_graphs": interactive_graphs,
+                "summary_graphs": summary_graphs
+            }
+        }
+        
+        return jsonify(response)
+        
+    except Exception as e:
+        logger.error(f"Error in demo endpoint: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "status": "error", 
+            "message": str(e)
+        }), 500
+
+@app.route('/demo/visualization/<file_name>/<vis_type>', methods=['GET'])
+def get_visualization(file_name, vis_type):
+    """
+    Endpoint to retrieve a specific visualization as an image or HTML.
+    
+    Args:
+        file_name: Name of the source file (e.g., "fire_transcript.txt")
+        vis_type: Type of visualization (network, interactive, summary)
+    """
+    try:
+        # Parse file name from parameter (might contain full path)
+        file_base = os.path.basename(file_name)
+        
+        # Find the full file path from the available transcript files
+        transcript_files = [
+            "Transcripts/fire transcript.txt",
+            "Transcripts/fire transcript 2.txt",
+            "Transcripts/heart attack transcript.txt"
+        ]
+        
+        found_file = None
+        for f in transcript_files:
+            if file_base in f:
+                found_file = f
+                break
+        
+        if not found_file:
+            return jsonify({"status": "error", "message": f"File {file_name} not found"}), 404
+        
+        # Read and process the transcript
+        with open(found_file, 'r') as f:
+            transcript = f.read()
+        
+        # Clean and extract data
+        cleaned_transcript = preprocess_transcript(transcript)
+        call_data = extract_all_911_call_data(cleaned_transcript)
+        
+        # Generate the requested visualization
+        if vis_type == 'network':
+            img_str = generate_network_graph(call_data)
+            img_data = base64.b64decode(img_str)
+            return Response(img_data, mimetype='image/png')
+            
+        elif vis_type == 'interactive':
+            html_content = generate_plotly_graph(call_data)
+            return Response(html_content, mimetype='text/html')
+            
+        elif vis_type == 'summary':
+            img_str = generate_incident_summary_plot(call_data)
+            img_data = base64.b64decode(img_str)
+            return Response(img_data, mimetype='image/png')
+            
+        else:
+            return jsonify({"status": "error", "message": f"Visualization type {vis_type} not supported"}), 400
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "status": "error", 
+            "message": str(e)
         }), 500
         
 if __name__ == "__main__":

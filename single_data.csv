@@ -1,0 +1,78 @@
+﻿id,nature,incidentno,start,address,created_at,updated_at,month,clean_address_EMS,latitude_EMS,longitude_EMS,address_reverse_EMS,Date_EMS,Unnamed: 0,fileName,AddressFinal,AddressExtracted,TEXT,clean_address_extracted,Date_target
+6.90307E+15,Chest Pain,28,1/1/21 01:08,317 CHELSEA ST DELAWARE,2/25/22 15:14,2/25/22 15:14,1,317 Chelsea St Delaware OH 43015 USA,40.2891681,-83.0726921,"317 Chelsea St, Delaware, OH 43015, USA",1/1/21 00:00,38,2021-01-01/4/CH4_03004448_51.txt,317 Chelsea Street,317 Chelsea Street Department D okay ty ANYBO fades 317 Chelsea Street Apartment D inside,"0002.0s 0002.5s SPEAKER_01:  Umm
+ 0003.3s 0006.7s SPEAKER_01:  I need you to do that for me now. I don't care, Tanya.
+ 0006.4s 0010.8s SPEAKER_00:  Okay, I have your number at 740-971-8962, is that correct?
+ 0011.1s 0011.5s SPEAKER_01:  Yeah.
+ 0011.9s 0013.0s SPEAKER_00:  Okay, and what's your name?
+ 0013.6s 0015.8s SPEAKER_01:  All in!
+ 0014.6s 0014.9s SPEAKER_00:  KARGER!
+ 0017.0s 0019.3s SPEAKER_00:  And you said, how old are you?
+ 0018.6s 0020.5s SPEAKER_01:  how are you going to go to the car
+ 0023.1s 0023.7s SPEAKER_00:  Howdy
+ 0023.1s 0024.0s SPEAKER_01:  How are you, Kevin?
+ 0024.4s 0025.0s SPEAKER_00:  27.
+ 0025.6s 0025.9s SPEAKER_01:  K
+ 0026.2s 0027.6s SPEAKER_00:  Are you still outside in the car?
+ 0028.2s 0029.5s SPEAKER_01:  No, I didn't leave yet.
+ 0030.2s 0036.2s SPEAKER_00:  Okay, yeah, we actually have medics coming to see you there at 317 Chelsea Street, Department D, okay? So you don't have to go anywhere.
+ 0039.7s 0041.8s SPEAKER_00:  Okay, I'm just going to ask you a few more questions.
+ 0042.8s 0045.0s SPEAKER_00:  Do you have any history of heart problems?
+ 0047.5s 0047.9s SPEAKER_01:  No.
+ 0049.7s 0052.1s SPEAKER_00:  And where is the painting or chef located at?
+ 0053.4s 0054.3s SPEAKER_01:  The mark starts.
+ 0055.1s 0056.5s SPEAKER_00:  Like, is it right, left, middle?
+ 0059.7s 0060.2s SPEAKER_01:  in the middle.
+ 0062.3s 0064.4s SPEAKER_00:  And was it sudden or gradual when it started?
+ 0067.2s 0068.5s SPEAKER_01:  Um, kinda.
+ 0070.9s 0072.8s SPEAKER_00:  Was it like all at once or gradually?
+ 0073.6s 0074.4s SPEAKER_01: ty ANYBO fades
+ 0075.6s 0076.4s SPEAKER_01:  Gradually.
+ 0079.4s 0080.1s SPEAKER_01:  It's very normal.
+ 0080.7s 0082.8s SPEAKER_01:  Okay.
+ 0083.9s 0086.8s SPEAKER_01:  I got my hat, this is the front of the neighborhood.
+ 0089.4s 0091.4s SPEAKER_00:  You have your hazards at the front of the neighborhood?
+ 0092.0s 0093.4s SPEAKER_01:  Yeah, it's my fault.
+ 0094.9s 0098.9s SPEAKER_00:  I thought you were at 317 Chelsea Street, Apartment D, inside of Apartment D.
+ 0102.6s 0103.7s SPEAKER_01:  Now I'm in a car.
+ 0104.5s 0108.7s SPEAKER_00:  Okay, so are you parked in front of the complex now? I want to do it. Come on.
+ 0109.7s 0111.2s SPEAKER_01:  Yes. Okay.
+ 0114.3s 0115.3s SPEAKER_01:  been hurry up.
+ 0114.5s 0114.8s SPEAKER_00:  How are you
+ 0116.0s 0121.1s SPEAKER_00:  Yeah, they marked in route to you. I'm putting on here that you're at the front of the complex in your car. What kind of vehicle are you in?
+ 0121.3s 0122.5s SPEAKER_01:  in the state
+ 0123.1s 0125.5s SPEAKER_00:  Is it two door or four door?
+ 0127.0s 0129.9s SPEAKER_01:  It's for us. What's the fun?
+ 0132.8s 0134.0s SPEAKER_00:  How many doors?
+ 0134.7s 0135.2s SPEAKER_01:  Fordar.
+ 0134.7s 0135.2s SPEAKER_01:  Fordar.
+ 0136.6s 0137.3s SPEAKER_00:  What year is it?
+ 0137.9s 0138.6s SPEAKER_01:  All seven.
+ 0139.6s 0140.0s SPEAKER_01:  Oh, yeah.
+ 0142.6s 0144.2s SPEAKER_00:  And are you feeling pain anywhere else?
+ 0145.6s 0146.3s SPEAKER_01:  My head.
+ 0148.1s 0149.1s SPEAKER_00:  Are you short of breath at all?
+ 0151.2s 0151.7s SPEAKER_01:  Yes.
+ 0152.7s 0154.5s SPEAKER_00:  And does that change when you breathe or move?
+ 0152.7s 0154.5s SPEAKER_00:  And does that change when you breathe or move?
+ 0158.7s 0159.2s SPEAKER_01:  Thank you.
+ 0160.3s 0162.3s SPEAKER_00:  He said the pain does change when you breathe or move.
+ 0164.7s 0165.0s SPEAKER_01:  Yeah.
+ 0167.2s 0169.1s SPEAKER_00:  Are you not dated or have you vomited?
+ 0170.9s 0172.9s SPEAKER_01:  Now, with our community.
+ 0173.5s 0174.4s SPEAKER_01:  Oh my god.
+ 0175.5s 0177.0s SPEAKER_01:  I bet the police is out of here.
+ 0177.6s 0180.9s SPEAKER_00:  Okay. All right. I'll go ahead and disconnect with you if you can make contact with them.
+ 0177.6s 0180.9s SPEAKER_00:  Okay. All right. I'll go ahead and disconnect with you if you can make contact with them.
+ 0182.4s 0183.4s SPEAKER_01:  Bye.",317 Chelsea St Delaware OH 43015 USA,1/1/21 00:00
+7.12345E+15,Shortness of Breath,42,3/5/21 09:45,128 MAIN AVENUE COLUMBUS,3/5/22 16:20,3/5/22 16:20,3,128 Main Ave Columbus OH 43215 USA,39.9612,-82.9988,"128 Main Ave, Columbus, OH 43215, USA",3/5/21 00:00,45,2021-03-05/7/AC2_04023456_52.txt,128 Main Avenue,128 Main Avenue Apartment B,"0001.2s 0001.5s SPEAKER_01: Hello, can you confirm your location?",128 Main Ave Columbus OH 43215 USA,3/5/21 00:00
+,,,,,,,,,,,,,,,,,"0002.0s 0002.8s SPEAKER_00: Yes, I'm at the corner of the building.",,
+,,,,,,,,,,,,,,,,,0003.3s 0004.0s SPEAKER_01: Are you experiencing any pain?,,
+,,,,,,,,,,,,,,,,,0004.5s 0005.1s SPEAKER_00: I'm having difficulty breathing and feel very anxious.,,
+,,,,,,,,,,,,,,,,,"0005.7s 0006.3s SPEAKER_01: Please stay calm, help is on the way.",,
+,,,,,,,,,,,,,,,,,"0006.8s 0007.2s SPEAKER_00: Alright, waiting for EMS to arrive.",,
+5.99E+15,Traffic Accident,73,4/12/21 14:30,450 OAK STREET FAIRFIELD,4/12/22 10:05,4/12/22 10:05,4,450 Oak St Fairfield OH 44827 USA,39.6,-84.35,"450 Oak St, Fairfield, OH 44827, USA",4/12/21 00:00,82,2021-04-12/9/AC2_05034567_53.txt,450 Oak Street,"450 Oak Street, near the intersection",0000.9s 0010.0s SPEAKER_00: This is a call regarding a vehicular accident.,450 Oak St Fairfield OH 44827 USA,4/12/21 00:00
+,,,,,,,,,,,,,,,,,"0010.5s 0011.3s SPEAKER_01: Yes, I witnessed the collision.",,
+,,,,,,,,,,,,,,,,,0012.0s 0013.0s SPEAKER_00: Can you describe the vehicles involved?,,
+,,,,,,,,,,,,,,,,,"0014.0s 0015.2s SPEAKER_01: Two cars collided on Oak Street, one is heavily damaged.",,
+,,,,,,,,,,,,,,,,,0016.0s 0017.0s SPEAKER_00: Emergency services are being dispatched immediately.,,
+,,,,,,,,,,,,,,,,,0018.0s 0019.0s SPEAKER_01: Please secure the area until help arrives.,,
