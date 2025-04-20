@@ -1,0 +1,39 @@
+Here’s the structured extraction of key details from the emergency call:
+
+### **Incident Details**  
+- **Type**: Shed fire (initially smoking, possibly extinguished)  
+- **Address**:  
+  - Confirmed: *11050 Fancure Road, Lot 257* (or *Fanta Road, Lot 2577*).  
+  - Alternate mention: *257 Champagne Court* (unconfirmed).  
+- **Current Status**:  
+  - No active flames; white/gray smoke visible.  
+  - Fire extinguisher used; cause unknown.  
+- **Structure**: Small yard shed (size unclear, not near main residence).  
+- **Threats**: Close to a trailer but not currently endangering other structures.  
+
+### **Caller Information**  
+- **Name**: Krista Hazel (or similar; partially unclear).  
+- **Phone**: *614-361-7793*.  
+
+### **Timeline & Actions**  
+- **Duration**: Fire burned for ~5 minutes before extinguisher use.  
+- **Response**: Caller’s cousin (from nearby trailer) alerted them; used caller’s extinguisher.  
+- **Access**: Best entry via *Lot 257*; shed is at the back with no rear access.  
+
+### **Hazards & Safety**  
+- **Hazardous Materials**: Unknown if present in shed.  
+- **Injuries/Danger**: No one inside or near shed; no immediate danger.  
+
+### **Dispatcher Instructions**  
+1. Keep everyone away; avoid retrieving items from shed.  
+2. Monitor for changes (e.g., reignition).  
+3. Have someone meet firefighters at the trailer’s front.  
+4. Call back if situation worsens.  
+
+### **Additional Notes**  
+- Caller worked third shift; was woken up for the emergency.  
+- COVID screening asked (likely protocol).  
+
+**Key Uncertainty**: Exact address variant (*Fancure/Fanta/Champagne*). Fire department en route to *11050 Fancure Road, Lot 257*.  
+
+Let me know if you need further refinement!
