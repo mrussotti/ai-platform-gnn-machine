@@ -1,39 +1,494 @@
-Here’s the structured extraction of key details from the emergency call:
-
-### **Incident Details**  
-- **Type**: Shed fire (initially smoking, possibly extinguished)  
-- **Address**:  
-  - Confirmed: *11050 Fancure Road, Lot 257* (or *Fanta Road, Lot 2577*).  
-  - Alternate mention: *257 Champagne Court* (unconfirmed).  
-- **Current Status**:  
-  - No active flames; white/gray smoke visible.  
-  - Fire extinguisher used; cause unknown.  
-- **Structure**: Small yard shed (size unclear, not near main residence).  
-- **Threats**: Close to a trailer but not currently endangering other structures.  
-
-### **Caller Information**  
-- **Name**: Krista Hazel (or similar; partially unclear).  
-- **Phone**: *614-361-7793*.  
-
-### **Timeline & Actions**  
-- **Duration**: Fire burned for ~5 minutes before extinguisher use.  
-- **Response**: Caller’s cousin (from nearby trailer) alerted them; used caller’s extinguisher.  
-- **Access**: Best entry via *Lot 257*; shed is at the back with no rear access.  
-
-### **Hazards & Safety**  
-- **Hazardous Materials**: Unknown if present in shed.  
-- **Injuries/Danger**: No one inside or near shed; no immediate danger.  
-
-### **Dispatcher Instructions**  
-1. Keep everyone away; avoid retrieving items from shed.  
-2. Monitor for changes (e.g., reignition).  
-3. Have someone meet firefighters at the trailer’s front.  
-4. Call back if situation worsens.  
-
-### **Additional Notes**  
-- Caller worked third shift; was woken up for the emergency.  
-- COVID screening asked (likely protocol).  
-
-**Key Uncertainty**: Exact address variant (*Fancure/Fanta/Champagne*). Fire department en route to *11050 Fancure Road, Lot 257*.  
-
-Let me know if you need further refinement!
+{
+  "metadata": {
+    "Unnamed: 0.1": 2,
+    "id": 6903070000000000,
+    "nature": "DOMESTIC",
+    "incidentno": 21965,
+    "start": "3/1/2021 0:32",
+    "address": "79 ROCK CREEK DR DELAWARE",
+    "created_at": "2/25/2022 15:14",
+    "updated_at": "2/25/2022 15:14",
+    "month": 3,
+    "clean_address_EMS": "79 Rockcreek Dr Delaware OH 43015 USA",
+    "latitude_EMS": 40.2995365,
+    "longitude_EMS": -83.098329,
+    "address_reverse_EMS": "75 Rockcreek Dr, Delaware, OH 43015, USA",
+    "Date_EMS": "3/1/2021 0:00",
+    "Unnamed: 0": 4833,
+    "fileName": "2021-03-01/6/CH6_05004634_51.txt",
+    "AddressFinal": "79 Rock Creek",
+    "AddressExtracted": "79 Rock Creek Drive 79 Rock Creek 79 Rock Creek correct",
+    "clean_address_extracted": "79 Rockcreek Dr Delaware OH 43015 USA",
+    "Date_target": "3/1/2021 0:00"
+  },
+  "transcript": [
+    {
+      "start": 10.0,
+      "end": 12.7,
+      "speaker": "SPEAKER_00",
+      "text": "911, what is the address of your emergency?"
+    },
+    {
+      "start": 12.7,
+      "end": 15.4,
+      "speaker": "SPEAKER_01",
+      "text": "79 Rock Creek Drive."
+    },
+    {
+      "start": 16.2,
+      "end": 17.6,
+      "speaker": "SPEAKER_00",
+      "text": "79 Rock Creek."
+    },
+    {
+      "start": 18.3,
+      "end": 18.8,
+      "speaker": "SPEAKER_01",
+      "text": "Yes."
+    },
+    {
+      "start": 19.2,
+      "end": 20.2,
+      "speaker": "SPEAKER_00",
+      "text": "What's going on there?"
+    },
+    {
+      "start": 20.6,
+      "end": 37.0,
+      "speaker": "SPEAKER_01",
+      "text": "My husband, I don't know what's going on, he was just attacking me because I have a cell phone and he thinks that all electronics is on."
+    },
+    {
+      "start": 21.1,
+      "end": 21.5,
+      "speaker": "SPEAKER_00",
+      "text": "Bye!"
+    },
+    {
+      "start": 37.6,
+      "end": 45.7,
+      "speaker": "SPEAKER_01",
+      "text": "Oh my goodness. Can you separate yourself from him? I can."
+    },
+    {
+      "start": 41.2,
+      "end": 41.5,
+      "speaker": "SPEAKER_00",
+      "text": "Thank you."
+    },
+    {
+      "start": 45.7,
+      "end": 48.2,
+      "speaker": "SPEAKER_00",
+      "text": "Can you put yourself in another room and lock the door?"
+    },
+    {
+      "start": 48.7,
+      "end": 55.7,
+      "speaker": "SPEAKER_01",
+      "text": "But I mean, now that we're in the room."
+    },
+    {
+      "start": 57.0,
+      "end": 58.0,
+      "speaker": "SPEAKER_00",
+      "text": "What is your name?"
+    },
+    {
+      "start": 57.0,
+      "end": 58.0,
+      "speaker": "SPEAKER_00",
+      "text": "What is your name?"
+    },
+    {
+      "start": 58.4,
+      "end": 62.2,
+      "speaker": "SPEAKER_01",
+      "text": "It's okay, I can't."
+    },
+    {
+      "start": 61.8,
+      "end": 63.4,
+      "speaker": "SPEAKER_00",
+      "text": "Okay, is there any weapons involved?"
+    },
+    {
+      "start": 64.0,
+      "end": 66.0,
+      "speaker": "SPEAKER_01",
+      "text": "No, mom."
+    },
+    {
+      "start": 68.7,
+      "end": 71.0,
+      "speaker": "SPEAKER_00",
+      "text": "Anybody been using any drugs or alcohol tonight?"
+    },
+    {
+      "start": 71.8,
+      "end": 75.8,
+      "speaker": "SPEAKER_01",
+      "text": "Yes, because I have a couple of feet here."
+    },
+    {
+      "start": 78.7,
+      "end": 83.2,
+      "speaker": "SPEAKER_01",
+      "text": "But she has a problem. She has a mental problem."
+    },
+    {
+      "start": 83.5,
+      "end": 85.4,
+      "speaker": "SPEAKER_00",
+      "text": "Okay, do you need a medic?"
+    },
+    {
+      "start": 85.4,
+      "end": 85.4,
+      "speaker": "SPEAKER_01",
+      "text": "you"
+    },
+    {
+      "start": 86.3,
+      "end": 86.5,
+      "speaker": "SPEAKER_01",
+      "text": "Oh, my God."
+    },
+    {
+      "start": 86.5,
+      "end": 87.2,
+      "speaker": "SPEAKER_00",
+      "text": "Yeah"
+    },
+    {
+      "start": 87.2,
+      "end": 87.3,
+      "speaker": "SPEAKER_01",
+      "text": "you"
+    },
+    {
+      "start": 87.8,
+      "end": 88.4,
+      "speaker": "SPEAKER_00",
+      "text": "Okay."
+    },
+    {
+      "start": 88.4,
+      "end": 89.5,
+      "speaker": "SPEAKER_01",
+      "text": "Thanks everybody."
+    },
+    {
+      "start": 90.1,
+      "end": 91.5,
+      "speaker": "SPEAKER_00",
+      "text": "Are you bleeding from anywhere?"
+    },
+    {
+      "start": 90.6,
+      "end": 91.1,
+      "speaker": "SPEAKER_01",
+      "text": "and"
+    },
+    {
+      "start": 92.5,
+      "end": 101.3,
+      "speaker": "SPEAKER_01",
+      "text": "No. No, not leaving from anywhere? OK. What's a good phone number for you? Pardon me? A good phone number for you?"
+    },
+    {
+      "start": 93.8,
+      "end": 97.2,
+      "speaker": "SPEAKER_00",
+      "text": "What's a good phone number for you?"
+    },
+    {
+      "start": 99.4,
+      "end": 101.2,
+      "speaker": "SPEAKER_00",
+      "text": "I got a phone number for you."
+    },
+    {
+      "start": 102.1,
+      "end": 103.5,
+      "speaker": "SPEAKER_01",
+      "text": "Bring it in on to!"
+    },
+    {
+      "start": 106.1,
+      "end": 106.9,
+      "speaker": "SPEAKER_01",
+      "text": "Please."
+    },
+    {
+      "start": 107.7,
+      "end": 109.7,
+      "speaker": "SPEAKER_01",
+      "text": "Let me see. Stop the piss."
+    },
+    {
+      "start": 111.0,
+      "end": 111.1,
+      "speaker": "SPEAKER_01",
+      "text": "you"
+    },
+    {
+      "start": 111.1,
+      "end": 112.9,
+      "speaker": "SPEAKER_00",
+      "text": "Miss, what's a good phone number for us?"
+    },
+    {
+      "start": 112.2,
+      "end": 113.8,
+      "speaker": "SPEAKER_01",
+      "text": "All right, no, it's still horrible."
+    },
+    {
+      "start": 114.5,
+      "end": 124.2,
+      "speaker": "SPEAKER_01",
+      "text": "mentorship."
+    },
+    {
+      "start": 124.9,
+      "end": 126.9,
+      "speaker": "SPEAKER_00",
+      "text": "Miss, what's a good phone number for you?"
+    },
+    {
+      "start": 126.0,
+      "end": 128.0,
+      "speaker": "SPEAKER_01",
+      "text": "for you."
+    },
+    {
+      "start": 128.3,
+      "end": 130.0,
+      "speaker": "SPEAKER_00",
+      "text": "A good phone number for you."
+    },
+    {
+      "start": 130.9,
+      "end": 136.8,
+      "speaker": "SPEAKER_01",
+      "text": "What is your"
+    },
+    {
+      "start": 136.0,
+      "end": 138.0,
+      "speaker": "SPEAKER_00",
+      "text": "What is your phone number?"
+    },
+    {
+      "start": 138.3,
+      "end": 140.3,
+      "speaker": "SPEAKER_01",
+      "text": "That's what I hate to talk about."
+    },
+    {
+      "start": 141.0,
+      "end": 143.1,
+      "speaker": "SPEAKER_00",
+      "text": "Can you get away from him and go to a different room?"
+    },
+    {
+      "start": 144.3,
+      "end": 148.6,
+      "speaker": "SPEAKER_01",
+      "text": "Well, we have only kitchen and room not for people."
+    },
+    {
+      "start": 144.3,
+      "end": 144.4,
+      "speaker": "SPEAKER_00",
+      "text": "We'll see you next time."
+    },
+    {
+      "start": 149.4,
+      "end": 150.5,
+      "speaker": "SPEAKER_01",
+      "text": "It is."
+    },
+    {
+      "start": 151.4,
+      "end": 152.5,
+      "speaker": "SPEAKER_01",
+      "text": "Thank you."
+    },
+    {
+      "start": 154.9,
+      "end": 155.5,
+      "speaker": "SPEAKER_01",
+      "text": "Okay."
+    },
+    {
+      "start": 156.9,
+      "end": 158.1,
+      "speaker": "SPEAKER_00",
+      "text": "What's your phone number?"
+    },
+    {
+      "start": 158.1,
+      "end": 158.1,
+      "speaker": "SPEAKER_01",
+      "text": "you"
+    },
+    {
+      "start": 159.1,
+      "end": 163.3,
+      "speaker": "SPEAKER_01",
+      "text": "937-407-9095."
+    },
+    {
+      "start": 163.3,
+      "end": 164.7,
+      "speaker": "SPEAKER_00",
+      "text": "Okay, and what was your name?"
+    },
+    {
+      "start": 165.5,
+      "end": 166.7,
+      "speaker": "SPEAKER_01",
+      "text": "She said I can't."
+    },
+    {
+      "start": 167.5,
+      "end": 168.1,
+      "speaker": "SPEAKER_00",
+      "text": "OK."
+    },
+    {
+      "start": 167.5,
+      "end": 168.1,
+      "speaker": "SPEAKER_00",
+      "text": "OK."
+    },
+    {
+      "start": 169.6,
+      "end": 171.1,
+      "speaker": "SPEAKER_00",
+      "text": "And you said you do need a medic?"
+    },
+    {
+      "start": 172.2,
+      "end": 182.6,
+      "speaker": "SPEAKER_01",
+      "text": "Yes, we need the magnet, they can have the safety to the hospital. He was in the hospital and they said that he has a brain that we could be healed."
+    },
+    {
+      "start": 177.8,
+      "end": 178.7,
+      "speaker": "SPEAKER_00",
+      "text": "OK."
+    },
+    {
+      "start": 183.4,
+      "end": 186.5,
+      "speaker": "SPEAKER_01",
+      "text": "You know, I'm talking to you, man."
+    },
+    {
+      "start": 184.3,
+      "end": 184.9,
+      "speaker": "SPEAKER_00",
+      "text": "Okay, bye!"
+    },
+    {
+      "start": 186.5,
+      "end": 188.0,
+      "speaker": "SPEAKER_00",
+      "text": "Are you injured at all?"
+    },
+    {
+      "start": 188.7,
+      "end": 191.7,
+      "speaker": "SPEAKER_01",
+      "text": "I don't know because he was..."
+    },
+    {
+      "start": 193.2,
+      "end": 200.0,
+      "speaker": "SPEAKER_01",
+      "text": "He was, you know, missing my arm and, you know, missing me."
+    },
+    {
+      "start": 201.0,
+      "end": 206.3,
+      "speaker": "SPEAKER_01",
+      "text": "Just because I have a cell phone, that's so... Oh, what is he doing?"
+    },
+    {
+      "start": 201.0,
+      "end": 206.3,
+      "speaker": "SPEAKER_01",
+      "text": "Just because I have a cell phone, that's so... Oh, what is he doing?"
+    },
+    {
+      "start": 210.3,
+      "end": 212.1,
+      "speaker": "SPEAKER_00",
+      "text": "Are there any weapons in the house at all?"
+    },
+    {
+      "start": 212.8,
+      "end": 213.5,
+      "speaker": "SPEAKER_01",
+      "text": "No."
+    },
+    {
+      "start": 213.5,
+      "end": 213.9,
+      "speaker": "SPEAKER_00",
+      "text": "Okay."
+    },
+    {
+      "start": 221.4,
+      "end": 223.6,
+      "speaker": "SPEAKER_00",
+      "text": "And that was 79 Rock Creek, correct?"
+    },
+    {
+      "start": 223.6,
+      "end": 225.0,
+      "speaker": "SPEAKER_01",
+      "text": "Yes, yes."
+    },
+    {
+      "start": 224.4,
+      "end": 225.1,
+      "speaker": "SPEAKER_00",
+      "text": "Yeah."
+    },
+    {
+      "start": 226.1,
+      "end": 231.0,
+      "speaker": "SPEAKER_00",
+      "text": "We got lots of help coming your way. Are you, do you have yourself locked in another room away from him?"
+    },
+    {
+      "start": 232.1,
+      "end": 240.0,
+      "speaker": "SPEAKER_01",
+      "text": "Well, we don't have a lock for now because this is a senior apartment, you know, in Kingston."
+    },
+    {
+      "start": 248.7,
+      "end": 252.7,
+      "speaker": "SPEAKER_00",
+      "text": "I have an officer marking an area, so I'm going to stay on the phone until he comes in, okay?"
+    },
+    {
+      "start": 253.3,
+      "end": 254.0,
+      "speaker": "SPEAKER_01",
+      "text": "Okay."
+    },
+    {
+      "start": 258.6,
+      "end": 260.9,
+      "speaker": "SPEAKER_00",
+      "text": "You should be with you here in just a couple minutes."
+    },
+    {
+      "
