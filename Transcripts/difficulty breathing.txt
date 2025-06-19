@@ -1,0 +1,75 @@
+"0011.0s 0012.9s SPEAKER_01:  911, what's the address of your emergency?
+ 0014.4s 0014.9s SPEAKER_00:  Hello.
+ 0015.7s 0016.9s SPEAKER_01:  This is 9-1.
+ 0018.0s 0023.6s SPEAKER_00:  I need the ambulance to my husband's oxygen levels.
+ 0024.3s 0030.0s SPEAKER_00:  fell down in the 50s and 60s and he does not feel good.
+ 0024.3s 0024.3s SPEAKER_01:  you
+ 0030.5s 0032.2s SPEAKER_01:  Okay, did you have any trouble breathing?
+ 0033.7s 0042.5s SPEAKER_00:  We just came yesterday from emergency room because his blood level was low and then they hit death.
+ 0043.7s 0047.4s SPEAKER_00:  The 79 Rock Creek Drive. 79 Rock Creek.
+ 0043.7s 0047.4s SPEAKER_00:  The 79 Rock Creek Drive. 79 Rock Creek.
+ 0048.3s 0048.6s SPEAKER_00:  Yes.
+ 0052.9s 0053.6s SPEAKER_01:  What is your name?
+ 0054.5s 0054.6s SPEAKER_01:  you
+ 0054.6s 0055.5s SPEAKER_00:  Suzhia Nakías cigarettes
+ 0056.1s 0057.4s SPEAKER_01:  Alright, Susan, what's your phone number?
+ 0058.6s 0062.4s SPEAKER_00:  937-407-9091.
+ 0062.8s 0068.4s SPEAKER_01:  All right, and my partner is getting the medics started your way already. This is 79 Rock Creek. I just have a few more questions for you, okay?
+ 0069.0s 0070.8s SPEAKER_01:  Okay. How old is your husband?
+ 0071.9s 0073.3s SPEAKER_01:  It's cold.
+ 0073.3s 0074.4s SPEAKER_00:  Alright, he's conscious.
+ 0075.6s 0077.0s SPEAKER_00:  Yes, for now, yes.
+ 0077.9s 0088.0s SPEAKER_00:  because I keep doing exercise and breathing to bring up that oxygen, but I cannot go past 70.
+ 0088.0s 0088.1s SPEAKER_01:  We'll see you next week.
+ 0089.0s 0089.5s SPEAKER_01:  Ah.
+ 0090.1s 0094.4s SPEAKER_01:  Is it actually hurting him to breathe, or is he just kind of having difficulty breathing?
+ 0095.1s 0105.3s SPEAKER_00:  Well, he has an emphysema and all kinds of problems, you know, like a lung cancer and all those kinds of stuff.
+ 0095.1s 0105.3s SPEAKER_00:  Well, he has an emphysema and all kinds of problems, you know, like a lung cancer and all those kinds of stuff.
+ 0105.3s 0105.8s SPEAKER_01:  Okay.
+ 0106.3s 0107.9s SPEAKER_00:  Does he have an inhaler that he can use?
+ 0108.9s 0113.6s SPEAKER_00:  Well, I just gave him a treatment with those nebulizers.
+ 0113.6s 0115.1s SPEAKER_01:  Okay, I just had a breathing treatment.
+ 0116.1s 0116.5s SPEAKER_00:  Yeah.
+ 0119.7s 0121.8s SPEAKER_01:  Alright, if you're able to speak to you at all, Susana.
+ 0123.2s 0123.2s SPEAKER_01:  you
+ 0123.2s 0125.1s SPEAKER_00:  Pardon me? Yeah.
+ 0124.0s 0124.0s SPEAKER_01:  you
+ 0125.9s 0129.7s SPEAKER_00:  Yeah, he's able to speak, but all what he's telling me.
+ 0130.5s 0140.6s SPEAKER_00:  Let me see. He is 68 right now. But all what he is telling me, I don't feel good. I don't feel good.
+ 0130.5s 0140.6s SPEAKER_00:  Let me see. He is 68 right now. But all what he is telling me, I don't feel good. I don't feel good.
+ 0137.8s 0138.2s SPEAKER_01:  feel.
+ 0140.6s 0140.6s SPEAKER_01:  you
+ 0143.1s 0144.8s SPEAKER_01:  I can't just sit up to be able to breathe.
+ 0146.3s 0148.7s SPEAKER_00:  Well, he's heating up right now.
+ 0149.4s 0163.4s SPEAKER_00:  Yesterday he was all day sleeping and I tried to wake him up and talk to him. He would go way back to sleep and I knew that something isn't right.
+ 0163.1s 0163.5s SPEAKER_01:  right.
+ 0164.2s 0164.2s SPEAKER_00:  you
+ 0164.2s 0167.7s SPEAKER_01:  And you said that he has been hospitalized recently.
+ 0168.9s 0187.2s SPEAKER_00:  Oh yeah, so many times. He was in Marion Hospital. He was in Ohio State Hospital. Yesterday, we were in emergency room because his blood level doctor called after blood analysis that his hemoglobin was low.
+ 0187.9s 0198.1s SPEAKER_00:  But I was able to, you know, at home I was giving him some supplements and I made some beef juice. So it came up.
+ 0198.7s 0201.3s SPEAKER_00:  He's believing he's not...
+ 0202.1s 0203.7s SPEAKER_00:  you know the best.
+ 0204.6s 0205.6s SPEAKER_00:  I don't know.
+ 0206.6s 0215.9s SPEAKER_00:  And you know he has that dharmotard but he doesn't have a power to blow in it. And I was trying to get him blow, blow.
+ 0216.7s 0218.7s SPEAKER_00:  No, you know he can.
+ 0219.2s 0219.6s SPEAKER_01:  Okay.
+ 0220.6s 0220.6s SPEAKER_00:  you
+ 0220.6s 0221.5s SPEAKER_01:  and then, um...
+ 0222.1s 0223.3s SPEAKER_01:  Do you have any heart problems?
+ 0225.3s 0239.3s SPEAKER_00:  Oh, he has a heart failure, he has a kidney failure, but we are managing all those, but his breathing never gets better.
+ 0239.3s 0242.5s SPEAKER_01:  Okay. Does he take any kind of asthma medication?
+ 0244.6s 0245.7s SPEAKER_00:  What medication?
+ 0246.1s 0246.7s SPEAKER_01:  asthma.
+ 0247.8s 0254.2s SPEAKER_00:  No, she doesn't have asthma. She has COPD and she has three in sailors.
+ 0257.0s 0260.5s SPEAKER_01:  Alright, and then if you're having a hard time swallowing at all, can you tell?
+ 0261.4s 0262.9s SPEAKER_00:  No, no.
+ 0264.5s 0265.6s SPEAKER_01:  And then, um...
+ 0268.9s 0273.0s SPEAKER_01:  My last question for you just with everything with the pandemic. Has anyone there been showing any COVID symptoms?
+ 0274.1s 0282.2s SPEAKER_00:  Well, no, she never had COVID and we both got vaccine first and second doses.
+ 0282.5s 0297.6s SPEAKER_01:  Okay, perfect. All right, well, Suzanne, the medics have marked and wrapped to you there. Just try and keep your husband as comfortable as you can, okay? Okay. Just don't have him exert himself to talk anymore or anything like that. And if the instructions on the inhaler is allowed...
+ 0298.3s 0307.8s SPEAKER_01:  Keep having him use those until they get there, okay? But just as they're instructed. And then if anything changes before they get there, I want you to call me back, but they'll be there shortly, okay?
+ 0298.3s 0307.8s SPEAKER_01:  Keep having him use those until they get there, okay? But just as they're instructed. And then if anything changes before they get there, I want you to call me back, but they'll be there shortly, okay?
+ 0308.4s 0310.1s SPEAKER_00:  Okay, thank you so much.
+ 0310.1s 0311.0s SPEAKER_01:  You're welcome.
+ 0311.8s 0312.3s SPEAKER_00:  Bye.
+ 0313.3s 0314.1s SPEAKER_00:  like to film."

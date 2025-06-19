@@ -1,0 +1,51 @@
+"0010.9s 0013.1s SPEAKER_00:  911, what's the address of your emergency?
+ 0013.3s 0018.8s SPEAKER_01:  11050 Fancure Road, lot 257.
+ 0021.1s 0025.0s SPEAKER_00:  11050 Fanta Road, lot 2577.
+ 0025.4s 0026.0s SPEAKER_01:  Yes.
+ 0027.1s 0030.0s SPEAKER_01:  It might be like 257, Champagne, Court.
+ 0027.1s 0030.0s SPEAKER_01:  It might be like 257, Champagne, Court.
+ 0032.0s 0033.7s SPEAKER_01:  just confirming it now is all.
+ 0034.5s 0036.1s SPEAKER_01:  All right, go for it. Keep your gun fire on the back.
+ 0037.1s 0038.8s SPEAKER_00:  Bonfire on the back you said.
+ 0039.3s 0041.3s SPEAKER_01:  The shed caught on fire
+ 0041.3s 0042.0s SPEAKER_00:  Shed.
+ 0044.3s 0045.9s SPEAKER_00:  Is it actively burning right now?
+ 0046.4s 0053.6s SPEAKER_01:  It's smoking. They've been out with a fire extinguisher. They're not 100% sure. We don't even know what caused it.
+ 0057.9s 0058.2s SPEAKER_01:  What's your name?
+ 0059.2s 0060.2s SPEAKER_01:  Uh, Krista?
+ 0062.0s 0062.6s SPEAKER_00:  in your life.
+ 0063.3s 0063.8s SPEAKER_01:  Hazel.
+ 0065.4s 0067.1s SPEAKER_00:  and your phone number in case we're disconnected.
+ 0067.6s 0071.8s SPEAKER_01:  614-361-7793.
+ 0072.7s 0081.7s SPEAKER_00:  Okay, so no flames right now, it's just smoking because someone used a fire extinguisher on it? Correct. Okay, and what color is the smoke right now?
+ 0082.6s 0084.3s SPEAKER_01:  like white, gray.
+ 0090.5s 0094.4s SPEAKER_00:  How many floors? Is it just like a small shed? Like how big are we talking?
+ 0095.2s 0100.4s SPEAKER_01:  Yeah, just like a yard shed. No bigger than like, I'm not 100% sure, but.
+ 0101.8s 0107.3s SPEAKER_00:  Is it threatening anything like any any other homes or anything else?
+ 0101.9s 0102.0s SPEAKER_01:  Thanks for watching!
+ 0107.3s 0109.6s SPEAKER_01:  I mean it's close to a trailer but no.
+ 0112.9s 0116.6s SPEAKER_00:  You wouldn't be concerned about it catching something else on fire at this point.
+ 0117.3s 0121.5s SPEAKER_01:  No. Okay. I mean, it's not like finding your...
+ 0122.9s 0125.0s SPEAKER_01:  but we don't know if there's anything that's gonna.
+ 0125.7s 0126.9s SPEAKER_01:  Bro, you ignite or nothing.
+ 0127.1s 0129.5s SPEAKER_00:  Yeah, for sure. And there's no one inside of it currently, correct?
+ 0130.0s 0130.7s SPEAKER_01:  No.
+ 0132.8s 0139.8s SPEAKER_00:  What's going to be the best way to access this shed? Do they just pull in to Lot 257 like in front of it and it'll be around back?
+ 0139.5s 0142.8s SPEAKER_01:  Yeah, because there's no access towards the back. Yes, correct.
+ 0146.8s 0148.5s SPEAKER_00:  How long has this fire been going on for?
+ 0149.7s 0160.5s SPEAKER_01:  I maybe like five minutes he ran inside and said or net His cousin is the one that lives across the street from us. He said his trailer his sheds on fire
+ 0161.1s 0168.1s SPEAKER_01:  So he grabbed our fire extinguisher and ran over. And I was beating on the door trying to get him up because he worked third shift. So.
+ 0170.6s 0171.0s SPEAKER_00:  Okay.
+ 0171.7s 0175.5s SPEAKER_00:  And no hazardous materials inside of that shed, right? Like, no-
+ 0175.5s 0179.0s SPEAKER_01:  I'm not 100% sure.
+ 0184.5s 0188.8s SPEAKER_00:  How long would you say it burns? You do think it burns for five minutes before it was extinguished?
+ 0189.8s 0191.9s SPEAKER_01:  Um, I'm not yet probably.
+ 0193.2s 0194.6s SPEAKER_01:  I mean, it was just smoking.
+ 0196.1s 0199.2s SPEAKER_01:  I didn't see him flying as I was trying to get him out.
+ 0199.3s 0199.9s SPEAKER_00:  Yeah, I understand.
+ 0201.1s 0201.5s SPEAKER_00:  Okay.
+ 0202.6s 0206.8s SPEAKER_00:  And no one's currently near it right now. No one's in danger, correct?
+ 0207.3s 0208.8s SPEAKER_01:  No, no one's in danger.
+ 0209.8s 0238.2s SPEAKER_00:  All right, well, we've already got the fire department started there, the 11050 Fanshawe Road lot 257. So in the meantime, just make sure you're not endangering yourself. Keep everyone away at this point. If it's only, if you're only seeing that white smoke right now and it doesn't appear to be burning, just let it do its thing for now. Make sure no one's going into the shed to try and retrieve anything. And then any signs or symptoms of COVID for anyone in the area.
+ 0242.7s 0251.1s SPEAKER_00:  Okay, and if someone can just meet the fire department out at the front of the trailer, they'd appreciate that. Definitely will. If anything changes, just give us a call back, okay?
+ 0251.6s 0252.3s SPEAKER_01:  Thank you."

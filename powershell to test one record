@@ -1,0 +1,50 @@
+###########################################################################
+#  Smoke‑test for POST /process_911_call
+#  – Reads a .txt transcript
+#  – Base‑64‑encodes it (exactly like the website)
+#  – Sends JSON to the Flask server
+#  – Prints the full JSON and a one‑liner summary
+###########################################################################
+
+# -------- 1.  Local transcript ------------------------------------------
+$transcriptPath = '.\Transcripts\fire transcript.txt'   # <- change if needed
+if (-not (Test-Path $transcriptPath)) {
+    Write-Error "Transcript file '$transcriptPath' not found."; return
+}
+
+# -------- 2.  Encode to Base‑64 -----------------------------------------
+$transcript = Get-Content $transcriptPath -Raw
+$bytes      = [System.Text.Encoding]::UTF8.GetBytes($transcript)
+$transB64   = [Convert]::ToBase64String($bytes)
+
+# -------- 3.  JSON body --------------------------------------------------
+$payload = @{ transcript_b64 = $transB64 } | ConvertTo-Json -Compress
+
+# If your site adds auth headers, replicate them here, e.g.:
+# $headers = @{ "x-api-key" = "YOUR‑TEST‑KEY" }
+$headers = @{}
+
+# -------- 4.  POST -------------------------------------------------------
+try {
+    $resp = Invoke-RestMethod `
+              -Uri         'http://127.0.0.1:5000/process_911_call' `
+              -Method      POST `
+              -Body        $payload `
+              -ContentType 'application/json' `
+              -Headers     $headers
+} catch {
+    Write-Warning "HTTP error ➜ $($_.Exception.Message)"
+    return
+}
+
+# -------- 5.  Output -----------------------------------------------------
+Write-Host "------- Raw JSON from server -------"
+$resp | ConvertTo-Json -Depth 10 | Write-Host
+
+Write-Host "`n------- Quick glance -------"
+$resp | Select-Object status,
+                     @{n='nature';  e={ $_.call_data.incident.nature }},
+                     @{n='summary'; e={ $_.call_data.incident.summary }},
+                     @{n='persons'; e={ $_.call_data.persons.Count }} |
+           Format-List
+###########################################################################

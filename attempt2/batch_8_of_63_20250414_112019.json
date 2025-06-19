@@ -1,0 +1,1346 @@
+{
+  "batch": 8,
+  "total_batches": 63,
+  "batch_size": 20,
+  "processed_successfully": 20,
+  "batch_errors": 0,
+  "results": [
+    {
+      "incident": {
+        "summary": "A resident at an assisted living facility is experiencing weakness, shakiness, and difficulty standing, with slightly elevated sugar and blood pressure levels.",
+        "timestamp": "",
+        "transcript": "0002.0s 0004.1s SPEAKER_00:  It's definitely 276.\n 0004.7s 0015.2s SPEAKER_00:  We're at Assisted Living. The phone number here is 740-201-3335.\n 0016.5s 0017.6s SPEAKER_00:  Okay, and what's your name?\n 0018.3s 0019.5s SPEAKER_00:  My name is Kelly.\n 0020.1s 0037.4s SPEAKER_00:  OK, and what's going on out there? She is not acting right. Vitals are pretty good. Sugar's up a tad. Blood pressure's off a tad. But she's just really shaky. She can't stand up.\n 0038.1s 0046.5s SPEAKER_00:  She was really hard to arouse this morning to get up, so I really think she needs to go out. She is conscious and breathing though.\n 0047.1s 0057.2s SPEAKER_00:  Yes, she's breathing fine. Everything is checking out pretty good, except she is just real weak in her legs and super jittery.\n 0062.1s 0063.7s SPEAKER_00:  She's just not acting right.\n 0065.1s 0066.3s SPEAKER_00:  Um, how old is she?\n 0067.5s 0074.3s SPEAKER_00:  She is seven. OK. Let me pull her part. I'm sorry. I just kind of came in and. Oh, that's OK.\n 0074.2s 0075.7s SPEAKER_01:  Are you with her right now?\n 0075.8s 0079.5s SPEAKER_00:  No, I'm in the nurses station right now.\n 0080.2s 0083.1s SPEAKER_00:  Huh? She's 88. I was close.\n 0080.2s 0083.1s SPEAKER_00:  Huh? She's 88. I was close.\n 0086.9s 0087.4s SPEAKER_01:  Um.\n 0088.0s 0091.2s SPEAKER_01:  Did you happen to have her sugar level or her blood pressure?\n 0091.0s 0095.0s SPEAKER_00:  Yes, her sugar level was 138.\n 0095.6s 0101.8s SPEAKER_00:  and I don't have the blood pressure with me right now, but it was like 140 something over 55.\n 0104.9s 0108.4s SPEAKER_01:  Okay, and is her door going to be unlocked so the medics can go in?\n 0108.4s 0118.1s SPEAKER_00:  Yeah, they need to come in through the AL1 door, and we'll take them up the elevator to her room.\n 0119.1s 0122.1s SPEAKER_01:  Okay. Has she had any COVID symptoms?\n 0122.8s 0124.0s SPEAKER_01:  Um, no.\n 0123.4s 0124.0s SPEAKER_00:  No!\n 0124.6s 0125.5s SPEAKER_00:  Not at all.\n 0124.7s 0125.6s SPEAKER_01:  Not at all.\n 0128.2s 0131.9s SPEAKER_01:  And is she naturally a diabetic or is she just her sugar with awe?\n 0131.9s 0134.4s SPEAKER_00:  Her sugar was just off. Yeah.\n 0133.9s 0134.2s SPEAKER_01:  Yeah.\n 0135.9s 0137.3s SPEAKER_00:  Alright, well we have got seven rounds.\n 0136.2s 0146.5s SPEAKER_01:  We have got seven routes to you guys at 100 Delaware Crossing West, number 276. But if anything changes or worsens before they get there, just call us back, okay?\n 0146.5s 0150.2s SPEAKER_00:  You betcha. Thank you so very much. Bye-bye.",
+        "nature": "Medical emergency (weakness, shakiness, elevated sugar and blood pressure)",
+        "severity": "Moderate (conscious and breathing but unable to stand)",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Kelly reports a resident at the assisted living facility is not acting right, with symptoms including shakiness, weakness, and slightly elevated sugar and blood pressure levels.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Kelly",
+          "phone": "740-201-3335",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "",
+          "conditions": "Sugar level was 138, blood pressure was 140 something over 55",
+          "age": "88",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, number 276",
+        "type": "Assisted Living facility",
+        "features": "AL1 door, elevator access to her room",
+        "time": ""
+      },
+      "row_index": 140,
+      "metadata": {
+        "Unnamed: 0.1": "183",
+        "id": "6903070000000000.0",
+        "nature": "Sick Person",
+        "incidentno": "7742",
+        "start": "1/23/2021 6:44",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "1/23/2021 0:00",
+        "Unnamed: 0": "1845",
+        "fileName": "2021-01-23/6/CH6_050043A6_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West number",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "1/23/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 95-year-old woman is experiencing acute pain and bruising after a fall a couple of days ago.",
+        "timestamp": "",
+        "transcript": " 0009.0s 0009.7s SPEAKER_00:  I feel so sad.\n 0010.9s 0013.1s SPEAKER_00:  911, what is the address of the emergency?\n 0013.1s 0013.1s SPEAKER_01:  you\n 0013.1s 0013.1s SPEAKER_01:  you\n 0013.9s 0016.8s SPEAKER_01:  100 Delaware crossing west.\n 0017.7s 0018.8s SPEAKER_00:  Okay, and what is your name?\n 0019.5s 0020.0s SPEAKER_01:  Betty?\n 0020.6s 0021.2s SPEAKER_01:  for guessing.\n 0021.8s 0023.9s SPEAKER_00:  and the phone number that you've called from.\n 0024.8s 0029.1s SPEAKER_01:  740-201-3336.\n 0029.8s 0031.6s SPEAKER_00:  And is there an apartment number?\n 0032.0s 0035.2s SPEAKER_01:  Yes, it's 3,076.\n 0035.9s 0037.8s SPEAKER_00:  Okay, what's going on today?\n 0038.6s 0067.1s SPEAKER_01:  I get called up here. I guess this person had fallen a couple days ago, and she's having quite a bit of pain today. This evening, they called me. I come up and examined her. She's having acute pain with movement on the left rib cage area. And she has some small bruising in the lower back there, kind of axillary area. Then she has the lower left quadrant.\n 0067.9s 0074.9s SPEAKER_01:  would be distal there by the pelvic area. She's complaining of pain too.\n 0076.0s 0079.5s SPEAKER_01:  And so I called the doctor and he wondered, sent in for some x-rays.\n 0080.0s 0082.2s SPEAKER_00:  So you are not with this patient right now.\n 0082.5s 0086.0s SPEAKER_01:  I'm outside of her room. Oh, you are? Okay. Yes.\n 0084.4s 0087.9s SPEAKER_00:  Oh, you are. Okay. Yes. Yes. Okay. Are you a nurse?\n 0088.6s 0088.9s SPEAKER_01:  Yes.\n 0089.1s 0089.6s SPEAKER_00:  Okay.\n 0090.4s 0091.4s SPEAKER_00:  How old is the patient?\n 0091.4s 0091.5s SPEAKER_01:  .\n 0092.2s 0097.6s SPEAKER_01:  She is 95. I think 95, around 95, 95 or 96.\n 0097.6s 0101.1s SPEAKER_00:  Okay, and so you have a way to get in, correct?\n 0101.8s 0101.9s SPEAKER_00:  you\n 0101.9s 0111.5s SPEAKER_01:  Yes, there will be somebody here to be able to let them in. She'll meet them down at the front door. The front door, just come in the front door. She will meet you down there and bring them up.\n 0111.9s 0116.4s SPEAKER_00:  meet at the front door. Okay. All right, I will let you go. Thank you.\n 0113.4s 0114.0s SPEAKER_01:  Uh-huh.\n 0116.7s 0118.3s SPEAKER_01:  Okay, thank you. Bye-bye.",
+        "nature": "Fall-related injuries",
+        "severity": "Moderate (acute pain and bruising)",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Betty calls 911 to report a 95-year-old woman experiencing pain and bruising after a fall.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Betty",
+          "phone": "740-201-3336",
+          "role": "Caller, nurse",
+          "relationship": "Nurse attending to the patient",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "",
+          "conditions": "Acute pain with movement on the left rib cage area, small bruising in the lower back and axillary area, pain in the lower left quadrant and pelvic area",
+          "age": "95 or 96",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware crossing west, apartment 3076",
+        "type": "Residence",
+        "features": "",
+        "time": "This evening"
+      },
+      "row_index": 141,
+      "metadata": {
+        "Unnamed: 0.1": "184",
+        "id": "6903070000000000.0",
+        "nature": "Injured From A Fall",
+        "incidentno": "8764",
+        "start": "1/25/2021 19:37",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "1/25/2021 0:00",
+        "Unnamed: 0": "2041",
+        "fileName": "2021-01-25/4/CH4_03004607_51.txt",
+        "AddressFinal": "100 Delaware crossing",
+        "AddressExtracted": "100 Delaware crossing 95 around 95 or",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "1/25/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 94-year-old resident is experiencing symptoms of a heart attack at an assisted living facility.",
+        "timestamp": "",
+        "transcript": "0010.1s 0012.5s SPEAKER_01:  911. What is the address of your emergency?\n 0012.9s 0014.8s SPEAKER_00:  100 Delaware Crossing West.\n 0016.3s 0016.3s SPEAKER_00:  you\n 0016.3s 0019.0s SPEAKER_01:  All right. And what's the phone number you called from in case you are disconnected?\n 0016.3s 0019.0s SPEAKER_01:  All right. And what's the phone number you called from in case you are disconnected?\n 0019.8s 0023.2s SPEAKER_00:  740-201-3335.\n 0025.5s 0026.2s SPEAKER_00:  And what's your name?\n 0027.0s 0027.5s SPEAKER_00:  Suzanne.\n 0027.5s 0027.6s SPEAKER_01:  you\n 0029.7s 0030.4s SPEAKER_01:  and tell me exactly\n 0030.0s 0030.8s SPEAKER_00:  I don't exactly what's happened.\n 0031.5s 0035.0s SPEAKER_00:  I have a resident who believes he's having a heart attack.\n 0039.1s 0042.8s SPEAKER_01:  And are you a nurse? Yes, I am. Tell me how old is the resident.\n 0043.2s 0045.5s SPEAKER_00:  The resident is 94 years old.\n 0043.2s 0045.5s SPEAKER_00:  The resident is 94 years old.\n 0047.0s 0055.8s SPEAKER_00:  and we'll make some things in a heart attack. He's symptomatic. He's having pressure, chest pain down his arm. He has a history of MI also.\n 0056.4s 0056.9s SPEAKER_00:  Um.\n 0058.6s 0059.4s SPEAKER_00:  How would it be?\n 0060.4s 0064.8s SPEAKER_00:  He's 94. His date of birth is 11-17-19-25.\n 0066.4s 0071.4s SPEAKER_00:  All right, what room is he in there? He's going to be in the assisted living. He's in room 241.\n 0072.6s 0073.6s SPEAKER_00:  and what door should be coming.\n 0074.2s 0080.0s SPEAKER_00:  Go ahead and come to the A-L door, the A-1 door. I'll have somebody be there.\n 0080.0s 0080.0s SPEAKER_01:  you\n 0081.1s 0085.4s SPEAKER_01:  Alright, we do have a minute to start it that way for you, okay? Thank you.",
+        "nature": "heart attack",
+        "severity": "life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a 94-year-old resident is having a heart attack at an assisted living facility.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Suzanne",
+          "phone": "740-201-3335",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "resident",
+          "conditions": "history of MI (myocardial infarction)",
+          "age": "94",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West",
+        "type": "assisted living facility",
+        "features": "room 241, A-L door (A-1 door)",
+        "time": ""
+      },
+      "row_index": 142,
+      "metadata": {
+        "Unnamed: 0.1": "185",
+        "id": "6903070000000000.0",
+        "nature": "Heart Problems",
+        "incidentno": "9197",
+        "start": "1/27/2021 4:01",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "1/27/2021 0:00",
+        "Unnamed: 0": "2186",
+        "fileName": "2021-01-27/4/CH4_0300461F_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "1/27/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at Willowbrook at Delaware Run is hard to arouse, with low oxygen levels, confusion, and altered behavior.",
+        "timestamp": "",
+        "transcript": "0013.9s 0016.1s SPEAKER_01:  911, what's the address of the emergency?\n 0017.0s 0022.0s SPEAKER_00:  Yes, it is Willowbrook at Delaware Run, 100 Delaware Crossing.\n 0023.4s 0024.3s SPEAKER_00:  And what's your name?\n 0024.3s 0024.3s SPEAKER_01:  you\n 0025.0s 0026.2s SPEAKER_00:  My name is Kelly.\n 0026.8s 0027.9s SPEAKER_01:  and tell me exactly what's happening.\n 0026.8s 0028.2s SPEAKER_00:  and tell me exactly what's happened.\n 0029.0s 0046.6s SPEAKER_00:  The resident is hard to arouse. Her O2SACs have gone down to 88%. We just put her on oxygen and the O2SACs did come up, but she is just very confused and not acting quite herself.\n 0047.3s 0047.9s SPEAKER_01:  Okay.\n 0047.3s 0047.9s SPEAKER_01:  Okay.\n 0052.0s 0055.4s SPEAKER_01:  And what room is she in? She is in...\n 0055.4s 0058.0s SPEAKER_00:  room 258.\n 0062.6s 0070.0s SPEAKER_01:  You said 258? 258. And how old is she? Approximately.\n 0070.0s 0072.0s SPEAKER_00:  She is 88.\n 0075.4s 0078.3s SPEAKER_01:  And what door do the medics need to go to?\n 0077.8s 0082.5s SPEAKER_00:  Go to the A1 and then they can hit that first elevator there.\n 0088.3s 0090.0s SPEAKER_01:  And can I get the phone number you're calling from?\n 0090.0s 0098.1s SPEAKER_00:  Sure, it's 740-201-3335.\n 0090.0s 0098.1s SPEAKER_00:  Sure, it's 740-201-3335.\n 0099.2s 0101.6s SPEAKER_01:  Is there a nurse with her?\n 0102.3s 0102.8s SPEAKER_01:  Yeah.\n 0103.6s 0108.6s SPEAKER_01:  Okay, well we've got the medics on their way. Thank you very much. You're welcome.\n 0108.6s 0109.8s SPEAKER_00:  Bye-bye.",
+        "nature": "Medical emergency (low oxygen levels, confusion)",
+        "severity": "Potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Kelly reports a resident at Willowbrook at Delaware Run is hard to arouse, with low oxygen levels and confusion.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Kelly",
+          "phone": "740-201-3335",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "resident",
+          "relationship": "",
+          "conditions": "low oxygen levels, confusion",
+          "age": "88",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing, Willowbrook at Delaware Run",
+        "type": "residence",
+        "features": "room 258, A1 entrance, first elevator",
+        "time": ""
+      },
+      "row_index": 143,
+      "metadata": {
+        "Unnamed: 0.1": "186",
+        "id": "6903070000000000.0",
+        "nature": "Difficulty Breathing",
+        "incidentno": "10034",
+        "start": "1/29/2021 8:52",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "1/29/2021 0:00",
+        "Unnamed: 0": "2328",
+        "fileName": "2021-01-29/3/CH3_0200435A_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "Run 100 Delaware Crossing",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "1/29/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at Willowbrook fell to the floor and hit her head, with a history of seizures, and is currently non-responsive.",
+        "timestamp": "",
+        "transcript": "0004.5s 0006.0s SPEAKER_00:  Bye.\n 0008.4s 0009.3s SPEAKER_00:  What do you want me to tell him?\n 0010.7s 0013.2s SPEAKER_00:  911. What's the address of your emergency?\n 0013.9s 0015.6s SPEAKER_00:  Hi.\n 0016.1s 0019.0s SPEAKER_01:  Hi, this is Janet Aran here at Willowbrook.\n 0019.7s 0023.6s SPEAKER_01:  We have a patient or resident here that fell to the floor and hit her head.\n 0024.2s 0027.4s SPEAKER_01:  She has history of seizures. I need a squad.\n 0028.7s 0029.4s SPEAKER_01:  For what?\n 0030.2s 0031.3s SPEAKER_01:  What's the address?\n 0030.4s 0031.0s SPEAKER_00:  It's the ag...\n 0032.2s 0033.4s SPEAKER_01:  100.\n 0034.1s 0035.8s SPEAKER_01:  Delaware Crossing West.\n 0034.1s 0035.8s SPEAKER_01:  Delaware Crossing West.\n 0037.0s 0038.6s SPEAKER_00:  Okay, an apartment number.\n 0040.3s 0042.1s SPEAKER_01:  Memory care.\n 0042.8s 0045.4s SPEAKER_01:  Excess assisted living\n 0045.4s 0045.6s SPEAKER_00:  you\n 0046.8s 0049.0s SPEAKER_00:  Okay, do you have an apartment number?\n 0049.0s 0051.8s SPEAKER_01:  No, because this is memory care unit.\n 0053.1s 0053.5s SPEAKER_01:  We're\n 0053.5s 0057.5s SPEAKER_00:  Department. Just 100 Delaware Crossing West.\n 0057.5s 0057.9s SPEAKER_01:  Yes.\n 0059.1s 0060.9s SPEAKER_01:  and they come to the lobby.\n 0062.7s 0063.2s SPEAKER_01:  Okay.\n 0064.2s 0066.7s SPEAKER_01:  or A1 door, we'll let them in.\n 0068.3s 0072.3s SPEAKER_00:  Okay, and A1-DOR oxygen.\n 0074.1s 0075.9s SPEAKER_00:  come to the 8-1 door.\n 0076.4s 0077.9s SPEAKER_01:  H is in Howard.\n 0078.5s 0079.2s SPEAKER_01:  one\n 0080.1s 0082.5s SPEAKER_01:  H1 is the medical...\n 0082.3s 0082.9s SPEAKER_00:  one.\n 0083.6s 0084.1s SPEAKER_00:  door.\n 0083.6s 0084.1s SPEAKER_00:  door.\n 0084.7s 0084.7s SPEAKER_01:  you\n 0084.7s 0088.1s SPEAKER_00:  Okay, what's your phone number in case we get disconnected?\n 0088.7s 0090.9s SPEAKER_01:  740\n 0091.5s 0092.7s SPEAKER_01:  grid\n 0094.6s 0095.9s SPEAKER_01:  3374.\n 0096.6s 0097.4s SPEAKER_00:  Okay, what's your name?\n 0099.1s 0099.3s SPEAKER_00:  Thank you.\n 0099.1s 0099.3s SPEAKER_00:  Thank you.\n 0101.4s 0101.8s SPEAKER_01:  What's your name?\n 0102.7s 0104.9s SPEAKER_01:  Janet, shirts are in.\n 0102.7s 0104.9s SPEAKER_01:  Janet, shirts are in.\n 0106.2s 0109.5s SPEAKER_00:  Okay, Dana, is your patient, is she awake and conscious?\n 0109.5s 0117.0s SPEAKER_01:  No, no, she's like, okay, now she's yawning. For about five minutes, she's non-responsive. She still is.\n 0117.6s 0119.2s SPEAKER_01:  I've got fats on her.\n 0119.8s 0126.5s SPEAKER_01:  She's 97% on room air, but her eyes are dilated. She is breathing.\n 0125.6s 0126.0s SPEAKER_00:  See you.\n 0127.1s 0128.3s SPEAKER_01:  She is breathing.\n 0128.9s 0134.4s SPEAKER_01:  her sacks for good and our heart rate 75, her blood pressure.\n 0137.5s 0138.1s SPEAKER_01:  Oh shoot.\n 0141.7s 0147.9s SPEAKER_01:  Okay, she's pinking back up now. Come on. Come on. She's not responsive, even the pain.\n 0148.7s 0149.1s SPEAKER_01:  Okay.\n 0148.7s 0149.1s SPEAKER_01:  Okay.\n 0150.6s 0153.8s SPEAKER_00:  But she is still breathing, okay. Yeah.\n 0154.9s 0156.1s SPEAKER_00:  Alright, and you're her nurse?\n 0156.8s 0156.9s SPEAKER_00:  you\n 0156.9s 0157.2s SPEAKER_01:  Yeah.\n 0158.3s 0160.4s SPEAKER_01:  We're putting oxygen on it right now.\n 0160.6s 0162.2s SPEAKER_00:  Okay.\n 0162.9s 0171.0s SPEAKER_00:  When the medics are in route to you guys at Willowbrook, assisted living, 100 Delaware Crossing West, I'll have them come to\n 0171.6s 0177.5s SPEAKER_00:  or H1, somebody will be waiting for them.\n 0178.7s 0185.3s SPEAKER_00:  Anybody had COVID or under doctors or... No, no current cases. No COVID.\n 0182.7s 0182.7s SPEAKER_01:  Thanks for watching!\n 0185.9s 0190.7s SPEAKER_00:  Alright, they are en route to you, okay? Okay, thank you. Okay, thank you. Bye.",
+        "nature": "Fall with head injury and history of seizures",
+        "severity": "Life-threatening",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident fell and hit her head, is non-responsive, and has a history of seizures. Emergency services are dispatched.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Janet Aran",
+          "phone": "740-3374",
+          "role": "Caller, nurse",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Dana",
+          "phone": "",
+          "role": "Patient/resident",
+          "relationship": "",
+          "conditions": "History of seizures",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West",
+        "type": "Assisted living, memory care unit",
+        "features": "Willowbrook, H1 door",
+        "time": ""
+      },
+      "row_index": 144,
+      "metadata": {
+        "Unnamed: 0.1": "187",
+        "id": "6903070000000000.0",
+        "nature": "Injured From A Fall",
+        "incidentno": "13135",
+        "start": "2/6/2021 8:53",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "2",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "2/6/2021 0:00",
+        "Unnamed: 0": "3049",
+        "fileName": "2021-02-06/3/CH3_02004410_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "Hi ts is Janet Aran 100 Delaware Crossing West Delaware Crossing West 100 Delaware Crossing West 740 grid 100 Delaware Crossing West I",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "2/6/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 91-year-old female patient at Willowbrook Assisted Living needs emergency transport to the ER due to fluctuating oxygen levels and a new diagnosis of CHF.",
+        "timestamp": "",
+        "transcript": "0005.0s 0007.0s SPEAKER_01:  Bye!\n 0012.1s 0014.8s SPEAKER_01:  911. What's the location of your emergency?\n 0015.4s 0019.3s SPEAKER_00:  Hi, 100 Delaware Crossing West, Delaware, Ohio.\n 0019.9s 0020.6s SPEAKER_01:  Okay.\n 0021.7s 0023.4s SPEAKER_01:  We said Delaware Crossing.\n 0023.6s 0024.2s SPEAKER_00:  Yes.\n 0024.9s 0025.5s SPEAKER_01:  Okay.\n 0024.9s 0025.5s SPEAKER_01:  Okay.\n 0033.7s 0038.2s SPEAKER_01:  Willowbrook Assisted Living? That's correct. And your name? Lynette.\n 0040.2s 0042.1s SPEAKER_01:  Okay, and a callback number.\n 0040.2s 0042.1s SPEAKER_01:  Okay, and a callback number.\n 0043.1s 0050.5s SPEAKER_00:  Okay, 740-201-3335. Okay, and what's going on?\n 0051.3s 0069.2s SPEAKER_00:  We have a patient that needs to be sent to the ER per Dr. Spellman. She is weaving her O2SATs or bouncing between 83% to 90%. We're aware she's filling up with fluids. She's got a new diagnosis of CHF.\n 0070.8s 0072.8s SPEAKER_01:  Okay, give me one second here.\n 0075.1s 0075.7s SPEAKER_01:  Bye.\n 0078.8s 0078.9s SPEAKER_01:  you\n 0078.9s 0079.6s SPEAKER_00:  cold as she.\n 0080.3s 0081.3s SPEAKER_00:  She is 91.",
+        "nature": "Medical emergency (CHF, fluctuating oxygen levels)",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a 91-year-old female patient at Willowbrook Assisted Living needs emergency transport to the ER due to CHF and unstable oxygen levels.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Lynette",
+          "phone": "740-201-3335",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Dr. Spellman",
+          "phone": "",
+          "role": "Medical professional",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "",
+          "conditions": "CHF, filling up with fluids, fluctuating oxygen levels (83% to 90%)",
+          "age": "91",
+          "sex": "Female"
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, Delaware, Ohio",
+        "type": "Assisted living facility",
+        "features": "Willowbrook Assisted Living",
+        "time": ""
+      },
+      "row_index": 145,
+      "metadata": {
+        "Unnamed: 0.1": "188",
+        "id": "6903070000000000.0",
+        "nature": "DIFFICULTY BREATHING",
+        "incidentno": "20140",
+        "start": "2/24/2021 13:04",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "2",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "2/24/2021 0:00",
+        "Unnamed: 0": "4610",
+        "fileName": "2021-02-24/1/CH1_00003C3D_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Delaware Oo.",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "2/24/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A woman calls 911 for her 88-year-old mother who is experiencing confusion, numbness in her hands and feet, and a low pulse rate after recent hospitalization for severe dehydration.",
+        "timestamp": "",
+        "transcript": " 0009.8s 0012.1s SPEAKER_00:  911. What is the address of your emergency?\n 0012.8s 0016.3s SPEAKER_01:  100 Delaware Crossing West, Department 1008.\n 0012.8s 0016.3s SPEAKER_01:  100 Delaware Crossing West, Department 1008.\n 0020.1s 0021.7s SPEAKER_00:  What phone number are you calling from?\n 0022.4s 0026.3s SPEAKER_01:  740-201-5739\n 0029.1s 0029.8s SPEAKER_01:  and watch your name.\n 0029.2s 0029.5s SPEAKER_00:  and watch your\n 0030.5s 0032.0s SPEAKER_01:  My name is Jane Butts.\n 0034.0s 0035.2s SPEAKER_01:  and I'm calling for my mother.\n 0035.6s 0036.7s SPEAKER_00:  Okay, what's going on?\n 0037.7s 0055.9s SPEAKER_01:  Well, she was in the hospital earlier this week with severe dehydration and she is completely confused today, complaining that her hand was numb, complaining that her feet are numb, wanting us to put a calculator on them to try to make it feel better. She's just completely confused.\n 0058.9s 0062.4s SPEAKER_01:  and they need to come to the door. Can I do some breathing? Yes, yes, yes.\n 0063.1s 0067.7s SPEAKER_01:  Alright. We need to come to door D2. Door D2.\n 0067.4s 0067.8s SPEAKER_00:  Thank you.\n 0068.3s 0068.7s SPEAKER_01:  Yeah.\n 0070.8s 0070.9s SPEAKER_00:  you\n 0070.9s 0071.6s SPEAKER_01:  How old is she?\n 0072.3s 0073.5s SPEAKER_01:  She is 88 years old.\n 0074.1s 0078.3s SPEAKER_00:  And are you there with her? Yes. All right, so the door's unlocked then.\n 0075.8s 0076.1s SPEAKER_01:  Yeah.\n 0078.9s 0080.2s SPEAKER_01:  We'll meet them at the door.\n 0080.6s 0082.8s SPEAKER_00:  All right. And has she had any COVID symptoms?\n 0083.4s 0086.2s SPEAKER_01:  No. No, in fact, she's had both of her shots.\n 0087.0s 0095.4s SPEAKER_01:  And she was like I said, was just in the hospital and had a COVID test Monday night. And I do believe it came back negative because when she was in the hospital room, she had someone in the room with her.\n 0095.6s 0097.1s SPEAKER_00:  Okay.\n 0098.7s 0102.5s SPEAKER_00:  Let me see here. Does she have any other symptoms other than the confusion?\n 0103.5s 0109.0s SPEAKER_01:  No, the nurse came down, the vital friends all looked pretty good other than their pulse rate was down a bit.\n 0109.8s 0110.7s SPEAKER_00:  Do you know what it was?\n 0111.5s 0114.0s SPEAKER_01:  Ah, I think she said it was 38.\n 0115.9s 0116.5s SPEAKER_00:  Okay.\n 0117.1s 0119.6s SPEAKER_00:  Um, this year is bond you appropriately.\n 0117.1s 0119.6s SPEAKER_00:  Um, this year is bond you appropriately.\n 0120.7s 0125.9s SPEAKER_01:  She hesitates a bit and then answers us, which is not normal for her. OK.\n 0125.5s 0125.5s SPEAKER_00:  you\n 0126.2s 0128.0s SPEAKER_00:  Do you know if she's in any kind of pain?\n 0128.9s 0135.1s SPEAKER_01:  Other than, like I said, saying that her feet hurt or her feet are numb and tingly, there doesn't seem to be any other signs.\n 0135.3s 0137.3s SPEAKER_00:  and she hasn't done any traveling recently.\n 0137.9s 0139.0s SPEAKER_01:  No, not at all.\n 0139.8s 0141.6s SPEAKER_00:  What about having a fever?\n 0142.5s 0144.0s SPEAKER_01:  did not appear to have a fever.\n 0144.2s 0147.7s SPEAKER_00:  Okay. Well, they are in route to you guys. Is she diabetic?\n 0148.5s 0149.6s SPEAKER_01:  borderline\n 0151.0s 0153.0s SPEAKER_01:  It was always maintained with diet.\n 0154.0s 0157.4s SPEAKER_01:  But I know she hasn't been eating real well lately either. OK.\n 0157.4s 0158.1s SPEAKER_00:  We'll see you next time.\n 0159.1s 0164.7s SPEAKER_00:  Alright, well there are around two. When they get there, if you just have any other medications, just let them know about those, okay?\n 0165.1s 0167.9s SPEAKER_01:  Okay, we'll do. Thank you very much. You're welcome. Bye-bye.",
+        "nature": "Medical emergency (confusion, numbness, low pulse rate)",
+        "severity": "Potentially life-threatening due to low pulse rate and confusion",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Jane Butts calls 911 for her 88-year-old mother who is experiencing confusion, numbness, and a low pulse rate after recent hospitalization.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Jane Butts",
+          "phone": "740-201-5739",
+          "role": "caller",
+          "relationship": "daughter of the victim",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "mother of Jane Butts",
+          "conditions": "borderline diabetic, maintained with diet, recent severe dehydration",
+          "age": "88",
+          "sex": "female"
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, Department 1008",
+        "type": "residence",
+        "features": "Door D2",
+        "time": ""
+      },
+      "row_index": 146,
+      "metadata": {
+        "Unnamed: 0.1": "189",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "21365",
+        "start": "2/27/2021 12:18",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "2",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "2/27/2021 0:00",
+        "Unnamed: 0": "16078",
+        "fileName": "2021-02-27/4CH4_03004854_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Department 1008 100 Delaware Crossing West Department 1008",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "2/27/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at Willowbrook Assisted Living is unresponsive but breathing.",
+        "timestamp": "",
+        "transcript": "0004.8s 0006.2s SPEAKER_00:  Probably not.\n 0012.5s 0015.0s SPEAKER_01:  911. What's the address?\n 0014.5s 0017.8s SPEAKER_00:  Okay, 100 Delaware Crossing West.\n 0018.5s 0018.5s SPEAKER_00:  you\n 0018.5s 0023.1s SPEAKER_01:  Okay? And what is your phone number in case you disconnect it?\n 0023.1s 0024.3s SPEAKER_00:  740.\n 0024.9s 0027.9s SPEAKER_00:  201-3335.\n 0028.5s 0032.5s SPEAKER_01:  Okay. And you're at Willowbrook Assisted Living? Yes.\n 0033.2s 0033.8s SPEAKER_01:  And what's your name?\n 0034.6s 0035.1s SPEAKER_01:  Holly.\n 0036.1s 0037.5s SPEAKER_01:  All in time, exactly what's going on.\n 0036.1s 0037.5s SPEAKER_01:  All in time, exactly what's going on.\n 0037.9s 0043.3s SPEAKER_00:  I have a resident here who is a full code. He's unaroundable.\n 0044.6s 0051.9s SPEAKER_00:  He was born in 1925. His vitals are always at normal limits. He's just not responding.\n 0044.6s 0051.9s SPEAKER_00:  He was born in 1925. His vitals are always at normal limits. He's just not responding.\n 0054.0s 0059.2s SPEAKER_01:  Alright, give me one second here. My partner is going to start a medic.\n 0060.1s 0066.2s SPEAKER_01:  I'm going to ask you a few questions, okay? Okay. I'm not conscious at all, but still breathing.\n 0066.7s 0067.0s SPEAKER_00:  Yeah.\n 0067.6s 0071.6s SPEAKER_01:  Okay. And born in 1925? Yep.\n 0074.9s 0075.5s SPEAKER_01:  What door?\n 0075.0s 0078.4s SPEAKER_00:  What door do they need to come in? Uh, main entrance, please.\n 0080.2s 0081.7s SPEAKER_00:  but he is breathing normally.\n 0082.7s 0086.2s SPEAKER_00:  uh... he's like he's sleeping like he's reading about the mouth open\n 0088.4s 0089.2s SPEAKER_00:  What room is he?\n 0090.2s 0091.0s SPEAKER_00:  241.\n 0093.4s 0095.0s SPEAKER_00:  Are you a nurse?\n 0096.6s 0097.4s SPEAKER_00:  Yes, I'm a nurse.\n 0100.3s 0104.7s SPEAKER_01:  Okay, any COVID symptoms that are under doctor's orders to quarantine? No.\n 0106.0s 0112.1s SPEAKER_01:  Okay. We have got the medics started here. We will work assisted living 100 Delaware crossing west.\n 0112.7s 0116.9s SPEAKER_01:  Okay, thank you. If the worst ends, go ahead and give us a call back, okay? Thanks, bye.",
+        "nature": "Unresponsive resident",
+        "severity": "Potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports an unresponsive resident at Willowbrook Assisted Living.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Holly",
+          "phone": "740-201-3335",
+          "role": "Caller, nurse",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Resident, victim",
+          "relationship": "",
+          "conditions": "Full code, vitals normal",
+          "age": "Born in 1925",
+          "sex": "Male"
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West",
+        "type": "Assisted living facility",
+        "features": "Willowbrook Assisted Living, room 241",
+        "time": ""
+      },
+      "row_index": 147,
+      "metadata": {
+        "Unnamed: 0.1": "190",
+        "id": "6903070000000000.0",
+        "nature": "UNRESPONSIVE / UNCONSCIOUS",
+        "incidentno": "28683",
+        "start": "3/17/2021 7:59",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "3",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "3/17/2021 0:00",
+        "Unnamed: 0": "6076",
+        "fileName": "2021-03-17/2/CH2_01004866_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Willowbrook Assisted Living 1925 ? Yep 100 Delaware crossing",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "3/17/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 76-year-old woman is running a fever, has fallen and cannot get up, and is incontinent.",
+        "timestamp": "",
+        "transcript": " 0010.8s 0012.8s SPEAKER_01:  911, what's the address in the emergency?\n 0013.7s 0015.0s SPEAKER_00:  of 100\n 0015.8s 0017.6s SPEAKER_00:  Delaware Crossing West.\n 0018.8s 0020.7s SPEAKER_00:  Apartment 3014.\n 0022.9s 0025.0s SPEAKER_01:  Okay, and tell me exactly what's happened.\n 0025.5s 0028.5s SPEAKER_00:  My wife is running a fever.\n 0029.3s 0036.8s SPEAKER_00:  has fallen and can't get up and I can't get her up and she is incontinent.\n 0037.9s 0038.3s SPEAKER_00:  Oh.\n 0040.6s 0041.0s SPEAKER_01:  Okay.\n 0042.2s 0048.5s SPEAKER_01:  We've got medics on their way while I'm on the phone with you. I just have some questions while they're on their way. Can I get your name and phone number?\n 0049.1s 0052.9s SPEAKER_00:  My name is Frank Craver, C-R-A-Z-E-R.\n 0053.7s 0057.7s SPEAKER_00:  And the best number to reach me is my cell phone, 937.\n 0058.3s 0061.4s SPEAKER_00:  594-2922.\n 0063.3s 0064.6s SPEAKER_00:  And how old is she?\n 0065.4s 0066.4s SPEAKER_00:  76.\n 0068.8s 0070.0s SPEAKER_01:  Is she breathing okay?\n 0070.7s 0073.7s SPEAKER_00:  Yes, but she's got a lot of lung congestion.",
+        "nature": "Medical emergency (fever, fall, incontinence, lung congestion)",
+        "severity": "Potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports his wife is running a fever, has fallen and cannot get up, and is incontinent.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Frank Craver",
+          "phone": "937-594-2922",
+          "role": "caller",
+          "relationship": "husband",
+          "conditions": "",
+          "age": "",
+          "sex": "male"
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "wife",
+          "conditions": "fever, lung congestion, incontinence",
+          "age": "76",
+          "sex": "female"
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, Apartment 3014",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 148,
+      "metadata": {
+        "Unnamed: 0.1": "191",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "34100",
+        "start": "3/30/2021 8:20",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "3",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "3/30/2021 0:00",
+        "Unnamed: 0": "7190",
+        "fileName": "2021-03-30/6/CH6_05004877_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Apartment 3014. Frank Craver C-R-A-Z-E-R.",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "3/30/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "An elderly man in an assisted living facility is experiencing chest pain in the heart and left shoulder area.",
+        "timestamp": "",
+        "transcript": " 0011.3s 0013.5s SPEAKER_01:  911, what's the address of your emergency?\n 0014.5s 0016.8s SPEAKER_00:  This is 100 Delaware.\n 0017.6s 0019.2s SPEAKER_00:  crossing west.\n 0020.3s 0021.7s SPEAKER_00:  Willowbrook, Delaware.\n 0022.8s 0024.7s SPEAKER_01:  Okay, what's going on there?\n 0026.0s 0030.5s SPEAKER_00:  Okay, I have this gentleman in apartment 2027.\n 0032.9s 0035.5s SPEAKER_00:  He's having chest pain.\n 0038.4s 0040.3s SPEAKER_01:  We said it's 2027.\n 0041.0s 0041.7s SPEAKER_00:  Yes, sir.\n 0043.1s 0045.1s SPEAKER_01:  Okay, are you with him right now or no?\n 0046.2s 0051.3s SPEAKER_00:  I'm outside his room. I've been with him. I've just come out of the room.\n 0052.2s 0054.2s SPEAKER_01:  Okay, is he awake and alert?\n 0054.9s 0055.3s SPEAKER_00:  Yes.\n 0055.9s 0057.1s SPEAKER_01:  How old is he?\n 0059.2s 0062.6s SPEAKER_00:  He's elderly, I don't know his age, but he's all over 80.\n 0063.5s 0064.3s SPEAKER_01:  Over 80.\n 0064.8s 0065.3s SPEAKER_00:  Mm-hmm.\n 0069.6s 0072.6s SPEAKER_01:  Was he able to tell you where in his chest the pain was located?\n 0073.2s 0078.5s SPEAKER_00:  Yes, it's on the left. It's in the heart area and the left shoulder area.\n 0079.9s 0081.3s SPEAKER_01:  When did it start for him?\n 0083.1s 0088.4s SPEAKER_00:  Well, they called me like 20 minutes ago, but it's this afternoon.\n 0091.6s 0092.6s SPEAKER_01:  And what was your name?\n 0093.4s 0095.4s SPEAKER_00:  My name is Jemima J.E.\n 0096.2s 0097.1s SPEAKER_00:  M-I\n 0097.7s 0098.8s SPEAKER_00:  M-A-H.\n 0102.2s 0102.5s SPEAKER_01:  Okay.\n 0104.3s 0107.8s SPEAKER_01:  and you said you were at 100 Delaware Crossing.\n 0108.4s 0109.1s SPEAKER_01:  left.\n 0108.6s 0108.8s SPEAKER_00:  Thank you.\n 0109.8s 0110.7s SPEAKER_00:  West, yes.\n 0111.4s 0115.2s SPEAKER_00:  at this assisted living facility here on...\n 0116.2s 0116.7s SPEAKER_00:  Um.\n 0117.5s 0120.3s SPEAKER_00:  I think it's William Street, off William Street.\n 0121.7s 0127.5s SPEAKER_01:  Okay. We've got the medics dispatched there, okay. Any COVID symptoms at all for him or anybody?\n 0129.0s 0135.3s SPEAKER_00:  Right now we've been tested every Monday and right now we are COVID free. Every Monday they test everybody.\n 0129.1s 0129.1s SPEAKER_01:  you\n 0136.1s 0140.7s SPEAKER_01:  Okay, they've marked it out there to you. If something gets worse, just give me a call back, okay?\n 0141.5s 0145.9s SPEAKER_00:  Yes, and it is on the second, you just take the elevator to the second floor.\n 0147.7s 0149.7s SPEAKER_01:  So go to the elevator and take the second floor.\n 0150.2s 0150.6s SPEAKER_00:  Yes.\n 0151.3s 0152.3s SPEAKER_01:  Okay, I'll let him know.\n 0153.5s 0154.8s SPEAKER_00:  Thank you very much.\n 0154.6s 0155.4s SPEAKER_01:  You're welcome.\n 0156.1s 0156.4s SPEAKER_00:  Bye.",
+        "nature": "chest pain",
+        "severity": "potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports an elderly man in apartment 2027 experiencing chest pain in the heart and left shoulder area.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Jemima J.E. M-I M-A-H",
+          "phone": "",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "",
+          "conditions": "",
+          "age": "over 80",
+          "sex": "male"
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, Willowbrook, Delaware",
+        "type": "assisted living facility",
+        "features": "apartment 2027, second floor, elevator access",
+        "time": "this afternoon"
+      },
+      "row_index": 149,
+      "metadata": {
+        "Unnamed: 0.1": "192",
+        "id": "6903070000000000.0",
+        "nature": "CHEST PAIN",
+        "incidentno": "36200",
+        "start": "4/4/2021 18:16",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "4/4/2021 0:00",
+        "Unnamed: 0": "7551",
+        "fileName": "2021-04-04/4/CH4_03004AB5_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "4/4/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 77-year-old man called 911 due to high blood pressure and rapid pulse.",
+        "timestamp": "",
+        "transcript": "0002.1s 0004.5s SPEAKER_01:  All right.\n 0011.0s 0013.2s SPEAKER_01:  911, what's the address of your emergency?\n 0013.7s 0018.4s SPEAKER_00:  100 Delaware Crossing West. Willowbrook.\n 0019.1s 0021.9s SPEAKER_00:  Okay. I live in an apartment.\n 0022.6s 0023.8s SPEAKER_00:  3019.\n 0025.2s 0026.8s SPEAKER_00:  and I just took my blood pressure.\n 0027.2s 0027.5s SPEAKER_01:  Mm-hmm.\n 0028.2s 0034.6s SPEAKER_00:  It's 197 over 98 and my pulse is beating at 136 beats a minute and I'm scared.\n 0035.5s 0035.8s SPEAKER_00:  Okay.\n 0035.5s 0037.3s SPEAKER_01:  Okay, you said you were in apartment 309.\n 0037.9s 0040.1s SPEAKER_01:  3019.\n 0040.7s 0042.5s SPEAKER_01:  Yes sir. Okay.\n 0043.1s 0048.2s SPEAKER_01:  Tom H-O-L-L-E-R-N. And Tom, what's the phone number you called from?\n 0043.1s 0048.2s SPEAKER_01:  Tom H-O-L-L-E-R-N. And Tom, what's the phone number you called from?\n 0049.0s 0053.0s SPEAKER_00:  uh... the product of a sort of four oh two oh one three eight\n 0052.5s 0053.2s SPEAKER_01:  Mm-hmm.\n 0054.0s 0057.0s SPEAKER_01:  And Tom, did you say you took your blood pressure?\n 0054.0s 0057.0s SPEAKER_01:  And Tom, did you say you took your blood pressure?\n 0057.7s 0064.2s SPEAKER_00:  I'm looking at the thing right now, and it's reading 197 over 98 and 136.\n 0065.4s 0069.7s SPEAKER_00:  And I felt a rapid pulse, and that's what caused me to do this.\n 0073.1s 0077.5s SPEAKER_01:  Alrighty, Tom. We've already got the medics dispatched there for you. How old are you, sir?\n 0078.1s 0080.3s SPEAKER_01:  77. 77.\n 0078.1s 0080.3s SPEAKER_01:  77. 77.\n 0080.8s 0082.3s SPEAKER_00:  Will they come to the room?\n 0083.1s 0084.7s SPEAKER_01:  Yeah, they can come to the room there.\n 0085.4s 0095.5s SPEAKER_01:  Okay, I'll sit here and wait for them. And you said you're at 3019, correct? That is correct, yes sir. And besides everything, you just told me any other problems for you today, Tom?\n 0095.5s 0102.0s SPEAKER_00:  I've had a problem with my blood pressure. It has been up, but nothing.\n 0102.0s 0105.2s SPEAKER_01:  Yeah. Any like COVID symptoms for you, Tom?\n 0106.3s 0108.2s SPEAKER_01:  Uh, no. OK.\n 0109.4s 0116.5s SPEAKER_01:  Alrighty sir, like I said, we've got them dispatched there to you. If you get worse or anything changes before they get there, just give me a call back, okay?\n 0117.2s 0119.6s SPEAKER_01:  Thank you. You're welcome, sir.",
+        "nature": "High blood pressure and rapid pulse",
+        "severity": "Potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reported high blood pressure and rapid pulse, requesting medical assistance.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Tom Hollern",
+          "phone": "4020138",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "High blood pressure",
+          "age": "77",
+          "sex": "male"
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, Willowbrook, apartment 3019",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 150,
+      "metadata": {
+        "Unnamed: 0.1": "193",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "39335",
+        "start": "4/12/2021 19:58",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "4/12/2021 0:00",
+        "Unnamed: 0": "8399",
+        "fileName": "2021-04-12/6/CH6_050049C6_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Willowbrook. 309 3019 ? Tom H-O-L-L-E-R-N.",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "4/12/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A patient named Darlene Krumbloff is unresponsive, pale, and showing signs of neurological impairment with left-sided weakness.",
+        "timestamp": "",
+        "transcript": "0011.4s 0013.2s SPEAKER_00:  911, what's the address of your emergency?\n 0013.8s 0015.6s SPEAKER_01:  100 Delaware crossing west.\n 0017.2s 0017.6s SPEAKER_00:  What is your name?\n 0018.6s 0019.9s SPEAKER_01:  Holly, LPN.\n 0021.3s 0022.7s SPEAKER_00:  What's your telephone number there?\n 0023.1s 0024.6s SPEAKER_01:  or 740.\n 0025.7s 0028.5s SPEAKER_01:  201-3335.\n 0029.1s 0030.0s SPEAKER_00:  Tell me exactly what's happened.\n 0030.7s 0053.8s SPEAKER_01:  I have Darlene Krumbloff. She, her date of birth is 2733. The 8th had found her, and she was not responding, very pale, not a lot of color. She was mumbling her words. She was able really to speak a lot. She's not following command. She's not able to follow my pin light. She's not smiling for me.\n 0054.9s 0072.0s SPEAKER_01:  She's having left-sided weakness, but her right side is also weak as well, which she is weak as it is. It's just her normal, but she's just acting completely off. Her vital signs are okay, but the husband is just requesting her to be sent to the hospital. She's a DNRCCA.\n 0072.2s 0072.9s SPEAKER_00:  What room is she in?\n 0073.6s 0075.7s SPEAKER_01:  She is in 259.\n 0076.7s 0078.3s SPEAKER_00:  Can you turn toward the Medicaid to use?\n 0079.0s 0081.0s SPEAKER_01:  Um, they can use...\n 0084.2s 0089.3s SPEAKER_01:  I think that one to come in the main lobby. I think they can come in the main lobby\n 0088.9s 0089.0s SPEAKER_00:  Thank you.\n 0091.6s 0095.2s SPEAKER_00:  Okay, I've got that in there for them. They are on the way. If anything changes, go ahead and give us a call back, okay?\n 0095.5s 0096.7s SPEAKER_01:  Okay, thank you. Bye.",
+        "nature": "Neurological impairment with left-sided weakness",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Holly, an LPN, reports that Darlene Krumbloff is unresponsive, pale, and showing signs of neurological impairment with left-sided weakness. The husband requests her to be sent to the hospital.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Holly",
+          "phone": "740-201-3335",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Darlene Krumbloff",
+          "phone": "",
+          "role": "victim",
+          "relationship": "",
+          "conditions": "DNRCCA",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "husband",
+          "phone": "",
+          "role": "witness",
+          "relationship": "husband of Darlene Krumbloff",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware crossing west",
+        "type": "residence",
+        "features": "room 259",
+        "time": ""
+      },
+      "row_index": 151,
+      "metadata": {
+        "Unnamed: 0.1": "194",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "46194",
+        "start": "4/30/2021 14:23",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "4/30/2021 0:00",
+        "Unnamed: 0": "9854",
+        "fileName": "2021-04-30/3/CH3_02004981_51.txt",
+        "AddressFinal": "100 Delaware crossing",
+        "AddressExtracted": "100 Delaware crossing LPN",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "4/30/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A woman fell in her apartment, experiencing severe pain in her left arm and shortness of breath, possibly due to a fracture.",
+        "timestamp": "",
+        "transcript": " 0010.7s 0013.1s SPEAKER_01:  911. What is the address of your emergency?\n 0013.5s 0017.0s SPEAKER_00:  Hi, I'm at 100 Delaware Crossing West.\n 0018.0s 0018.6s SPEAKER_00:  Willowbrook?\n 0019.5s 0025.5s SPEAKER_01:  Okay, I have that here. Is there any certain apartment numbers? Can you hear me okay? Yeah, I can hear you.\n 0025.5s 0026.3s SPEAKER_00:  Can you hear me?\n 0027.0s 0037.7s SPEAKER_00:  A little bit. My mobile phone doesn't like this side of the building. Oh, okay. Is there an apartment number? Yes. We're going to come to apartment number 1018.\n 0027.0s 0037.7s SPEAKER_00:  A little bit. My mobile phone doesn't like this side of the building. Oh, okay. Is there an apartment number? Yes. We're going to come to apartment number 1018.\n 0041.5s 0044.4s SPEAKER_01:  Alright, and what's the phone number you called from in case we're disconnected?\n 0044.4s 0050.1s SPEAKER_00:  I'm calling from 740-201-3335.\n 0050.7s 0051.4s SPEAKER_00:  And what's your name?\n 0052.5s 0063.8s SPEAKER_00:  My name is Suzanne. Suzanne, what's going on there? I have a woman who fell in her apartment who can't move her left arm without severe pain and I can't tell for sure if she's got a fracture or not.\n 0066.0s 0069.8s SPEAKER_00:  Alright, are you a nurse? Yes, I am. Okay, how old is she?\n 0070.4s 0075.8s SPEAKER_00:  I'm looking at her assist. She was born 2-2 of 1939, so she's 80.\n 0078.8s 0081.4s SPEAKER_01:  Okay, she's awake and able to talk, she's having severe pain.\n 0081.4s 0084.0s SPEAKER_00:  Yeah, she's short of breath, she's on oxygen.\n 0084.9s 0087.9s SPEAKER_00:  Her oxygen level was running a little bit low for me.\n 0094.0s 0097.2s SPEAKER_01:  Alright, and I apologize, you said it was her left arm, correct?\n 0097.8s 0097.8s SPEAKER_01:  you\n 0097.8s 0102.1s SPEAKER_00:  Her left arm, yeah, she said she felt pretty hard on her left side.\n 0103.4s 0107.1s SPEAKER_00:  and then she alerted us that she was meeting assistance.\n 0106.5s 0110.6s SPEAKER_01:  And as far as the material that she landed on was a carpet, hardwood, cement.\n 0110.6s 0116.1s SPEAKER_00:  I think it was carpeting. Mrs. Leeson, did you land on your carpeting in your room?\n 0110.6s 0116.1s SPEAKER_00:  I think it was carpeting. Mrs. Leeson, did you land on your carpeting in your room?\n 0118.9s 0120.2s SPEAKER_00:  in the bathroom trial.\n 0122.8s 0125.9s SPEAKER_00:  Yeah, she landed on the tile in the kitchen, she said.\n 0122.8s 0125.9s SPEAKER_00:  Yeah, she landed on the tile in the kitchen, she said.\n 0126.7s 0130.5s SPEAKER_00:  So that's a hard floor. And if you lose consciousness at any point, are you able to ask her?\n 0127.6s 0127.6s SPEAKER_01:  you\n 0131.6s 0140.3s SPEAKER_00:  Let me just check. Sure. Chris, ask her if she... I'm afraid to walk away from this spot because I'm afraid I'll lose you. Did she... Ask her if she hit her head at all.\n 0131.6s 0140.3s SPEAKER_00:  Let me just check. Sure. Chris, ask her if she... I'm afraid to walk away from this spot because I'm afraid I'll lose you. Did she... Ask her if she hit her head at all.\n 0143.0s 0143.6s SPEAKER_01:  She said no.\n 0145.1s 0149.5s SPEAKER_01:  Alrighty, and other than that, has anybody had COVID symptoms or been under Dr. Ford or the quarantine?\n 0149.0s 0154.4s SPEAKER_00:  No, no, she's had her both in her inoculations and she's not been under a quarantine.\n 0154.0s 0162.4s SPEAKER_01:  Okay, perfect. We did go ahead and get a medic started to you there at 100 Delaware Crossing West apartment 1018. Is that correct? That is correct. I will go...\n 0162.4s 0165.6s SPEAKER_00:  meet them at the front door. Okay, perfect. She doesn't need to be there for me. She won.\n 0166.7s 0170.0s SPEAKER_00:  Okay. All right, thanks. Bye. Bye.",
+        "nature": "Fall with possible fracture and shortness of breath",
+        "severity": "Potentially serious due to age and symptoms",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a woman fell in her apartment, experiencing severe pain in her left arm and shortness of breath.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Suzanne",
+          "phone": "740-201-3335",
+          "role": "caller, nurse",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Mrs. Leeson",
+          "phone": "",
+          "role": "victim",
+          "relationship": "",
+          "conditions": "on oxygen",
+          "age": "80",
+          "sex": "female"
+        },
+        {
+          "name": "Chris",
+          "phone": "",
+          "role": "witness",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, apartment 1018",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 152,
+      "metadata": {
+        "Unnamed: 0.1": "195",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "49531",
+        "start": "5/9/2021 0:27",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/9/2021 0:00",
+        "Unnamed: 0": "10631",
+        "fileName": "2021-05-09/2/CH2_01004CDD_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Willowbrook 100 Delaware Crossing West apartment 1018",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/9/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at an assisted living facility is experiencing severe pain and is unable to bear weight, with pain in her back, shoulders, and legs.",
+        "timestamp": "",
+        "transcript": " 0009.3s 0011.5s SPEAKER_01:  911, what's the address of your emergency?\n 0012.2s 0015.6s SPEAKER_00:  Hi, it would be a hundred Delaware crossing west.\n 0016.2s 0017.0s SPEAKER_00:  Go, Little High.\n 0017.0s 0017.3s SPEAKER_01:  Barbac judge debate. KATHRYN Any new details for you? We're live from 11-17\n 0018.4s 0021.0s SPEAKER_01:  Okay, and is there an apartment number?\n 0018.4s 0021.0s SPEAKER_01:  Okay, and is there an apartment number?\n 0021.8s 0023.9s SPEAKER_00:  No, this would be for the assisted living.\n 0023.9s 0029.0s SPEAKER_01:  Okay, and then what's the number in case we get disconnected?\n 0023.9s 0029.0s SPEAKER_01:  Okay, and then what's the number in case we get disconnected?\n 0029.7s 0033.9s SPEAKER_00:  Okay, our number is 740201.\n 0034.6s 0036.0s SPEAKER_00:  3335.\n 0039.1s 0039.7s SPEAKER_01:  Okay, and your name?\n 0040.5s 0041.5s SPEAKER_01:  My name is Lynette.\n 0042.4s 0043.9s SPEAKER_01:  Okay, Lynette, tell me exactly what happened.\n 0044.6s 0045.1s SPEAKER_01:  Um,\n 0045.1s 0060.4s SPEAKER_00:  One of our residents up here is having a lot of pain. She is not weight-bearing. She screams every time we touch her legs. She's not drinking. And she has her back and shoulders, and legs are hurting herself.\n 0045.1s 0060.4s SPEAKER_00:  One of our residents up here is having a lot of pain. She is not weight-bearing. She screams every time we touch her legs. She's not drinking. And she has her back and shoulders, and legs are hurting herself.\n 0061.2s 0063.0s SPEAKER_01:  Okay? And is she conscious?\n 0063.6s 0064.0s SPEAKER_01:  Yes.\n 0064.6s 0065.5s SPEAKER_01:  And how old is she?\n 0066.4s 0072.0s SPEAKER_00:  Let's see, her date of birth is 5-24 of 37, so she is 83.\n 0072.0s 0076.3s SPEAKER_01:  Okay, and then what room is she in?\n 0077.0s 0077.9s SPEAKER_01:  She's in room 2.\n 0077.9s 0079.2s SPEAKER_00:  2-7-3.\n 0079.9s 0080.8s SPEAKER_00:  Okay, what document?\n 0082.2s 0084.0s SPEAKER_00:  On the AL One Door, please.\n 0085.0s 0085.4s SPEAKER_00:  me\n 0085.4s 0085.8s SPEAKER_01:  out.\n 0087.0s 0089.6s SPEAKER_01:  Okay. And is there a nurse with her?\n 0090.3s 0095.4s SPEAKER_01:  That would be me. Okay. Ready? Does anyone have any COVID symptoms?\n 0095.8s 0097.8s SPEAKER_00:  No COVID symptoms here.\n 0098.6s 0098.6s SPEAKER_00:  you\n 0098.6s 0106.5s SPEAKER_01:  Okay, we got them dispatched to 100 Delaware crossing west. Yes. All right, thank you.\n 0107.1s 0108.2s SPEAKER_00:  Thank you.",
+        "nature": "Severe pain in back, shoulders, and legs; unable to bear weight",
+        "severity": "serious",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident at an assisted living facility is in severe pain and unable to bear weight.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Lynette",
+          "phone": "7402013335",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "resident",
+          "relationship": "",
+          "conditions": "severe pain in back, shoulders, and legs; not weight-bearing",
+          "age": "83",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware crossing west",
+        "type": "assisted living facility",
+        "features": "room 2-7-3",
+        "time": ""
+      },
+      "row_index": 153,
+      "metadata": {
+        "Unnamed: 0.1": "196",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "51976",
+        "start": "5/15/2021 12:14",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/15/2021 0:00",
+        "Unnamed: 0": "11179",
+        "fileName": "2021-05-15/4/CH4_03004E3C_51.txt",
+        "AddressFinal": "100 Delaware crossing",
+        "AddressExtracted": "100 Delaware crossing",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/15/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident is experiencing severe heart pain and numbness in the left arm.",
+        "timestamp": "",
+        "transcript": "0010.6s 0012.8s SPEAKER_01:  911, what's the address of your emergency?\n 0013.2s 0016.1s SPEAKER_00:  It is Willowbrook at Delaware Run.\n 0017.4s 0019.0s SPEAKER_00:  for a Delaware crossing.\n 0019.7s 0020.4s SPEAKER_00:  Okay.\n 0020.4s 0025.0s SPEAKER_01:  Give me just one second here. What? Is there an apartment number?\n 0022.0s 0022.3s SPEAKER_00:  here.\n 0025.0s 0027.5s SPEAKER_00:  Her number is 273.\n 0030.9s 0037.5s SPEAKER_01:  Okay, and the phone number and I'm not seeing that in here. I'll type it in. And what's the phone number in case we get disconnected? Okay.\n 0037.5s 0045.4s SPEAKER_00:  Okay, the phone number here is 740-201-3335. My name's Kelly.\n 0048.3s 0048.3s SPEAKER_00:  you\n 0048.3s 0048.9s SPEAKER_01:  Kelly.\n 0050.2s 0052.0s SPEAKER_01:  and then tell me exactly what happened.\n 0052.8s 0081.4s SPEAKER_00:  We've got a resident here. She's complaining of severe heart pain, crushing pain. She feels a little clammy to me. Her pulse is 87%. Blood pressure is not too bad. Last one I took was 131 over 86. Her pulse is 85 and temp is 97.6, but she's complaining of numbness in the left arm and crushing heart pain.\n 0081.4s 0081.4s SPEAKER_01:  you\n 0082.7s 0086.7s SPEAKER_01:  Okay, and is she conscious? Yes, she is.\n 0087.5s 0089.5s SPEAKER_01:  Okay, and about how old is she?\n 0089.5s 0096.7s SPEAKER_00:  She is 93, no 83, excuse me, I'm sorry. 83.\n 0096.2s 0101.0s SPEAKER_01:  You are fine. And then what door does my medics need to go into? A1, please.\n 0102.8s 0107.0s SPEAKER_01:  Okay, and then anyone have any COVID symptoms or anything like that? None.\n 0109.1s 0113.6s SPEAKER_01:  Okay, and then is there a nurse with her? Yes.\n 0114.8s 0119.8s SPEAKER_01:  Okay. We do have them dispatched to 100 Delaware Crossing West for you.\n 0119.2s 0123.4s SPEAKER_00:  Sounds great. Thank you. You're welcome. Bye-bye.",
+        "nature": "Severe heart pain and numbness in the left arm",
+        "severity": "Life-threatening",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident experiencing severe heart pain and numbness in the left arm.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Kelly",
+          "phone": "740-201-3335",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Resident",
+          "relationship": "",
+          "conditions": "Severe heart pain, numbness in the left arm, clammy skin",
+          "age": "83",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Nurse",
+          "relationship": "With the resident",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "Willowbrook at Delaware Run, apartment 273",
+        "type": "Residence",
+        "features": "Door A1",
+        "time": ""
+      },
+      "row_index": 154,
+      "metadata": {
+        "Unnamed: 0.1": "197",
+        "id": "6903070000000000.0",
+        "nature": "CHEST PAIN",
+        "incidentno": "53516",
+        "start": "5/19/2021 6:01",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/19/2021 0:00",
+        "Unnamed: 0": "11569",
+        "fileName": "2021-05-19/6/CH6_05004CDA_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/19/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 92-year-old woman is experiencing health issues including weakness, shortness of breath, and abnormal lab results, prompting a request for medical assessment.",
+        "timestamp": "",
+        "transcript": "0011.3s 0013.5s SPEAKER_01:  911. What's the address of your emergency?\n 0011.3s 0013.5s SPEAKER_01:  911. What's the address of your emergency?\n 0014.2s 0016.2s SPEAKER_00:  100, Delaware Crossing West.\n 0017.0s 0017.4s SPEAKER_00:  come on\n 0017.4s 0019.0s SPEAKER_01:  Delaware Crossing West.\n 0019.0s 0019.2s SPEAKER_00:  Yep.\n 0020.0s 0020.5s SPEAKER_01:  the Peru 42 year old man\n 0020.5s 0021.1s SPEAKER_00:  called from.\n 0021.7s 0022.9s SPEAKER_00:  740.\n 0024.0s 0025.1s SPEAKER_00:  2 0 1\n 0025.7s 0026.7s SPEAKER_00:  3372.\n 0027.6s 0031.5s SPEAKER_00:  Is there an apartment number with us? Yes, it's apartment 260.\n 0031.5s 0031.6s SPEAKER_01:  Thank you.\n 0032.9s 0034.4s SPEAKER_01:  I'm sorry, 260.\n 0034.8s 0035.0s SPEAKER_00:  Yep.\n 0035.0s 0036.5s SPEAKER_01:  Okay. Your name is?\n 0037.1s 0037.4s SPEAKER_00:  the last [-aigh surges in there but then\n 0037.1s 0037.6s SPEAKER_01:  most likely this is a possibility. Listen, indoors. Un 2004. Before her former home improvement requirements\n 0038.8s 0040.0s SPEAKER_01:  Ollie coming directly to what's happened.\n 0040.0s 0046.7s SPEAKER_00:  I'm calling regarding Joanne Gasell. She is a 92-year-old woman. She has a full code.\n 0047.3s 0059.4s SPEAKER_00:  She has been acting a little different, very weak, shorter breath. She had a chest x-ray done yesterday that was negative. She has had some stat lab drawn, and there's quite a few.\n 0060.4s 0061.9s SPEAKER_00:  abnormalities.\n 0062.8s 0067.7s SPEAKER_00:  and per our request and the daughter's request. We just want her to be sent out to be assessed.",
+        "nature": "Health issues including weakness and shortness of breath",
+        "severity": "Potentially serious due to age and symptoms",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a 92-year-old woman, Joanne Gasell, is experiencing health issues and requests medical assessment.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Joanne Gasell",
+          "phone": "",
+          "role": "victim",
+          "relationship": "",
+          "conditions": "Full code, recent chest x-ray (negative), stat lab drawn with abnormalities",
+          "age": "92",
+          "sex": "woman"
+        },
+        {
+          "name": "",
+          "phone": "740-201-3372",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, apartment 260",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 155,
+      "metadata": {
+        "Unnamed: 0.1": "198",
+        "id": "6903070000000000.0",
+        "nature": "DIFFICULTY BREATHING",
+        "incidentno": "55427",
+        "start": "5/23/2021 9:54",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/23/2021 0:00",
+        "Unnamed: 0": "11949",
+        "fileName": "2021-05-23/4/CH4_03004F10_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Delaware Crossing West Yep 260 Yep. Joanne Gasell",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/23/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "An elderly lady fell and severely hurt her back.",
+        "timestamp": "",
+        "transcript": " 0011.9s 0014.1s SPEAKER_00:  911, what's the address of your emergency?\n 0014.6s 0016.6s SPEAKER_01:  100 Delaware Crossing West.\n 0018.5s 0020.9s SPEAKER_00:  Okay, and is there an apartment number or anything?\n 0020.7s 0024.7s SPEAKER_01:  No, no, you're going to come in A as in Apple I.\n 0025.4s 0026.2s SPEAKER_00:  Is that a door?\n 0026.6s 0027.4s SPEAKER_01:  Uh-huh.\n 0027.4s 0029.5s SPEAKER_00:  Okay. And what's going on there, man?\n 0029.9s 0040.1s SPEAKER_01:  We have an elderly lady, Lois Perkins. She fell. She was not waiting for any assistance. Step backwards and fell, and she's hurt her back severely.\n 0041.5s 0041.9s SPEAKER_01:  Okay\n 0042.6s 0043.6s SPEAKER_00:  And what's your name ma'am?\n 0044.2s 0044.7s SPEAKER_01:  Tina.\n 0045.1s 0047.1s SPEAKER_00:  And Gina, do you know the phone number there?\n 0047.6s 0048.7s SPEAKER_01:  7-4-0.\n 0049.8s 0053.1s SPEAKER_01:  201-3335.\n 0053.5s 0055.2s SPEAKER_00:  Okay, do you know what she is?\n 0056.0s 0058.8s SPEAKER_01:  She is 93.\n 0056.0s 0058.8s SPEAKER_01:  She is 93.\n 0059.5s 0061.5s SPEAKER_00:  and any obvious injuries for...\n 0062.0s 0072.0s SPEAKER_01:  No, no, I didn't move her because it's her back. I mean, you don't see any blood or bruising or anything, but she's complaining that her back is like killing her. Okay. So I was afraid to move her.\n 0070.3s 0070.9s SPEAKER_00:  OK.\n 0073.2s 0075.7s SPEAKER_00:  And he says he was just standing up, correct?\n 0076.1s 0084.5s SPEAKER_01:  Yes, she was standing up in the bathroom and fell backwards. And she does have dementia, but when she tells you there's pain, she knows there's pain. Okay.\n 0087.2s 0090.0s SPEAKER_00:  And you know what she landed on? Like what kind of breath is it?\n 0089.2s 0095.7s SPEAKER_01:  It's like tile, half tile, half carpet. She's like right in between the bathroom.\n 0096.1s 0101.3s SPEAKER_00:  Okay. Well, Gina, we've got the medics dispatched there. I got them coming to door 1A.\n 0101.6s 0102.4s SPEAKER_01:  Uh-huh.\n 0102.3s 0104.8s SPEAKER_00:  before they get there. Just give me a call back, okay?\n 0105.1s 0107.2s SPEAKER_01:  Absolutely, thank you. Bye.\n 0106.5s 0106.7s SPEAKER_00:  Thank you.",
+        "nature": "Fall resulting in severe back injury",
+        "severity": "Severe",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports an elderly lady fell and severely hurt her back.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Lois Perkins",
+          "phone": "",
+          "role": "Victim",
+          "relationship": "",
+          "conditions": "Dementia",
+          "age": "93",
+          "sex": "Female"
+        },
+        {
+          "name": "Tina",
+          "phone": "740-201-3335",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": "Female"
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, door 1A",
+        "type": "Residence",
+        "features": "Bathroom with half tile, half carpet flooring",
+        "time": ""
+      },
+      "row_index": 156,
+      "metadata": {
+        "Unnamed: 0.1": "199",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "56074",
+        "start": "5/24/2021 21:28",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/24/2021 0:00",
+        "Unnamed: 0": "12121",
+        "fileName": "2021-05-24/6/CH6_05004D5F_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West lady Lois Perkins",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/24/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident is missing and a patrol car is requested to search the area.",
+        "timestamp": "",
+        "transcript": "0012.1s 0014.5s SPEAKER_01:  911, what's the address of the emergency?\n 0014.5s 0014.5s SPEAKER_00:  you\n 0015.3s 0015.3s SPEAKER_01:  Thank you.\n 0015.3s 0018.2s SPEAKER_00:  It's 100 Delaware Crossing West.\n 0021.0s 0021.3s SPEAKER_01:  Yeah.\n 0021.1s 0021.3s SPEAKER_00:  Yeah.\n 0021.9s 0023.6s SPEAKER_01:  And what is your phone number?\n 0024.4s 0028.8s SPEAKER_00:  It's EO740201\n 0029.5s 0031.8s SPEAKER_00:  3-3-3-5.\n 0033.2s 0033.6s SPEAKER_00:  And your answer is no.\n 0034.6s 0035.9s SPEAKER_00:  My name is Kelly.\n 0036.5s 0037.6s SPEAKER_01:  and tell you what's going on there.\n 0038.3s 0049.8s SPEAKER_00:  We are missing a resident and I'm wondering if we could get a patrol car to maybe patrol the area to see if she's wandered up onto 36-37.",
+        "nature": "Missing person",
+        "severity": "",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a missing resident and requests a patrol car to search the area.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Kelly",
+          "phone": "EO7402013335",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West",
+        "type": "",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 157,
+      "metadata": {
+        "Unnamed: 0.1": "200",
+        "id": "6903070000000000.0",
+        "nature": "MISSING PERSON",
+        "incidentno": "58242",
+        "start": "5/30/2021 6:20",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/30/2021 0:00",
+        "Unnamed: 0": "12655",
+        "fileName": "2021-05-30/2/CH2_01004ECF_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Yeah",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/30/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident has fallen in a building, resulting in a head injury.",
+        "timestamp": "",
+        "transcript": "0009.4s 0011.3s SPEAKER_00:  911 with the adjust to the emergency.\n 0012.3s 0017.3s SPEAKER_01:  We have a resident who has fallen in our building and her head is bleeding.\n 0018.7s 0019.6s SPEAKER_00:  Okay, I won't worry about it.\n 0021.1s 0023.9s SPEAKER_01:  100 Delaware Crossing West.\n 0025.1s 0026.5s SPEAKER_00:  Okay, what's the bottom of your\n 0027.8s 0032.4s SPEAKER_01:  740-201-5640.\n 0032.7s 0035.2s SPEAKER_00:  And are you just in the main building or is there an apartment number?\n 0035.6s 0038.2s SPEAKER_01:  It's in the main building. Door.\n 0039.5s 0040.2s SPEAKER_01:  F3.\n 0041.6s 0042.7s SPEAKER_00:  door, what'd you say it was?\n 0043.4s 0044.3s SPEAKER_01:  F3\n 0046.7s 0047.6s SPEAKER_00:  Oh, yeah.\n 0049.4s 0050.3s SPEAKER_00:  and what's your name?\n 0051.3s 0052.3s SPEAKER_01:  Joel Hornby.\n 0053.5s 0055.7s SPEAKER_00:  is our nurses with her.\n 0058.4s 0058.9s SPEAKER_00:  Thank you.\n 0059.6s 0062.0s SPEAKER_01:  Yes, sorry, they're talking on the radio. Say that again.\n 0062.3s 0063.7s SPEAKER_00:  are the nurses with the patient.\n 0064.5s 0067.9s SPEAKER_01:  They're on their way there. We have housekeeping with them right now.\n 0068.6s 0070.2s SPEAKER_00:  Okay, where are they at in the building?\n 0070.9s 0072.4s SPEAKER_01:  in the basement.\n 0073.3s 0075.8s SPEAKER_01:  at the bottom of elevator four.\n 0079.2s 0079.7s SPEAKER_00:  Oh.\n 0084.2s 0084.6s SPEAKER_00:  you.",
+        "nature": "Fall resulting in head injury",
+        "severity": "Potentially serious due to head bleeding",
+        "hazards": "None mentioned"
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident has fallen in the building with a head injury, provides location details.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Joel Hornby",
+          "phone": "740-201-5640",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Resident (victim)",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": "Female (implied by 'her')"
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Nurses",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Housekeeping",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West",
+        "type": "Building (main building)",
+        "features": "Basement, bottom of elevator four, door F3",
+        "time": ""
+      },
+      "row_index": 158,
+      "metadata": {
+        "Unnamed: 0.1": "201",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "57931",
+        "start": "5/29/2021 10:13",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/29/2021 0:00",
+        "Unnamed: 0": "12613",
+        "fileName": "2021-05-29/5/CH5_04004C7E_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Hornby",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/29/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A patient is experiencing difficulty breathing, with low oxygen levels when standing, and has concerning lung sounds and heavy coughing. The patient is on oxygen but may need hospital care.",
+        "timestamp": "",
+        "transcript": " 0010.8s 0013.3s SPEAKER_01:  911. What's the address of your emergency?\n 0014.1s 0018.7s SPEAKER_00:  Our address is 100 Delaware Crossing West, Delaware, Ohio.\n 0019.8s 0019.8s SPEAKER_00:  you\n 0019.8s 0020.8s SPEAKER_01:  Okay\n 0021.4s 0022.9s SPEAKER_01:  Do you have an apartment number?\n 0023.4s 0029.9s SPEAKER_00:  If this would be on the AL side on the second floor, it would be room 248.\n 0032.0s 0033.0s SPEAKER_01:  48\n 0034.6s 0039.0s SPEAKER_01:  One second here. What's your phone number in case you get disconnected?\n 0039.0s 0043.1s SPEAKER_00:  740-201-3335.\n 0044.8s 0047.9s SPEAKER_01:  This is Willow Bro, correct? Yes.\n 0049.1s 0051.7s SPEAKER_01:  and your name? My name is Lynette.\n 0053.8s 0055.7s SPEAKER_01:  Alright, until next time, I hope it was fun.\n 0056.8s 0058.5s SPEAKER_01:  I'm sorry, what did you say?\n 0058.5s 0080.5s SPEAKER_00:  Exactly. What's going on? Okay, we have a patient here that is having difficulty breathing. She de-sats every time she stands to about 77 or in the 80s. We have brought her back up with she's on O2 right now, but she's got some really nasty sound in lungs and she's coughing pretty heavily. Okay, are you her nurse?\n 0080.0s 0080.9s SPEAKER_01:  Yes.\n 0082.1s 0083.4s SPEAKER_01:  Okay, what door did...\n 0083.4s 0084.3s SPEAKER_00:  they need to come in.\n 0084.9s 0087.3s SPEAKER_00:  They need to come in the AL-1 side.\n 0089.5s 0095.5s SPEAKER_01:  and they will know where that is or do they normally come in that side? Yes.\n 0095.5s 0099.8s SPEAKER_00:  That's marked. Yeah, that's it. Yeah, it is marked and that's the site they normally come in.\n 0100.6s 0106.5s SPEAKER_01:  All right. And any COVID symptoms under doctors will just quarantine? No.\n 0107.3s 0108.0s SPEAKER_01:  Okay.\n 0108.0s 0108.8s SPEAKER_00:  our other patients.\n 0109.7s 0112.2s SPEAKER_00:  I'm a retina is\n 0112.9s 0113.6s SPEAKER_00:  Let me see.\n 0114.2s 0115.0s SPEAKER_00:  Id Eb bHOO enter dis welcome registered bHOO have you guys seen my phone?ulous she was a luic tobull ion at se o de de De\n 0115.8s 0126.7s SPEAKER_00:  She is, hold on, we're processing paperwork here. I think, I believe 92. 92, and she is the way she's not just a site. Oh yeah, and she's gonna be site mad. Okay.\n 0115.8s 0126.7s SPEAKER_00:  She is, hold on, we're processing paperwork here. I think, I believe 92. 92, and she is the way she's not just a site. Oh yeah, and she's gonna be site mad. Okay.\n 0126.7s 0128.5s SPEAKER_01:  Alright.\n 0127.8s 0127.8s SPEAKER_00:  you\n 0130.2s 0132.7s SPEAKER_01:  Will she be combative?\n 0130.2s 0132.7s SPEAKER_01:  Will she be combative?\n 0133.5s 0140.4s SPEAKER_00:  Possibly, but her family is there. She doesn't want to go to the hospital, but she needs more help than what I can give her.\n 0141.2s 0149.9s SPEAKER_01:  Alright, well they are just that you guys 100 Delaware Crossing West, Department 248, okay? Yes, thank you so much. Alright, thank you.\n 0147.6s 0148.9s SPEAKER_00:  Thank you so much.\n 0149.9s 0150.4s SPEAKER_00:  Bye.",
+        "nature": "Difficulty breathing, low oxygen levels, heavy coughing",
+        "severity": "Potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a patient with difficulty breathing, low oxygen levels, and concerning lung sounds. The patient is on oxygen but may need hospital care. The patient is 92 years old and may be combative.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Lynette",
+          "phone": "740-201-3335",
+          "role": "caller, nurse",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "patient",
+          "relationship": "",
+          "conditions": "Difficulty breathing, low oxygen levels, heavy coughing",
+          "age": "92",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Delaware Crossing West, Delaware, Ohio",
+        "type": "residence (room 248 on the AL side, second floor)",
+        "features": "AL-1 side entrance, marked",
+        "time": ""
+      },
+      "row_index": 159,
+      "metadata": {
+        "Unnamed: 0.1": "202",
+        "id": "6903070000000000.0",
+        "nature": "DIFFICULTY BREATHING",
+        "incidentno": "58638",
+        "start": "5/31/2021 8:59",
+        "address": "100 DELAWARE CROSSING W DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "latitude_EMS": "40.3029882",
+        "longitude_EMS": "-83.098287",
+        "address_reverse_EMS": "100 Delaware Crossing W, Delaware, OH 43015, USA",
+        "Date_EMS": "5/31/2021 0:00",
+        "Unnamed: 0": "12748",
+        "fileName": "2021-05-31/2/CH2_01004EEC_51.txt",
+        "AddressFinal": "100 Delaware Crossing",
+        "AddressExtracted": "100 Delaware Crossing West Delaware Oo Willow Bro correct at se o de de 100 Delaware Crossing West Department 248 okay",
+        "clean_address_extracted": "100 Delaware Crossing W Delaware OH 43015 USA",
+        "Date_target": "5/31/2021 0:00"
+      }
+    }
+  ],
+  "error_details": []
+}

@@ -1,0 +1,1346 @@
+{
+  "batch": 6,
+  "total_batches": 63,
+  "batch_size": 20,
+  "processed_successfully": 20,
+  "batch_errors": 0,
+  "results": [
+    {
+      "incident": {
+        "summary": "A resident fell, resulting in a laceration over her eyebrow and a deep laceration on her ring finger, requiring stitches.",
+        "timestamp": "",
+        "transcript": "0009.9s 0011.9s SPEAKER_01:  911, what's the address of the emergency?\n 0012.5s 0015.3s SPEAKER_01:  100 Willowbrook Way South.\n 0016.6s 0017.7s SPEAKER_01:  Okay, and what's your name?\n 0018.4s 0019.5s SPEAKER_01:  My name is Sharon.\n 0021.4s 0022.0s SPEAKER_01:  Coming.\n 0022.0s 0022.9s SPEAKER_00:  exactly what's happened.\n 0024.0s 0035.5s SPEAKER_00:  One of our residents just fell. She took a nasty fall, and she has pretty good size laceration over her eyebrow. But I'm going to show you a little bit of the background.\n 0036.3s 0046.7s SPEAKER_00:  The head nurse who assessed her said she needs stitches in her finger. She has a deep laceration on her ring finger.\n 0050.0s 0054.3s SPEAKER_00:  He also has a skin tear on an elbow, but it's the finger that...\n 0055.2s 0056.5s SPEAKER_00:  I'm not good.\n 0056.5s 0066.4s SPEAKER_01:  Okay, and what room is she in? She's in 160. 160. And what door do the medics need to go to?\n 0066.1s 0069.6s SPEAKER_00:  D or D as in dog.\n 0070.7s 0073.0s SPEAKER_01:  OK, and how old is she?\n 0073.9s 0078.2s SPEAKER_00:  She is, let me see here, 89.\n 0078.2s 0082.5s SPEAKER_01:  Eight and nine. Okay, is she awake right now? Oh, yes.\n 0084.2s 0089.2s SPEAKER_01:  Do you know, does she have any of the symptoms of COVID? Does she have COVID?\n 0089.2s 0091.4s SPEAKER_00:  She has had COVID in the past.\n 0092.1s 0092.5s SPEAKER_00:  OK.",
+        "nature": "Fall resulting in lacerations",
+        "severity": "Moderate (requires stitches)",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident fell, resulting in lacerations requiring medical attention.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Sharon",
+          "phone": "",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "resident/victim",
+          "relationship": "",
+          "conditions": "Had COVID in the past",
+          "age": "89",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way South, room 160",
+        "type": "residence",
+        "features": "Door D as in dog",
+        "time": ""
+      },
+      "row_index": 100,
+      "metadata": {
+        "Unnamed: 0.1": "131",
+        "id": "6903070000000000.0",
+        "nature": "Injured From A Fall",
+        "incidentno": "9994",
+        "start": "1/29/2021 6:57",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "1/29/2021 0:00",
+        "Unnamed: 0": "2368",
+        "fileName": "2021-01-29/5/CH5_040042E5_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way South COVID ?",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "1/29/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "An employee is experiencing chest pain and other symptoms possibly related to a heart condition.",
+        "timestamp": "",
+        "transcript": "0002.0s 0004.1s SPEAKER_00:  Car\n 0012.0s 0014.0s SPEAKER_00:  911. What is the address of your emergency?\n 0015.0s 0017.3s SPEAKER_01:  100 Willow Brookway South.\n 0018.0s 0019.8s SPEAKER_00:  Okay, what's the phone number you're calling from?\n 0020.9s 0025.0s SPEAKER_01:  740-272-2196 And your name?\n 0025.9s 0027.8s SPEAKER_01:  Jeff McIntosh, Director, Maina.\n 0028.2s 0030.8s SPEAKER_00:  Jeff, is there a certain apartment number?\n 0031.5s 0034.7s SPEAKER_01:  It's the maintenance garage right here in the main parking lot.\n 0038.2s 0040.4s SPEAKER_01:  and Scroge Man, Perky Munch.\n 0040.4s 0041.7s SPEAKER_00:  OK, and what's the problem?\n 0042.4s 0046.2s SPEAKER_01:  One of my employees was out working.\n 0047.4s 0048.0s SPEAKER_01:  Aww.\n 0048.6s 0052.9s SPEAKER_01:  complaining of chest pain, jaw hurting,\n 0054.1s 0058.0s SPEAKER_01:  having anxiety and\n 0058.7s 0059.8s SPEAKER_01:  and distract.\n 0060.0s 0061.2s SPEAKER_00:  Okay, how old is he?\n 0062.2s 0064.6s SPEAKER_00:  Ahhhh, let's say 60.\n 0065.3s 0070.6s SPEAKER_00:  Okay. Can you ask him if he's had any of the COVID sentence, coffee or short-spread that's collaborating?\n 0065.3s 0070.6s SPEAKER_00:  Okay. Can you ask him if he's had any of the COVID sentence, coffee or short-spread that's collaborating?\n 0071.7s 0071.7s SPEAKER_00:  you\n 0071.7s 0076.1s SPEAKER_01:  Actually, he had COVID a month and a half ago.\n 0076.1s 0076.7s SPEAKER_00:  Oh, OK, perfect.",
+        "nature": "Chest pain and possible heart condition",
+        "severity": "potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports an employee experiencing chest pain and other symptoms, possibly related to a past COVID infection.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Jeff McIntosh",
+          "phone": "740-272-2196",
+          "role": "caller",
+          "relationship": "Director of maintenance",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "victim",
+          "relationship": "employee of Jeff McIntosh",
+          "conditions": "had COVID a month and a half ago",
+          "age": "60",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willow Brookway South",
+        "type": "maintenance garage",
+        "features": "main parking lot",
+        "time": ""
+      },
+      "row_index": 101,
+      "metadata": {
+        "Unnamed: 0.1": "132",
+        "id": "6903070000000000.0",
+        "nature": "Chest Pain",
+        "incidentno": "16220",
+        "start": "2/14/2021 10:03",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "2",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "2/14/2021 0:00",
+        "Unnamed: 0": "3833",
+        "fileName": "2021-02-14/3/CH3_0200449A_51.txt",
+        "AddressFinal": "100 Willow Brookway",
+        "AddressExtracted": "100 Willow Brookway South Jeff McIntosh Director Maina Jeff Man Perky Munch",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "2/14/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A person is unresponsive at Willowbrook Christian Village, and the nurse has requested emergency services.",
+        "timestamp": "",
+        "transcript": "0013.0s 0014.2s SPEAKER_00:  What is the address of your emergency?\n 0015.6s 0019.4s SPEAKER_01:  I am at Willowbrook Christian Village.\n 0020.2s 0022.1s SPEAKER_01:  and I am looking for the address.\n 0022.5s 0023.9s SPEAKER_00:  100 Willowbrook Shell.\n 0024.5s 0025.0s SPEAKER_01:  Yeah.\n 0025.5s 0026.8s SPEAKER_00:  Alright, what's your first name?\n 0027.4s 0028.8s SPEAKER_01:  My first name is Melissa.\n 0029.1s 0030.2s SPEAKER_00:  and you have a room number.\n 0031.3s 0033.7s SPEAKER_01:  Yes, two five nine.\n 0034.5s 0035.9s SPEAKER_00:  and tell me exactly what's going on.\n 0037.0s 0046.8s SPEAKER_01:  I am not the nurse. I am therapy. The nurse sent me to call. He is DNR, CC, something else, and that means they still need to send him out to the hospital, but he is not responsive with sternal rubs.\n 0047.7s 0048.1s SPEAKER_01:  All right.\n 0047.7s 0048.1s SPEAKER_01:  All right.\n 0053.5s 0054.3s SPEAKER_00:  and were you with him?\n 0055.7s 0061.8s SPEAKER_01:  I'm sorry, no I was not. I saw the daughter run out of the room. So then the other nurse ran in and they told me to call you.\n 0062.3s 0066.7s SPEAKER_00:  All right, I am getting the medics to 100 Willowbrook, room 259 for an unresponsive.\n 0067.6s 0068.5s SPEAKER_01:  Thank you so much.\n 0068.5s 0069.4s SPEAKER_00:  Alright Melissa, thank you.\n 0070.1s 0073.5s SPEAKER_01:  Hey, I'm sorry, there's two Willowbrooks. You got the one from a cross from Bob Evans, right?\n 0074.6s 0078.8s SPEAKER_00:  This one's coming in on the 911 line, so let me make sure I've got you in the right spot.\n 0079.1s 0083.8s SPEAKER_01:  Yes, sorry, both of them are like one's Willowbrook Way, one's like Willowbrook Crossing, and I get confused.\n 0084.3s 0085.8s SPEAKER_00:  Yes, I've got you back.\n 0086.8s 0088.0s SPEAKER_01:  by Highway Control.\n 0086.8s 0089.3s SPEAKER_00:  by high speed control between them.\n 0089.9s 0091.9s SPEAKER_00:  Make sure I get you back off Cotswold.\n 0092.5s 0094.5s SPEAKER_01:  Perfect, exactly right. Thank you so much.\n 0094.6s 0096.4s SPEAKER_00:  I want to make sure I'm in the right building.\n 0095.9s 0097.9s SPEAKER_01:  Yes, sir. Have a good day.\n 0098.6s 0099.0s SPEAKER_01:  Bye.",
+        "nature": "Unresponsive person",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Melissa calls 911 to report an unresponsive person at Willowbrook Christian Village, room 259.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Melissa",
+          "phone": "",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Unresponsive person",
+          "relationship": "",
+          "conditions": "DNR, CC",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Daughter",
+          "relationship": "Daughter of unresponsive person",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Nurse",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Shell, room 259",
+        "type": "Residence (Willowbrook Christian Village)",
+        "features": "Located across from Bob Evans",
+        "time": ""
+      },
+      "row_index": 102,
+      "metadata": {
+        "Unnamed: 0.1": "133",
+        "id": "6903070000000000.0",
+        "nature": "UNRESPONSIVE / UNCONSCIOUS",
+        "incidentno": "30835",
+        "start": "3/22/2021 11:46",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "3",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "3/22/2021 0:00",
+        "Unnamed: 0": "6489",
+        "fileName": "2021-03-22/3/CH3_020046AA_51.txt",
+        "AddressFinal": "100 Willowbrook Shell",
+        "AddressExtracted": "Willowbrook Christian Village 100 Willowbrook Shell Yeah 100 Willowbrook room Bob Evans right",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "3/22/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 98-year-old woman named Veda Aitland has a fractured right hip and is in significant pain.",
+        "timestamp": "",
+        "transcript": "0011.6s 0014.0s SPEAKER_01:  number one what's the address of your emergency.\n 0014.4s 0017.9s SPEAKER_00:  Hi, it's 100.\n 0019.4s 0020.9s SPEAKER_00:  Willowbrook Way South.\n 0022.3s 0025.0s SPEAKER_01:  100 Willow Brook White South.\n 0025.1s 0026.6s SPEAKER_00:  Uh huh. Maybe.\n 0026.4s 0026.6s SPEAKER_01:  Okay.\n 0026.4s 0026.6s SPEAKER_01:  Okay.\n 0027.6s 0028.1s SPEAKER_01:  and your name.\n 0030.7s 0031.0s SPEAKER_00: ...\n 0031.3s 0031.9s SPEAKER_01:  What is your name?\n 0032.5s 0033.3s SPEAKER_00:  My name is Chris.\n 0034.3s 0035.1s SPEAKER_00:  with a V8.\n 0036.2s 0038.9s SPEAKER_01:  Interfront number you're calling from in case we're disconnected.\n 0039.9s 0044.4s SPEAKER_00:  740-368-4597.\n 0044.9s 0045.9s SPEAKER_01:  Hey, Colin from a landline.\n 0046.8s 0049.9s SPEAKER_00:  I know the phone here at the facility.\n 0050.7s 0052.0s SPEAKER_01:  Okay, tell me exactly what's happening.\n 0052.8s 0067.6s SPEAKER_00:  This lady's name is Veda Aitland. She saw a couple days ago. They did an x-ray of the right knee. It was negative. She still could not bear weight and some plenty of pain still today. So they x-rayed the hip just a little bit ago in the pelvic area, and she does have a fractured right hip.\n 0069.0s 0069.3s SPEAKER_01:  Okay.\n 0069.0s 0069.3s SPEAKER_01:  Okay.\n 0070.2s 0074.8s SPEAKER_01:  Alright, my partner can go ahead and start the medics there for that. Is there a nurse or doctor with her currently?\n 0075.4s 0076.0s SPEAKER_00:  on the nurse.\n 0076.6s 0078.5s SPEAKER_01:  Okay. And how old is the patient?\n 0079.3s 0081.5s SPEAKER_00:  She is 98 years old.\n 0082.6s 0083.7s SPEAKER_00:  you want a birthday?\n 0085.1s 0088.4s SPEAKER_01:  No, that's not necessarily she in a specific room.\n 0089.0s 0092.5s SPEAKER_00:  Yes, she is in room 256. That one.\n 0093.1s 0095.1s SPEAKER_00:  I'll be right here when they come.\n 0096.2s 0096.6s SPEAKER_00:  calling off.\n 0097.1s 0101.4s SPEAKER_01:  Okay, is there a specific door they need to enter or just a main entrance?\n 0101.5s 0109.4s SPEAKER_00:  or when they see the phone, you have to go out front and just call the door eye back around the back. When they get here, call, I'll be looking for them.\n 0110.4s 0113.2s SPEAKER_01:  Alright, I will let them know if anything changes, just give us a call, bye.\n 0113.7s 0114.5s SPEAKER_00:  Thank you very much.\n 0115.5s 0115.8s SPEAKER_00:  Bye-bye.",
+        "nature": "Fractured right hip",
+        "severity": "Significant pain, unable to bear weight",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a 98-year-old woman with a fractured right hip at a facility.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Chris",
+          "phone": "740-368-4597",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Veda Aitland",
+          "phone": "",
+          "role": "patient",
+          "relationship": "",
+          "conditions": "Fractured right hip",
+          "age": "98",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way South",
+        "type": "facility",
+        "features": "Room 256",
+        "time": ""
+      },
+      "row_index": 103,
+      "metadata": {
+        "Unnamed: 0.1": "134",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "33597",
+        "start": "3/28/2021 21:46",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "3",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "3/28/2021 0:00",
+        "Unnamed: 0": "6957",
+        "fileName": "2021-03-28/2/CH2_01004955_51.txt",
+        "AddressFinal": "100 Willow Brook",
+        "AddressExtracted": "Way South 100 Willow Brook Wte South Uh huh",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "3/28/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 92-year-old resident is experiencing dizziness and has dangerously high blood pressure.",
+        "timestamp": "",
+        "transcript": "0012.0s 0013.8s SPEAKER_01:  What is the address of your emergency?\n 0014.6s 0017.1s SPEAKER_00:  It's 100 Willowbrook Way.\n 0018.3s 0020.9s SPEAKER_00:  apartment 2019.\n 0022.5s 0023.5s SPEAKER_01:  in your first name.\n 0024.0s 0026.0s SPEAKER_00:  My name is Carol.\n 0026.0s 0026.5s SPEAKER_01:  girl.\n 0027.5s 0028.9s SPEAKER_01:  Alright, tell me exactly what's going on.\n 0029.9s 0041.3s SPEAKER_00:  I have a resident Bernard Murchland age 92 complaining of dizziness, but when I went to check him his blood pressure was 220 over 120.\n 0043.5s 0046.7s SPEAKER_01:  I don't know. I don't know.\n 0043.5s 0046.7s SPEAKER_01:  I don't know. I don't know.\n 0049.1s 0049.7s SPEAKER_01:  We'll see you next week.\n 0050.7s 0051.9s SPEAKER_01:  information in there.\n 0053.6s 0055.4s SPEAKER_01:  New art 100 Willowbrook, Southway.\n 0056.4s 0062.2s SPEAKER_00:  Yes. So the one by Bob Evans, you need to make sure you tell him. Yep. What door do you want to come in?\n 0061.9s 0062.3s SPEAKER_01:  come in.\n 0063.1s 0064.0s SPEAKER_00:  door M.\n 0064.6s 0065.7s SPEAKER_01:  or am I?\n 0067.2s 0071.6s SPEAKER_01:  Alright. And then Mark. Yep, and he has conscious breathing and... He is.\n 0071.2s 0078.4s SPEAKER_00:  He is. He's talking. He looks like he always does, but that blood pressure scared me and I did it on both arms twice, so...\n 0079.6s 0080.1s SPEAKER_01:  Alright.\n 0081.1s 0084.7s SPEAKER_01:  Alright, I've got the medics heading over to you. If there's any big changes, give me a call back.\n 0085.3s 0087.1s SPEAKER_00:  Great. Thanks so much. All right. Thank you.\n 0087.9s 0088.0s SPEAKER_00:  Bye.",
+        "nature": "Medical emergency (high blood pressure and dizziness)",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident with dangerously high blood pressure and dizziness.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Carol",
+          "phone": "",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": "Female"
+        },
+        {
+          "name": "Bernard Murchland",
+          "phone": "",
+          "role": "Victim",
+          "relationship": "Resident",
+          "conditions": "High blood pressure (220 over 120)",
+          "age": "92",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way, apartment 2019",
+        "type": "Residence",
+        "features": "Near Bob Evans, entrance door M",
+        "time": ""
+      },
+      "row_index": 104,
+      "metadata": {
+        "Unnamed: 0.1": "135",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "36782",
+        "start": "4/6/2021 4:05",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "4/6/2021 0:00",
+        "Unnamed: 0": "7729",
+        "fileName": "2021-04-06/2/CH2_01004A0F_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way resident Bernard Murchland 100 Willowbrook Southway Alright",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "4/6/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 93-year-old woman fell and injured her right knee at her apartment in a senior living facility.",
+        "timestamp": "",
+        "transcript": " 0012.5s 0014.9s SPEAKER_00:  911. What is the address of your emergency?\n 0015.7s 0020.3s SPEAKER_01:  uh, 100 Willowbrook Way, it's uh...\n 0022.6s 0024.3s SPEAKER_00:  Okay, what's going on there?\n 0022.6s 0024.3s SPEAKER_00:  Okay, what's going on there?\n 0024.9s 0027.1s SPEAKER_01:  Well, I fell and...\n 0028.2s 0033.0s SPEAKER_01:  I thought maybe it would get better, but it isn't.\n 0033.7s 0037.5s SPEAKER_01:  I thought I probably should go to the hospital and have them look at it.\n 0038.1s 0042.3s SPEAKER_01:  Okay. You said on my right. My right knee, actually, is what it is.\n 0038.1s 0042.3s SPEAKER_01:  Okay. You said on my right. My right knee, actually, is what it is.\n 0042.8s 0047.5s SPEAKER_00:  Okay, are you in a room number there or is 100 just the entire building?\n 0048.8s 0057.9s SPEAKER_01:  I'm trying to think, it's Willowbrook, the name of the, you know, it's a place for older people.\n 0057.7s 0061.2s SPEAKER_00:  Well, but are you in a room there or...\n 0061.1s 0062.6s SPEAKER_01:  I have an apartment.\n 0063.3s 0066.9s SPEAKER_01:  And I'm right near, you know, where door L is.\n 0068.2s 0075.8s SPEAKER_01:  OK, door L. It's at the back where all the cars are parked, the residents' cars are parked.\n 0068.3s 0069.3s SPEAKER_00:  door L\n 0076.5s 0078.5s SPEAKER_01:  It's in the back.\n 0079.3s 0089.0s SPEAKER_01:  of the building and I was going to say I don't want to cause any commotion around here. So I could be out waiting for you.\n 0090.4s 0096.2s SPEAKER_00:  Well, we can come in here. It's not a big deal. I just need to know where to send the help.\n 0095.0s 0098.3s SPEAKER_01:  How do you get in? They're all locked.\n 0098.3s 0099.8s SPEAKER_00:  They can get in. We can get in.\n 0100.4s 0106.0s SPEAKER_00:  But once they get into the building I just need to know what room or what apartment number to go to.\n 0106.8s 0111.3s SPEAKER_01:  Yeah, well, I'm all the way to the back. I don't want to have to walk all the way to the front.\n 0111.9s 0118.0s SPEAKER_00:  Well they can meet you around that. We can get an example of a nurse's legend. But, I mean, do you want to just meet them at Doral?\n 0118.8s 0124.3s SPEAKER_01:  Yeah, that would be great. I'm all ready to go. I don't know how long it'll take you, but.\n 0125.0s 0128.0s SPEAKER_00:  Okay, and so door L is around the back where the staff all parks.\n 0128.4s 0134.0s SPEAKER_01:  There are a lot of residents' cars parked there.\n 0135.1s 0146.3s SPEAKER_01:  I will sit inside. I don't know how cold it is. I'll just sit inside and you won't have a siren going or anything will you?\n 0142.9s 0143.2s SPEAKER_00:  Well.\n 0146.4s 0155.8s SPEAKER_00:  I can let them know silent approach. While they're on the way to you, I've got some questions to ask you just so they've got some more information. How old are you?\n 0156.8s 0157.7s SPEAKER_01:  93.\n 0158.0s 0159.3s SPEAKER_00:  93 okay\n 0160.8s 0162.1s SPEAKER_00:  And what caused your fall earlier?\n 0163.8s 0179.9s SPEAKER_01:  I use a walker and I just turned around too fast. It's my own fault. I've tried so hard to be careful because I've fallen a few times.\n 0179.9s 0180.1s SPEAKER_00:  Thank you.\n 0180.8s 0183.8s SPEAKER_00:  You didn't fall down anything though, just fell from a standing position.\n 0184.4s 0191.0s SPEAKER_01:  Yes, I was at the sink and I turned around. I always had my walker right there.\n 0191.9s 0194.2s SPEAKER_00:  Okay. What kind of surface did you land on?\n 0196.1s 0196.6s SPEAKER_01:  Uh...\n 0197.4s 0199.9s SPEAKER_01:  Well, I know him, I guess.\n 0200.4s 0202.6s SPEAKER_00:  Did you lose any consciousness when you fell earlier?\n 0203.3s 0204.1s SPEAKER_01:  Do I what?\n 0204.1s 0206.4s SPEAKER_00:  Did you lose any consciousness when you fell earlier?\n 0206.9s 0207.4s SPEAKER_01:  No.\n 0208.1s 0208.4s SPEAKER_00:  Okay.\n 0209.5s 0212.5s SPEAKER_00:  And any cuts bruising bleeding that you can see?\n 0213.0s 0213.6s SPEAKER_01:  Uh, no.\n 0215.5s 0217.7s SPEAKER_00:  And he said your right knee was hurting?\n 0217.9s 0224.4s SPEAKER_01:  I think it's my right knee and I feel bad because I had surgery on that right knee.\n 0225.0s 0229.2s SPEAKER_01:  About 15 years ago. Alright, we have a...\n 0228.2s 0230.8s SPEAKER_00:  Alright, you having any shortness of breath?\n 0231.7s 0236.9s SPEAKER_01:  No, I don't think so. You're kind of nervous. I know that. Okay.\n 0233.6s 0234.4s SPEAKER_00:  Alright, Ian.\n 0237.3s 0239.4s SPEAKER_00:  any pain or illness prior to your phone.\n 0241.3s 0241.8s SPEAKER_01:  Pardon me.\n 0242.1s 0244.6s SPEAKER_00:  any pain or illness prior to the fall earlier?\n 0244.9s 0248.2s SPEAKER_01:  Oh, prior? Uh, no.\n 0248.8s 0250.9s SPEAKER_00:  and any COVID symptoms or anything.\n 0252.7s 0258.9s SPEAKER_01:  No. All right. No, COVID. No. OK. I've got a mask to take with me. Sure.\n 0258.9s 0260.1s SPEAKER_00:  Uh, what was your name?\n 0261.1s 0264.3s SPEAKER_01:  Low Extension, D-E-N-T-O-N.\n 0264.8s 0269.4s SPEAKER_00:  And Lois, do you have a good phone number we could reach out if we need to?\n 0270.1s 0273.0s SPEAKER_00:  Pardon me? A phone number we can reach you at if we need to.\n 0272.5s 0278.8s SPEAKER_01:  Oh, well, yeah, my son. I was going to call him, but I thought it would be so hard for me to get in his car, and I hate to bother him.\n 0279.4s 0280.1s SPEAKER_01:  Ah!\n 0282.8s 0287.2s SPEAKER_01:  Hold on, I'll keep going. If you don't know it, that's OK. I'll call my phone. Just a minute.",
+        "nature": "Fall resulting in knee injury",
+        "severity": "Non-life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a fall and knee injury at a senior living facility, requesting medical assistance.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Low Extension",
+          "phone": "",
+          "role": "caller, victim",
+          "relationship": "",
+          "conditions": "Had surgery on right knee 15 years ago, uses a walker",
+          "age": "93",
+          "sex": ""
+        },
+        {
+          "name": "son",
+          "phone": "",
+          "role": "relative",
+          "relationship": "son of Low Extension",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way",
+        "type": "senior living facility",
+        "features": "Apartment near door L at the back where residents' cars are parked",
+        "time": ""
+      },
+      "row_index": 105,
+      "metadata": {
+        "Unnamed: 0.1": "136",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "36782",
+        "start": "4/6/2021 4:05",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "4/6/2021 0:00",
+        "Unnamed: 0": "7733",
+        "fileName": "2021-04-06/2/CH2_01004A0A_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way D-E-N-T-O-N. And Ah !",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "4/6/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at 100 Willowbrook Way South needs transport to the hospital due to a changing medical condition.",
+        "timestamp": "",
+        "transcript": "0006.6s 0008.5s SPEAKER_03:  Thank you.\n 0011.1s 0013.1s SPEAKER_00:  911 what's the address of the emergency?\n 0014.2s 0017.0s SPEAKER_04:  Hi, 100 Willowbrook Way South.\n 0018.8s 0020.2s SPEAKER_03:  And what's your name?\n 0020.9s 0021.9s SPEAKER_03:  Sarah Ross.\n 0020.9s 0021.9s SPEAKER_03:  Sarah Ross.\n 0022.8s 0024.3s SPEAKER_01:  Tell me exactly what happened.\n 0025.1s 0030.8s SPEAKER_02:  We have a resident that's in need of transport to the hospital. He's just had a changing condition.",
+        "nature": "Changing medical condition",
+        "severity": "",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident at 100 Willowbrook Way South needs hospital transport due to a changing medical condition.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Sarah Ross",
+          "phone": "",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "resident",
+          "relationship": "",
+          "conditions": "changing condition",
+          "age": "",
+          "sex": "male"
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way South",
+        "type": "residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 106,
+      "metadata": {
+        "Unnamed: 0.1": "139",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "40779",
+        "start": "4/16/2021 11:59",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "4/16/2021 0:00",
+        "Unnamed: 0": "8714",
+        "fileName": "2021-04-16/6/CH6_05004A16_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way South ? Sarah Ross Sarah Ross",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "4/16/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at a memory care unit fell and may have broken her hip.",
+        "timestamp": "",
+        "transcript": "0010.8s 0012.8s SPEAKER_00:  911, what's the address in the emergency?\n 0013.5s 0013.6s SPEAKER_00:  you\n 0013.6s 0016.8s SPEAKER_01:  It's 100 Willowbrook Way style.\n 0018.3s 0019.2s SPEAKER_01:  Okay, and what's your name?\n 0019.8s 0024.6s SPEAKER_01:  Betty Heard, oh my name is Jeanette. And tell me exactly what's happened.\n 0025.3s 0034.9s SPEAKER_01:  Yeah, I'm calling from the memory care unit at Willowbrook Christian Village. We had a resident who fell, and I'm suspecting that she probably broke her hip, her right hip.\n 0025.3s 0034.9s SPEAKER_01:  Yeah, I'm calling from the memory care unit at Willowbrook Christian Village. We had a resident who fell, and I'm suspecting that she probably broke her hip, her right hip.\n 0037.5s 0038.2s SPEAKER_01:  That was cool.\n 0038.8s 0041.3s SPEAKER_01:  need transported to the hospital.",
+        "nature": "Fall with suspected hip fracture",
+        "severity": "Serious",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident at a memory care unit fell and may have broken her hip, requesting transport to the hospital.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Jeanette",
+          "phone": "",
+          "role": "Caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Betty Heard",
+          "phone": "",
+          "role": "Resident",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way",
+        "type": "Memory care unit at Willowbrook Christian Village",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 107,
+      "metadata": {
+        "Unnamed: 0.1": "140",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "41769",
+        "start": "4/19/2021 7:40",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "4/19/2021 0:00",
+        "Unnamed: 0": "8943",
+        "fileName": "2021-04-19/6/CH6_05004A40_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way Betty Heard Willowbrook Christian Village Willowbrook Christian Village",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "4/19/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A 79-year-old male resident is experiencing tachycardia and increased respiration rate, requiring emergency medical attention.",
+        "timestamp": "",
+        "transcript": "0011.8s 0013.8s SPEAKER_01:  911, what's the address of the emergency?\n 0014.8s 0019.2s SPEAKER_00:  and 100 Willowbrook Way South.\n 0020.3s 0022.0s SPEAKER_01:  Okay, and what's your name?\n 0022.0s 0027.3s SPEAKER_00:  Sarah Roth, I'm a nurse that's caring for a resident here that we are requesting to be sent out.\n 0027.8s 0029.6s SPEAKER_01:  Okay, and tell me exactly what happened.\n 0030.2s 0038.0s SPEAKER_00:  He is very tachycardic. His heart rate is in the 180s, and he's having an increased respiration rate of around 30.\n 0030.2s 0038.0s SPEAKER_00:  He is very tachycardic. His heart rate is in the 180s, and he's having an increased respiration rate of around 30.\n 0042.0s 0043.0s SPEAKER_01:  and how would it be?\n 0043.0s 0043.1s SPEAKER_00:  Bye.\n 0043.9s 0046.2s SPEAKER_00:  He is 79 year old male.\n 0046.5s 0047.8s SPEAKER_01:  Is he conscious right now?\n 0048.3s 0048.7s SPEAKER_00:  Yes.\n 0052.2s 0055.3s SPEAKER_01:  And what door do they need to go to?\n 0055.7s 0057.0s SPEAKER_00:  Um, door I.\n 0058.3s 0059.5s SPEAKER_00:  at kind of around the board.\n 0062.8s 0064.7s SPEAKER_01:  and what room is in.\n 0065.5s 0065.6s SPEAKER_01:  Thank you.\n 0065.6s 0068.2s SPEAKER_00:  She is in room 261.\n 0070.1s 0073.6s SPEAKER_01:  Will you have somebody go around to Dora'i to meet them?\n 0074.0s 0077.2s SPEAKER_00:  Yes, of course. Yeah, we'll keep an eye out for them and let them in.\n 0077.4s 0079.5s SPEAKER_01:  And what is the phone number you're calling from?\n 0080.3s 0082.8s SPEAKER_00:  Our phone number is 740.\n 0084.0s 0085.3s SPEAKER_00:  three six eight\n 0086.3s 0088.0s SPEAKER_00:  4 5 9 7\n 0088.2s 0089.0s SPEAKER_01:  Bye.\n 0090.4s 0092.0s SPEAKER_01:  Okay, and is there a nurse with him?\n 0092.8s 0099.5s SPEAKER_01:  Yes. OK, we've got them on their way. If anything changes, just give us a call back. Perfect. Thank you so much. You're welcome.\n 0100.3s 0100.4s SPEAKER_01:  Bye.\n 0100.4s 0100.6s SPEAKER_00:  Bye.",
+        "nature": "Tachycardia and increased respiration rate",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Sarah Roth, a nurse, reports a 79-year-old male resident with tachycardia and increased respiration rate, requesting emergency medical services.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Sarah Roth",
+          "phone": "7403684597",
+          "role": "Caller, nurse",
+          "relationship": "Caring for the resident",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Victim",
+          "relationship": "",
+          "conditions": "Tachycardia, increased respiration rate",
+          "age": "79",
+          "sex": "Male"
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way South",
+        "type": "Residence",
+        "features": "Door I, room 261",
+        "time": ""
+      },
+      "row_index": 108,
+      "metadata": {
+        "Unnamed: 0.1": "141",
+        "id": "6903070000000000.0",
+        "nature": "INJURED FROM A FALL",
+        "incidentno": "41769",
+        "start": "4/19/2021 7:40",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "4",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "4/19/2021 0:00",
+        "Unnamed: 0": "8947",
+        "fileName": "2021-04-19/6/CH6_05004A44_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way South ? Sarah Roth 5 9 7 Bye",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "4/19/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Caller reports a false alarm and requests cancellation of emergency services",
+        "timestamp": "",
+        "transcript": "0012.8s 0015.1s SPEAKER_02:  911, what is the address of the emergency?\n0015.7s 0016.0s SPEAKER_02:  Hi.\n0016.0s 0027.1s SPEAKER_03:  100 Willowbrook Way South, twin single 161. I just called a little while ago, and I checked with our maintenance, and it was a false alarm. So you can cancel the squad order.\n0027.6s 0028.5s SPEAKER_00:  So he's OK.\n0029.1s 0031.4s SPEAKER_03:  Everything's okay. Yeah, they said it was a false alarm.\n0031.7s 0033.1s SPEAKER_01:  Okay, I'll let them know. Thank you.\n0033.4s 0034.4s SPEAKER_03:  Thank you.",
+        "nature": "false alarm",
+        "severity": "non-emergency",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a false alarm and requests cancellation of emergency services",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "",
+          "phone": "",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "maintenance",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way South, twin single 161",
+        "type": "",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 109,
+      "metadata": {
+        "Unnamed: 0.1": "144",
+        "id": "6903070000000000.0",
+        "nature": "MEDICAL ALARM",
+        "incidentno": "46974",
+        "start": "5/2/2021 14:29",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/2/2021 0:00",
+        "Unnamed: 0": "10045",
+        "fileName": "2021-05-02/3/CH3_020049B6_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way South twin",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/2/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at Willowbrook Christian Village is experiencing unrelenting nausea and vomiting, requiring hospital transfer.",
+        "timestamp": "",
+        "transcript": "0005.5s 0005.5s SPEAKER_00:  you\n 0011.7s 0014.0s SPEAKER_00:  911, what is the address of the emergency?\n 0015.0s 0020.3s SPEAKER_01:  I'm at Willowbrook Christian Village, 100 Willowbrook Way.\n 0021.7s 0024.5s SPEAKER_00:  Okay, is that the address of the patient?\n 0025.5s 0030.7s SPEAKER_01:  Yes, yep. I got a resident here who needs to be transferred out to the hospital.\n 0031.7s 0034.6s SPEAKER_00:  And what unit are they in, or room number?\n 0034.9s 0038.6s SPEAKER_01:  They're on terrace, room number 263.\n 0039.4s 0039.6s SPEAKER_00:  Thank you.\n 0040.2s 0044.6s SPEAKER_00:  263. Yep. Okay, and what is your name?\n 0045.1s 0046.9s SPEAKER_01:  Sarah, Ross, RN.\n 0048.4s 0049.2s SPEAKER_01:  phone number for you.\n 0049.9s 0052.7s SPEAKER_01:  is 740.\n 0053.8s 0054.8s SPEAKER_01:  368\n 0055.7s 0057.4s SPEAKER_01:  4597.\n 0059.0s 0061.7s SPEAKER_00:  Okay, and what's going on with the patient today?\n 0062.2s 0068.2s SPEAKER_01:  unrelentless nausea vomiting that we haven't been able to control.\n 0071.0s 0074.1s SPEAKER_00:  Is there a certain door that the medics need to go to?\n 0074.1s 0081.4s SPEAKER_01:  Yes, door, eye, and if they pull in, it's just curved around to the back, to the side of the building.\n 0081.7s 0083.9s SPEAKER_00:  Will someone be there to meet? Yes.\n 0083.4s 0084.4s SPEAKER_01:  Yes.\n 0085.2s 0086.1s SPEAKER_00:  How would I keep it?\n 0087.0s 0089.5s SPEAKER_01:  She is an 88 female.\n 0091.8s 0095.2s SPEAKER_00:  Alright, we've got them on the way. If anything changes or worse, then give us a call back.\n 0095.9s 0098.2s SPEAKER_01:  Thank you so much.",
+        "nature": "Unrelenting nausea and vomiting",
+        "severity": "Requires hospital transfer",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident at Willowbrook Christian Village needs hospital transfer due to unrelenting nausea and vomiting.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Sarah Ross",
+          "phone": "7403684597",
+          "role": "Caller, RN",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "Resident at Willowbrook Christian Village",
+          "conditions": "Unrelenting nausea and vomiting",
+          "age": "88",
+          "sex": "female"
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way",
+        "type": "Residence (Willowbrook Christian Village)",
+        "features": "Terrace, room number 263; entrance at door eye, curved around to the back/side of the building",
+        "time": ""
+      },
+      "row_index": 110,
+      "metadata": {
+        "Unnamed: 0.1": "145",
+        "id": "6903070000000000.0",
+        "nature": "HEART PROBLEMS",
+        "incidentno": "47614",
+        "start": "5/4/2021 9:13",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/4/2021 0:00",
+        "Unnamed: 0": "10191",
+        "fileName": "2021-05-04/3/CH3_020049EB_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "Willowbrook Christian Village 100 Willowbrook Way ? Sarah Ross RN",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/4/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A patient named Dan Andrews slid down in her chair and is experiencing severe pain in her right abdomen, unable to be moved.",
+        "timestamp": "",
+        "transcript": "0010.8s 0013.3s SPEAKER_00:  911, what is the address of your emergency?\n 0010.8s 0013.3s SPEAKER_00:  911, what is the address of your emergency?\n 0014.3s 0014.3s SPEAKER_00:  you\n 0014.3s 0019.2s SPEAKER_01:  It is 100 Willowbrook Way, and then if you guys could come to...\n 0020.1s 0024.1s SPEAKER_01:  I look at the door. Aye. Door aye at the terrace.\n 0024.9s 0025.7s SPEAKER_01:  care center.\n 0026.4s 0028.8s SPEAKER_00:  Okay, and what's the phone number you're calling from?\n 0028.2s 0028.8s SPEAKER_01:  and\n 0029.5s 0034.4s SPEAKER_01:  It is 36740 3684597.\n 0034.6s 0035.1s SPEAKER_00:  Your name?\n 0035.7s 0036.3s SPEAKER_01:  Elizabeth.\n 0036.9s 0038.6s SPEAKER_00:  and tell me exactly what's going on there, Elizabeth.\n 0039.2s 0046.6s SPEAKER_01:  Yeah, I have a patient named Dan Andrews and she had slid down in her chair and she has a lot of pain in her right abdomen.\n 0047.7s 0052.7s SPEAKER_01:  and it's pain with palpation and we can't really move her.\n 0053.5s 0054.5s SPEAKER_00:  She",
+        "nature": "Severe abdominal pain",
+        "severity": "life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller Elizabeth reports a patient, Dan Andrews, with severe abdominal pain who cannot be moved.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Elizabeth",
+          "phone": "367403684597",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Dan Andrews",
+          "phone": "",
+          "role": "patient",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": "female"
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way",
+        "type": "care center",
+        "features": "Door aye at the terrace",
+        "time": ""
+      },
+      "row_index": 111,
+      "metadata": {
+        "Unnamed: 0.1": "147",
+        "id": "6903070000000000.0",
+        "nature": "ABDOMINAL PAIN",
+        "incidentno": "49777",
+        "start": "5/9/2021 21:50",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/9/2021 0:00",
+        "Unnamed: 0": "10647",
+        "fileName": "2021-05-09/3/CH3_02004A4B_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way Dan Andrews",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/9/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at Willowbrook Wellness is experiencing dizziness and has an abnormally low pulse rate, requiring medical attention.",
+        "timestamp": "",
+        "transcript": "0002.6s 0004.9s SPEAKER_00:  Stay till they come.\n 0006.0s 0009.1s SPEAKER_00:  Ah, no more. But they expect these things.\n 0010.4s 0012.3s SPEAKER_01:  911, what's the address? Your emergency?\n 0013.0s 0021.1s SPEAKER_00:  I'm at, oh, it's this 100 Willowbrook Way, 10 Village Lane at the Willowbrook near Bob Evans.\n 0021.5s 0022.9s SPEAKER_01:  OK, what number are you in there?\n 0024.1s 0035.3s SPEAKER_00:  I am at the phone number of 740. What's your phone number, Jeanette? 362? Yes, I was going to say that earlier.\n 0036.5s 0040.6s SPEAKER_00:  I'm sorry. I would have walked out here from the front.\n 0040.8s 0042.5s SPEAKER_01:  It's okay, what apartment number is it?\n 0043.5s 0045.7s SPEAKER_00:  or department number 24.\n 0045.7s 0046.2s SPEAKER_01:  24.\n 0046.9s 0048.3s SPEAKER_00:  Uh huh.\n 0049.0s 0052.4s SPEAKER_00:  My name is Carol. I'm the Willowbrook Wellness Nurse.\n 0053.8s 0056.7s SPEAKER_00:  and I can give you this home phone number now if you'd like.\n 0056.8s 0057.3s SPEAKER_01:  Go with it.\n 0058.0s 0063.7s SPEAKER_00:  740-990-4356\n 0064.2s 0065.3s SPEAKER_01:  Tell me exactly what's happened.\n 0066.1s 0070.4s SPEAKER_00:  Well, I have a resident who hasn't felt good for a couple of days.\n 0071.0s 0084.6s SPEAKER_00:  some dizziness, but I came out and took her vital signs. Her blood pressure was fine at 140 over 70, but her pulse with my pulse oximeter was between 35.\n 0085.4s 0090.4s SPEAKER_00:  and 48 and I did it apically and radially too.\n 0091.4s 0093.5s SPEAKER_00:  and couldn't come up with anything different.\n 0094.3s 0102.1s SPEAKER_00:  Is there a chance if she did need to be transported when they got there? She could go to Riverside. Her daughter is here too.\n 0103.4s 0108.7s SPEAKER_01:  Yeah, that's something that you'll have to speak to the medics about. I don't think that they'll have a problem with that, but you'll have to talk to them about it.\n 0109.1s 0109.5s SPEAKER_00:  Okay.\n 0112.3s 0113.0s SPEAKER_01:  And I'm sorry.\n 0113.0s 0113.6s SPEAKER_00:  How would she?\n 0114.4s 0115.9s SPEAKER_00:  How old are you, Jeanette?\n 0116.7s 0117.5s SPEAKER_00:  86.\n 0121.6s 0123.6s SPEAKER_01:  I should have recently been over to quarantine or any of the COVID.\n 0123.6s 0129.1s SPEAKER_00:  symptoms. She's had both vaccinations and no I don't expect any COVID.\n 0123.6s 0129.1s SPEAKER_00:  symptoms. She's had both vaccinations and no I don't expect any COVID.\n 0129.9s 0134.1s SPEAKER_01:  Okay, my partner's got the medics started that way. Is there a certain door or anything that they need to enter through?\n 0134.8s 0140.9s SPEAKER_00:  Just the main door. I'll make sure I'm there to meet him. Okay. Where somebody is.\n 0140.6s 0144.4s SPEAKER_01:  Okay, the medics are on the way. If anything changes or she gets worse, go ahead and give us a call back, okay?\n 0144.7s 0148.0s SPEAKER_00:  Thank you so very much.",
+        "nature": "Medical emergency (dizziness and low pulse rate)",
+        "severity": "Potentially life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Carol, the Willowbrook Wellness Nurse, reports a resident with dizziness and a low pulse rate, requesting medical assistance.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Carol",
+          "phone": "740-990-4356",
+          "role": "Caller, Willowbrook Wellness Nurse",
+          "relationship": "Nurse to resident",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Jeanette",
+          "phone": "740-362",
+          "role": "Resident, patient",
+          "relationship": "Daughter present",
+          "conditions": "Dizziness, low pulse rate (35-48), vaccinated against COVID",
+          "age": "86",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way, 10 Village Lane at the Willowbrook near Bob Evans, apartment 24",
+        "type": "Residence (Wellness facility)",
+        "features": "Main door entry",
+        "time": ""
+      },
+      "row_index": 112,
+      "metadata": {
+        "Unnamed: 0.1": "148",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "51760",
+        "start": "5/14/2021 21:43",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/14/2021 0:00",
+        "Unnamed: 0": "11032",
+        "fileName": "2021-05-14/2/CH2_01004D38_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way 10 Village Lane at Evans 362 Willowbrook Wellness Nurse",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/14/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident at Christian Village skilled unit is experiencing severe health issues including acute kidney injury, nausea, vomiting, and a significant drop in blood pressure.",
+        "timestamp": "",
+        "transcript": "0009.4s 0011.5s SPEAKER_01:  911, what's the address of your emergency?\n0012.1s 0014.7s SPEAKER_00:  100 Willowbrook Way, Delaware, Ohio.\n0016.1s 0016.6s SPEAKER_01:  Okay.\n0017.4s 0020.0s SPEAKER_01:  And are you at\n0021.0s 0021.4s SPEAKER_01:  Sorry.\n0022.3s 0024.4s SPEAKER_01:  What building are you at?\n0025.6s 0028.0s SPEAKER_00:  Um, we're in the skilled unit.\n0029.0s 0035.1s SPEAKER_01:  Okay, but what's the Willowbrook? Because I just want to make sure we send it to the right location. It's the Willowbrook, what's the name of the business?\n0035.8s 0037.6s SPEAKER_00:  Christian Village, sorry.\n0037.3s 0041.3s SPEAKER_01:  Sorry. Christian Village, okay. And your phone number in case we get disconnected.\n0041.4s 0043.0s SPEAKER_00:  at 740.\n0043.7s 0047.0s SPEAKER_00:  368-4597.\n0047.7s 0048.3s SPEAKER_00:  and your name.\n0049.0s 0049.5s SPEAKER_00:  Morgan.\n0053.4s 0055.8s SPEAKER_01:  and tell me exactly what happened.\n0057.1s 0074.0s SPEAKER_00:  My resident, Bonnie Weaver, she's been having a lot of kidney issues. She has acute kidney injury. She's been having a lot of nausea and vomiting over the past couple of days. Her blood pressure is 142 over 64 this morning and then now it's down to 68 over 44.\n0075.7s 0077.4s SPEAKER_01:  Okay, in what room is she in?\n0078.2s 0080.2s SPEAKER_00:  June 1 to 59.\n0081.0s 0082.4s SPEAKER_01:  And what door do they need to come to?\n0082.9s 0083.8s SPEAKER_00:  uh, door I.\n0086.4s 0086.4s SPEAKER_00:  you\n0086.4s 0088.4s SPEAKER_01:  Okay, and hi, I'm Chikaantee.\n0089.5s 0091.8s SPEAKER_01:  Yes, and how old is she?\n0090.0s 0090.1s SPEAKER_00:  Yeah.\n0090.0s 0090.1s SPEAKER_00:  Yeah.\n0093.0s 0094.9s SPEAKER_00:  She is 75.\n0096.5s 0099.3s SPEAKER_01:  And are you a nurse there with her? Yes.\n0099.9s 0103.3s SPEAKER_01:  And then anyone there have any COVID symptoms, you know.\n0104.9s 0108.3s SPEAKER_01:  Okay. We have time started to 100. We'll work our way south for you.\n0108.5s 0110.3s SPEAKER_00:  Thank you.\n0109.5s 0109.7s SPEAKER_01:  Ha ha.",
+        "nature": "Acute kidney injury with severe symptoms",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident at Christian Village skilled unit is experiencing severe health issues including acute kidney injury, nausea, vomiting, and a significant drop in blood pressure.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Morgan",
+          "phone": "740-368-4597",
+          "role": "Caller",
+          "relationship": "Nurse at Christian Village",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Bonnie Weaver",
+          "phone": "",
+          "role": "Victim",
+          "relationship": "Resident at Christian Village",
+          "conditions": "Acute kidney injury, nausea, vomiting",
+          "age": "75",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way, Delaware, Ohio",
+        "type": "Skilled unit at Christian Village",
+        "features": "Room June 1 to 59, door I",
+        "time": ""
+      },
+      "row_index": 113,
+      "metadata": {
+        "Unnamed: 0.1": "150",
+        "id": "6903070000000000.0",
+        "nature": "SICK PERSON",
+        "incidentno": "53667",
+        "start": "5/19/2021 12:20",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/19/2021 0:00",
+        "Unnamed: 0": "11514",
+        "fileName": "2021-05-19/4/CH4_03004EA8_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way Delaware Oo. Village Sorry Christian Village okay Bonnie Weaver 64",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/19/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "An 85-year-old woman with pneumonia is experiencing severe shortness of breath and low oxygen levels, prompting her family to request emergency transport despite her being under comfort care.",
+        "timestamp": "",
+        "transcript": "0012.0s 0014.0s SPEAKER_00:  911. What is the address of your emergency?\n 0015.2s 0017.9s SPEAKER_01:  100 Willowbrook Way.\n 0018.9s 0019.2s SPEAKER_01:  and.\n 0020.6s 0021.4s SPEAKER_01:  It's.\n 0022.0s 0023.0s SPEAKER_01:  It's a facility.\n 0024.6s 0027.5s SPEAKER_00:  Okay, what room or what apartment or what door?\n 0025.1s 0025.1s SPEAKER_01:  you\n 0027.1s 0032.6s SPEAKER_01:  We're at the CHERUS building, the nursing home section. So it's CHERUS.\n 0033.6s 0036.6s SPEAKER_01:  and it's on the short-term hall.\n 0037.5s 0039.5s SPEAKER_01:  and it's room 264.\n 0040.5s 0042.2s SPEAKER_00:  OK, and what is it that's going on there?\n 0043.0s 0044.0s SPEAKER_00:  So we have\n 0044.0s 0056.6s SPEAKER_01:  I have a lady who is, she does actively have pneumonia right now, but she's got shortness of breath. Her pulse ox on five liters is 70, 71 FS.\n 0057.3s 0065.3s SPEAKER_01:  We've tried everything to get her oxygen off. We're not really getting it off. And the families decided they wanted her out. She's an 85-year-old.\n 0066.5s 0068.5s SPEAKER_00:  But she is conscious and breathing right now.\n 0068.9s 0075.7s SPEAKER_01:  She is, yes. She is definitely, she is a BNR. Okay.\n 0076.7s 0081.1s SPEAKER_01:  They see in our comfort care, but family has opted to send her.\n 0081.7s 0084.4s SPEAKER_00:  Okay. What was your name?\n 0085.0s 0085.4s SPEAKER_00:  Debbie.\n 0086.1s 0087.2s SPEAKER_00:  And what was your phone number?\n 0088.7s 0089.0s SPEAKER_00:  Ah.\n 0089.0s 0089.6s SPEAKER_01:  Bye.\n 0090.3s 0091.7s SPEAKER_01:  It is.\n 0095.0s 0095.6s SPEAKER_01:  Sorry.\n 0096.2s 0102.4s SPEAKER_01:  pretty bad when you don't know your phone number. 740-368-4597.\n 0103.2s 0106.4s SPEAKER_00:  Okay, and are you the nurse or is anyone with her?\n 0106.4s 0106.8s SPEAKER_01:  Thank you.\n 0107.5s 0111.1s SPEAKER_01:  I'm the nurse and her son is with her currently right now.\n 0112.7s 0120.4s SPEAKER_00:  Okay. All right, we've got help dispatched out there. If anything changes with her or worsens with her, just give us a call back.\n 0121.1s 0124.5s SPEAKER_01:  Okay, thank you. Alright, thank you. Alright, bye bye.\n 0125.5s 0125.5s SPEAKER_01:  you\n 0125.5s 0125.5s SPEAKER_01:  you",
+        "nature": "Severe shortness of breath due to pneumonia",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports an 85-year-old woman with pneumonia experiencing severe shortness of breath and low oxygen levels, requesting emergency transport.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Debbie",
+          "phone": "740-368-4597",
+          "role": "Nurse/caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Son",
+          "relationship": "Son of the patient",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "",
+          "conditions": "Pneumonia, low oxygen levels",
+          "age": "85",
+          "sex": "Female"
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way, CHERUS building, nursing home section, short-term hall, room 264",
+        "type": "Nursing home facility",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 114,
+      "metadata": {
+        "Unnamed: 0.1": "151",
+        "id": "6903070000000000.0",
+        "nature": "DIFFICULTY BREATHING",
+        "incidentno": "54602",
+        "start": "5/21/2021 12:29",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/21/2021 0:00",
+        "Unnamed: 0": "11695",
+        "fileName": "2021-05-21/2/CH2_01004DDA_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way 70 71 FS",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/21/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "Emergency call regarding an unspecified incident at 100 Willowbrook Way in Delaware, Ohio.",
+        "timestamp": "",
+        "transcript": "0003.5s 0004.5s SPEAKER_03:  Beep Beep Beep Beep\n 0011.4s 0013.9s SPEAKER_03:  911, what's the address of your emergency?\n 0015.1s 0015.1s SPEAKER_03:  you\n 0015.1s 0019.1s SPEAKER_02:  It's 100 Willowbrook Way in Delaware, Ohio.\n 0020.5s 0023.5s SPEAKER_00:  Is it the 100 Willowbrook Southway or?\n 0020.5s 0023.5s SPEAKER_00:  Is it the 100 Willowbrook Southway or?\n 0025.1s 0025.7s SPEAKER_01:  Um.\n 0027.5s 0029.7s SPEAKER_01:  Is it south? Is it southwest?\n 0030.5s 0031.2s SPEAKER_01:  as well.\n 0030.5s 0031.2s SPEAKER_01:  as well.",
+        "nature": "",
+        "severity": "",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller provided the address of the emergency as 100 Willowbrook Way in Delaware, Ohio.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "",
+          "phone": "",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way in Delaware, Ohio",
+        "type": "",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 115,
+      "metadata": {
+        "Unnamed: 0.1": "152",
+        "id": "6903070000000000.0",
+        "nature": "INJURED PERSON - BASIC",
+        "incidentno": "55070",
+        "start": "5/22/2021 13:47",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/22/2021 0:00",
+        "Unnamed: 0": "11773",
+        "fileName": "2021-05-22/2/CH2_01004DF5_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way in Delaware Oo 100 Willowbrook Southway 100 Willowbrook Southway or",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/22/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A resident is in acute respiratory distress at a specified address.",
+        "timestamp": "",
+        "transcript": "0004.8s 0005.9s SPEAKER_01:  I love that one.\n 0012.5s 0014.7s SPEAKER_00:  911 with the address of the emergency.\n 0012.5s 0014.7s SPEAKER_00:  911 with the address of the emergency.\n 0015.4s 0015.4s SPEAKER_00:  you\n 0015.4s 0018.6s SPEAKER_01:  100 Willowbrook Way and our door is aye.\n 0019.6s 0020.0s SPEAKER_01:  card is\n 0020.0s 0020.4s SPEAKER_00:  chair.\n 0021.6s 0022.5s SPEAKER_00:  What is your name?\n 0023.3s 0024.4s SPEAKER_00:  Elizabeth Black.\n 0025.5s 0026.5s SPEAKER_00:  How do you spell your last name?\n 0026.9s 0028.3s SPEAKER_01:  It's FLATK.\n 0029.6s 0033.4s SPEAKER_00:  Can you set door I? Yes, it's Tara.\n 0034.3s 0036.3s SPEAKER_00:  And what's the phone number you called from?\n 0036.8s 0041.7s SPEAKER_01:  is 740-368-4597.\n 0042.0s 0042.8s SPEAKER_00:  What's going on?\n 0043.5s 0047.0s SPEAKER_01:  I have a resident that's in acute respiratory distress.\n 0048.9s 0050.5s SPEAKER_00:  Are they in a room?\n 0051.1s 0056.4s SPEAKER_01:  Yes, it is room 262A and we will be here at the door to let them in and guide them.\n 0058.5s 0058.5s SPEAKER_01:  you\n 0058.5s 0059.7s SPEAKER_00:  And you said he's how old?\n 0060.3s 0062.4s SPEAKER_00:  She is 81. Oh, he.\n 0063.0s 0063.4s SPEAKER_00:  Um.\n 0064.9s 0066.3s SPEAKER_00:  conscious right now.\n 0066.7s 0073.5s SPEAKER_01:  Yes, we have her on a non-rebreeder and she's satin in 95, so when we take that off of her, she's satin in 70.\n 0074.2s 0074.2s SPEAKER_01:  you\n 0074.2s 0074.7s SPEAKER_00:  Okay.\n 0075.7s 0085.9s SPEAKER_00:  Alright, are you a nurse? Yes. Okay. Alright, we have them on the way. Room 262A and they'll meet you at door I. Yes, thank you. Okay, thank you.\n 0084.6s 0084.8s SPEAKER_01:  Thank you.",
+        "nature": "acute respiratory distress",
+        "severity": "life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a resident in acute respiratory distress at 100 Willowbrook Way, room 262A.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Elizabeth Black",
+          "phone": "740-368-4597",
+          "role": "caller",
+          "relationship": "",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "",
+          "phone": "",
+          "role": "resident",
+          "relationship": "",
+          "conditions": "acute respiratory distress",
+          "age": "81",
+          "sex": "female"
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way, room 262A",
+        "type": "residence",
+        "features": "door I",
+        "time": ""
+      },
+      "row_index": 116,
+      "metadata": {
+        "Unnamed: 0.1": "153",
+        "id": "6903070000000000.0",
+        "nature": "911 HANG-UP/OPEN/MISDIAL",
+        "incidentno": "55577",
+        "start": "5/23/2021 16:50",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/23/2021 0:00",
+        "Unnamed: 0": "11902",
+        "fileName": "2021-05-23/2/CH2_01004E16_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/23/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A woman named Shirley Burtica is experiencing stroke symptoms and needs emergency medical assistance.",
+        "timestamp": "",
+        "transcript": "0010.3s 0012.3s SPEAKER_00:  911, what's the address of the emergency?\n 0010.3s 0012.3s SPEAKER_00:  911, what's the address of the emergency?\n 0013.5s 0016.7s SPEAKER_01:  It's 100 Willowbrook Way.\n 0017.3s 0019.1s SPEAKER_01:  Apartment 30.\n 0019.9s 0020.4s SPEAKER_01:  Good.\n 0020.4s 0020.9s SPEAKER_00:  Thanks for watching.\n 0021.6s 0023.9s SPEAKER_00:  31, 5.\n 0024.2s 0030.8s SPEAKER_01:  Yes, and this is the Willowbrook by the Bob Evans. I always feel like I should say that.\n 0031.4s 0038.5s SPEAKER_01:  I have a lady, Shirley Burtica, who on Monday had stroke symptoms.\n 0039.1s 0043.4s SPEAKER_01:  has functioned all week, has slurred speech.\n 0044.0s 0050.4s SPEAKER_01:  Right, not slurred, it's word finding and halting, which is very different from her. I know her well.\n 0051.2s 0059.0s SPEAKER_01:  We called her doctor to see if we could get in there and they said, nope, absolutely, go to the ER. I don't want her driving.\n 0059.9s 0060.5s SPEAKER_00:  Okay.\n 0061.2s 0062.8s SPEAKER_00:  And how old is she?\n 0064.1s 0064.1s SPEAKER_00:  you\n 0064.1s 0067.8s SPEAKER_01:  So if she was born in 35, you are how old?\n 0068.9s 0070.0s SPEAKER_01:  I am.\n 0071.4s 0072.2s SPEAKER_01:  Baby.\n 0072.9s 0074.1s SPEAKER_01:  85.\n 0078.4s 0080.4s SPEAKER_00:  So that was her talking to you in the background.\n 0080.4s 0082.0s SPEAKER_01:  It was, yes.\n 0082.0s 0085.5s SPEAKER_00:  Can I get your name and the phone number that you're calling from? My phone number is...\n 0085.5s 0087.8s SPEAKER_01:  My name is Carol Roden.\n 0088.7s 0093.0s SPEAKER_01:  and my number here is 740.\n 0093.7s 0095.6s SPEAKER_01:  368\n 0096.2s 0099.6s SPEAKER_01:  I don't know your phone number.\n 0100.8s 0102.8s SPEAKER_01:  4 6 8 5.\n 0102.7s 0110.8s SPEAKER_00:  Okay. And is there a nurse, Watar? I'm the nurse. Yep. Okay. And what door do they need to go to?\n 0111.4s 0111.4s SPEAKER_00:  you\n 0111.4s 0119.6s SPEAKER_01:  I'll have to get somebody to block it open for you, but they could either, let's see, we'll send you on.\n 0121.3s 0122.6s SPEAKER_01:  door\n 0123.2s 0124.5s SPEAKER_01:  L, I guess.\n 0124.9s 0126.2s SPEAKER_00:  Alice and Lincoln.\n 0126.6s 0127.1s SPEAKER_01:  Yes.\n 0127.4s 0132.1s SPEAKER_00:  Okay. We've got them on their way. If anything changes, just give us a call back.\n 0132.7s 0134.2s SPEAKER_00:  Thank you. You're welcome.",
+        "nature": "Stroke symptoms",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Caller reports a woman experiencing stroke symptoms and requests emergency medical assistance.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Shirley Burtica",
+          "phone": "",
+          "role": "Victim",
+          "relationship": "",
+          "conditions": "Stroke symptoms, word finding and halting speech",
+          "age": "85",
+          "sex": "Female"
+        },
+        {
+          "name": "Carol Roden",
+          "phone": "740-368-4685",
+          "role": "Caller",
+          "relationship": "Knows Shirley Burtica well",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "100 Willowbrook Way, Apartment 30",
+        "type": "Residence",
+        "features": "Willowbrook by the Bob Evans",
+        "time": ""
+      },
+      "row_index": 117,
+      "metadata": {
+        "Unnamed: 0.1": "155",
+        "id": "6903070000000000.0",
+        "nature": "STROKE",
+        "incidentno": "57087",
+        "start": "5/27/2021 10:04",
+        "address": "100 WILLOW BROOK S WAY DELAWARE",
+        "created_at": "2/25/2022 15:15",
+        "updated_at": "2/25/2022 15:15",
+        "month": "5",
+        "clean_address_EMS": "100 Willow Brook Way Delaware OH 43015 USA",
+        "latitude_EMS": "40.2717452",
+        "longitude_EMS": "-83.0749975",
+        "address_reverse_EMS": "100 Willow Brook Way, Delaware, OH 43015, USA",
+        "Date_EMS": "5/27/2021 0:00",
+        "Unnamed: 0": "12416",
+        "fileName": "2021-05-27/6/CH6_05004D96_51.txt",
+        "AddressFinal": "100 Willowbrook Way",
+        "AddressExtracted": "100 Willowbrook Way Apartment 30 lady Srley Burtica Roden",
+        "clean_address_extracted": "100 Willow Brook Way Delaware OH 43015 USA",
+        "Date_target": "5/27/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A woman is experiencing numbness on her right side, possibly related to preexisting nerve issues and scoliosis.",
+        "timestamp": "",
+        "transcript": "0012.9s 0016.6s SPEAKER_00:  911 with the address of your marketing team.\n 0016.6s 0020.2s SPEAKER_01:  It's 8939 Riverside Drive.\n 0016.6s 0020.2s SPEAKER_01:  It's 8939 Riverside Drive.\n 0021.1s 0022.5s SPEAKER_01:  I am verified that address.\n 0022.5s 0023.2s SPEAKER_00:  Want me one more time?\n 0022.5s 0023.2s SPEAKER_00:  Want me one more time?\n 0024.5s 0027.3s SPEAKER_01:  8 9 3 9 Riverside Drive\n 0028.5s 0029.7s SPEAKER_01:  apartment 14.\n 0034.1s 0034.8s SPEAKER_00:  And what's your name?\n 0035.9s 0036.9s SPEAKER_01:  My name is Victoria.\n 0037.2s 0039.8s SPEAKER_00:  I'm make sure what's the phone number for you in case we're disconnected.\n 0040.6s 0040.6s SPEAKER_00:  you\n 0040.6s 0041.8s SPEAKER_01:  at 740.\n 0043.1s 0044.3s SPEAKER_01:  975\n 0045.4s 0047.0s SPEAKER_01:  0948.\n 0048.4s 0049.6s SPEAKER_01:  Tell me exactly what's happened.\n 0050.6s 0057.3s SPEAKER_01:  So my mom, her whole right side is numb. Like yesterday she was fine, but now it's like she can't get up.\n 0058.0s 0058.7s SPEAKER_01:  and um\n 0059.5s 0062.5s SPEAKER_01:  Like, she's had nerve issues before. It's just gotten really bad.\n 0063.7s 0063.9s SPEAKER_01:  I\n 0063.9s 0070.0s SPEAKER_00:  Do you think it's a stroke or do you think she's having other nerve related issues?\n 0069.1s 0072.8s SPEAKER_01:  We don't know.\n 0069.1s 0072.8s SPEAKER_01:  We don't know.\n 0073.5s 0076.7s SPEAKER_01:  I mean, she is responsive.\n 0077.4s 0085.7s SPEAKER_01:  like the side isn't drooping on her face or anything. I don't think it's exactly how does she work related. She's 50 mom you're 52 right?\n 0086.3s 0090.8s SPEAKER_01:  53. What side is numb? The right side.\n 0086.3s 0090.8s SPEAKER_01:  53. What side is numb? The right side.\n 0093.7s 0095.7s SPEAKER_00:  And she is conscious and breathing okay?\n 0096.3s 0098.4s SPEAKER_00:  Yeah. Okay.\n 0098.2s 0106.9s SPEAKER_01:  Just making sure. She has said something about it feeling a little funny when she breathes, but it's just like a nerve thing.\n 0106.9s 0107.4s SPEAKER_00:  start.\n 0108.5s 0110.8s SPEAKER_01:  She's had nerve issues.\n 0112.4s 0121.4s SPEAKER_01:  pretty much her whole life because of her back, like she has scoliosis real bad. Okay. It's gotten like her arm and everything is numb. It's all started today.\n 0121.4s 0121.7s SPEAKER_00:  OK.\n 0122.6s 0129.2s SPEAKER_00:  Do you know what time this morning? Just because if it were to happen to be a stroke and they would be concerned, they would need a time.\n 0130.9s 0137.9s SPEAKER_00:  About nine o'clock. Okay. Can she follow, you know, simple commands and she's responding to you okay?\n 0137.9s 0141.8s SPEAKER_01:  Yeah, she's answered a couple questions since I've been on the phone with you. Okay.\n 0142.1s 0146.1s SPEAKER_00:  Any confusion, trouble speaking or understanding her?\n 0146.1s 0149.8s SPEAKER_01:  Nope, she's just in a lot of pain and that side is numb.\n 0150.8s 0151.5s SPEAKER_01:  OK.\n 0150.8s 0151.5s SPEAKER_01:  OK.\n 0152.4s 0155.2s SPEAKER_00:  And if you ask her to smile, it's even on both sides.\n 0152.4s 0155.2s SPEAKER_00:  And if you ask her to smile, it's even on both sides.\n 0155.9s 0155.9s SPEAKER_00:  you\n 0155.9s 0156.7s SPEAKER_01:  can.\n 0156.7s 0156.8s SPEAKER_00:  Thank you.\n 0156.7s 0156.8s SPEAKER_00:  Thank you.\n 0157.4s 0160.4s SPEAKER_00:  Yes. Okay. And is she diabetic?\n 0161.5s 0163.5s SPEAKER_00:  Yes, she's typed too. OK.\n 0164.1s 0166.6s SPEAKER_00:  Have you taken her sugar recently?\n 0167.4s 0175.3s SPEAKER_01:  Mom, did you take your sugar? Not this morning. But she said it's been an average of 143.\n 0167.4s 0175.3s SPEAKER_01:  Mom, did you take your sugar? Not this morning. But she said it's been an average of 143.\n 0167.4s 0175.3s SPEAKER_01:  Mom, did you take your sugar? Not this morning. But she said it's been an average of 143.\n 0183.5s 0185.1s SPEAKER_00:  and she's not had a seizure at all.\n 0186.0s 0186.7s SPEAKER_00:  No.\n 0186.7s 0187.3s SPEAKER_01:  any headache\n 0188.4s 0189.1s SPEAKER_01:  any headache mom\n 0189.4s 0190.3s SPEAKER_00:  No.\n 0189.8s 0190.0s SPEAKER_01:  you\n 0191.1s 0196.1s SPEAKER_00:  And no history of stroke, right? Just nerve issues with scoliosis? No. OK.\n 0195.0s 0197.5s SPEAKER_01:  school. We have no history of\n 0197.5s 0201.2s SPEAKER_00:  and no recent trauma or injury.\n 0202.0s 0202.0s SPEAKER_00:  you\n 0202.0s 0204.2s SPEAKER_01:  No recent trauma or injury, right mom? No.\n 0205.0s 0222.5s SPEAKER_00:  Alright, well we do have help around to you. Just have her stay seated. We don't want her to fall or anything like that. Make things even worse. Let her rest in whatever position is most comfortable for her. Nothing to eat her or drink unless you would need it in regards to diabetic emergencies.\n 0223.3s 0232.5s SPEAKER_00:  Other than that, if anything changes with her, go ahead and give us a call back. We do have a help en route to you just with everything going on, any COVID symptoms on anyone in the resident.\n 0233.5s 0236.9s SPEAKER_00:  No. And no one's been under a doctor for the quarantine?\n 0238.1s 0242.1s SPEAKER_01:  No. Okay. Well, I mean, we were back in January, but not now.\n 0238.1s 0242.1s SPEAKER_01:  No. Okay. Well, I mean, we were back in January, but not now.\n 0242.8s 0251.4s SPEAKER_00:  Right. Okay. All right, Victoria there and around over there. If anything changes with her, you give us a call back, okay? Okay, thank you. Uh-huh, you're welcome. Bye-bye.",
+        "nature": "Numbness on right side, possibly related to nerve issues and scoliosis",
+        "severity": "Moderate",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Victoria reports her mother's sudden numbness on the right side, possibly related to preexisting nerve issues and scoliosis.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Victoria",
+          "phone": "7409750948",
+          "role": "caller",
+          "relationship": "daughter",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Victoria's mother",
+          "phone": "",
+          "role": "victim",
+          "relationship": "mother of Victoria",
+          "conditions": "nerve issues, scoliosis, type 2 diabetes",
+          "age": "53",
+          "sex": "female"
+        }
+      ],
+      "location": {
+        "address": "8939 Riverside Drive, apartment 14",
+        "type": "residence",
+        "features": "",
+        "time": "9 o'clock"
+      },
+      "row_index": 118,
+      "metadata": {
+        "Unnamed: 0.1": "156",
+        "id": "6903070000000000.0",
+        "nature": "Stroke",
+        "incidentno": "16612",
+        "start": "2/15/2021 13:28",
+        "address": "8939 RIVERSIDE DR LIBERTY TWP",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "2",
+        "clean_address_EMS": "8939 Riverside Dr Powell OH 43065 USA",
+        "latitude_EMS": "40.1745708",
+        "longitude_EMS": "-83.125011",
+        "address_reverse_EMS": "8939 Riverside Dr, Powell, OH 43065, USA",
+        "Date_EMS": "2/15/2021 0:00",
+        "Unnamed: 0": "3916",
+        "fileName": "2021-02-15/3/CH3_020044AA_51.txt",
+        "AddressFinal": "8939 Riverside Drive",
+        "AddressExtracted": "8939 Riverside Drive 8939 Riverside Drive 3 9 Riverside Drive apartment 975 0948",
+        "clean_address_extracted": "8939 Riverside Dr Powell OH 43065 USA",
+        "Date_target": "2/15/2021 0:00"
+      }
+    },
+    {
+      "incident": {
+        "summary": "A patient named Charlotte is experiencing an acute change in mental status and cannot move to get into a car, requiring emergency medical attention.",
+        "timestamp": "",
+        "transcript": "0011.7s 0014.1s SPEAKER_01:  911 with the address of your emergency.\n0014.5s 0020.4s SPEAKER_00:  Yes, it will be 191 Joy Avenue. Verify your address for me.\n0020.4s 0021.0s SPEAKER_01:  One more time?\n0022.2s 0032.5s SPEAKER_00:  191 Joy Avenue. Your name? My name is Vivian. I'm calling from Dr. Amunini's office at Ohio Health Primary Care.\n0032.8s 0033.3s SPEAKER_01:  Okay.\n0033.5s 0037.3s SPEAKER_00:  I'm calling in regards to one of my patients by the name of Charlotte.\n0039.3s 0042.1s SPEAKER_00:  Mantle M-A-N-T-E-L.\n0043.1s 0045.8s SPEAKER_00:  Dataverse 4-4 1945.\n0049.9s 0063.0s SPEAKER_00:  Her daughter Anita, A-N-I-P-A, is there with her, but Dr. Amranini wants her to go to the emergency room because of acute change and mental stages.\n0063.9s 0067.0s SPEAKER_00:  and she cannot move to get into the car.\n0067.7s 0070.2s SPEAKER_00:  So she needs to go to the emergency room.\n0070.9s 0078.4s SPEAKER_01:  Okay, like possibly having a stroke or she's just not feeling well? Um... Or a mental health type of thing.\n0079.2s 0080.7s SPEAKER_01:  Let me check the chart here.\n0085.5s 0086.5s SPEAKER_01:  Keep going.\n0085.5s 0086.5s SPEAKER_01:  Keep going.\n0087.2s 0092.2s SPEAKER_00:  The daughter, I just talked to the daughter. She said like she's yelling.\n0092.2s 0093.9s SPEAKER_01:  If she die of edict at all, you know.\n0094.2s 0095.9s SPEAKER_00:  Martin.",
+        "nature": "Acute change in mental status, possible stroke or mental health issue",
+        "severity": "Life-threatening",
+        "hazards": ""
+      },
+      "calls": [
+        {
+          "summary": "Vivian from Dr. Amunini's office calls 911 to report that her patient Charlotte is experiencing an acute change in mental status and cannot move, requiring emergency transport to the hospital.",
+          "timestamp": ""
+        }
+      ],
+      "persons": [
+        {
+          "name": "Vivian",
+          "phone": "",
+          "role": "Caller",
+          "relationship": "Works at Dr. Amunini's office",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Charlotte Mantle",
+          "phone": "",
+          "role": "Patient",
+          "relationship": "Patient of Dr. Amunini, mother of Anita",
+          "conditions": "Acute change in mental status",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Anita",
+          "phone": "",
+          "role": "Daughter of Charlotte",
+          "relationship": "Daughter of Charlotte",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        },
+        {
+          "name": "Dr. Amunini",
+          "phone": "",
+          "role": "Doctor",
+          "relationship": "Charlotte's doctor",
+          "conditions": "",
+          "age": "",
+          "sex": ""
+        }
+      ],
+      "location": {
+        "address": "191 Joy Avenue",
+        "type": "Residence",
+        "features": "",
+        "time": ""
+      },
+      "row_index": 119,
+      "metadata": {
+        "Unnamed: 0.1": "157",
+        "id": "6903070000000000.0",
+        "nature": "Sick Person",
+        "incidentno": "1022",
+        "start": "1/4/2021 11:45",
+        "address": "191 JOY AVE DELAWARE",
+        "created_at": "2/25/2022 15:14",
+        "updated_at": "2/25/2022 15:14",
+        "month": "1",
+        "clean_address_EMS": "191 Joy Ave Delaware OH 43015 USA",
+        "latitude_EMS": "40.3072726",
+        "longitude_EMS": "-83.0495412",
+        "address_reverse_EMS": "191 Joy Ave, Delaware, OH 43015, USA",
+        "Date_EMS": "1/4/2021 0:00",
+        "Unnamed: 0": "282",
+        "fileName": "2021-01-04/5/CH5_04004196_51.txt",
+        "AddressFinal": "191 Joy Avenue",
+        "AddressExtracted": "191 Joy Avenue 191 Joy Avenue Oo Health Primary Care. Dataverse 4-4 1945",
+        "clean_address_extracted": "191 Joy Ave Delaware OH 43015 USA",
+        "Date_target": "1/4/2021 0:00"
+      }
+    }
+  ],
+  "error_details": []
+}
